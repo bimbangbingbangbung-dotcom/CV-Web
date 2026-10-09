@@ -24,6 +24,7 @@ npm-debug.log*
 .opencode/node_modules/
 .opencode/bun.lock
 .opencode/bun.lockb
+.opencode/autosync.log
 
 # Editors / OS
 .vscode/settings.json
