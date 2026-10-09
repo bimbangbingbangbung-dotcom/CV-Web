@@ -3,13 +3,16 @@ import { Plugin } from "@opencode/plugin"
 /**
  * autosync - automatically commits and pushes changes to GitHub.
  *
- * After every tool execution (file writes, edits, shell commands, subagents)
- * it waits a few seconds for changes to settle, then runs:
+ * After tool executions that may change files (write, edit, shell, ...) it
+ * waits a few seconds for changes to settle, then runs:
  *
  *   git add -A -> git commit -> git push
  *
  * If the working tree is clean it does nothing, so read-only actions never
  * create empty commits.
+ *
+ * Supports both OpenCode V2 (Plugin.define + setup) and V1 (server() hooks)
+ * from one entrypoint.
  */
 
 const SETTLE_MS = 3000
@@ -78,22 +81,35 @@ async function flush(): Promise<void> {
 }
 
 function schedule(dir: string): void {
+  if (!dir) return
   target = dir
   if (timer) clearTimeout(timer)
   timer = setTimeout(() => void flush(), SETTLE_MS)
 }
 
-export default Plugin.define({
-  id: "autosync",
-  async setup(ctx) {
-    const registration = await ctx.tool.hook("execute.after", () => {
+export default {
+  // ---- OpenCode V2 -------------------------------------------------------
+  ...Plugin.define({
+    id: "autosync",
+    async setup(ctx) {
       const dir = ctx.location.project?.canonical ?? ctx.location.directory
-      if (dir) schedule(dir)
-    })
+      const registration = await ctx.tool.hook("execute.after", () => schedule(dir))
 
-    return () => {
-      registration.dispose()
-      if (timer) clearTimeout(timer)
+      return () => {
+        void registration.dispose()
+        if (timer) clearTimeout(timer)
+      }
+    },
+  }),
+
+  // ---- OpenCode V1 (legacy CLI) ------------------------------------------
+  async server(ctx?: { directory?: string; worktree?: string }) {
+    const dir = ctx?.worktree ?? ctx?.directory ?? process.cwd()
+    return {
+      "tool.execute.after": async () => schedule(dir),
+      event: async ({ event }: { event?: { type?: string } }) => {
+        if (event?.type === "session.idle") schedule(dir)
+      },
     }
   },
-})
+}

@@ -1,0 +1,7 @@
+{
+  "name": "cv-web-opencode",
+  "private": true,
+  "dependencies": {
+    "@opencode/plugin": "^2.0.26"
+  }
+}
