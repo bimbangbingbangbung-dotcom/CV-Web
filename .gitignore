@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+dist/
+build/
+out/
+.next/
+.cache/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+
+# Editors / OS
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Misc
+*.tmp
+*.tsbuildinfo
