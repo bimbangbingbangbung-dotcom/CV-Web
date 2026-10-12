@@ -55,9 +55,7 @@ export function valueSchema(node: SchemaNode, root: SchemaNode): SchemaNode {
 
 /** camelCase property name → "Camel Case" for labels. */
 export function humanize(name: string): string {
-  return name
-    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
-    .replace(/^./, (c) => c.toUpperCase());
+  return name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, (c) => c.toUpperCase());
 }
 
 /** Fields long enough to deserve a textarea (editor heuristic, documented). */
@@ -94,7 +92,11 @@ export function fieldRow(
   return h(
     'div',
     { class: 'admin-field' },
-    h('label', { class: 'admin-label', text: required ? `${labelText} *` : labelText, ...(id ? { attrs: { for: id } } : {}) }),
+    h('label', {
+      class: 'admin-label',
+      text: required ? `${labelText} *` : labelText,
+      ...(id ? { attrs: { for: id } } : {}),
+    }),
     control,
     help ? h('p', { class: 'admin-help', id: helpId, text: help }) : null,
   );
@@ -110,7 +112,10 @@ function textControl(
   const text = String(value ?? '');
   const multiline = isMultiline(path);
   const input = multiline
-    ? h('textarea', { id, attrs: { rows: '5', ...(node.minLength ? { minlength: String(node.minLength) } : {}) } })
+    ? h('textarea', {
+        id,
+        attrs: { rows: '5', ...(node.minLength ? { minlength: String(node.minLength) } : {}) },
+      })
     : h('input', {
         id,
         attrs: {
@@ -164,11 +169,7 @@ function selectControl(
 }
 
 /** Color: native picker + hex text field + live swatch (values stay in sync). */
-function colorControl(
-  path: (string | number)[],
-  value: unknown,
-  ctx: FormContext,
-): HTMLElement {
+function colorControl(path: (string | number)[], value: unknown, ctx: FormContext): HTMLElement {
   const current = typeof value === 'string' && /^#[0-9a-fA-F]{6}$/.test(value) ? value : '#000000';
   const picker = h('input', { attrs: { type: 'color', 'aria-label': 'Color picker' } });
   picker.value = current;
@@ -220,23 +221,39 @@ function listControls(
   };
   const up = h(
     'button',
-    { class: 'icon-btn', attrs: { type: 'button', 'aria-label': `Move ${label} up`, disabled: index === 0 } },
+    {
+      class: 'icon-btn',
+      attrs: { type: 'button', 'aria-label': `Move ${label} up`, disabled: index === 0 },
+    },
     icon('arrow-up'),
   );
   up.addEventListener('click', () => commitMove(index - 1));
   const down = h(
     'button',
-    { class: 'icon-btn icon-btn-down', attrs: { type: 'button', 'aria-label': `Move ${label} down`, disabled: index === items.length - 1 } },
+    {
+      class: 'icon-btn icon-btn-down',
+      attrs: {
+        type: 'button',
+        'aria-label': `Move ${label} down`,
+        disabled: index === items.length - 1,
+      },
+    },
     icon('arrow-up'),
   );
   down.addEventListener('click', () => commitMove(index + 1));
   const remove = h(
     'button',
-    { class: 'icon-btn icon-btn-danger', attrs: { type: 'button', 'aria-label': `Remove ${label}` } },
+    {
+      class: 'icon-btn icon-btn-danger',
+      attrs: { type: 'button', 'aria-label': `Remove ${label}` },
+    },
     icon('close'),
   );
   remove.addEventListener('click', () => {
-    ctx.onCommit(path, items.filter((_, i) => i !== index));
+    ctx.onCommit(
+      path,
+      items.filter((_, i) => i !== index),
+    );
     ctx.announce(`Removed ${label} — press Ctrl+Z to undo`);
   });
   return h('div', { class: 'list-buttons' }, up, down, remove);
@@ -265,7 +282,10 @@ function objectList(
       'button',
       {
         class: 'icon-btn drag-handle',
-        attrs: { type: 'button', 'aria-label': `Reorder ${title} (use Move up/down buttons for keyboard)` },
+        attrs: {
+          type: 'button',
+          'aria-label': `Reorder ${title} (use Move up/down buttons for keyboard)`,
+        },
       },
       icon('menu'),
     );
@@ -321,11 +341,7 @@ function objectList(
 }
 
 /** Array of strings: chip list + input (Enter or Add commits). */
-function stringList(
-  path: (string | number)[],
-  value: string[],
-  ctx: FormContext,
-): HTMLElement {
+function stringList(path: (string | number)[], value: string[], ctx: FormContext): HTMLElement {
   const input = h('input', {
     id: fieldId(path),
     class: 'chip-input',
@@ -402,5 +418,9 @@ export function objectControl(
     if (!control) return null;
     return fieldRow(humanize(key), control, sub.description, node.required?.includes(key));
   });
-  return h('div', { class: 'object-grid' }, ...rows.filter((row): row is HTMLElement => row !== null));
+  return h(
+    'div',
+    { class: 'object-grid' },
+    ...rows.filter((row): row is HTMLElement => row !== null),
+  );
 }

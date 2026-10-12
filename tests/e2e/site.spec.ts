@@ -116,9 +116,7 @@ test.describe('theme', () => {
   test('prefers-reduced-motion shows every block instantly', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
-    const hiddenReveals = await page
-      .locator('[data-reveal]:not(.is-visible)')
-      .count();
+    const hiddenReveals = await page.locator('[data-reveal]:not(.is-visible)').count();
     expect(hiddenReveals).toBe(0);
   });
 });

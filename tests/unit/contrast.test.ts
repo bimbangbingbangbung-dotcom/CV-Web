@@ -29,7 +29,10 @@ describe('contrastRatio', () => {
   });
 
   it('is symmetric', () => {
-    expect(contrastRatio('#123456', '#abcdef')).toBeCloseTo(contrastRatio('#abcdef', '#123456') ?? 0, 5);
+    expect(contrastRatio('#123456', '#abcdef')).toBeCloseTo(
+      contrastRatio('#abcdef', '#123456') ?? 0,
+      5,
+    );
   });
 });
 

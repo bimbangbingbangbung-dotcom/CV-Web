@@ -62,15 +62,19 @@ function downloadJson(data: unknown, filename: string): void {
 }
 
 /** Native <dialog> confirmation naming the exact action (per the brief). */
-function confirmAction(
-  title: string,
-  message: string,
-  confirmLabel: string,
-): Promise<boolean> {
+function confirmAction(title: string, message: string, confirmLabel: string): Promise<boolean> {
   return new Promise((resolve) => {
     const dialog = h('dialog', { class: 'admin-dialog' });
-    const confirmBtn = h('button', { class: 'btn btn-primary btn-sm', text: confirmLabel, attrs: { type: 'button' } });
-    const cancelBtn = h('button', { class: 'btn btn-ghost btn-sm', text: 'Cancel', attrs: { type: 'button' } });
+    const confirmBtn = h('button', {
+      class: 'btn btn-primary btn-sm',
+      text: confirmLabel,
+      attrs: { type: 'button' },
+    });
+    const cancelBtn = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Cancel',
+      attrs: { type: 'button' },
+    });
     confirmBtn.addEventListener('click', () => {
       dialog.close();
       resolve(true);
@@ -128,7 +132,10 @@ export function openPanel(options: PanelOptions): () => void {
 
   // --- Toolbar ---
   const dirtyBadge = h('span', { class: 'badge admin-badge' });
-  const status = h('span', { class: 'admin-status', attrs: { role: 'status', 'aria-live': 'polite' } });
+  const status = h('span', {
+    class: 'admin-status',
+    attrs: { role: 'status', 'aria-live': 'polite' },
+  });
   const undoBtn = iconButton('undo', 'Undo (Ctrl+Z)');
   const redoBtn = iconButton('redo', 'Redo (Ctrl+Shift+Z)');
   // Stable ids so focus can be restored across form re-renders.
@@ -136,7 +143,10 @@ export function openPanel(options: PanelOptions): () => void {
   redoBtn.id = 'admin-redo';
 
   function iconButton(glyph: 'undo' | 'redo', label: string): HTMLButtonElement {
-    const btn = h('button', { class: 'icon-btn', attrs: { type: 'button', 'aria-label': label, title: label } });
+    const btn = h('button', {
+      class: 'icon-btn',
+      attrs: { type: 'button', 'aria-label': label, title: label },
+    });
     btn.append(icon(glyph));
     return btn;
   }
@@ -145,7 +155,13 @@ export function openPanel(options: PanelOptions): () => void {
   redoBtn.addEventListener('click', () => store.redo());
 
   const importInput = h('input', {
-    attrs: { type: 'file', accept: '.json,application/json', hidden: true, 'aria-hidden': 'true', tabindex: '-1' },
+    attrs: {
+      type: 'file',
+      accept: '.json,application/json',
+      hidden: true,
+      'aria-hidden': 'true',
+      tabindex: '-1',
+    },
   }) as HTMLInputElement;
 
   const downloadBtn = h('button', { class: 'btn btn-primary btn-sm', attrs: { type: 'button' } });
@@ -156,7 +172,8 @@ export function openPanel(options: PanelOptions): () => void {
     store.set(['meta', 'lastUpdated'], new Date().toISOString().slice(0, 10));
     onPreview(store.draft); // footer "Last updated" reflects immediately
     downloadJson(store.draft, 'content.json');
-    status.textContent = 'Downloaded — replace public/content.json in the repo and commit to publish.';
+    status.textContent =
+      'Downloaded — replace public/content.json in the repo and commit to publish.';
   };
   downloadBtn.addEventListener('click', publishDownload);
 
@@ -169,13 +186,20 @@ export function openPanel(options: PanelOptions): () => void {
   const helpBtn = textButton('Help', () => selectTab('help'));
   const closeBtn = h(
     'button',
-    { class: 'icon-btn', attrs: { type: 'button', 'aria-label': 'Close editor', title: 'Close editor' } },
+    {
+      class: 'icon-btn',
+      attrs: { type: 'button', 'aria-label': 'Close editor', title: 'Close editor' },
+    },
     icon('close'),
   );
   closeBtn.addEventListener('click', () => onClose());
 
   function textButton(label: string, onClick: () => void): HTMLButtonElement {
-    const btn = h('button', { class: 'btn btn-ghost btn-sm', text: label, attrs: { type: 'button' } });
+    const btn = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: label,
+      attrs: { type: 'button' },
+    });
     btn.addEventListener('click', onClick);
     return btn;
   }
@@ -231,16 +255,25 @@ export function openPanel(options: PanelOptions): () => void {
   async function showDiff(): Promise<void> {
     const entries = diffJson(options.published, store.draft);
     const dialog = h('dialog', { class: 'admin-dialog diff-dialog' });
-    const close = h('button', { class: 'btn btn-ghost btn-sm', text: 'Close', attrs: { type: 'button' } });
+    const close = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Close',
+      attrs: { type: 'button' },
+    });
     close.addEventListener('click', () => dialog.close());
     dialog.append(
       h('h2', { class: 'dialog-title', text: 'Draft vs published content.json' }),
       entries.length === 0
-        ? h('p', { class: 'dialog-text', text: 'No differences — the draft matches the published file.' })
+        ? h('p', {
+            class: 'dialog-text',
+            text: 'No differences — the draft matches the published file.',
+          })
         : h(
             'ul',
             { class: 'diff-list' },
-            ...entries.map((entry) => h('li', { class: `diff-${entry.kind}`, text: describeDiff(entry) })),
+            ...entries.map((entry) =>
+              h('li', { class: `diff-${entry.kind}`, text: describeDiff(entry) }),
+            ),
           ),
       h('div', { class: 'dialog-actions' }, close),
     );
@@ -292,7 +325,13 @@ export function openPanel(options: PanelOptions): () => void {
       const btn = h('button', {
         class: 'admin-tab',
         text: label,
-        attrs: { type: 'button', role: 'tab', id: `tab-${name}`, 'aria-selected': 'false', 'aria-controls': 'admin-panel' },
+        attrs: {
+          type: 'button',
+          role: 'tab',
+          id: `tab-${name}`,
+          'aria-selected': 'false',
+          'aria-controls': 'admin-panel',
+        },
       });
       btn.addEventListener('click', () => selectTab(name));
       tabButtons.set(name, btn);
@@ -300,7 +339,11 @@ export function openPanel(options: PanelOptions): () => void {
     }),
   );
 
-  const body = h('div', { class: 'admin-body', id: 'admin-panel', attrs: { role: 'tabpanel', tabindex: '-1' } });
+  const body = h('div', {
+    class: 'admin-body',
+    id: 'admin-panel',
+    attrs: { role: 'tabpanel', tabindex: '-1' },
+  });
 
   // --- Tab renderers ---
   function renderContentTab(): HTMLElement {
@@ -321,13 +364,22 @@ export function openPanel(options: PanelOptions): () => void {
       'fieldset',
       { class: 'admin-group' },
       h('legend', { text: 'Meta' }),
-      fieldRow('Last updated', (() => {
-        const input = h('input', { id: 'f-meta-lastUpdated', attrs: { type: 'date' } });
-        input.value = draft.meta.lastUpdated;
-        input.addEventListener('change', () => ctx.onCommit(['meta', 'lastUpdated'], input.value));
-        return input;
-      })(), 'Shown in the footer and sitemap — set automatically when you download.'),
-      h('p', { class: 'admin-help', text: `Schema version ${draft.meta.schemaVersion} (managed by the site).` }),
+      fieldRow(
+        'Last updated',
+        (() => {
+          const input = h('input', { id: 'f-meta-lastUpdated', attrs: { type: 'date' } });
+          input.value = draft.meta.lastUpdated;
+          input.addEventListener('change', () =>
+            ctx.onCommit(['meta', 'lastUpdated'], input.value),
+          );
+          return input;
+        })(),
+        'Shown in the footer and sitemap — set automatically when you download.',
+      ),
+      h('p', {
+        class: 'admin-help',
+        text: `Schema version ${draft.meta.schemaVersion} (managed by the site).`,
+      }),
     );
     return h('div', {}, ...groups.filter((g): g is HTMLElement => g !== null), metaGroup);
   }
@@ -335,8 +387,18 @@ export function openPanel(options: PanelOptions): () => void {
   function renderAppearanceTab(): HTMLElement {
     const draft = store.draft;
     const accentNode = rootSchema.properties?.['appearance']?.properties ?? {};
-    const light = controlFor(['appearance', 'accent'], accentNode['accent'] ?? {}, draft.appearance.accent, ctx);
-    const dark = controlFor(['appearance', 'accentDark'], accentNode['accentDark'] ?? {}, draft.appearance.accentDark, ctx);
+    const light = controlFor(
+      ['appearance', 'accent'],
+      accentNode['accent'] ?? {},
+      draft.appearance.accent,
+      ctx,
+    );
+    const dark = controlFor(
+      ['appearance', 'accentDark'],
+      accentNode['accentDark'] ?? {},
+      draft.appearance.accentDark,
+      ctx,
+    );
 
     const table = h(
       'table',
@@ -383,12 +445,7 @@ export function openPanel(options: PanelOptions): () => void {
           text: 'Applies to links, buttons and highlights. The checker below evaluates your colors against the site palette on both themes.',
         }),
       ),
-      h(
-        'div',
-        {},
-        h('h3', { class: 'admin-subtitle', text: 'WCAG contrast check' }),
-        table,
-      ),
+      h('div', {}, h('h3', { class: 'admin-subtitle', text: 'WCAG contrast check' }), table),
     );
   }
 
@@ -415,17 +472,49 @@ export function openPanel(options: PanelOptions): () => void {
         ctx.onCommit(['sections', index, 'enabled'], enabled.checked),
       );
 
-      const up = h('button', { class: 'icon-btn', attrs: { type: 'button', 'aria-label': `Move ${section.label} up`, disabled: index === 0 } }, icon('arrow-up'));
+      const up = h(
+        'button',
+        {
+          class: 'icon-btn',
+          attrs: {
+            type: 'button',
+            'aria-label': `Move ${section.label} up`,
+            disabled: index === 0,
+          },
+        },
+        icon('arrow-up'),
+      );
       up.addEventListener('click', () => move(index, -1));
-      const down = h('button', { class: 'icon-btn icon-btn-down', attrs: { type: 'button', 'aria-label': `Move ${section.label} down`, disabled: index === sections.length - 1 } }, icon('arrow-up'));
+      const down = h(
+        'button',
+        {
+          class: 'icon-btn icon-btn-down',
+          attrs: {
+            type: 'button',
+            'aria-label': `Move ${section.label} down`,
+            disabled: index === sections.length - 1,
+          },
+        },
+        icon('arrow-up'),
+      );
       down.addEventListener('click', () => move(index, 1));
 
       return h(
         'li',
         { class: 'section-row' },
         h('code', { class: 'section-id', text: section.id }),
-        h('div', { class: 'admin-field' }, h('label', { text: 'Heading', attrs: { for: `sec-label-${section.id}` } }), labelInput),
-        h('div', { class: 'admin-field section-enabled' }, enabled, h('label', { text: 'Enabled', attrs: { for: `sec-enabled-${section.id}` } })),
+        h(
+          'div',
+          { class: 'admin-field' },
+          h('label', { text: 'Heading', attrs: { for: `sec-label-${section.id}` } }),
+          labelInput,
+        ),
+        h(
+          'div',
+          { class: 'admin-field section-enabled' },
+          enabled,
+          h('label', { text: 'Enabled', attrs: { for: `sec-enabled-${section.id}` } }),
+        ),
         h('div', { class: 'list-buttons' }, up, down),
       );
     });
@@ -443,12 +532,7 @@ export function openPanel(options: PanelOptions): () => void {
 
   function renderHelpTab(): HTMLElement {
     const shortcut = (keys: string, description: string): HTMLElement =>
-      h(
-        'li',
-        {},
-        h('kbd', { text: keys }),
-        description,
-      );
+      h('li', {}, h('kbd', { text: keys }), description);
     return h(
       'div',
       { class: 'help-panel' },
@@ -534,7 +618,15 @@ export function openPanel(options: PanelOptions): () => void {
   // --- Mount ---
   const root = h(
     'div',
-    { class: 'admin-root', attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Content editor', tabindex: '-1' } },
+    {
+      class: 'admin-root',
+      attrs: {
+        role: 'dialog',
+        'aria-modal': 'true',
+        'aria-label': 'Content editor',
+        tabindex: '-1',
+      },
+    },
     bar,
     tabBar,
     body,

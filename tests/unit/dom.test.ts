@@ -25,7 +25,9 @@ describe('h()', () => {
   });
 
   it('sets attributes from the attrs map and skips false/null', () => {
-    const el = h('a', { attrs: { href: '#x', 'aria-current': true, download: null, hidden: false } });
+    const el = h('a', {
+      attrs: { href: '#x', 'aria-current': true, download: null, hidden: false },
+    });
     expect(el.getAttribute('href')).toBe('#x');
     expect(el.getAttribute('aria-current')).toBe('');
     expect(el.hasAttribute('download')).toBe(false);

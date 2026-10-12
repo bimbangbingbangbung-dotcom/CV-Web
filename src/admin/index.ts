@@ -46,10 +46,21 @@ async function sha256Hex(text: string): Promise<string> {
 /** Blocking passcode prompt (only when content.json configures a hash). */
 function passcodeGate(expectedHash: string): Promise<boolean> {
   return new Promise((resolve) => {
-    const input = h('input', { id: 'gate-input', attrs: { type: 'password', autocomplete: 'current-password' } });
+    const input = h('input', {
+      id: 'gate-input',
+      attrs: { type: 'password', autocomplete: 'current-password' },
+    });
     const error = h('p', { class: 'field-error', attrs: { role: 'alert' } });
-    const unlock = h('button', { class: 'btn btn-primary btn-sm', text: 'Unlock', attrs: { type: 'submit' } });
-    const cancel = h('button', { class: 'btn btn-ghost btn-sm', text: 'Cancel', attrs: { type: 'button' } });
+    const unlock = h('button', {
+      class: 'btn btn-primary btn-sm',
+      text: 'Unlock',
+      attrs: { type: 'submit' },
+    });
+    const cancel = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Cancel',
+      attrs: { type: 'button' },
+    });
 
     const form = h(
       'form',
@@ -83,8 +94,17 @@ function passcodeGate(expectedHash: string): Promise<boolean> {
 
     const root = h(
       'div',
-      { class: 'admin-gate', attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Editor passcode' } },
-      h('div', { class: 'gate-panel' }, icon('pencil'), h('h2', { text: 'This area is protected' }), form),
+      {
+        class: 'admin-gate',
+        attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Editor passcode' },
+      },
+      h(
+        'div',
+        { class: 'gate-panel' },
+        icon('pencil'),
+        h('h2', { text: 'This area is protected' }),
+        form,
+      ),
     );
     document.body.append(root);
     input.focus();
@@ -94,9 +114,21 @@ function passcodeGate(expectedHash: string): Promise<boolean> {
 /** "Resume draft?" choice for an autosaved draft found in localStorage. */
 function resumeDialog(savedAt: string): Promise<'resume' | 'discard' | 'ignore'> {
   return new Promise((resolve) => {
-    const resume = h('button', { class: 'btn btn-primary btn-sm', text: 'Resume draft', attrs: { type: 'button' } });
-    const discard = h('button', { class: 'btn btn-ghost btn-sm', text: 'Discard draft', attrs: { type: 'button' } });
-    const ignore = h('button', { class: 'btn btn-ghost btn-sm', text: 'Keep for later', attrs: { type: 'button' } });
+    const resume = h('button', {
+      class: 'btn btn-primary btn-sm',
+      text: 'Resume draft',
+      attrs: { type: 'button' },
+    });
+    const discard = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Discard draft',
+      attrs: { type: 'button' },
+    });
+    const ignore = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Keep for later',
+      attrs: { type: 'button' },
+    });
     resume.addEventListener('click', () => {
       dialog.remove();
       resolve('resume');
@@ -126,7 +158,11 @@ function resumeDialog(savedAt: string): Promise<'resume' | 'discard' | 'ignore'>
 }
 
 /** Floating "unsaved draft" indicator on the public side of the editor. */
-function createDraftPill(): { el: HTMLElement; button: HTMLElement; setDirty: (dirty: boolean) => void } {
+function createDraftPill(): {
+  el: HTMLElement;
+  button: HTMLElement;
+  setDirty: (dirty: boolean) => void;
+} {
   const button = h(
     'button',
     { class: 'draft-pill', attrs: { type: 'button' } },
@@ -210,7 +246,9 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
     const openingWith = JSON.stringify(options.initialDraft ?? content);
     if (persisted) {
       const migrated = migrate(persisted.data);
-      const validated = migrated.ok ? validateContent(migrated.data) : { ok: false as const, errors: [] };
+      const validated = migrated.ok
+        ? validateContent(migrated.data)
+        : { ok: false as const, errors: [] };
       if (!validated.ok) {
         clearPersistedDraft(); // corrupt leftover — drop it silently
       } else if (

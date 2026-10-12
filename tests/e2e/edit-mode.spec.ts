@@ -126,9 +126,7 @@ test.describe('edit mode', () => {
     await page.goto('/#admin');
     await expect(page.locator('.admin-root')).toBeVisible();
     const results = await new AxeBuilder({ page }).include('.admin-root').analyze();
-    const bad = results.violations.filter(
-      (v) => v.impact === 'serious' || v.impact === 'critical',
-    );
+    const bad = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
     expect(bad.map((v) => `${v.id} (${v.impact}): ${v.help}`)).toEqual([]);
   });
 });

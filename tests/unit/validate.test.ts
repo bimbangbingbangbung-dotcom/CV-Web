@@ -48,9 +48,9 @@ describe('validateContent', () => {
     const result = validateContent(broken);
     expect(result.ok).toBe(false);
     if (!result.ok) {
-      expect(result.errors.some((e) => e.path === '/sections' && e.message.includes('duplicate'))).toBe(
-        true,
-      );
+      expect(
+        result.errors.some((e) => e.path === '/sections' && e.message.includes('duplicate')),
+      ).toBe(true);
     }
   });
 });

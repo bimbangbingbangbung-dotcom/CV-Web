@@ -13,7 +13,11 @@ const svg = await readFile('public/favicon.svg', 'utf8');
 await mkdir('public/assets', { recursive: true });
 
 const escapeHtml = (text) =>
-  String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
@@ -60,7 +64,12 @@ const ogHtml = `<!doctype html>
 
 await page.setViewportSize({ width: 1200, height: 630 });
 await page.setContent(ogHtml);
-await page.screenshot({ path: 'public/assets/og-image.png', clip: { x: 0, y: 0, width: 1200, height: 630 } });
+await page.screenshot({
+  path: 'public/assets/og-image.png',
+  clip: { x: 0, y: 0, width: 1200, height: 630 },
+});
 
 await browser.close();
-console.log('generate-images: og-image.png, favicon-192/512.png, apple-touch-icon.png → public/assets/');
+console.log(
+  'generate-images: og-image.png, favicon-192/512.png, apple-touch-icon.png → public/assets/',
+);

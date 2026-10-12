@@ -6,7 +6,9 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const badViolations = (violations: { impact?: string | null; id: string; help: string }[]): string[] =>
+const badViolations = (
+  violations: { impact?: string | null; id: string; help: string }[],
+): string[] =>
   violations
     .filter((v) => v.impact === 'serious' || v.impact === 'critical')
     .map((v) => `${v.id} (${v.impact}): ${v.help}`);
