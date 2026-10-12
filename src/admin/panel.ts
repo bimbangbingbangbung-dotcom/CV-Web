@@ -501,7 +501,7 @@ export function openPanel(options: PanelOptions): () => void {
   const unsubscribe = store.subscribe((_draft, meta) => {
     updateBadges();
     // Field edits keep the DOM (and focus) intact; structural changes rebuild.
-    if (meta.external || activeTab === 'appearance') renderActiveTab();
+    if (meta.external || activeTab === 'appearance') renderPreservingFocus();
   });
 
   // --- Keyboard shortcuts inside the editor ---
