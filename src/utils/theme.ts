@@ -35,8 +35,10 @@ export function applyTheme(resolved: ResolvedTheme): void {
   const root = document.documentElement;
   root.dataset['theme'] = resolved;
   root.style.colorScheme = resolved;
-  const meta = document.querySelector('meta[name="theme-color"]');
+  const meta = document.createElement === undefined ? null : document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', THEME_COLOR[resolved]);
+  // Let interested components (e.g. header theme buttons) re-sync.
+  window.dispatchEvent(new CustomEvent('cvweb:themechange', { detail: { theme: resolved } }));
 }
 
 /** Persist a mode and apply it. */
