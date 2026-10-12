@@ -322,7 +322,11 @@ function stringList(
   value: string[],
   ctx: FormContext,
 ): HTMLElement {
-  const input = h('input', { class: 'chip-input', attrs: { type: 'text', placeholder: 'Type and press Enter' } });
+  const input = h('input', {
+    id: fieldId(path),
+    class: 'chip-input',
+    attrs: { type: 'text', placeholder: 'Type and press Enter' },
+  });
   const commit = (next: string[]): void => {
     ctx.onCommit(path, next);
   };
