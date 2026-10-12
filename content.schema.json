@@ -347,6 +347,16 @@
       }
     },
 
+    "projectDetail": {
+      "additionalProperties": false,
+      "required": ["problem", "solution", "result"],
+      "properties": {
+        "problem": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "solution": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "result": { "type": "string", "minLength": 1, "maxLength": 500 }
+      }
+    },
+
     "experienceList": {
       "type": "array",
       "items": {
