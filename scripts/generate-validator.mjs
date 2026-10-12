@@ -30,20 +30,26 @@ const ajv = new Ajv2020({
   allowUnionTypes: true,
   code: { source: true },
 });
+addFormats(ajv);
 
-// Ajv standalone emits CommonJS; the browser bundle needs ESM. Transform the
-// export lines rather than bundling a CJS shim. Fail loudly if Ajv's output
-// shape ever changes instead of shipping a broken validator.
-const rootExport = 'module.exports = validate;';
-if (!code.includes(rootExport)) {
+const validate = ajv.compile(schema);
+let code = standaloneCode(ajv, validate);
+
+// Ajv standalone emits CommonJS (`module.exports = validateNN;`) where NN is
+// a generated suffix. Extract that name, convert to ESM for the browser
+// bundle, and fail loudly if Ajv's output shape ever changes instead of
+// silently shipping a broken validator.
+const exportMatch = code.match(/module\.exports\s*=\s*([A-Za-z_$][\w$]*)\s*;/);
+if (!exportMatch) {
   console.error('generate-validator: unexpected Ajv standalone output. Head of file:');
   console.error(code.slice(0, 500));
   process.exit(1);
 }
+const fnName = exportMatch[1];
 code = code
   .replace('"use strict";', '')
-  .replace(rootExport, '')
-  .replace(/module\.exports\.default\s*=\s*validate;/, '')
+  .replace(/module\.exports\s*=\s*[A-Za-z_$][\w$]*\s*;/, '')
+  .replace(new RegExp(`module\\.exports\\.default\\s*=\\s*${fnName}\\s*;`), '')
   .trim();
 
 const header = [
@@ -57,7 +63,7 @@ const header = [
   '',
 ].join('\n');
 
-await writeFile(outPath, `${header}${code}\n\nexport default validate;\n`, 'utf8');
+await writeFile(outPath, `${header}${code}\n\nexport default ${fnName};\n`, 'utf8');
 console.log(
   `generate-validator: wrote ${path.relative(root, outPath)} (${(code.length / 1024).toFixed(1)} KB)`,
 );
