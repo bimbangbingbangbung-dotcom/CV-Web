@@ -28,5 +28,9 @@ export function renderSkills(content: Content): HTMLElement | null {
     ),
   );
 
-  return sectionShell('skills', labelOf(content, 'skills'), h('div', { class: 'skill-groups' }, ...groups));
+  return sectionShell(
+    'skills',
+    labelOf(content, 'skills'),
+    h('div', { class: 'skill-groups' }, ...groups),
+  );
 }

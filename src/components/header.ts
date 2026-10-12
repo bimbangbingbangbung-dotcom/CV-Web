@@ -77,7 +77,9 @@ export function initHeader(content: Content, main: HTMLElement): HeaderHandles {
   const makeNavLink = (section: SectionEntry): HTMLAnchorElement =>
     h('a', { text: section.label, attrs: { href: `#${section.id}` } });
   const makeEditLink = (): HTMLAnchorElement | null =>
-    cfg.showEditLink ? h('a', { class: 'header-edit', text: 'Edit', attrs: { href: '#admin' } }) : null;
+    cfg.showEditLink
+      ? h('a', { class: 'header-edit', text: 'Edit', attrs: { href: '#admin' } })
+      : null;
 
   // --- Build the header ---
   const navLinks = navSections.map(makeNavLink);
@@ -89,7 +91,10 @@ export function initHeader(content: Content, main: HTMLElement): HeaderHandles {
     { class: 'site-header', id: 'site-header', attrs: { tabindex: '-1' } },
     h(
       'a',
-      { class: 'header-brand', attrs: { href: '#top', 'aria-label': `${content.owner.fullName} — back to top` } },
+      {
+        class: 'header-brand',
+        attrs: { href: '#top', 'aria-label': `${content.owner.fullName} — back to top` },
+      },
       h('span', { class: 'header-initials', text: initials, attrs: { 'aria-hidden': 'true' } }),
       h('span', { class: 'header-name', text: content.owner.fullName }),
     ),
@@ -114,7 +119,11 @@ export function initHeader(content: Content, main: HTMLElement): HeaderHandles {
   const overlayLinks = navSections.map(makeNavLink);
   const overlay = h(
     'div',
-    { class: 'menu-overlay', id: 'site-menu', attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Site menu', hidden: true } },
+    {
+      class: 'menu-overlay',
+      id: 'site-menu',
+      attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Site menu', hidden: true },
+    },
     h(
       'div',
       { class: 'menu-panel' },
@@ -122,20 +131,44 @@ export function initHeader(content: Content, main: HTMLElement): HeaderHandles {
         'div',
         { class: 'menu-head' },
         h('span', { class: 'menu-title', text: content.owner.fullName }),
-        h('button', { class: 'icon-btn menu-close', attrs: { type: 'button', 'aria-label': 'Close menu' } }, icon('close')),
+        h(
+          'button',
+          { class: 'icon-btn menu-close', attrs: { type: 'button', 'aria-label': 'Close menu' } },
+          icon('close'),
+        ),
       ),
-      h('nav', { attrs: { 'aria-label': 'Primary' } }, h('ul', { class: 'menu-links' }, ...overlayLinks.map((l) => h('li', {}, l)))),
-      h('div', { class: 'menu-actions' }, makeThemeButton(), makeCvButton('btn btn-primary'), editLink?.cloneNode(true) ?? null),
+      h(
+        'nav',
+        { attrs: { 'aria-label': 'Primary' } },
+        h('ul', { class: 'menu-links' }, ...overlayLinks.map((l) => h('li', {}, l))),
+      ),
+      h(
+        'div',
+        { class: 'menu-actions' },
+        makeThemeButton(),
+        makeCvButton('btn btn-primary'),
+        editLink?.cloneNode(true) ?? null,
+      ),
     ),
   );
   const handle = h(
     'button',
-    { class: 'touch-handle', attrs: { type: 'button', 'aria-label': 'Open menu', 'aria-expanded': 'false', 'aria-controls': 'site-menu' } },
+    {
+      class: 'touch-handle',
+      attrs: {
+        type: 'button',
+        'aria-label': 'Open menu',
+        'aria-expanded': 'false',
+        'aria-controls': 'site-menu',
+      },
+    },
     icon('menu'),
   );
 
   // --- Optional edge hint (thin accent line until first interaction) ---
-  const edgeHint = cfg.discoverabilityHint ? h('div', { class: 'edge-hint', attrs: { 'aria-hidden': 'true' } }) : null;
+  const edgeHint = cfg.discoverabilityHint
+    ? h('div', { class: 'edge-hint', attrs: { 'aria-hidden': 'true' } })
+    : null;
 
   document.body.append(hoverZone, header, handle, overlay, ...(edgeHint ? [edgeHint] : []));
 
@@ -280,7 +313,8 @@ export function initHeader(content: Content, main: HTMLElement): HeaderHandles {
           const y = window.scrollY;
           const delta = y - lastY;
           lastY = y;
-          if (y < 64) setVisible(false); // top of the page stays clean
+          if (y < 64)
+            setVisible(false); // top of the page stays clean
           else if (delta < -4) show();
           else if (delta > 4) scheduleHide(200);
           ticking = false;

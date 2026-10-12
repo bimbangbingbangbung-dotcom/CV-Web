@@ -28,11 +28,19 @@ export function renderEducation(content: Content): HTMLElement | null {
             )
           : null,
         (edu.honors?.length ?? 0) > 0
-          ? h('ul', { class: 'honor-list' }, ...(edu.honors ?? []).map((honor) => h('li', { text: honor })))
+          ? h(
+              'ul',
+              { class: 'honor-list' },
+              ...(edu.honors ?? []).map((honor) => h('li', { text: honor })),
+            )
           : null,
       ),
     ),
   );
 
-  return sectionShell('education', labelOf(content, 'education'), h('ul', { class: 'timeline' }, ...items));
+  return sectionShell(
+    'education',
+    labelOf(content, 'education'),
+    h('ul', { class: 'timeline' }, ...items),
+  );
 }

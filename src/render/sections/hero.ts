@@ -28,7 +28,11 @@ export function renderHero(content: Content): HTMLElement {
   const downloadBtn = h('a', { class: 'btn btn-primary', text: cv.label, attrs: { href: cvHref } });
   downloadBtn.prepend(icon('download'));
 
-  const contactBtn = h('a', { class: 'btn btn-ghost', text: 'Contact me', attrs: { href: '#contact' } });
+  const contactBtn = h('a', {
+    class: 'btn btn-ghost',
+    text: 'Contact me',
+    attrs: { href: '#contact' },
+  });
 
   const socialLinks = contact.socials.map((social) => {
     const isHttps = social.url.startsWith('http');
@@ -79,7 +83,9 @@ export function renderHero(content: Content): HTMLElement {
       h('p', { class: 'hero-tagline', text: owner.tagline }),
       h('p', { class: 'hero-bio', text: owner.shortBio }),
       h('div', { class: 'hero-cta' }, downloadBtn, contactBtn),
-      socialLinks.length > 0 ? h('ul', { class: 'social-row' }, ...socialLinks.map((l) => h('li', {}, l))) : null,
+      socialLinks.length > 0
+        ? h('ul', { class: 'social-row' }, ...socialLinks.map((l) => h('li', {}, l)))
+        : null,
     ),
     h('aside', { class: 'hero-aside' }, avatar),
   );

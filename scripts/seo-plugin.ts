@@ -105,7 +105,9 @@ function buildManifest(c: SeoContent): string {
       display: 'standalone',
       background_color: c.site.themeColor ?? '#fbfbfa',
       theme_color: c.site.themeColor ?? '#fbfbfa',
-      icons: [{ src: './favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any maskable' }],
+      icons: [
+        { src: './favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any maskable' },
+      ],
     },
     null,
     2,
@@ -150,13 +152,20 @@ export function seoPlugin(): Plugin {
       // Dev parity: the same generated files without a build step.
       server.middlewares.use((req, res, next) => {
         const route = (req.url ?? '').split('?')[0];
-        if (route !== '/manifest.webmanifest' && route !== '/robots.txt' && route !== '/sitemap.xml') {
+        if (
+          route !== '/manifest.webmanifest' &&
+          route !== '/robots.txt' &&
+          route !== '/sitemap.xml'
+        ) {
           next();
           return;
         }
         void loadContent(config.root)
           .then((content) => {
-            res.setHeader('Content-Type', route.endsWith('.xml') ? 'application/xml' : 'application/json');
+            res.setHeader(
+              'Content-Type',
+              route.endsWith('.xml') ? 'application/xml' : 'application/json',
+            );
             if (route === '/robots.txt') {
               res.setHeader('Content-Type', 'text/plain');
               res.end(buildRobots(content));

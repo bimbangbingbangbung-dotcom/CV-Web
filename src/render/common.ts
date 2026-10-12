@@ -12,7 +12,10 @@ import { externalAnchor } from '../utils/url';
 import { LEVEL_LABELS, type SkillLevel } from '../schema/types';
 
 /** Resolve the owner-defined heading for a section (nav label = section title). */
-export function labelOf(content: { sections: { id: string; label: string }[] }, id: string): string {
+export function labelOf(
+  content: { sections: { id: string; label: string }[] },
+  id: string,
+): string {
   return content.sections.find((s) => s.id === id)?.label ?? id;
 }
 
@@ -21,7 +24,11 @@ export function sectionShell(id: string, label: string, ...children: (Node | nul
   const body = children.filter((child): child is Node => child !== null);
   return h(
     'section',
-    { class: 'section', id, attrs: { 'aria-labelledby': `${id}-title`, tabindex: '-1', 'data-reveal': true } },
+    {
+      class: 'section',
+      id,
+      attrs: { 'aria-labelledby': `${id}-title`, tabindex: '-1', 'data-reveal': true },
+    },
     h('h2', { class: 'section-title', id: `${id}-title`, text: label }),
     ...body,
   );
@@ -46,10 +53,13 @@ export function dateRange(start: string, end: string): HTMLElement {
 /** A muted meta line with "·" separators between parts. */
 export function metaLine(...parts: (string | HTMLElement | null)[]): HTMLElement {
   const line = h('p', { class: 'meta-line' });
-  parts.filter((p): p is string | HTMLElement => p !== null).forEach((part, i) => {
-    if (i > 0) line.append(h('span', { class: 'meta-dot', text: '·', attrs: { 'aria-hidden': 'true' } }));
-    line.append(typeof part === 'string' ? h('span', { text: part }) : part);
-  });
+  parts
+    .filter((p): p is string | HTMLElement => p !== null)
+    .forEach((part, i) => {
+      if (i > 0)
+        line.append(h('span', { class: 'meta-dot', text: '·', attrs: { 'aria-hidden': 'true' } }));
+      line.append(typeof part === 'string' ? h('span', { text: part }) : part);
+    });
   return line;
 }
 

@@ -24,5 +24,9 @@ export function renderAchievements(content: Content): HTMLElement | null {
     ),
   );
 
-  return sectionShell('achievements', labelOf(content, 'achievements'), h('ul', { class: 'list-plain' }, ...items));
+  return sectionShell(
+    'achievements',
+    labelOf(content, 'achievements'),
+    h('ul', { class: 'list-plain' }, ...items),
+  );
 }

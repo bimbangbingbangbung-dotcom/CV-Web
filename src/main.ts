@@ -104,14 +104,13 @@ function showErrorBanner(errors: FieldError[], source: ContentSource): void {
       { class: 'error-body' },
       h('strong', { text: 'Content problem detected' }),
       sourceNote ? h('p', { text: sourceNote }) : null,
-      h(
-        'details',
-        {},
-        h('summary', { text: `Details (${errors.length})` }),
-        list,
-      ),
+      h('details', {}, h('summary', { text: `Details (${errors.length})` }), list),
     ),
-    h('button', { class: 'icon-btn', attrs: { type: 'button', 'aria-label': 'Dismiss this message' } }, icon('close')),
+    h(
+      'button',
+      { class: 'icon-btn', attrs: { type: 'button', 'aria-label': 'Dismiss this message' } },
+      icon('close'),
+    ),
   );
   banner.querySelector('button')?.addEventListener('click', () => banner.remove());
 

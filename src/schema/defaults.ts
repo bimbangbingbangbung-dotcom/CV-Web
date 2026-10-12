@@ -35,7 +35,8 @@ export const DEFAULT_CONTENT: Content = {
     fullName: 'Your Name',
     headline: 'Computer Engineering Student',
     tagline: 'This page is showing built-in fallback content.',
-    shortBio: 'public/content.json could not be loaded. Replace it with your own content to restore the site.',
+    shortBio:
+      'public/content.json could not be loaded. Replace it with your own content to restore the site.',
     location: 'Your City, Country',
     availability: { label: 'Open to opportunities', show: true },
     photo: null,

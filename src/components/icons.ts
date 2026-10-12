@@ -39,7 +39,11 @@ const ICON_PATHS: Record<string, string[]> = {
   ],
   moon: ['M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z'],
   download: ['M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4', 'M7 10l5 5 5-5', 'M12 15V3'],
-  external: ['M15 3h6v6', 'M10 14 21 3', 'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'],
+  external: [
+    'M15 3h6v6',
+    'M10 14 21 3',
+    'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6',
+  ],
   'chevron-down': ['M6 9l6 6 6-6'],
   'arrow-up': ['M12 19V5', 'M5 12l7-7 7 7'],
   menu: ['M4 7h16', 'M4 12h16', 'M4 17h16'],

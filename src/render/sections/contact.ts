@@ -15,7 +15,10 @@ import { labelOf, sectionShell } from '../common';
 
 function emailRow(content: Content): HTMLElement {
   const email = content.contact.email;
-  const status = h('span', { class: 'copy-status', attrs: { role: 'status', 'aria-live': 'polite' } });
+  const status = h('span', {
+    class: 'copy-status',
+    attrs: { role: 'status', 'aria-live': 'polite' },
+  });
 
   const copyBtn = h(
     'button',
@@ -65,7 +68,8 @@ function socialList(content: Content): HTMLElement | null {
           ...(isHttps ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
         },
       });
-      if (['github', 'linkedin', 'x'].includes(social.platform)) link.prepend(icon(social.platform));
+      if (['github', 'linkedin', 'x'].includes(social.platform))
+        link.prepend(icon(social.platform));
       else if (social.platform === 'email') link.prepend(icon('mail'));
       return h('li', {}, link);
     }),
@@ -96,7 +100,9 @@ function contactForm(content: Content): HTMLElement {
   const fieldEls = FORM_FIELDS.map((spec) => {
     const input =
       spec.type === 'textarea'
-        ? h('textarea', { attrs: { id: `cf-${spec.name}`, name: spec.name, rows: '5', required: true } })
+        ? h('textarea', {
+            attrs: { id: `cf-${spec.name}`, name: spec.name, rows: '5', required: true },
+          })
         : h('input', {
             attrs: {
               id: `cf-${spec.name}`,
@@ -119,7 +125,11 @@ function contactForm(content: Content): HTMLElement {
     );
   });
 
-  const submit = h('button', { class: 'btn btn-primary', text: 'Send message', attrs: { type: 'submit' } });
+  const submit = h('button', {
+    class: 'btn btn-primary',
+    text: 'Send message',
+    attrs: { type: 'submit' },
+  });
 
   const form = h(
     'form',
@@ -130,7 +140,15 @@ function contactForm(content: Content): HTMLElement {
       'div',
       { class: 'honeypot', attrs: { 'aria-hidden': 'true' } },
       h('label', { text: 'Leave this field empty', attrs: { for: 'cf-website' } }),
-      h('input', { attrs: { id: 'cf-website', name: honeypot, type: 'text', tabindex: '-1', autocomplete: 'off' } }),
+      h('input', {
+        attrs: {
+          id: 'cf-website',
+          name: honeypot,
+          type: 'text',
+          tabindex: '-1',
+          autocomplete: 'off',
+        },
+      }),
     ),
     status,
     submit,
@@ -143,7 +161,8 @@ function contactForm(content: Content): HTMLElement {
       const value = input.value.trim();
       let message = '';
       if (!value) message = `${spec.label} is required`;
-      else if (spec.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) message = 'Enter a valid email address';
+      else if (spec.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+        message = 'Enter a valid email address';
       if (message) {
         ok = false;
         input.setAttribute('aria-invalid', 'true');

@@ -20,5 +20,9 @@ export function renderPublications(content: Content): HTMLElement | null {
     ),
   );
 
-  return sectionShell('publications', labelOf(content, 'publications'), h('ul', { class: 'list-plain' }, ...items));
+  return sectionShell(
+    'publications',
+    labelOf(content, 'publications'),
+    h('ul', { class: 'list-plain' }, ...items),
+  );
 }

@@ -37,5 +37,9 @@ export function renderExperience(content: Content): HTMLElement | null {
     ),
   );
 
-  return sectionShell('experience', labelOf(content, 'experience'), h('ul', { class: 'timeline' }, ...items));
+  return sectionShell(
+    'experience',
+    labelOf(content, 'experience'),
+    h('ul', { class: 'timeline' }, ...items),
+  );
 }

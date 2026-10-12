@@ -53,7 +53,12 @@ function projectCard(project: Project): HTMLElement {
     imageHref
       ? h('img', {
           class: 'project-image',
-          attrs: { src: imageHref, alt: `Screenshot of ${project.title}`, loading: 'lazy', decoding: 'async' },
+          attrs: {
+            src: imageHref,
+            alt: `Screenshot of ${project.title}`,
+            loading: 'lazy',
+            decoding: 'async',
+          },
         })
       : null,
     detailBlock(project),
@@ -93,7 +98,10 @@ export function renderProjects(content: Content): HTMLElement | null {
           };
           return h(
             'div',
-            { class: 'filter-row', attrs: { role: 'group', 'aria-label': 'Filter projects by technology' } },
+            {
+              class: 'filter-row',
+              attrs: { role: 'group', 'aria-label': 'Filter projects by technology' },
+            },
             makeFilter('All', null),
             ...tags.map((tag) => makeFilter(tag, tag)),
           );
