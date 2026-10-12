@@ -149,6 +149,7 @@ export function openPanel(options: PanelOptions): () => void {
   }) as HTMLInputElement;
 
   const downloadBtn = h('button', { class: 'btn btn-primary btn-sm', attrs: { type: 'button' } });
+  downloadBtn.id = 'admin-download';
   downloadBtn.append(icon('download'), 'Download content.json');
 
   const publishDownload = (): void => {
