@@ -134,8 +134,16 @@ async function routeAdmin(): Promise<void> {
   }
 }
 
+/** Push content.json appearance values into the design-token indirection. */
+function applyAppearance(content: Content): void {
+  const root = document.documentElement;
+  root.style.setProperty('--accent-user', content.appearance.accent);
+  root.style.setProperty('--accent-dark-user', content.appearance.accentDark);
+}
+
 /** Render the public page and wire up the header. Reused when publishing. */
 function boot(content: Content): void {
+  applyAppearance(content);
   updateDocumentMeta(content);
 
   // content.theme.default only applies before the visitor picks their own.
