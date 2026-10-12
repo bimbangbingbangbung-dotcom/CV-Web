@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+public/fonts/
+package-lock.json
+src/utils/content-validator.generated.ts
