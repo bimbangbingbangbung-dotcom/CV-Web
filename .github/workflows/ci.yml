@@ -1,0 +1,62 @@
+# Build verification — runs on every push/PR. No deployment.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Validate content against schema
+        run: npm run validate:content
+
+      - name: Unit tests (Vitest)
+        run: npm test
+
+      - name: Production build (includes typecheck + content gate)
+        run: npm run build
+
+      - name: Public JS budget (< 50 KB gzipped)
+        run: node scripts/check-budget.mjs
+
+      - name: Install Playwright (chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E + accessibility tests (Playwright + axe)
+        run: npm run test:e2e
+
+      - name: Lighthouse CI (perf/a11y/bp/seo ≥ 95)
+        run: npm run lighthouse
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
