@@ -149,7 +149,7 @@ function boot(content: Content): void {
   if (!hasStoredMode() && content.theme.default !== 'system') setMode(content.theme.default);
 
   const main = renderPage(content);
-  initHeader(content, main);
+  initHeader(content);
   initReveal(main);
   currentContent = content;
   void routeAdmin();

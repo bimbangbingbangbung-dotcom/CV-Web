@@ -36,7 +36,7 @@ function isTypingTarget(target: EventTarget | null): boolean {
   return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable;
 }
 
-export function initHeader(content: Content, main: HTMLElement): HeaderHandles {
+export function initHeader(content: Content): HeaderHandles {
   const cfg = content.header;
   const root = document.documentElement;
   root.dataset['headerMode'] = cfg.mode;
@@ -283,7 +283,7 @@ export function initHeader(content: Content, main: HTMLElement): HeaderHandles {
     if (event.key === 'Escape') {
       if (!overlay.hidden) {
         closeOverlay();
-      } else if (hoverBound && visible && mode !== 'always-visible') {
+      } else if (hoverBound && visible) {
         hide();
         (document.activeElement as HTMLElement | null)?.blur?.();
       }

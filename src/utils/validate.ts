@@ -8,6 +8,23 @@
 import type { Content } from '../schema/types';
 import validateGenerated from './content-validator.generated';
 
+/**
+ * The generated module exports a plain validate function; Ajv attaches the
+ * errors from the LAST run to that function at runtime. This interface
+ * declares what we rely on (the generated file itself is @ts-nocheck).
+ */
+interface GeneratedValidator {
+  (data: unknown): boolean;
+  errors?: {
+    instancePath?: string;
+    keyword: string;
+    message?: string;
+    params?: Record<string, unknown>;
+  }[];
+}
+
+const generated = validateGenerated as unknown as GeneratedValidator;
+
 export interface FieldError {
   /** JSON path like /owner/fullCode — shown to the user as-is (it maps to content.json). */
   path: string;
@@ -48,14 +65,9 @@ function friendlyMessage(error: {
 export function validateContent(data: unknown): ValidationResult {
   const errors: FieldError[] = [];
 
-  const valid: boolean = validateGenerated(data);
+  const valid: boolean = generated(data);
   if (!valid) {
-    for (const err of (validateGenerated.errors ?? []) as {
-      instancePath?: string;
-      keyword: string;
-      message?: string;
-      params?: Record<string, unknown>;
-    }[]) {
+    for (const err of generated.errors ?? []) {
       errors.push({
         path: err.instancePath || '(root)',
         message: friendlyMessage(err),
