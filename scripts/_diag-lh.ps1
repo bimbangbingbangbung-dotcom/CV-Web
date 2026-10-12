@@ -15,7 +15,8 @@ $j.configSettings | ConvertTo-Json -Depth 4
 Write-Output '--- final-screenshot dimensions ---'
 $fs = $j.audits.'final-screenshot'
 if ($fs -and $fs.details.data) {
-  $bytes = [Convert]::FromBase64String($fs.details.data)
+  $b64 = $fs.details.data -replace '^data:[^,]+,', ''
+  $bytes = [Convert]::FromBase64String($b64)
   [IO.File]::WriteAllBytes("$env:TEMP/lh-final-screenshot.png", $bytes)
   Write-Output ("saved: $env:TEMP/lh-final-screenshot.png (" + $bytes.Length + ' bytes)')
 }
