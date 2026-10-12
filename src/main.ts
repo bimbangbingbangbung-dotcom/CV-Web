@@ -188,6 +188,7 @@ async function start(): Promise<void> {
   const result = await fetchPublishedContent();
 
   if (result.source === 'published') saveSnapshot(result.content);
+  publishedContent = result.content;
   boot(result.content);
 
   if (result.errors.length > 0) {
