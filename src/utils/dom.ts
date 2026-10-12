@@ -39,7 +39,8 @@ export function h<K extends keyof HTMLElementTagNameMap>(
 export function appendChildren(parent: ParentNode, children: Child[]): void {
   for (const child of children) {
     if (child === null || child === undefined || child === false) continue;
-    parent.append(child);
+    // ParentNode.append() takes string | Node — normalize numbers to text.
+    parent.append(typeof child === 'number' ? String(child) : child);
   }
 }
 
