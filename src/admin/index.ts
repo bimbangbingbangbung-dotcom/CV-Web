@@ -161,18 +161,24 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
     if (dirtyAtClose) {
       // Keep the "draft in editor" pill so the owner can jump back in.
       pill.el.classList.add('is-orphaned');
+      pill.el.hidden = false;
       pill.button.addEventListener('click', () => {
         location.hash = '#admin';
       });
     } else {
       pill.el.remove();
-      window.removeEventListener('beforeunload', guard);
+      setGuard(false);
     }
   };
 
-  const guard = (event: BeforeUnloadEvent): void => {
-    event.preventDefault();
-    event.returnValue = '';
+  const setGuard = (on: boolean): void => {
+    if (on && !guardAttached) {
+      window.addEventListener('beforeunload', guard);
+      guardAttached = true;
+    } else if (!on && guardAttached) {
+      window.removeEventListener('beforeunload', guard);
+      guardAttached = false;
+    }
   };
 
   void (async () => {
