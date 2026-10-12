@@ -1,0 +1,156 @@
+/*
+ * Print stylesheet — an ATS-friendly, single-column CV.
+ *
+ * The output target is a recruiter printing to PDF (Ctrl+P): chrome hidden,
+ * black on white, URLs printed after external links, no card/timeline entry
+ * split across pages.
+ *
+ * Note: hiding the auto-hide header with display:none is correct HERE —
+ * @media print has no pointer, keyboard or screen-reader interaction, and
+ * the header remains fully available on screen (see header.css).
+ */
+
+@media print {
+  @page {
+    margin: 15mm;
+  }
+
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #ffffff;
+    --text: #000000;
+    --text-muted: #333333;
+    --text-faint: #555555;
+    --border: #bbbbbb;
+    --accent: #0b4a45;
+    --accent-contrast: #ffffff;
+  }
+
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+
+  /* Page chrome never prints. */
+  .site-header,
+  .hover-zone,
+  .touch-handle,
+  .menu-overlay,
+  .edge-hint,
+  .error-banner,
+  .skip-link,
+  .hero-cta,
+  .filter-row,
+  .footer-actions,
+  .copy-status {
+    display: none !important;
+  }
+
+  /* Reset reveal animation — everything visible instantly. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero {
+    padding: 0 0 8mm;
+    grid-template-columns: auto 1fr;
+    gap: 6mm;
+  }
+
+  .hero-aside {
+    order: -1;
+  }
+
+  .avatar {
+    width: 26mm;
+    border: 1px solid #bbb;
+  }
+
+  .hero-main h1 {
+    font-size: 24pt;
+  }
+
+  .hero-tagline {
+    font-size: 13pt;
+    max-width: none;
+  }
+
+  .section {
+    padding-block: 6mm;
+    border-top: 1px solid #ddd;
+    break-inside: auto;
+  }
+
+  .section-title {
+    font-size: 14pt;
+    margin-bottom: 4mm;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  /* Never split a card / timeline row / achievement across pages. */
+  .timeline-item,
+  .card,
+  .achievement-item,
+  .skill-group,
+  .email-row,
+  .contact-form {
+    break-inside: avoid;
+  }
+
+  .chip {
+    border-color: #999;
+    background: none;
+    color: #000;
+  }
+
+  /* Print the destination after every external link (ATS-friendly). */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    color: #555;
+    word-break: break-all;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .social-link {
+    border: none;
+    padding: 0;
+    color: #000;
+  }
+
+  .card,
+  .about-facts {
+    border: 1px solid #ccc;
+    background: none;
+  }
+
+  .contact-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 4mm;
+  }
+
+  /* Keep footer metadata (it IS the CV's date stamp). */
+  .site-footer {
+    border-top: 1px solid #ddd;
+    margin-top: 4mm;
+  }
+
+  .footer-inner {
+    padding: 3mm 0;
+    font-size: 9pt;
+  }
+}
