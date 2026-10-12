@@ -136,6 +136,10 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
   let disposed = false;
   let disposePanel: (() => void) | null = null;
   let unsubscribe: (() => void) | null = null;
+  let dirtyAtClose = false;
+
+  // Dedupe: closing with unsaved work keeps the pill on the public page.
+  document.querySelectorAll('.draft-pill-wrap').forEach((el) => el.remove());
   const pill = createDraftPill();
 
   const cleanup = (): void => {
@@ -143,7 +147,16 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
     disposed = true;
     unsubscribe?.();
     disposePanel?.();
-    pill.el.remove();
+    if (dirtyAtClose) {
+      // Keep the "draft in editor" pill so the owner can jump back in.
+      pill.el.classList.add('is-orphaned');
+      pill.button.addEventListener('click', () => {
+        location.hash = '#admin';
+      });
+    } else {
+      pill.el.remove();
+      window.removeEventListener('beforeunload', guard);
+    }
   };
 
   const guard = (event: BeforeUnloadEvent): void => {
@@ -158,8 +171,7 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
       try {
         unlocked = sessionStorage.getItem(UNLOCK_KEY) === '1';
       } catch {
-        /* ignore */
-      }
+        /* ignore */\n      }
       if (!unlocked) {
         unlocked = await passcodeGate(content.admin.passcodeSha256);
         if (!unlocked) {
@@ -172,18 +184,24 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
 
     // 2. Draft resume — localStorage holds working copies only; publishing
     //    still happens by downloading the file and committing it.
-    const store = new DraftStore(content);
+    const store = new DraftStore(content, options.initialDraft);
     const persisted = loadPersistedDraft();
+    const openingWith = JSON.stringify(options.initialDraft ?? content);
     if (persisted) {
       const migrated = migrate(persisted.data);
       const validated = migrated.ok ? validateContent(migrated.data) : { ok: false as const, errors: [] };
-      if (validated.ok && JSON.stringify(validated.content) !== JSON.stringify(content)) {
+      if (!validated.ok) {
+        clearPersistedDraft(); // corrupt leftover — drop it silently
+      } else if (
+        JSON.stringify(validated.content) !== openingWith &&
+        JSON.stringify(validated.content) !== JSON.stringify(content)
+      ) {
+        // Only worth asking when the stored draft differs from BOTH the
+        // baseline and the draft we are already opening with.
         const choice = await resumeDialog(persisted.savedAt);
         if (disposed) return;
         if (choice === 'resume') store.replace(validated.content, { history: false });
         else if (choice === 'discard') clearPersistedDraft();
-      } else if (!validated.ok) {
-        clearPersistedDraft(); // corrupt leftover — drop it silently
       }
     }
     if (disposed) return;
@@ -193,11 +211,13 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
     //    public page too.
     document.body.append(pill.el);
     unsubscribe = store.subscribe((draft, meta) => {
+      dirtyAtClose = store.dirty;
       pill.setDirty(store.dirty);
       if (store.dirty) window.addEventListener('beforeunload', guard);
       else window.removeEventListener('beforeunload', guard);
       if (meta.external) options.onPreview(draft);
     });
+    dirtyAtClose = store.dirty;
     pill.setDirty(store.dirty);
 
     // 4. Open the editor panel.
