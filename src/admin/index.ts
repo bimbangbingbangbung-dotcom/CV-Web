@@ -116,7 +116,7 @@ function resumeDialog(savedAt: string): Promise<'resume' | 'discard' | 'ignore'>
 }
 
 /** Floating "unsaved draft" indicator on the public side of the editor. */
-function createDraftPill(): { el: HTMLElement; setDirty: (dirty: boolean) => void } {
+function createDraftPill(): { el: HTMLElement; button: HTMLElement; setDirty: (dirty: boolean) => void } {
   const button = h(
     'button',
     { class: 'draft-pill', attrs: { type: 'button' } },
@@ -126,6 +126,7 @@ function createDraftPill(): { el: HTMLElement; setDirty: (dirty: boolean) => voi
   const el = h('div', { class: 'draft-pill-wrap', attrs: { hidden: true } }, button);
   return {
     el,
+    button,
     setDirty: (dirty: boolean) => {
       el.hidden = !dirty;
     },
