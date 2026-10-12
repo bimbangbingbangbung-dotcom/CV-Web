@@ -105,8 +105,25 @@ export function openPanel(options: PanelOptions): () => void {
     onCommit: (path, value) => {
       store.set(path, value);
       onPreview(store.draft);
+      // Structural edits (list add/remove/reorder) change the DOM shape —
+      // rebuild the form but return focus to wherever the user was.
+      if (Array.isArray(value)) renderPreservingFocus();
     },
     announce,
+  };
+
+  /**
+   * Re-render the active tab without dropping keyboard focus: remember the
+   * focused element's id, rebuild, restore (fallback: the panel root).
+   */
+  const renderPreservingFocus = (): void => {
+    const active = document.activeElement as HTMLElement | null;
+    const id = active?.id || null;
+    const wasInsidePanel =
+      active === document.body || (active !== null && active.closest('.admin-root') !== null);
+    renderActiveTab();
+    if (id) document.getElementById(id)?.focus();
+    else if (wasInsidePanel) root.focus();
   };
 
   // --- Toolbar ---
