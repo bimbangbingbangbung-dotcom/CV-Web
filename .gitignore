@@ -32,6 +32,12 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
+# Test / audit artifacts
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+
 # Misc
 *.tmp
 *.tsbuildinfo

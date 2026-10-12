@@ -1,0 +1,26 @@
+{
+  "name": "cv-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Minimalist, accessible, content-driven CV website. Vite + TypeScript, zero framework runtime.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "npm run gen:validator && vite",
+    "gen:validator": "node scripts/generate-validator.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "build": "npm run gen:validator && npm run validate:content && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lighthouse": "lhci autorun"
+  }
+}
