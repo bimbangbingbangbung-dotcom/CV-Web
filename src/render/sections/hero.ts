@@ -81,6 +81,6 @@ export function renderHero(content: Content): HTMLElement {
       h('div', { class: 'hero-cta' }, downloadBtn, contactBtn),
       socialLinks.length > 0 ? h('ul', { class: 'social-row' }, ...socialLinks.map((l) => h('li', {}, l))) : null,
     ),
-    h('aside', { class: 'hero-aside', attrs: { 'aria-hidden': 'true' } }, avatar),
+    h('aside', { class: 'hero-aside' }, avatar),
   );
 }

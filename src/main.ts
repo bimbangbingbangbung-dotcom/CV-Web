@@ -170,4 +170,12 @@ async function start(): Promise<void> {
 }
 
 window.addEventListener('hashchange', () => void routeAdmin());
+
+// Print: expand every collapsible so no detail is lost on paper.
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('details').forEach((details) => {
+    details.open = true;
+  });
+});
+
 void start();
