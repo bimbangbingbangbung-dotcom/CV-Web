@@ -332,18 +332,16 @@
               }
             }
           },
-          "image": { "$ref": "#/$defs/localPath" },
+          "image": {
+            "type": ["string", "null"],
+            "description": "Path/URL to a project screenshot, or null for none.",
+            "pattern": "^(https?://|/|\\./)"
+          },
           "featured": { "type": "boolean" },
           "detail": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["problem", "solution", "result"],
-            "description": "Optional expandable detail view (problem → solution → result).",
-            "properties": {
-              "problem": { "type": "string", "minLength": 1, "maxLength": 500 },
-              "solution": { "type": "string", "minLength": 1, "maxLength": 500 },
-              "result": { "type": "string", "minLength": 1, "maxLength": 500 }
-            }
+            "type": ["object", "null"],
+            "$ref": "#/$defs/projectDetail",
+            "description": "Optional expandable detail view (problem → solution → result), or null."
           }
         }
       }
