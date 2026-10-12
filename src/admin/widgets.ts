@@ -263,7 +263,10 @@ function objectList(
 
     const handle = h(
       'button',
-      { class: 'icon-btn drag-handle', attrs: { type: 'button', 'aria-label': `Reorder ${title} (use Move up/down buttons for keyboard) } } },
+      {
+        class: 'icon-btn drag-handle',
+        attrs: { type: 'button', 'aria-label': `Reorder ${title} (use Move up/down buttons for keyboard)` },
+      },
       icon('menu'),
     );
 
