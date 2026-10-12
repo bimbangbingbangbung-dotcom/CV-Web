@@ -44,7 +44,7 @@ Open `http://localhost:5173/#admin` to edit content in the browser.
 | `npm run lighthouse`       | Lighthouse CI (≥ 95 on all four categories)              |
 | `npm run check:budget`     | Public JS gzip budget (< 50 KB; editor chunk excluded)   |
 | `npm run gen:assets`       | Regenerate OG image, PWA icons, placeholder CV PDF       |
-| `npm run ci`               | The full local gate (what CI runs)                       |
+| `npm run ci`               | Fast gate: lint, typecheck, content validation, unit tests, build, budget |
 
 ## Editing your content
 
