@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config';
+import { seoPlugin } from './scripts/seo-plugin';
 
 /**
  * Vite config.
@@ -8,6 +9,7 @@ import { defineConfig } from 'vitest/config';
  */
 export default defineConfig({
   base: './',
+  plugins: [seoPlugin()],
   build: {
     target: 'es2022',
     sourcemap: false,
