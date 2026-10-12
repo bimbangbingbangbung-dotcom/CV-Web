@@ -37,7 +37,13 @@ interface HeaderHandles {
 let previousCleanup: (() => void)[] = [];
 
 function teardownHeader(): void {
-  for (const selector of ['#site-header', '.hover-zone', '.touch-handle', '#site-menu', '.edge-hint']) {
+  for (const selector of [
+    '#site-header',
+    '.hover-zone',
+    '.touch-handle',
+    '#site-menu',
+    '.edge-hint',
+  ]) {
     document.querySelectorAll(selector).forEach((el) => el.remove());
   }
   for (const fn of previousCleanup) fn();
@@ -96,7 +102,9 @@ export function initHeader(content: Content): HeaderHandles {
   const makeNavLink = (section: SectionEntry): HTMLAnchorElement =>
     h('a', { text: section.label, attrs: { href: `#${section.id}` } });
   const makeEditLink = (): HTMLAnchorElement | null =>
-    cfg.showEditLink ? h('a', { class: 'header-edit', text: 'Edit', attrs: { href: '#admin' } }) : null;
+    cfg.showEditLink
+      ? h('a', { class: 'header-edit', text: 'Edit', attrs: { href: '#admin' } })
+      : null;
 
   // --- Build the header ---
   const navLinks = navSections.map(makeNavLink);
@@ -108,7 +116,10 @@ export function initHeader(content: Content): HeaderHandles {
     { class: 'site-header', id: 'site-header', attrs: { tabindex: '-1' } },
     h(
       'a',
-      { class: 'header-brand', attrs: { href: '#top', 'aria-label': `${content.owner.fullName} — back to top` } },
+      {
+        class: 'header-brand',
+        attrs: { href: '#top', 'aria-label': `${content.owner.fullName} — back to top` },
+      },
       h('span', { class: 'header-initials', text: initials, attrs: { 'aria-hidden': 'true' } }),
       h('span', { class: 'header-name', text: content.owner.fullName }),
     ),
@@ -321,7 +332,8 @@ export function initHeader(content: Content): HeaderHandles {
         const y = window.scrollY;
         const delta = y - lastY;
         lastY = y;
-        if (y < 64) setVisible(false); // top of the page stays clean
+        if (y < 64)
+          setVisible(false); // top of the page stays clean
         else if (delta < -4) show();
         else if (delta > 4) scheduleHide(200);
         ticking = false;
