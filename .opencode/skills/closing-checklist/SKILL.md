@@ -6,7 +6,7 @@ description: >
   findings and schedule builds, tracks status, surfaces what's blocking. Use
   when user says "closing checklist", "what's left to close", "checklist
   status", "add to the checklist", or on a scheduled status pull.
-argument-hint: "[optional: item ID + status update]"
+argument-hint: '[optional: item ID + status update]'
 ---
 
 # /closing-checklist
@@ -32,39 +32,39 @@ Deals close when the checklist is done. Everything on it, done. Nothing missing.
 Lives at `~/.claude/plugins/config/claude-for-legal/corporate-legal/deals/[code]/closing-checklist.yaml`. Structure:
 
 ```yaml
-deal_code: "Project Falcon"
+deal_code: 'Project Falcon'
 target_close: [DATE]
 signing_date: [DATE]
 last_updated: [DATE]
 
 conditions_precedent:
   - id: CP-001
-    item: "HSR waiting period expiration"
-    category: "Regulatory"
-    responsible: "Buyer counsel"
+    item: 'HSR waiting period expiration'
+    category: 'Regulatory'
+    responsible: 'Buyer counsel'
     due: 2026-04-15
-    status: "Filed 2026-03-01, waiting period runs"
+    status: 'Filed 2026-03-01, waiting period runs'
     blocking: true
-    source: "Purchase Agreement §7.1(a)"
+    source: 'Purchase Agreement §7.1(a)'
 
   - id: CP-002
-    item: "Acme Corp consent to assignment"
-    category: "Third-party consents"
-    responsible: "Target — Jane Doe"
+    item: 'Acme Corp consent to assignment'
+    category: 'Third-party consents'
+    responsible: 'Target — Jane Doe'
     due: 2026-04-20
-    status: "Request sent 2026-03-10, no response"
+    status: 'Request sent 2026-03-10, no response'
     blocking: true
-    source: "Schedule 3.12(a)(4); Acme MSA §14.2"
+    source: 'Schedule 3.12(a)(4); Acme MSA §14.2'
 
 closing_deliverables:
   - id: CD-001
-    item: "Certificate of good standing — Target (DE)"
-    category: "Corporate"
-    responsible: "Target counsel"
+    item: 'Certificate of good standing — Target (DE)'
+    category: 'Corporate'
+    responsible: 'Target counsel'
     due: 2026-04-28
-    status: "Not started"
+    status: 'Not started'
     blocking: true
-    source: "Purchase Agreement §2.3(b)(iv)"
+    source: 'Purchase Agreement §2.3(b)(iv)'
 
   # ... etc
 ```
@@ -100,26 +100,26 @@ The handoff schema covers the full range of pre-closing actions, not just consen
 ```yaml
 handoff:
   # Required fields
-  item: "[Counterparty or action, one line]"
-  category: "[Third-party consents | Shareholder / board action | Regulatory filing | Release / termination | Escrow / holdback | Closing deliverable]"
-  source: "[Contract name / statutory section / VDR path + Bates]"
-  blocking: true  # unless the agreement has a materiality qualifier
-  severity: "[🔴 / 🟠 / 🟡 / 🟢 — carried from upstream, see severity-floor rule in CLAUDE.md]"
+  item: '[Counterparty or action, one line]'
+  category: '[Third-party consents | Shareholder / board action | Regulatory filing | Release / termination | Escrow / holdback | Closing deliverable]'
+  source: '[Contract name / statutory section / VDR path + Bates]'
+  blocking: true # unless the agreement has a materiality qualifier
+  severity: '[🔴 / 🟠 / 🟡 / 🟢 — carried from upstream, see severity-floor rule in CLAUDE.md]'
 
   # Consent / third-party action fields
-  counterparty: "[e.g., Dunmore Holdings LLC]"
-  guarantor: "[e.g., Buyer parent guaranty required, or N/A]"
+  counterparty: '[e.g., Dunmore Holdings LLC]'
+  guarantor: '[e.g., Buyer parent guaranty required, or N/A]'
   conditions: "[any substantive condition the counterparty attached — e.g., 'replacement guaranty from buyer parent required before consent effective']"
-  notice_deadline: "[e.g., 30 days prior to closing, or specific date]"
+  notice_deadline: '[e.g., 30 days prior to closing, or specific date]'
 
   # Corporate action fields
-  approval_body: "[Shareholders | Board | Committee | Regulator]"
-  approval_threshold: "[e.g., 75% disinterested stockholder vote for §280G cleansing]"
-  statutory_or_charter_source: "[e.g., IRC §280G(b)(5)(B); Charter Art. IV §2]"
+  approval_body: '[Shareholders | Board | Committee | Regulator]'
+  approval_threshold: '[e.g., 75% disinterested stockholder vote for §280G cleansing]'
+  statutory_or_charter_source: '[e.g., IRC §280G(b)(5)(B); Charter Art. IV §2]'
 
   # Timing
-  estimated_time_to_complete: "[e.g., 30 days]"
-  must_occur_before: "[e.g., closing | signing | end of hiatus period]"
+  estimated_time_to_complete: '[e.g., 30 days]'
+  must_occur_before: '[e.g., closing | signing | end of hiatus period]'
 ```
 
 Preserve every field the upstream skill populated. A "Dunmore consent required, with replacement guaranty condition and 30-day notice" should surface on the checklist with all three elements (consent, guarantor, notice), not collapse to "Dunmore consent to change of control." When the upstream skill provides a severity, carry it — see the cross-skill severity floor rule in `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`.
@@ -149,9 +149,9 @@ CP-002: Acme responded, consent form attached, needs countersignature
 
 ### 🔴 Blocking and at risk
 
-| ID | Item | Due | Status | Days to due |
-|---|---|---|---|---|
-| [CP-XXX] | [item] | [date] | [status] | **[N]** |
+| ID       | Item   | Due    | Status   | Days to due |
+| -------- | ------ | ------ | -------- | ----------- |
+| [CP-XXX] | [item] | [date] | [status] | **[N]**     |
 
 ### 🟡 Blocking, on track
 

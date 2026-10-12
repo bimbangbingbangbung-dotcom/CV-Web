@@ -92,6 +92,7 @@ If `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` contains `[PLA
 > I notice you haven't configured your practice profile yet — that's how I tailor posture, jurisdictions, and approval chain to your practice.
 >
 > **Two choices:**
+>
 > - Run `/ip-legal:cold-start-interview` (2 minutes) to configure your profile, then I'll run this tailored to YOUR practice.
 > - Say **"provisional"** and I'll run this against generic defaults — US jurisdiction, middle risk appetite, lawyer role, no playbook — and tag every output `[PROVISIONAL — configure your profile for tailored output]` so you can see what I do before committing.
 
@@ -127,19 +128,19 @@ Before any database search, run the intrinsic problems that kill a mark regardle
 of prior registrations. For each, assess plainly and flag. Do not rationalize away
 a clear issue.
 
-| Bar | What it means | Flag when |
-|---|---|---|
-| **Generic** | The term IS the category (e.g., "Soap" for soap) | The mark names what the thing is |
-| **Descriptive** | Directly describes a feature, function, quality, or ingredient | A consumer reads the mark and knows what the product does without imagination |
-| **Deceptive / deceptively misdescriptive** | Misrepresents a material feature | The mark suggests a quality the goods don't have and that quality would matter |
-| **Primarily geographically descriptive / deceptive** | Mark is primarily a place name and goods come from (or don't) that place | Mark = place + generic; or place + goods where customers would assume origin |
-| **Primarily merely a surname** | Mark is primarily a surname | Mark reads as someone's last name to the relevant consumer |
-| **False connection** | Mark falsely suggests connection with person, institution, national symbol | Mark invokes a specific identifiable person or institution |
-| **Prohibited matter** | Flags, coats of arms, insignia, specific prohibited categories | Mark contains a prohibited element |
-| **Functional (for design marks / trade dress)** | The feature is essential to use or affects cost/quality | Design mark — and the feature performs a function |
+| Bar                                                  | What it means                                                              | Flag when                                                                      |
+| ---------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Generic**                                          | The term IS the category (e.g., "Soap" for soap)                           | The mark names what the thing is                                               |
+| **Descriptive**                                      | Directly describes a feature, function, quality, or ingredient             | A consumer reads the mark and knows what the product does without imagination  |
+| **Deceptive / deceptively misdescriptive**           | Misrepresents a material feature                                           | The mark suggests a quality the goods don't have and that quality would matter |
+| **Primarily geographically descriptive / deceptive** | Mark is primarily a place name and goods come from (or don't) that place   | Mark = place + generic; or place + goods where customers would assume origin   |
+| **Primarily merely a surname**                       | Mark is primarily a surname                                                | Mark reads as someone's last name to the relevant consumer                     |
+| **False connection**                                 | Mark falsely suggests connection with person, institution, national symbol | Mark invokes a specific identifiable person or institution                     |
+| **Prohibited matter**                                | Flags, coats of arms, insignia, specific prohibited categories             | Mark contains a prohibited element                                             |
+| **Functional (for design marks / trade dress)**      | The feature is essential to use or affects cost/quality                    | Design mark — and the feature performs a function                              |
 
-Note on scandalous/immoral marks: after *Iancu v. Brunetti* (2019) and *Matal v.
-Tam* (2017), the USPTO no longer refuses registration on those bases. The
+Note on scandalous/immoral marks: after _Iancu v. Brunetti_ (2019) and _Matal v.
+Tam_ (2017), the USPTO no longer refuses registration on those bases. The
 surviving statutory bar in this zone is false connection under §2(a). Apply that;
 don't flag under the struck-down bars.
 
@@ -203,7 +204,7 @@ available from search result" — do not guess.
 ### Adjacent families sweep (required before concluding)
 
 A clearance that only checks exact and near-exact matches misses the marks a
-competitor adopted *because* yours was taken. Before concluding, identify 3–5
+competitor adopted _because_ yours was taken. Before concluding, identify 3–5
 adjacent word families the practitioner should also sweep, and ask the user to
 confirm or add to the list.
 
@@ -236,6 +237,7 @@ with a confirmation prompt:
 > the category before I continue.
 
 > **When non-English-speaking jurisdictions are in scope,** the English-only phonetic sweep misses the most common source of cross-border conflicts. Add:
+>
 > - **Translation equivalents.** The mark translated into the relevant languages. The EU's foreign-equivalents doctrine treats a translation as the same mark for confusion purposes.
 > - **Transliteration.** The mark written in the relevant script (Cyrillic, Chinese/Japanese/Korean, Arabic, Hangul, Thai). Phonetic equivalence across scripts is a recognized conflict basis.
 > - **Script variations.** Marks registered in a non-Latin script that sound like your mark when romanized.
@@ -255,7 +257,7 @@ do not silently skip the sweep.
 
 > **Confusion framework is jurisdiction-specific.** The US and EU assess likelihood of confusion differently. Don't apply the wrong one.
 >
-> - **US (federal circuits):** Multi-factor tests (*du Pont*, *Polaroid*, *Sleekcraft*) — strength of the mark, similarity (sight/sound/meaning), proximity of goods, channels, buyer sophistication, actual confusion, intent.
+> - **US (federal circuits):** Multi-factor tests (_du Pont_, _Polaroid_, _Sleekcraft_) — strength of the mark, similarity (sight/sound/meaning), proximity of goods, channels, buyer sophistication, actual confusion, intent.
 > - **EU (Art. 8(1)(b) EUTMR):** Global appreciation — all relevant factors assessed holistically through the eyes of the average consumer. Key differences: greater weight on phonetic similarity; translation equivalents as standard (the mark translated into EU languages); "likelihood of association" beyond source confusion; the distinctiveness of the earlier mark carries more weight.
 > - **UK (TMA 1994 §5(2)):** Follows the EU global appreciation approach post-Brexit but diverging case law. Check for UK-specific decisions.
 > - **Other jurisdictions:** If the intake includes a jurisdiction without a framework above, say: "I don't have [jurisdiction]'s confusion framework. Applying the US test would give you a wrong answer that looks right. Options: (a) I search for the applicable standard, (b) you route to a [jurisdiction] trademark specialist, (c) I note this jurisdiction is out of scope." Never silently apply US doctrine.
@@ -263,15 +265,15 @@ do not silently skip the sweep.
 The relevant circuit's test determines the factors to walk through. Cite the
 test that applies:
 
-- **TTAB / Federal Circuit:** *In re E. I. du Pont de Nemours & Co.*, 476 F.2d
+- **TTAB / Federal Circuit:** _In re E. I. du Pont de Nemours & Co._, 476 F.2d
   1357 (C.C.P.A. 1973) (13 factors).
-- **Second Circuit:** *Polaroid Corp. v. Polarad Electronics Corp.*, 287 F.2d 492
+- **Second Circuit:** _Polaroid Corp. v. Polarad Electronics Corp._, 287 F.2d 492
   (2d Cir. 1961) (8 factors).
-- **Ninth Circuit:** *AMF Inc. v. Sleekcraft Boats*, 599 F.2d 341 (9th Cir. 1979)
+- **Ninth Circuit:** _AMF Inc. v. Sleekcraft Boats_, 599 F.2d 341 (9th Cir. 1979)
   (8 factors).
 - **Other circuits:** walk through the circuit's named multi-factor test (e.g.,
-  *Frisch's Restaurants* in the Sixth Circuit, *Scotch Whisky Association* in the
-  Seventh, *Lapp* in the Third).
+  _Frisch's Restaurants_ in the Sixth Circuit, _Scotch Whisky Association_ in the
+  Seventh, _Lapp_ in the Third).
 
 Pick based on where the user plans to enforce (practice profile), the TTAB if
 the immediate forum is registration, or the primary commercial forum otherwise.
@@ -304,7 +306,7 @@ Per the decision posture in `~/.claude/plugins/config/claude-for-legal/ip-legal/
 - If uncertain, write: "Similar marks found — confusion assessment required
   before adoption." Or: "Factors cut both ways; attorney judgment required."
 - Clear space for "no similar marks found in the databases searched" is fine
-  *only* if a real search was run; see the no-search fallback above otherwise.
+  _only_ if a real search was run; see the no-search fallback above otherwise.
 
 ---
 
@@ -359,8 +361,8 @@ or invests in this mark.
 
 ## Knockout issues
 
-| Bar | Flag | Note |
-|---|---|---|
+| Bar                                                                                                   | Flag             | Note                  |
+| ----------------------------------------------------------------------------------------------------- | ---------------- | --------------------- |
 | Generic / descriptive / deceptive / geographic / surname / false connection / prohibited / functional | [none / flagged] | [one line if flagged] |
 
 ## Similar marks check
@@ -370,21 +372,22 @@ search run; see scope note below."]
 **Scope:** [classes, jurisdictions, exact-vs-fuzzy, design search or not]
 
 **Adjacent families swept (confirmed with user):**
+
 - [family 1 — e.g., HUB / NEST / LINK / CONNECT / BRIDGE / GATEWAY]
 - [family 2 — e.g., ALEXA-style assistant names]
 - [family 3 — e.g., HOME / HOUSE / SMART variants]
 - [family 4 — phonetic twins on the root]
 
-*A clearance that only checks exact and near-exact matches misses the marks a
+_A clearance that only checks exact and near-exact matches misses the marks a
 competitor adopted because yours was taken. If any family was not swept (no
 connector, time not available), it is listed explicitly as a next-step input
-to the full professional search — not silently skipped.*
+to the full professional search — not silently skipped._
 
-| Mark | Source | Classes / G&S | Owner | Status | First use | Note |
-|---|---|---|---|---|---|---|
-| [exact] | [registration no. / citation / URL] | [class list] | [owner from record] | [reg/pending/abandoned/cancelled] | [date or "not available"] | [why it matters — exact match / adjacent family] |
+| Mark    | Source                              | Classes / G&S | Owner               | Status                            | First use                 | Note                                             |
+| ------- | ----------------------------------- | ------------- | ------------------- | --------------------------------- | ------------------------- | ------------------------------------------------ |
+| [exact] | [registration no. / citation / URL] | [class list]  | [owner from record] | [reg/pending/abandoned/cancelled] | [date or "not available"] | [why it matters — exact match / adjacent family] |
 
-*If no search was run:* **No database search was run.** This triage did not hit
+_If no search was run:_ **No database search was run.** This triage did not hit
 TESS, Solve Intelligence, Descrybe, CourtListener, state registries,
 Madrid/WIPO, or any common law / unregistered-mark sources. A knockout or full
 search across those databases is required before any conclusion about availability.
@@ -394,18 +397,19 @@ search across those databases is required before any conclusion about availabili
 For each of the factors under the test applied, a one-line flag noting what cuts
 each way.
 
-| Factor | Flag | Direction |
-|---|---|---|
-| Similarity of marks (sight / sound / meaning / commercial impression) | [note] | [weighs toward / against conflict / mixed] |
-| Similarity of goods or services | [note] | [direction] |
-| Channels of trade | [note] | [direction] |
-| Consumer sophistication | [note] | [direction] |
-| Strength of prior mark | [note] | [direction] |
-| Intent | [note] | [direction] |
-| Actual confusion | [note or "no evidence surfaced"] | [direction] |
-| Likelihood of expansion / bridge-the-gap | [note] | [direction] |
+| Factor                                                                | Flag                             | Direction                                  |
+| --------------------------------------------------------------------- | -------------------------------- | ------------------------------------------ |
+| Similarity of marks (sight / sound / meaning / commercial impression) | [note]                           | [weighs toward / against conflict / mixed] |
+| Similarity of goods or services                                       | [note]                           | [direction]                                |
+| Channels of trade                                                     | [note]                           | [direction]                                |
+| Consumer sophistication                                               | [note]                           | [direction]                                |
+| Strength of prior mark                                                | [note]                           | [direction]                                |
+| Intent                                                                | [note]                           | [direction]                                |
+| Actual confusion                                                      | [note or "no evidence surfaced"] | [direction]                                |
+| Likelihood of expansion / bridge-the-gap                              | [note]                           | [direction]                                |
 
-**Conclusion on confusion:** *This skill does not conclude.* Either:
+**Conclusion on confusion:** _This skill does not conclude._ Either:
+
 - "Similar marks found; attorney confusion assessment required before adoption."
 - "No similar marks found in the databases searched; full clearance required
   before adoption."

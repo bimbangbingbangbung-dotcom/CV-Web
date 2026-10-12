@@ -62,16 +62,11 @@ test('submits form with user data', async () => {
 ## Testing with Providers
 
 ```tsx
-function renderWithProviders(
-  ui: React.ReactElement,
-  { initialState = {}, ...options } = {}
-) {
+function renderWithProviders(ui: React.ReactElement, { initialState = {}, ...options } = {}) {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </QueryClientProvider>
     );
   }
@@ -95,7 +90,7 @@ import { setupServer } from 'msw/node';
 const server = setupServer(
   http.get('/api/users/:id', ({ params }) => {
     return HttpResponse.json({ id: params.id, name: 'John' });
-  })
+  }),
 );
 
 beforeAll(() => server.listen());
@@ -112,7 +107,7 @@ test('handles error', async () => {
   server.use(
     http.get('/api/users/:id', () => {
       return new HttpResponse(null, { status: 500 });
-    })
+    }),
   );
 
   render(<UserProfile userId="123" />);
@@ -139,10 +134,9 @@ test('useCounter increments', () => {
 test('useDebounce delays value', async () => {
   vi.useFakeTimers();
 
-  const { result, rerender } = renderHook(
-    ({ value }) => useDebounce(value, 500),
-    { initialProps: { value: 'initial' } }
-  );
+  const { result, rerender } = renderHook(({ value }) => useDebounce(value, 500), {
+    initialProps: { value: 'initial' },
+  });
 
   rerender({ value: 'updated' });
   expect(result.current).toBe('initial');
@@ -158,17 +152,17 @@ test('useDebounce delays value', async () => {
 
 ## Quick Reference
 
-| Query | Use When |
-|-------|----------|
-| `getByRole` | Buttons, links, headings |
-| `getByLabelText` | Form inputs |
-| `getByText` | Non-interactive text |
-| `findByX` | Async/loading content |
-| `queryByX` | Assert NOT present |
+| Query            | Use When                 |
+| ---------------- | ------------------------ |
+| `getByRole`      | Buttons, links, headings |
+| `getByLabelText` | Form inputs              |
+| `getByText`      | Non-interactive text     |
+| `findByX`        | Async/loading content    |
+| `queryByX`       | Assert NOT present       |
 
-| Pattern | Use Case |
-|---------|----------|
-| `userEvent.setup()` | User interactions |
-| `renderHook()` | Testing custom hooks |
-| `msw` | Mocking API calls |
-| Custom render | Wrap with providers |
+| Pattern             | Use Case             |
+| ------------------- | -------------------- |
+| `userEvent.setup()` | User interactions    |
+| `renderHook()`      | Testing custom hooks |
+| `msw`               | Mocking API calls    |
+| Custom render       | Wrap with providers  |

@@ -6,7 +6,7 @@ description: >
   items stay flagged until resolved. The operational record for a clinic
   workload. Use when a student or supervisor needs to add a deadline,
   ask what's due this week, get a deadline report, or update a case deadline.
-argument-hint: "[--add | --report (default) | --update [id] | --complete [id] | --close [id] | --horizon=N]"
+argument-hint: '[--add | --report (default) | --update [id] | --complete [id] | --close [id] | --horizon=N]'
 ---
 
 # /deadlines
@@ -45,6 +45,7 @@ Flag: `--add | --report | --update | --complete | --close` (default: report)
 ### `--add` — log a new deadline
 
 **Inputs:**
+
 - Case ID + name (which case)
 - Practice area
 - Type (filing / hearing / statute-of-limitations / discovery / cure-period / response / notice / other)
@@ -96,18 +97,18 @@ Read `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml`. Pr
 
 ## ⚠️ Overdue (flagged for immediate attention)
 
-| ID | Case | Type | Due | Owner | Days overdue |
-|---|---|---|---|---|---|
+| ID  | Case | Type | Due | Owner | Days overdue |
+| --- | ---- | ---- | --- | ----- | ------------ |
 
 ## 🔴 Due today / next 3 days
 
-| ID | Case | Type | Due | Owner |
-|---|---|---|---|---|
+| ID  | Case | Type | Due | Owner |
+| --- | ---- | ---- | --- | ----- |
 
 ## 🟡 Due in 4-7 days
 
-| ID | Case | Type | Due | Owner |
-|---|---|---|---|---|
+| ID  | Case | Type | Due | Owner |
+| --- | ---- | ---- | --- | ----- |
 
 ## 🟢 Due in 8-14 days
 
@@ -122,7 +123,7 @@ Read `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml`. Pr
 ## By owner student (workload distribution)
 
 | Student | Overdue | Next 7d | Next 14d | Total active |
-|---|---|---|---|---|
+| ------- | ------- | ------- | -------- | ------------ |
 
 ## By practice area
 

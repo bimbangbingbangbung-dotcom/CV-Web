@@ -6,7 +6,7 @@ description: >
   next step. Use when the user asks "does this need a PIA", "triage this feature",
   "privacy check on X", "is this okay from a privacy perspective", or describes a
   new data processing activity, product feature, or vendor relationship.
-argument-hint: "[describe the data processing activity or feature]"
+argument-hint: '[describe the data processing activity or feature]'
 ---
 
 # /use-case-triage
@@ -45,6 +45,7 @@ the assessment — it determines whether one is needed and on what terms. The PI
 generation skill does the deep work.
 
 The output is one of four classifications:
+
 - **PROCEED** — No PIA needed. Standard safeguards apply.
 - **PIA REQUIRED** — Assessment needed before or alongside deployment.
 - **DPIA MANDATORY** — A regime-mandated data protection impact assessment is
@@ -68,6 +69,7 @@ If the file is missing or contains `[PLACEHOLDER]`, surface this bounce:
 > I notice you haven't configured your practice profile yet — that's how I tailor the PIA trigger criteria, regulatory footprint, and privacy policy commitments to your practice.
 >
 > **Two choices:**
+>
 > - Run `/privacy-legal:cold-start-interview` (2 minutes) to configure your profile, then I'll triage tailored to YOUR practice.
 > - Say **"provisional"** and I'll triage against generic defaults — US jurisdiction, middle risk appetite, lawyer role, no playbook — and tag every output `[PROVISIONAL — configure your profile for tailored output]` so you can see what I do before committing.
 
@@ -115,6 +117,7 @@ activities need a PIA regardless of internal policy.
 > **Activity-based federal overlays — ask first:**
 >
 > Does this processing touch:
+>
 > - **Financial account data or "nonpublic personal information" about consumers** (GLBA / Reg P — applies to financial institutions and their non-affiliated third parties; imposes substantive restrictions on sharing NPI for marketing, separate from and on top of any state privacy-law exemption)?
 > - **Protected health information held by a covered entity or business associate** (HIPAA Privacy / Security Rules — substantive restrictions on use and disclosure, breach notification at 500+ records, BAA required for any vendor)?
 > - **Education records held by a school or a service provider acting for a school** (FERPA — consent requirements for disclosure, directory-information carve-outs)?
@@ -128,6 +131,7 @@ For each regime in `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAU
 If **any** applicable regime's mandatory trigger is met → **DPIA MANDATORY** (or the equivalent regime-specific mandate), regardless of house trigger.
 
 **Strong indicators (not necessarily mandatory but do one anyway):**
+
 - New technology or novel use of existing technology
 - Children's data
 - Combining datasets that weren't collected together
@@ -146,6 +150,7 @@ Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `##
 against every stated commitment.
 
 **Common conflicts to catch:**
+
 - Policy says "we collect X, Y, Z" — this activity collects W. Policy update
   needed before launch, or stop collecting W.
 - Policy says "we don't sell or share data with third parties" — this activity
@@ -169,6 +174,7 @@ proceeds.
 ---
 
 ### Bottom line
+
 [PIA required / Mandatory DPIA required / Proceed — one-sentence why]
 
 ---
@@ -188,17 +194,17 @@ is in conflict.]
 
 ---
 
-*If PIA REQUIRED or DPIA MANDATORY — conditions before proceeding:*
+_If PIA REQUIRED or DPIA MANDATORY — conditions before proceeding:_
 
-| Requirement | Owner | Done? |
-|---|---|---|
-| [e.g., Privacy Impact Assessment — full DPIA format] | [Privacy counsel] | ☐ |
-| [e.g., Legitimate interest assessment (if LI basis)] | [Privacy counsel] | ☐ |
-| [e.g., DPO consultation (DPIA mandatory track)] | [DPO] | ☐ |
-| [e.g., Vendor DPA in place] | [Privacy / Legal] | ☐ |
-| [e.g., Privacy policy update before launch] | [Privacy counsel] | ☐ |
-| [e.g., Consent mechanism built and tested] | [Product] | ☐ |
-| [e.g., Data subject rights process covers new data category] | [Privacy / Product] | ☐ |
+| Requirement                                                  | Owner               | Done? |
+| ------------------------------------------------------------ | ------------------- | ----- |
+| [e.g., Privacy Impact Assessment — full DPIA format]         | [Privacy counsel]   | ☐     |
+| [e.g., Legitimate interest assessment (if LI basis)]         | [Privacy counsel]   | ☐     |
+| [e.g., DPO consultation (DPIA mandatory track)]              | [DPO]               | ☐     |
+| [e.g., Vendor DPA in place]                                  | [Privacy / Legal]   | ☐     |
+| [e.g., Privacy policy update before launch]                  | [Privacy counsel]   | ☐     |
+| [e.g., Consent mechanism built and tested]                   | [Product]           | ☐     |
+| [e.g., Data subject rights process covers new data category] | [Privacy / Product] | ☐     |
 
 **Lawful basis (if GDPR in footprint):** [Consent / Contract / Legitimate Interest /
 Legal Obligation — or "unclear — needs determination in PIA"]
@@ -218,11 +224,12 @@ If they say no, the triage result stands. The PIA can be run any time with:
 
 ---
 
-*If STOP:*
+_If STOP:_
 
 **Conflict:** [Specific privacy policy commitment or principle in conflict]
 
 **To proceed, one of these has to change:**
+
 - [Option A — redesign the activity so it doesn't create the conflict]
 - [Option B — update the privacy policy to cover this processing (requires review
   of whether the update is itself consistent with lawful basis)]
@@ -256,12 +263,12 @@ Only flag handoffs that are actually relevant. Don't append both as boilerplate.
 If the user presents a feature list, roadmap, or backlog — summary table first,
 then expand each non-PROCEED entry:
 
-| # | Activity | Classification | Key condition / blocker |
-|---|---|---|---|
-| 1 | [activity] | 🟢 Proceed | — |
-| 2 | [activity] | 🟡 PIA required | Lawful-basis assessment needed; vendor DPA not in place |
-| 3 | [activity] | 🟠 DPIA mandatory | Large-scale special category data |
-| 4 | [activity] | 🔴 Stop | Privacy policy conflict — purpose limitation |
+| #   | Activity   | Classification    | Key condition / blocker                                 |
+| --- | ---------- | ----------------- | ------------------------------------------------------- |
+| 1   | [activity] | 🟢 Proceed        | —                                                       |
+| 2   | [activity] | 🟡 PIA required   | Lawful-basis assessment needed; vendor DPA not in place |
+| 3   | [activity] | 🟠 DPIA mandatory | Large-scale special category data                       |
+| 4   | [activity] | 🔴 Stop           | Privacy policy conflict — purpose limitation            |
 
 ---
 

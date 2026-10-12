@@ -9,8 +9,12 @@ function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
 }
 
 // Multiple constraints
-interface HasId { id: number; }
-interface HasName { name: string; }
+interface HasId {
+  id: number;
+}
+interface HasName {
+  name: string;
+}
 
 function merge<T extends HasId, U extends HasName>(obj1: T, obj2: U): T & U {
   return { ...obj1, ...obj2 };
@@ -18,8 +22,7 @@ function merge<T extends HasId, U extends HasName>(obj1: T, obj2: U): T & U {
 
 // Generic constraint with default
 type ApiResponse<T = unknown, E = Error> =
-  | { success: true; data: T }
-  | { success: false; error: E };
+  { success: true; data: T } | { success: false; error: E };
 
 // Constraint with infer
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
@@ -41,11 +44,7 @@ type ToArrayNonDist<T> = [T] extends [any] ? T[] : never;
 type BothArray = ToArrayNonDist<string | number>; // (string | number)[]
 
 // Nested conditionals for type extraction
-type Flatten<T> = T extends Array<infer U>
-  ? U extends Array<infer V>
-    ? Flatten<V>
-    : U
-  : T;
+type Flatten<T> = T extends Array<infer U> ? (U extends Array<infer V> ? Flatten<V> : U) : T;
 
 type Nested = Flatten<string[][][]>; // string
 
@@ -121,8 +120,8 @@ type ExtractRouteParams<T extends string> =
   T extends `${infer _Start}/:${infer Param}/${infer Rest}`
     ? Param | ExtractRouteParams<`/${Rest}`>
     : T extends `${infer _Start}/:${infer Param}`
-    ? Param
-    : never;
+      ? Param
+      : never;
 
 type Params = ExtractRouteParams<'/users/:id/posts/:postId'>; // 'id' | 'postId'
 ```
@@ -140,18 +139,13 @@ type Maybe<T> = { type: 'just'; value: T } | { type: 'nothing' };
 
 const MaybeFunctor: TypeClass<Maybe<any>> = {
   map: <A, B>(f: (a: A) => B, ma: Maybe<A>): Maybe<B> => {
-    return ma.type === 'just'
-      ? { type: 'just', value: f(ma.value) }
-      : { type: 'nothing' };
-  }
+    return ma.type === 'just' ? { type: 'just', value: f(ma.value) } : { type: 'nothing' };
+  },
 };
 
 // Builder pattern with generics
 type Builder<T, K extends keyof T = never> = {
-  with<P extends Exclude<keyof T, K>>(
-    key: P,
-    value: T[P]
-  ): Builder<T, K | P>;
+  with<P extends Exclude<keyof T, K>>(key: P, value: T[P]): Builder<T, K | P>;
   build(): K extends keyof T ? T : never;
 };
 ```
@@ -160,32 +154,32 @@ type Builder<T, K extends keyof T = never> = {
 
 ```typescript
 // JSON type
-type JSONValue =
-  | string
-  | number
-  | boolean
-  | null
-  | JSONValue[]
-  | { [key: string]: JSONValue };
+type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
 
 // Deep partial
-type DeepPartial<T> = T extends object ? {
-  [K in keyof T]?: DeepPartial<T[K]>;
-} : T;
+type DeepPartial<T> = T extends object
+  ? {
+      [K in keyof T]?: DeepPartial<T[K]>;
+    }
+  : T;
 
 // Deep readonly
-type DeepReadonly<T> = T extends object ? {
-  readonly [K in keyof T]: DeepReadonly<T[K]>;
-} : T;
+type DeepReadonly<T> = T extends object
+  ? {
+      readonly [K in keyof T]: DeepReadonly<T[K]>;
+    }
+  : T;
 
 // Path type for nested objects
-type PathsToProps<T> = T extends object ? {
-  [K in keyof T]: K extends string
-    ? T[K] extends object
-      ? K | `${K}.${PathsToProps<T[K]>}`
-      : K
-    : never;
-}[keyof T] : never;
+type PathsToProps<T> = T extends object
+  ? {
+      [K in keyof T]: K extends string
+        ? T[K] extends object
+          ? K | `${K}.${PathsToProps<T[K]>}`
+          : K
+        : never;
+    }[keyof T]
+  : never;
 
 interface User {
   profile: {
@@ -231,13 +225,11 @@ type Length<T extends any[]> = T['length'];
 type Concat<A extends any[], B extends any[]> = [...A, ...B];
 
 // Type-level conditionals
-type If<Condition extends boolean, Then, Else> =
-  Condition extends true ? Then : Else;
+type If<Condition extends boolean, Then, Else> = Condition extends true ? Then : Else;
 
 // Type-level equality
 type Equal<X, Y> =
-  (<T>() => T extends X ? 1 : 2) extends
-  (<T>() => T extends Y ? 1 : 2) ? true : false;
+  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
 
 // Assert equal types (for testing)
 type Assert<T extends true> = T;
@@ -246,14 +238,14 @@ type Test = Assert<Equal<1 | 2, 2 | 1>>; // OK
 
 ## Quick Reference
 
-| Pattern | Use Case |
-|---------|----------|
-| `T extends U ? X : Y` | Conditional type logic |
-| `infer R` | Extract types from patterns |
-| `K in keyof T` | Iterate over object keys |
-| `as NewKey` | Remap keys in mapped types |
-| Template literals | String pattern types |
-| `T extends any` | Distributive conditionals |
-| `[T] extends [any]` | Non-distributive check |
-| `-?` modifier | Remove optional |
-| `readonly` modifier | Make immutable |
+| Pattern               | Use Case                    |
+| --------------------- | --------------------------- |
+| `T extends U ? X : Y` | Conditional type logic      |
+| `infer R`             | Extract types from patterns |
+| `K in keyof T`        | Iterate over object keys    |
+| `as NewKey`           | Remap keys in mapped types  |
+| Template literals     | String pattern types        |
+| `T extends any`       | Distributive conditionals   |
+| `[T] extends [any]`   | Non-distributive check      |
+| `-?` modifier         | Remove optional             |
+| `readonly` modifier   | Make immutable              |

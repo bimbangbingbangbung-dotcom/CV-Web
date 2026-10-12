@@ -171,6 +171,7 @@ analysis — that requires a prior-art search. This screens the disclosure's own
 description for self-evident novelty problems.
 
 **Red flags (🔴):**
+
 - "We just applied [known technique] to [new domain]" — e.g., "we took
   gradient boosting and applied it to predicting customer churn"
 - "It's like [existing product] but for [X]" — Uber-for-dog-walking framing
@@ -180,6 +181,7 @@ description for self-evident novelty problems.
   tuning
 
 **Green flags (✓):**
+
 - A new **mechanism** — a new way of doing the thing, not a new application
 - A new **combination** that produces an unexpected result (not just
   additive — "faster," "smaller," "cheaper" are sometimes unexpected, sometimes
@@ -196,6 +198,7 @@ combination based on what's known? This is a screen, not a § 103 analysis —
 flag for further investigation, never conclude obviousness or non-obviousness.
 
 **Red flags (🔴) for further investigation:**
+
 - Combining **known elements in a predictable way** — putting a known sensor
   on a known machine to measure a known thing
 - **Routine optimization** — "we tuned the existing parameter from X to Y and
@@ -206,6 +209,7 @@ flag for further investigation, never conclude obviousness or non-obviousness.
   reasonable expectation of success
 
 **Green flags (✓):**
+
 - Teaching away — prior art expected the opposite result or said this approach
   wouldn't work
 - Unexpected result — the combination produces something the POSA would not
@@ -219,6 +223,7 @@ hardest screen, the most litigated, and the one most likely to require a
 specialist read. Flag anything borderline for specialist review.
 
 **Red flags (🔴) for § 101:**
+
 - Pure **business method** without technical implementation — "a method of
   pricing widgets more efficiently"
 - **Mathematical algorithm** on its own — even as dressed up in pseudocode
@@ -231,6 +236,7 @@ specialist read. Flag anything borderline for specialist review.
   performs the function
 
 **Green flags (✓) for software/AI inventions:**
+
 - Technical improvement to the **computer itself** — new architecture, new
   training technique, new hardware/software interface, new security mechanism
 - Specific technical means, not just results
@@ -243,11 +249,12 @@ question.
 
 For **biotech / diagnostic** inventions, also flag for § 101 if the claim
 recites:
+
 - A natural correlation ("if level of X is above Y, patient has Z")
 - A naturally occurring substance (isolated gene, natural product) without
   significant human modification
 
-> **§101 is a US standard. Other patent offices are different.** The EPO's "technical effect" test (Art. 52 EPC) is materially more permissive for software and AI inventions than US §101 post-*Alice*. JPO and CNIPA also apply different standards. An invention that screens 🔴 under *Alice* may be perfectly eligible at EPO/JPO/CNIPA.
+> **§101 is a US standard. Other patent offices are different.** The EPO's "technical effect" test (Art. 52 EPC) is materially more permissive for software and AI inventions than US §101 post-_Alice_. JPO and CNIPA also apply different standards. An invention that screens 🔴 under _Alice_ may be perfectly eligible at EPO/JPO/CNIPA.
 >
 > When the practice profile includes non-US jurisdictions: "This §101 screen is US-only. If you file internationally, the eligibility posture may be different — particularly for software, AI/ML, and business methods, which EPO is more permissive on. Don't decline based on US §101 alone if you have EP/JP/CN filing plans."
 
@@ -260,6 +267,7 @@ absolutely, or start a clock that cannot be stopped.
 Categorize the disclosure status:
 
 **🔴 Likely barred:**
+
 - Publicly disclosed, sold, or offered for sale **more than 12 months ago**
   in the US — 35 U.S.C. § 102(b) one-year grace period has run
 - **Any** public disclosure, anywhere, before filing — absolute novelty bar in
@@ -268,11 +276,13 @@ Categorize the disclosure status:
   open.
 
 **🟡 Clock is running:**
+
 - Publicly disclosed within the last 12 months — US one-year clock is running,
   foreign rights may already be lost. Urgent. Confirm the disclosure date and
   route to filing immediately.
 
 **✓ Clear:**
+
 - No public disclosure. Confidential customer demonstrations under NDA, internal
   use, beta releases to named parties under NDA, draft papers not yet submitted
   — usually not "public" for § 102 purposes, but depends on the facts. When the
@@ -280,6 +290,7 @@ Categorize the disclosure status:
   specifics for the prosecution team to assess.
 
 **Ask specifically about:**
+
 - Papers submitted to journals or conferences (submission ≠ publication; but
   check the journal's policy and whether preprints were posted)
 - Talks given at conferences, meetups, internal company events open to
@@ -302,6 +313,7 @@ secret** than as a patent. Publishing a patent on an undetectable invention is
 giving it to competitors in exchange for an asset you can never enforce.
 
 **🔴 Low detectability flags:**
+
 - Server-side algorithm with no observable output pattern
 - Internal manufacturing process (e.g., a novel etch step in a semiconductor
   process)
@@ -315,6 +327,7 @@ not "is this patentable" but "should we patent it if we could." Route to
 whoever in the practice profile owns trade-secret classification decisions.
 
 **✓ High detectability:**
+
 - Consumer product — visible in the product
 - Published API, SDK, protocol — visible in network traffic or integration
   docs
@@ -358,28 +371,28 @@ Format:
 >
 > **Bottom line: [PURSUE / INVESTIGATE / DECLINE]**
 >
-> *[One sentence — the reason in plain language.]*
+> _[One sentence — the reason in plain language.]_
 >
 > ---
 >
 > ### Screen results
 >
-> | Screen | Verdict | Notes |
-> |---|---|---|
-> | Novelty signals | [✓ / 🟡 / 🔴] | [one-line reasoning] |
-> | Obviousness flags | [✓ / 🟡 / 🔴] | [one-line reasoning] |
-> | § 101 eligibility | [✓ / 🟡 / 🔴] | [one-line reasoning] |
-> | Public disclosure / bar dates | [✓ / 🟡 / 🔴] | [one-line reasoning + dates] |
-> | Detectability | [✓ / 🟡 / 🔴] | [one-line reasoning] |
-> | Strategic value | [✓ / 🟡 / 🔴] | [one-line reasoning, referenced to profile] |
+> | Screen                        | Verdict       | Notes                                       |
+> | ----------------------------- | ------------- | ------------------------------------------- |
+> | Novelty signals               | [✓ / 🟡 / 🔴] | [one-line reasoning]                        |
+> | Obviousness flags             | [✓ / 🟡 / 🔴] | [one-line reasoning]                        |
+> | § 101 eligibility             | [✓ / 🟡 / 🔴] | [one-line reasoning]                        |
+> | Public disclosure / bar dates | [✓ / 🟡 / 🔴] | [one-line reasoning + dates]                |
+> | Detectability                 | [✓ / 🟡 / 🔴] | [one-line reasoning]                        |
+> | Strategic value               | [✓ / 🟡 / 🔴] | [one-line reasoning, referenced to profile] |
 >
 > ---
 >
 > ### Open questions
 >
-> *Things that would change the answer. The inventor, the prosecution team, or
+> _Things that would change the answer. The inventor, the prosecution team, or
 > a specialist would need to address these before this screen converts to a
-> filing decision.*
+> filing decision._
 >
 > - [question]
 > - [question]

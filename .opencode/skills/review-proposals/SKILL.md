@@ -6,7 +6,7 @@ description: >
   when the playbook-monitor agent has surfaced proposals, when the user says
   "review playbook proposals", "what playbook updates are pending", or wants to
   step through deviation-driven playbook changes.
-argument-hint: "[no arguments needed — works from the pending proposals file]"
+argument-hint: '[no arguments needed — works from the pending proposals file]'
 ---
 
 # /review-proposals
@@ -17,7 +17,7 @@ Steps through pending playbook update proposals from the monitor agent and appli
 
 1. **Load the playbook-monitor agent** and run Step 5 (review and approval flow).
 
-2. **If no proposals file exists** or it is empty: respond *"No pending proposals. Playbook is up to date."* Do not proceed further.
+2. **If no proposals file exists** or it is empty: respond _"No pending proposals. Playbook is up to date."_ Do not proceed further.
 
 3. **Present proposals one at a time.** For each, show the full proposal block and offer four options: Accept, Reject, Edit, Defer.
 

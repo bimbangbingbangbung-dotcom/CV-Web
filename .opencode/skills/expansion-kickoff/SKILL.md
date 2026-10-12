@@ -6,7 +6,7 @@ description: >
   country-specific flags, and creates a persistent tracker. Use when someone
   says "we're hiring in [country]", "expansion to [country]", or "first hire
   in [country]".
-argument-hint: "[country name]"
+argument-hint: '[country name]'
 ---
 
 # /expansion-kickoff

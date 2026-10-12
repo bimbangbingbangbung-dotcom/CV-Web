@@ -12,13 +12,13 @@ Use this procedure when two or more documentation surfaces make overlapping clai
 6. Normalize harmless differences in wording, order, formatting, and equivalent terminology. Preserve negation, numbers, units, defaults, conditions, versions, environments, and actor or permission scope.
 7. Classify each overlapping fact:
 
-| State | Meaning |
-|---|---|
-| `MATCH` | The surfaces are semantically compatible in the same scope and version. |
-| `CONTRADICTION` | The claims cannot all be true in the same scope and version. |
+| State                    | Meaning                                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `MATCH`                  | The surfaces are semantically compatible in the same scope and version.                              |
+| `CONTRADICTION`          | The claims cannot all be true in the same scope and version.                                         |
 | `CONSEQUENTIAL_OMISSION` | A surface omits a fact its stated audience needs, creating a concrete failure or safety consequence. |
-| `INTENTIONAL_VARIANT` | The difference is appropriate for audience, format, environment, or version and does not mislead. |
-| `UNAVAILABLE` | The surface could not be accessed or its relevant section could not be resolved. |
+| `INTENTIONAL_VARIANT`    | The difference is appropriate for audience, format, environment, or version and does not mislead.    |
+| `UNAVAILABLE`            | The surface could not be accessed or its relevant section could not be resolved.                     |
 
 Use a compact claim matrix while working in `semantic` mode:
 

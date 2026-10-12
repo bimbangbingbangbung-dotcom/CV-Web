@@ -6,7 +6,7 @@ description: >
   have employees, reads seed documents, and builds a jurisdiction-aware
   escalation table. Use on fresh install, when CLAUDE.md still has
   [PLACEHOLDER] markers, or when re-running with --redo or --check-integrations.
-argument-hint: "[--redo | --check-integrations]"
+argument-hint: '[--redo | --check-integrations]'
 ---
 
 # /cold-start-interview
@@ -29,6 +29,7 @@ Employment law is jurisdictional down to the bone. The right answer in Texas is 
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md`:
+
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -51,7 +52,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -86,7 +87,7 @@ The interview's information comes only from the user's typed answers and documen
 ## Interview pacing
 
 - **Assume the answer exists somewhere.** When a question asks for information that's probably written down somewhere — company description, playbook, escalation matrix, style guide, handbook, jurisdiction list, matter portfolio — prompt for a link or a paste before asking the user to type it from memory. "Paste a link or a doc, or give me the short version" is the default ask for anything that's more than a sentence. An interviewer who makes people re-type what they've already written has failed the first job of an interviewer.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 
 **Pause for real answers.** Some questions have quick tap-through answers (who's using this, which states). Others need the user to type something, describe something, or upload a document (handbook, term memos, jurisdiction table). When a question needs more than a quick tap:
 
@@ -159,7 +160,7 @@ Record the answer in the plugin config as `## Practice setting` (or include in t
 
 > This plugin can work with: HRIS (Workday, BambooHR, Rippling, ADP), document storage (Google Drive, SharePoint, Box), and Slack. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -205,15 +206,18 @@ If not:
 If not:
 
 **Hiring:** When does legal see an offer?
+
 - Every offer? Only exec? Only with restrictive covenants? Never?
 - What's in the standard offer letter? Restrictive covenants vary by state — non-competes are unenforceable in California, fine in Florida.
 
 **Termination:** When does legal see a termination?
+
 - Every term? Performance only? RIFs only?
 - What's the standard severance — formula, discretionary, none?
 - Release required? Always, or only above X severance?
 
 **The high-risk flags:** What makes a termination scary? (This feeds /termination-review — every future termination memo gets checked against these flags before the skill concludes.)
+
 - Recent complaint (harassment, discrimination, whistleblower)
 - Recently returned from protected leave
 - Protected class + thin documentation
@@ -253,11 +257,11 @@ If they have poor visibility (scattered folders, no system): accept whatever the
 
 This is the core output. For each state/country in the footprint:
 
-| Jurisdiction | Special rules | Auto-escalate |
-|---|---|---|
-| California | No non-competes. Final pay due last day (or 72hrs if employee quits w/o notice). Meal/rest break penalties. PAGA exposure. | Any termination. Any restrictive covenant. |
-| New York | Pay transparency in postings. NYC has separate rules. Final pay next regular payday. | Exec hires (pay transparency). |
-| [etc.] | | |
+| Jurisdiction | Special rules                                                                                                              | Auto-escalate                              |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| California   | No non-competes. Final pay due last day (or 72hrs if employee quits w/o notice). Meal/rest break penalties. PAGA exposure. | Any termination. Any restrictive covenant. |
+| New York     | Pay transparency in postings. NYC has separate rules. Final pay next regular payday.                                       | Exec hires (pay transparency).             |
+| [etc.]       |                                                                                                                            |                                            |
 
 Don't invent rules for jurisdictions they didn't name. If they have one employee in Montana and no memo ever mentioned Montana, note `[Montana: 1 employee, no history — research on first issue]`.
 
@@ -286,7 +290,6 @@ If yes, show this tailored list (not a generic template — these are the concre
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
 
-
 - "Here's your jurisdiction table. The California row is the one to double-check."
 - "What's the next termination? Let me take a look."
 - Flag handbook gaps: "Your handbook doesn't have a remote work policy and you're remote-first. Want one?"
@@ -297,7 +300,6 @@ This solves the cold-start problem (the supervisor doesn't know what to do first
 
 <!-- COLLATERAL LINKS: when onboarding collateral exists, add here:
      "Want a walkthrough? [Watch the 3-minute intro](URL) or [read the getting-started guide](URL)." -->
-
 
 ### Close with the "you can change anything later" note
 

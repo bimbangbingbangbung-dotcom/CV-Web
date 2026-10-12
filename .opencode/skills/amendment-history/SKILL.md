@@ -6,7 +6,7 @@ description: >
   clause. Use when the user says "what changed in this contract over time", "show
   me the amendment history", "where's the latest [clause]", "how has [provision]
   evolved", or uploads multiple versions of an agreement.
-argument-hint: "[file(s) | [CLM ID (coming soon)] | [repository link (coming soon)]] [--provision <clause name>]"
+argument-hint: '[file(s) | [CLM ID (coming soon)] | [repository link (coming soon)]] [--provision <clause name>]'
 ---
 
 # /amendment-history
@@ -80,6 +80,7 @@ Trigger phrases: "where's the [clause]", "latest [provision]", "how did
 [term] change", "find the indemnity", "what does it say now about [topic]"
 
 Common provision mappings:
+
 - "indemnity" / "indemnification" → indemnification section
 - "liability" / "liability cap" → limitation of liability
 - "termination" → term and termination
@@ -90,9 +91,11 @@ Common provision mappings:
 
 If the term is ambiguous and maps to more than one provision, list the
 candidates and ask which one:
+
 > "I found [N] provisions related to [term] — [list them]. Which one?"
 
 If the overall request is ambiguous between modes, ask one question:
+
 > "Summary of all changes across the contract, or trace a specific
 > provision — like indemnity, liability, or termination?"
 
@@ -120,6 +123,7 @@ self-explanatory from document titles (e.g., "Amendment No. 1",
 or document header — proceed without asking.
 
 Only ask the user to confirm ordering if:
+
 - Filenames give no indication of sequence (e.g., "agreement-final.pdf",
   "agreement-v2.pdf", "agreement-markup.pdf")
 - Dates are absent from both filenames and document headers
@@ -127,10 +131,12 @@ Only ask the user to confirm ordering if:
 
 If ordering was inferred rather than confirmed, note confidence at the
 top of the output only where uncertain:
+
 > "Order inferred from document titles — one item I was less certain
 > about: [specific document]. Confirm if this affects your review."
 
 **Ordering rules:**
+
 - Always establish chronological order before reading content.
 - If execution dates are available in metadata, use them.
 - If not, look for dates in the document header or recitals
@@ -148,6 +154,7 @@ This skill reads the base agreement and amendments — often privileged or confi
 ## Step 2: Read and index
 
 Read each document in chronological order. For each, extract:
+
 - Document type (base agreement, amendment number, addendum, etc.)
 - Execution date
 - Parties (confirm they match across documents — flag if a new party
@@ -166,12 +173,12 @@ drive the output — do not show it to the user.
 Every finding must include an inline section reference so the reader
 can verify against the source document without searching:
 
-  "Termination for convenience (§12.3): Added. Customer may terminate
-  on 90 days written notice with no fee after the initial term."
+"Termination for convenience (§12.3): Added. Customer may terminate
+on 90 days written notice with no fee after the initial term."
 
 If a provision spans multiple sections or the section number changed
 across amendments, cite all references:
-  "Indemnification (§9.1 base; §9.1 restated in Amendment 5)"
+"Indemnification (§9.1 base; §9.1 restated in Amendment 5)"
 
 ### Output format
 
@@ -187,16 +194,19 @@ across amendments, cite all references:
 ## What changed — chronological
 
 ### Amendment 1 — [date]
+
 **Purpose:** [one sentence — why this amendment existed, from recitals
 or clear from context. If not stated, omit rather than guess.]
 
 **Material changes:**
+
 - [Provision] (§[X.X]): [what it said before → what it says now,
   in plain English]
 - [New provision added] (§[X.X]): [what it does]
 - [Provision deleted] (§[X.X]): [what was removed and why it matters]
 
 ### Amendment 2 — [date]
+
 [same structure]
 
 [repeat for each amendment]
@@ -205,14 +215,15 @@ or clear from context. If not stated, omit rather than guess.]
 
 ## Net current state
 
-| Provision | Current position | §Ref | Last changed |
-|---|---|---|---|
-| [clause] | [plain English summary] | §[X.X] | Amendment N, [date] |
-| [clause] | [unchanged from base] | §[X.X] | Base agreement |
+| Provision | Current position        | §Ref   | Last changed        |
+| --------- | ----------------------- | ------ | ------------------- |
+| [clause]  | [plain English summary] | §[X.X] | Amendment N, [date] |
+| [clause]  | [unchanged from base]   | §[X.X] | Base agreement      |
 
 ---
 
 ## Watch items
+
 [Flag anything that looks inconsistent — e.g., an amendment modifying
 a provision that was already deleted, contradictory language between
 amendments, a party name that changed without a formal assignment,
@@ -231,26 +242,30 @@ was untouched — skip them entirely.
 
 ```markdown
 # Provision Trace: [Provision name]
+
 ## [Counterparty] — [Agreement type]
 
 ---
 
 ### Original — [Base agreement date], §[X.X]
+
 > "[exact quote]"
 
-*Plain English:* [one sentence]
+_Plain English:_ [one sentence]
 
 ---
 
 ### Amendment [N] — [date], §[X.X]
 
 **Was:**
+
 > "[exact quote of prior language]"
 
 **Now:**
+
 > "[exact quote of replacement language]"
 
-*What changed:* [one sentence — practical effect on the parties]
+_What changed:_ [one sentence — practical effect on the parties]
 
 ---
 
@@ -262,13 +277,15 @@ All others are omitted.]
 ## Current controlling language
 
 **§[X.X] — [source document, date]**
+
 > "[exact quote]"
 
-*Plain English:* [one sentence]
+_Plain English:_ [one sentence]
 
 ---
 
 ## Watch items
+
 [Flags, inconsistencies, open questions — with section references.
 Common items to check: whether the provision is subject to or carved
 out of the liability cap; whether the section number shifted across
@@ -277,6 +294,7 @@ provision.]
 ```
 
 If the provision was never amended after the base agreement:
+
 > "This provision has not been modified by any amendment. Original
 > language controls. §[X.X], base agreement, [date]."
 

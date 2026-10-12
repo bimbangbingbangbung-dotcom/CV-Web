@@ -65,15 +65,15 @@ The thing that makes a tabular review useful is that Column C means the same thi
 
 Every column has a **type** that constrains the answer format:
 
-| Type | What it returns | Use for |
-|---|---|---|
-| `verbatim` | Exact quote from the document, character-for-character | Defined terms, operative clause language, anything where the words matter |
-| `classify` | One value from a fixed list you define | Yes/No, present/absent, clause variants (e.g., "sole consent" / "consent not unreasonably withheld" / "silent") |
-| `date` | ISO date | Effective date, expiration, termination notice deadline |
-| `duration` | Number + unit | Term length, notice period, survival period |
-| `currency` | Number + currency code | Caps, thresholds, fees, purchase price references |
-| `number` | Bare number | Counts, percentages, page references |
-| `free` | Short free text summary | Use sparingly — this is the type that drifts. Only when the others genuinely don't fit. |
+| Type       | What it returns                                        | Use for                                                                                                         |
+| ---------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `verbatim` | Exact quote from the document, character-for-character | Defined terms, operative clause language, anything where the words matter                                       |
+| `classify` | One value from a fixed list you define                 | Yes/No, present/absent, clause variants (e.g., "sole consent" / "consent not unreasonably withheld" / "silent") |
+| `date`     | ISO date                                               | Effective date, expiration, termination notice deadline                                                         |
+| `duration` | Number + unit                                          | Term length, notice period, survival period                                                                     |
+| `currency` | Number + currency code                                 | Caps, thresholds, fees, purchase price references                                                               |
+| `number`   | Bare number                                            | Counts, percentages, page references                                                                            |
+| `free`     | Short free text summary                                | Use sparingly — this is the type that drifts. Only when the others genuinely don't fit.                         |
 
 **The verbatim rule:** Every non-`verbatim` column also captures the exact source quote that supports the answer, as a companion field. The answer in the cell is the interpretation; the quote is the evidence. A `classify` cell that says "consent not unreasonably withheld" is useless without the sentence it came from, because the reviewer's job is to check whether that's the right read.
 
@@ -81,11 +81,11 @@ Every column has a **type** that constrains the answer format:
 
 A blank cell hides information. Force one of three explicit states whenever you can't produce a positive answer:
 
-| State | Meaning | When to use |
-|---|---|---|
-| `not_present` | The document was read and the clause is not there | You are confident the subject matter isn't addressed |
-| `unclear` | Something is there but you can't classify it confidently | Ambiguous drafting, partial clause, conflicting provisions |
-| `needs_review` | You found something but a human must make the call | Edge case, unusual drafting, the answer depends on a judgment the schema doesn't capture |
+| State          | Meaning                                                  | When to use                                                                              |
+| -------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `not_present`  | The document was read and the clause is not there        | You are confident the subject matter isn't addressed                                     |
+| `unclear`      | Something is there but you can't classify it confidently | Ambiguous drafting, partial clause, conflicting provisions                               |
+| `needs_review` | You found something but a human must make the call       | Edge case, unusual drafting, the answer depends on a judgment the schema doesn't capture |
 
 These are three different pieces of information. A deal team handles "the contract is silent on assignment" very differently from "the assignment clause is ambiguous." Collapsing them into one blank cell loses the distinction.
 
@@ -94,6 +94,7 @@ These are three different pieces of information. A deal team handles "the contra
 ### Step 0: What and where
 
 Confirm:
+
 1. **Documents.** Where are they? VDR MCP (Box, Datasite, iManage), local folder, Google Drive folder, or a list of files. How many? If >200, warn that this will take a while and offer to start with a materiality-filtered subset.
 2. **Schema.** What columns? Two paths:
    - User picks a template from `references/` (M&A diligence standard is the default)
@@ -108,33 +109,48 @@ Write it to `.review-schema.yaml` next to the output. This file is the reusable 
 
 ```yaml
 schema:
-  name: "M&A Diligence — Project [Code]"
+  name: 'M&A Diligence — Project [Code]'
   created: 2026-05-07
   columns:
     - id: counterparty
-      label: "Counterparty"
+      label: 'Counterparty'
       type: verbatim
-      prompt: "Who is the contracting party other than the target?"
+      prompt: 'Who is the contracting party other than the target?'
     - id: effective_date
-      label: "Effective Date"
+      label: 'Effective Date'
       type: date
-      prompt: "When did the agreement become effective?"
+      prompt: 'When did the agreement become effective?'
     - id: change_of_control
-      label: "Change of Control"
+      label: 'Change of Control'
       type: classify
-      options: [silent, consent_required, consent_not_unreasonably_withheld, automatic_termination, notice_only]
-      prompt: "Does the agreement address a change of control of the target? What does it require?"
+      options:
+        [
+          silent,
+          consent_required,
+          consent_not_unreasonably_withheld,
+          automatic_termination,
+          notice_only,
+        ]
+      prompt: 'Does the agreement address a change of control of the target? What does it require?'
     - id: assignment
-      label: "Assignment Restrictions"
+      label: 'Assignment Restrictions'
       type: classify
-      options: [silent, consent_required, consent_not_unreasonably_withheld, freely_assignable, assignable_to_affiliates]
-      prompt: "Can the target assign this agreement? What restrictions apply?"
+      options:
+        [
+          silent,
+          consent_required,
+          consent_not_unreasonably_withheld,
+          freely_assignable,
+          assignable_to_affiliates,
+        ]
+      prompt: 'Can the target assign this agreement? What restrictions apply?'
     # ... more columns
 ```
 
 ### Step 2: Sample run
 
 Do not fan out to 200 documents on an untested schema. Run 3–5 documents first. Show the user the rows. Look for:
+
 - Columns where most answers are `unclear` — the prompt is ambiguous, rewrite it
 - `classify` columns where answers don't fit the options — add options or change to `free`
 - `verbatim` columns returning paraphrases — reinforce that it must be character-for-character
@@ -167,14 +183,17 @@ The normalization pass in Step 4 spot-checks this by re-reading the source at th
 After the fan-out, read the whole table column by column. This is the pass that catches the failure mode of every tabular review tool: the same clause interpreted inconsistently across documents.
 
 For each `classify` column:
+
 - Check that every `answered` value is in the options list. Outliers get re-classified or bumped to `needs_review`.
 - Check for clusters: if 180 documents say `consent_required` and 20 say `consent_not_unreasonably_withheld`, that's probably real. If 195 say `consent_required` and 5 say `freely_assignable`, look at the 5 — they're either genuinely different or misclassified.
 
 For each `date` / `duration` / `currency` column:
+
 - Check format consistency. Normalize.
 - Flag implausible values (a 99-year term, a $1 cap) as `needs_review`.
 
 For each `verbatim` column AND for the companion source quotes on every other column:
+
 - Spot-check by re-opening the source document at the cited `location` for a random sample (at least 3–5 rows per column, or 10% of rows, whichever is larger) and comparing the stored `quote` character-for-character against the source.
 - If any quote is composed, paraphrased, reconstructed, or cannot be located at the cited span: downgrade that cell to `needs_review` with `quote_mismatch` in notes, and flag the whole column — expand the spot-check to the rest of the column rather than assuming the other rows are clean. One fabricated quote is enough to justify widening the check.
 - A cell with `state: answered` and a mismatched quote is a higher-severity failure than an `unclear` or `needs_review` cell — it misrepresents the evidence trail. Downgrade aggressively.
@@ -184,17 +203,19 @@ For each `verbatim` column AND for the companion source quotes on every other co
 Write the table in three formats:
 
 **Markdown** (always, for in-session review):
+
 ```markdown
-| Document | Counterparty | Effective Date | Change of Control | Assignment | ⚠️ Flags |
-|---|---|---|---|---|---|
-| Vendor MSA — Acme | Acme Corp | 2023-04-01 | consent_required | consent_required | — |
-| Supply Agmt — Beta | Beta LLC | 2021-11-15 | ⚠️ unclear | silent | CoC ambiguous §14.2 |
+| Document           | Counterparty | Effective Date | Change of Control | Assignment       | ⚠️ Flags            |
+| ------------------ | ------------ | -------------- | ----------------- | ---------------- | ------------------- |
+| Vendor MSA — Acme  | Acme Corp    | 2023-04-01     | consent_required  | consent_required | —                   |
+| Supply Agmt — Beta | Beta LLC     | 2021-11-15     | ⚠️ unclear        | silent           | CoC ambiguous §14.2 |
 ```
 
 **CSV** (`.csv`, always):
 One file for the values, one companion file for the quotes and locations (`_sources.csv`). Keeps the main file clean and the evidence trail complete.
 
 **Excel** (`.xlsx`) or **Google Sheets** — whichever the user works in. Ask; don't guess. Both follow the same workbook structure (see `references/excel-output.md` and `references/gsheets-output.md`). For Excel: Claude in Excel (Office agent) if available, `openpyxl` fallback. For Sheets: Sheets MCP if available, Sheets API via ADC, CSV-import fallback. In the spreadsheet output:
+
 - Each data column is paired with a hidden source column containing the quote and location. Cell comments (Excel) or notes (Sheets) on the visible column surface the quote on hover.
 - Color code by state: white = answered, yellow = unclear or needs_review, gray = not_present.
 - A `Verified` column per data column, blank by default. The reviewer marks it. This is the verify/flag pattern that makes the table auditable — the deal team can see at a glance what a human has actually checked.
@@ -207,6 +228,7 @@ Prepend the work-product header from the plugin config `## Outputs` as a top row
 ### Step 6: Summary
 
 After the table is written, give the user a one-screen readout:
+
 - Document count, column count, rows completed
 - Count of `not_present`, `unclear`, `needs_review` per column — this is the verification workload
 - Any columns where the normalization pass flagged >10% of rows

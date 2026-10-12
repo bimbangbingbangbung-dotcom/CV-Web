@@ -10,7 +10,9 @@ function Comments({ commentsPromise }: { commentsPromise: Promise<Comment[]> }) 
   const comments = use(commentsPromise);
   return (
     <ul>
-      {comments.map(c => <li key={c.id}>{c.text}</li>)}
+      {comments.map((c) => (
+        <li key={c.id}>{c.text}</li>
+      ))}
     </ul>
   );
 }
@@ -112,10 +114,10 @@ function ContactForm() {
 import { useOptimistic } from 'react';
 
 function TodoList({ todos }: { todos: Todo[] }) {
-  const [optimisticTodos, addOptimisticTodo] = useOptimistic(
-    todos,
-    (state, newTodo: Todo) => [...state, newTodo]
-  );
+  const [optimisticTodos, addOptimisticTodo] = useOptimistic(todos, (state, newTodo: Todo) => [
+    ...state,
+    newTodo,
+  ]);
 
   async function addTodo(formData: FormData) {
     const text = formData.get('text') as string;
@@ -130,7 +132,7 @@ function TodoList({ todos }: { todos: Todo[] }) {
   return (
     <>
       <ul>
-        {optimisticTodos.map(todo => (
+        {optimisticTodos.map((todo) => (
           <li key={todo.id}>{todo.text}</li>
         ))}
       </ul>
@@ -160,15 +162,15 @@ function Form() {
 
 ## Quick Reference
 
-| Hook | Purpose |
-|------|---------|
-| `use()` | Read promise/context in render |
-| `useActionState()` | Form action state + pending |
-| `useFormStatus()` | Form pending state (child) |
-| `useOptimistic()` | Optimistic UI updates |
+| Hook               | Purpose                        |
+| ------------------ | ------------------------------ |
+| `use()`            | Read promise/context in render |
+| `useActionState()` | Form action state + pending    |
+| `useFormStatus()`  | Form pending state (child)     |
+| `useOptimistic()`  | Optimistic UI updates          |
 
-| Pattern | When |
-|---------|------|
-| `use(promise)` | Suspense data fetching |
-| `use(context)` | Conditional context read |
+| Pattern          | When                      |
+| ---------------- | ------------------------- |
+| `use(promise)`   | Suspense data fetching    |
+| `use(context)`   | Conditional context read  |
 | `useActionState` | Server Actions with state |

@@ -5,7 +5,7 @@ description: >
   user says "review this launch", "legal review for [feature]", "can we ship
   this", "what are the legal issues with [product]", or references a launch
   tracker ticket or PRD that needs a category-by-category review memo.
-argument-hint: "[PRD file | Drive link | tracker ticket ID]"
+argument-hint: '[PRD file | Drive link | tracker ticket ID]'
 ---
 
 # /launch-review
@@ -40,8 +40,9 @@ Read the PRD, check every category in this team's framework, calibrate against w
 ## Load calibration
 
 Read `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md`:
+
 - `## Review framework` — the categories to check
-- `## Risk calibration` — what blocks vs. what's FYI *at this company*
+- `## Risk calibration` — what blocks vs. what's FYI _at this company_
 - `## Launch review process` — output format
 - `## Escalation` — when to route up
 
@@ -83,14 +84,14 @@ ensures it's never skipped even if the PRD is vague.
 
 For each category in `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` → Review framework. If the team doesn't have one, use the 8-category default below. The categories are stable framing concepts; within each category, research the regulatory regimes applicable to the product's sector, audience, and jurisdictions before calibrating severity. What blocks in one jurisdiction or sector may be routine in another — `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` captures the team's calibration.
 
-| # | Category | Key question | Auto-skip if |
-|---|---|---|---|
-| 1 | **Contractual commitments** | Does this conflict with any customer-facing promise (ToS, SLA, marketing)? | No customer-facing changes |
-| 2 | **Privacy** | New data collection, new purpose, new sharing? | No data changes |
-| 3 | **Security** | New attack surface, new data at rest, new access patterns? | UI-only, no backend change |
-| 4 | **IP** | Third-party code/content? Open-source license check? Outputs that could infringe? | No new dependencies, no user-generated content |
-| 5 | **Third-party** | New vendor, partner, or integration? | No new external parties |
-| 6 | **Regulatory** | Does this touch a regulated sector, audience, or jurisdiction? Research the applicable regimes. | Same users, same sectors, same jurisdictions as existing product |
+| #   | Category                    | Key question                                                                                    | Auto-skip if                                                     |
+| --- | --------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| 1   | **Contractual commitments** | Does this conflict with any customer-facing promise (ToS, SLA, marketing)?                      | No customer-facing changes                                       |
+| 2   | **Privacy**                 | New data collection, new purpose, new sharing?                                                  | No data changes                                                  |
+| 3   | **Security**                | New attack surface, new data at rest, new access patterns?                                      | UI-only, no backend change                                       |
+| 4   | **IP**                      | Third-party code/content? Open-source license check? Outputs that could infringe?               | No new dependencies, no user-generated content                   |
+| 5   | **Third-party**             | New vendor, partner, or integration?                                                            | No new external parties                                          |
+| 6   | **Regulatory**              | Does this touch a regulated sector, audience, or jurisdiction? Research the applicable regimes. | Same users, same sectors, same jurisdictions as existing product |
 
 > **No silent supplement.** If a research query to the configured legal research tool (Westlaw, CourtListener, regulator sites, or firm platform) returns few or no results for a regime, enforcement precedent, or regulator guidance, report what was found and stop. Do NOT fill the gap from web search or model knowledge without asking. Say: "The search returned [N] results from [tool]. Coverage appears thin for [regime / topic]. Options: (1) broaden the search query, (2) try a different research tool, (3) search the web — results will be tagged `[web search — verify]` and should be checked against the issuing authority before relying, or (4) flag as unverified and stop. Which would you like?" A lawyer decides whether to accept lower-confidence sources.
 >
@@ -103,8 +104,8 @@ For each category in `~/.claude/plugins/config/claude-for-legal/product-legal/CL
 > Tool-retrieved citations keep their source tag (`[Westlaw]`, `[CourtListener]`, `[regulator site]`, or the MCP tool name); web-search citations remain `[web search — verify]`; user-supplied citations (from the PRD or seed materials) remain `[user provided]`. The tiering surfaces the real verification work — a reader who verifies everything verifies nothing. Never strip or collapse the tags.
 >
 > `[platform policy — verify against live docs]` — platform rules (Apple App Store Review Guidelines, Google Play policies, Meta / Snap / TikTok creator rules, ESRB / PEGI descriptors, card-network rules, app-store in-app-purchase policies) cited without fetching the live page. Never use `[settled]` for a platform policy — these change without notice and the model's snapshot is almost always stale. If the launch hinges on a platform rule, fetch the current policy page in-session before relying on it.
-| 7 | **Marketing claims** | Any claims that need substantiation? | No marketing component |
-| 8 | **AI governance** | Does this use AI in any form? Is the use case in the registry? AIA done? Vendor AI terms reviewed? | No AI component detected in Step 2 |
+> | 7 | **Marketing claims** | Any claims that need substantiation? | No marketing component |
+> | 8 | **AI governance** | Does this use AI in any form? Is the use case in the registry? AIA done? Vendor AI terms reviewed? | No AI component detected in Step 2 |
 
 **For each category, output:**
 
@@ -122,16 +123,16 @@ For each category in `~/.claude/plugins/config/claude-for-legal/product-legal/CL
 
 **Sector hints.** The 8-category framework above is enterprise-SaaS-shaped. If the launch involves any of the sectors below, add the overlay: ask the overlay question alongside the base-framework question for each affected category, and surface the sector-specific regime before calibrating severity. A launch that checks all 8 boxes but misses a sector regime still ships with a hole.
 
-| Sector | Overlay regimes to surface |
-|---|---|
-| **Children / minors** | COPPA (US — operators of services directed to children under 13 or with actual knowledge), CA AADC / state age-appropriate design codes, platform age ratings (ESRB, PEGI), addictive-design scrutiny (NY Safe for Kids Act, CA SB 976 and analogs), FTC endorsement guides for kid-directed influencers |
+| Sector                                     | Overlay regimes to surface                                                                                                                                                                                                                                                                                                               |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Children / minors**                      | COPPA (US — operators of services directed to children under 13 or with actual knowledge), CA AADC / state age-appropriate design codes, platform age ratings (ESRB, PEGI), addictive-design scrutiny (NY Safe for Kids Act, CA SB 976 and analogs), FTC endorsement guides for kid-directed influencers                                 |
 | **Gaming / loot boxes / in-game currency** | Loot-box odds disclosure (CA AB 2476-style, Chinese / Korean / Belgian / Dutch regimes), ESRB / PEGI descriptors (In-Game Purchases, Loot Boxes, Real Gambling), state gambling law (games-of-chance vs. games-of-skill lines, sweepstakes promotions law), FTC dark-patterns guidance, platform-store policies (Apple, Google, console) |
-| **Financial / fintech** | GLBA (NPI, Safeguards Rule, Reg P), state money transmission licensing (MTLs across ~50 states + DC), CFPB UDAAP, state UDAP, bank-partner sponsorship requirements and "true lender" exposure, Reg E / Reg Z where applicable, FINRA if brokerage |
-| **Health** | HIPAA (if CE or BA), FDA SaMD / clinical decision support / general wellness exemption, state health-privacy (WA MHMDA, NV SB 370, CT HIPAA-analog), FTC Health Breach Notification Rule for non-HIPAA entities |
-| **Education** | FERPA (if school or school-acting service provider), state student-privacy (NY Ed Law 2-d, IL SOPPA, CA SOPIPA + AB 1584), COPPA if K-12 data under 13 |
-| **Employment / HR tech** | Title VII, EEOC guidance on AI in hiring, ADA, state AI-hiring laws (IL AIVIA, NYC Local Law 144, CA / CO / UT / NJ analogs under consideration or enacted), state biometric laws (IL BIPA, TX / WA analogs) for video-interview and keystroke products, FCRA for background / verification products |
-| **Government / public sector** | FedRAMP (Low / Moderate / High), FAR / DFARS, CMMC where applicable, state-level equivalents (StateRAMP), CJIS for law-enforcement data, IRS Publication 1075 for tax data, StateRAMP and state procurement rules |
-| **Consumer / retail / marketing** | FTC Act § 5, Made-in-USA rule, Green Guides, CAN-SPAM, TCPA (with TCPA-Shaken/Stir for calls), state auto-renewal (ROSCA, CA ARL, NY GBL § 527-a [consumer] or GOL § 5-903 [B2B services] — verify which applies), state sweepstakes/promotions law |
+| **Financial / fintech**                    | GLBA (NPI, Safeguards Rule, Reg P), state money transmission licensing (MTLs across ~50 states + DC), CFPB UDAAP, state UDAP, bank-partner sponsorship requirements and "true lender" exposure, Reg E / Reg Z where applicable, FINRA if brokerage                                                                                       |
+| **Health**                                 | HIPAA (if CE or BA), FDA SaMD / clinical decision support / general wellness exemption, state health-privacy (WA MHMDA, NV SB 370, CT HIPAA-analog), FTC Health Breach Notification Rule for non-HIPAA entities                                                                                                                          |
+| **Education**                              | FERPA (if school or school-acting service provider), state student-privacy (NY Ed Law 2-d, IL SOPPA, CA SOPIPA + AB 1584), COPPA if K-12 data under 13                                                                                                                                                                                   |
+| **Employment / HR tech**                   | Title VII, EEOC guidance on AI in hiring, ADA, state AI-hiring laws (IL AIVIA, NYC Local Law 144, CA / CO / UT / NJ analogs under consideration or enacted), state biometric laws (IL BIPA, TX / WA analogs) for video-interview and keystroke products, FCRA for background / verification products                                     |
+| **Government / public sector**             | FedRAMP (Low / Moderate / High), FAR / DFARS, CMMC where applicable, state-level equivalents (StateRAMP), CJIS for law-enforcement data, IRS Publication 1075 for tax data, StateRAMP and state procurement rules                                                                                                                        |
+| **Consumer / retail / marketing**          | FTC Act § 5, Made-in-USA rule, Green Guides, CAN-SPAM, TCPA (with TCPA-Shaken/Stir for calls), state auto-renewal (ROSCA, CA ARL, NY GBL § 527-a [consumer] or GOL § 5-903 [B2B services] — verify which applies), state sweepstakes/promotions law                                                                                      |
 
 If a sector hint fires and no dedicated category in the base framework covers it, insert it as a category (e.g., "6a. Sector overlay — children / COPPA + CA AADC"). Don't let it disappear into category 6 Regulatory as an afterthought; the sector regime often supplies the controlling floor, not a footnote.
 
@@ -184,9 +185,9 @@ Format per `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` �
 
 ## Action items
 
-| # | Item | Owner | Due | Blocking? |
-|---|---|---|---|---|
-| 1 | [specific] | [PM/eng/legal] | [date] | Yes/No |
+| #   | Item       | Owner          | Due    | Blocking? |
+| --- | ---------- | -------------- | ------ | --------- |
+| 1   | [specific] | [PM/eng/legal] | [date] | Yes/No    |
 
 ---
 
@@ -234,6 +235,7 @@ Example divider and block:
 **Launch status:** Blocked pending conditions below.
 
 **Conditions:**
+
 - [ ] Attach completed PIA to ticket — Owner: [PM] — Due: [date]
 - [ ] Remove "most accurate on the market" copy from homepage draft — Owner: [Marketing] — Due: [date]
 - [ ] Confirm with GC before changing retention window — Owner: [PM] — Due: [date]

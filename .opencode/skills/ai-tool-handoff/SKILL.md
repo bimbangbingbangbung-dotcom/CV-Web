@@ -27,6 +27,7 @@ This skill hands off the bulk extraction to the right tool, then runs the QA lay
 ## Load context
 
 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` → AI-assisted review:
+
 - Tool in use (Luminance / Kira / none)
 - What it's used for (which clause types)
 - Trust level (use as-is / spot-check / full re-review)
@@ -37,11 +38,13 @@ If `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` says no
 ## When to hand off
 
 Hand off when all of:
+
 - Category has >50 documents (below that, faster to just read them)
 - Extraction target is a clause type the tool is good at (CoC, assignment, exclusivity, MFN, termination, auto-renewal)
 - Documents are reasonably uniform (all customer contracts on similar paper — not a mix of contracts, letters, and board minutes)
 
 Don't hand off:
+
 - Bespoke or heavily negotiated documents
 - Side letters and amendments (context-dependent, tools miss the interaction with the main agreement)
 - Anything where the question is "what does this mean for the deal" not "does this clause exist"
@@ -64,6 +67,7 @@ Per `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` — wh
 **Documents:** [N] docs from VDR folder [path]
 **Load to:** [Tool workspace/matter]
 **Extraction targets:**
+
 - Change of control / assignment
 - Exclusivity
 - [etc. per `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`]
@@ -88,6 +92,7 @@ When the tool returns results, apply the trust level:
 The tool found the clauses. Now apply judgment:
 
 For each flagged CoC provision: is it actually triggered by this deal?
+
 - Stock sale vs. asset sale vs. merger — different triggers
 - "Change of control" defined how in the contract — majority ownership? board control? something else?
 - Is there a carve-out for this type of transaction?
@@ -113,10 +118,10 @@ This is the part the tool can't do. Output goes to diligence findings in house f
 
 ### Results
 
-| Clause type | Docs flagged | After judgment layer | Material |
-|---|---|---|---|
-| Change of control | [N] | [N actually triggered by deal structure] | [N above threshold] |
-| Assignment | [N] | [N] | [N] |
+| Clause type       | Docs flagged | After judgment layer                     | Material            |
+| ----------------- | ------------ | ---------------------------------------- | ------------------- |
+| Change of control | [N]          | [N actually triggered by deal structure] | [N above threshold] |
+| Assignment        | [N]          | [N]                                      | [N]                 |
 
 **→ [N] findings added to diligence issues**
 **→ [N] consents added to closing checklist**

@@ -5,7 +5,7 @@ description: >
   them Socratically, flagging where you're shaky so you know what to re-read
   before class. Use when the user says "prep for class tomorrow", "cold call
   [case]", "what might [professor] ask on", or points at assigned reading.
-argument-hint: "[case name, or paste case text, or path to reading]"
+argument-hint: '[case name, or paste case text, or path to reading]'
 ---
 
 # /cold-call-prep
@@ -58,30 +58,36 @@ Not a replacement for reading the case. A test that you actually did.
 Professors cold-call in recurring patterns. Predict across these categories:
 
 **Facts-level (warm-up):**
+
 - Who are the parties? What happened? Procedural posture?
 - What did the trial court do? The appellate court below?
 - Why is this in the casebook? What subject is it illustrating?
 
 **Holding / rule:**
+
 - What's the holding? One sentence.
 - What's the rule that comes out of this case — the portable takeaway?
 - How would you phrase the rule if it were in your outline?
 
 **Reasoning:**
+
 - Why did the court decide this way?
 - What arguments did the court reject?
 - Was there a dissent? What did it argue?
 
 **Application / hypos:**
+
 - What if [fact X] were different — same outcome?
 - How does this case compare to [prior case in the syllabus]?
 - What's the limiting principle? Where does this rule stop?
 
 **Policy / theory:**
+
 - What's the policy the court is protecting?
 - Does this rule make sense? Alternative approaches?
 
 **Professor-specific flavor (from ~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md notes):**
+
 - If the professor is known for hypo-heavy calls, weight Application/Hypo questions
 - If policy-heavy, weight Policy/Theory
 - If fact-heavy socratic (Socratic 101 Paper Chase style), weight Facts + Holding
@@ -112,10 +118,12 @@ At the end:
 **Missed:** [questions where they didn't know]
 
 ## Before class tomorrow:
+
 - [specific thing to re-check — facts they got wrong, rule they couldn't state]
 - [if shaky on policy/theory: "read the dissent again — that's usually where policy questions come from"]
 
 ## Questions likely to come up in class:
+
 - [top 3 of the 10 — the ones the professor is most likely to lead with]
 ```
 

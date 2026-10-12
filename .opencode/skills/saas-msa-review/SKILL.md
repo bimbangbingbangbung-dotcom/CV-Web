@@ -95,7 +95,7 @@ Check each element against `~/.claude/plugins/config/claude-for-legal/commercial
 
 ### 5. Subprocessors
 
-This is a data protection issue but it's SaaS-specific because the subprocessor list *changes* over the life of the subscription.
+This is a data protection issue but it's SaaS-specific because the subprocessor list _changes_ over the life of the subscription.
 
 Check each element against `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`:
 
@@ -113,8 +113,6 @@ Check each element against `~/.claude/plugins/config/claude-for-legal/commercial
 - **Deprecation notice period** for features the team relies on
 - **Feature parity on replacement** (same price tier, higher tier)
 
-
-
 ## AI and machine learning rights
 
 **AI/ML data rights decision procedure.** Don't just check whether an AI training clause exists. The #1 emerging negotiation point in SaaS contracts is structurally more than a one-line existence check. Work through:
@@ -125,7 +123,7 @@ Check each element against `~/.claude/plugins/config/claude-for-legal/commercial
 4. **Competitive contamination.** Does the vendor serve your competitors? If so, training on your data could leak competitive intelligence into outputs your competitors see. Is there a competitive isolation commitment?
 5. **Opt-out scope and durability.** If there's an opt-out, does it cover all AI uses or only some? Does it survive renewals and TOS updates? Is it per-user or per-org? Many vendors default to training and offer an opt-out buried in an admin console — check whether the contract makes the default explicit.
 6. **Output ownership.** If the SaaS product is itself AI-generated (drafting, summarization, analysis), who owns the outputs? Can the vendor use your outputs as training examples? Check third-party AI subprocessors too — the vendor may send customer data to a third-party LLM (OpenAI, Anthropic, Google) and the subprocessor list / data flow is where that shows up.
-7. **Downstream regulatory chain.** Does the vendor's use of your data for AI create regulatory exposure for YOU? EU AI Act deployer obligations, FTC §5 undisclosed data-sharing exposure (see *FTC v. Humor Rainbow/OkCupid*), state AI laws.
+7. **Downstream regulatory chain.** Does the vendor's use of your data for AI create regulatory exposure for YOU? EU AI Act deployer obligations, FTC §5 undisclosed data-sharing exposure (see _FTC v. Humor Rainbow/OkCupid_), state AI laws.
 
 Match each to a playbook position. The practice profile's `## AI/ML training rights` section should have positions for each. If the agreement is silent on all seven, that's still a finding: "The agreement is silent on AI/ML training rights — request an explicit prohibition or a defined carve-out tied to each of the seven dimensions above."
 
@@ -158,6 +156,7 @@ When the playbook position conflicts with the contract's governing-law enforceab
 **Edit at the smallest possible granularity.** A redline is a negotiation artifact, not a rewrite. Wholesale clause replacement signals "we threw out your drafting" — it's aggressive, it forces the counterparty to re-read the whole clause, and it discards the parts of their drafting that were fine. Surgical redlines — strike a word, insert a phrase, restructure a subclause — signal "we have specific asks" and are faster to read, understand, and accept.
 
 Default to the smallest edit that achieves the playbook position:
+
 - Replace a **word** before a phrase. ("twelve (12)" → "twenty-four (24)")
 - Replace a **phrase** before a sentence. ("paid by the Buyer" → "paid and payable by the Buyer")
 - Restructure a **subclause** before replacing the sentence. (Add "(a)" and "(b)" to split a compound condition.)
@@ -171,6 +170,7 @@ When in doubt, smaller. A client who receives a surgical redline trusts that you
 Use the vendor-agreement-review memo structure, with a SaaS-specific section added after the standard playbook checks. The vendor-agreement-review memo already carries the privilege header.
 
 **Dual severity.** Every SaaS-specific finding carries both axes (see CLAUDE.md `## Dual severity`):
+
 - **Legal risk:** 🔴 Critical | 🟠 High | 🟡 Medium | 🟢 Low
 - **Business friction:** 🔴 Blocks deals | 🟠 Slows deals | 🟡 Confuses customers | 🟢 Invisible
 
@@ -188,6 +188,7 @@ Data-exit, auto-renewal, and price-escalation findings are the ones most likely 
 ## SaaS-specific findings
 
 ### Auto-renewal
+
 **Renewal date:** [date]
 **Notice window:** Cancel by [date] ([N] days before renewal)
 **Renewal price mechanism:** [as written]
@@ -195,18 +196,23 @@ Data-exit, auto-renewal, and price-escalation findings are the ones most likely 
 **Flag for renewal-tracker:** [yes — and the record the tracker needs]
 
 ### Price escalation
+
 [findings against `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` positions]
 
 ### Data exit
+
 [findings — this is the one the business owner should read]
 
 ### SLA
+
 [findings, or "Skipped — service is not business-critical per [stakeholder]"]
 
 ### Subprocessors
+
 [findings against `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` positions]
 
 ### Service changes
+
 [findings against `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` positions]
 ```
 
@@ -215,18 +221,18 @@ Data-exit, auto-renewal, and price-escalation findings are the ones most likely 
 **To renewal-tracker:** When you find the renewal date and notice window, hand them off. The renewal-tracker register expects the following fields (see `skills/renewal-tracker/references/renewal-register.yaml` for the full schema):
 
 ```yaml
-counterparty:         [name]
-agreement:            [title]
-signed_date:          [ISO date]
-initial_term_end:     [ISO date]
-renewal_mechanism:    [e.g., "auto-renew annual"]
-notice_period_days:   [integer]
-cancel_by_effective:            [ISO date — initial_term_end minus notice_period_days]
-price_on_renewal:     [mechanism as written]
-annual_value:         [integer, if stated]
-business_owner:       [email, if known]
-clm_id:               [id if available]
-status:               active
+counterparty: [name]
+agreement: [title]
+signed_date: [ISO date]
+initial_term_end: [ISO date]
+renewal_mechanism: [e.g., 'auto-renew annual']
+notice_period_days: [integer]
+cancel_by_effective: [ISO date — initial_term_end minus notice_period_days]
+price_on_renewal: [mechanism as written]
+annual_value: [integer, if stated]
+business_owner: [email, if known]
+clm_id: [id if available]
+status: active
 ```
 
 If any field is not determinable from the contract or context, leave it out and note which fields were missing so the human can fill them in. `clm_id`, `annual_value`, and `business_owner` are especially likely to need human input.
@@ -235,11 +241,10 @@ If any field is not determinable from the contract or context, leave it out and 
 
 ## A note on what to fight over
 
-SaaS vendors, especially large ones, negotiate their paper about as willingly as airlines negotiate ticket terms. Pick battles *per the team's playbook* — the `SaaS positions` section in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` should distinguish between terms the team will always push on, terms it fights over only for material deals, and terms it lets slide. If the playbook doesn't draw those lines, ask.
+SaaS vendors, especially large ones, negotiate their paper about as willingly as airlines negotiate ticket terms. Pick battles _per the team's playbook_ — the `SaaS positions` section in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` should distinguish between terms the team will always push on, terms it fights over only for material deals, and terms it lets slide. If the playbook doesn't draw those lines, ask.
 
 Calibrate based on contract value and switching cost. A $5K/year tool with easy alternatives gets a lighter touch than a $500K/year platform we'll build on top of.
 
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
-

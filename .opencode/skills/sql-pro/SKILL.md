@@ -5,7 +5,7 @@ license: MIT
 metadata:
   author: https://github.com/Jeffallan
   company: https://synergetic.solutions
-  version: "1.1.0"
+  version: '1.1.0'
   domain: language
   triggers: SQL optimization, query performance, database design, PostgreSQL, MySQL, SQL Server, window functions, CTEs, query tuning, EXPLAIN plan, database indexing
   role: specialist
@@ -28,17 +28,18 @@ metadata:
 
 Load detailed guidance based on context:
 
-| Topic | Reference | Load When |
-|-------|-----------|-----------|
-| Query Patterns | `references/query-patterns.md` | JOINs, CTEs, subqueries, recursive queries |
-| Window Functions | `references/window-functions.md` | ROW_NUMBER, RANK, LAG/LEAD, analytics |
-| Optimization | `references/optimization.md` | EXPLAIN plans, indexes, statistics, tuning |
-| Database Design | `references/database-design.md` | Normalization, keys, constraints, schemas |
+| Topic               | Reference                           | Load When                                   |
+| ------------------- | ----------------------------------- | ------------------------------------------- |
+| Query Patterns      | `references/query-patterns.md`      | JOINs, CTEs, subqueries, recursive queries  |
+| Window Functions    | `references/window-functions.md`    | ROW_NUMBER, RANK, LAG/LEAD, analytics       |
+| Optimization        | `references/optimization.md`        | EXPLAIN plans, indexes, statistics, tuning  |
+| Database Design     | `references/database-design.md`     | Normalization, keys, constraints, schemas   |
 | Dialect Differences | `references/dialect-differences.md` | PostgreSQL vs MySQL vs SQL Server specifics |
 
 ## Quick-Reference Examples
 
 ### CTE Pattern
+
 ```sql
 -- Isolate expensive subquery logic for reuse and readability
 WITH ranked_orders AS (
@@ -56,6 +57,7 @@ WHERE rn = 1;                           -- latest completed order per customer
 ```
 
 ### Window Function Pattern
+
 ```sql
 -- Running total and rank within partition — no self-join required
 SELECT
@@ -68,6 +70,7 @@ FROM employees;
 ```
 
 ### EXPLAIN ANALYZE Interpretation
+
 ```sql
 -- PostgreSQL: always use ANALYZE to see actual row counts vs. estimates
 EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)
@@ -76,12 +79,15 @@ FROM orders o
 JOIN customers c ON c.id = o.customer_id
 WHERE o.created_at > NOW() - INTERVAL '30 days';
 ```
+
 Key things to check in the output:
+
 - **Seq Scan on large table** → add or fix an index
 - **actual rows ≫ estimated rows** → run `ANALYZE <table>` to refresh statistics
 - **Buffers: shared hit** vs **read** → high `read` count signals missing cache / index
 
 ### Before / After Optimization Example
+
 ```sql
 -- BEFORE: correlated subquery, one execution per row (slow)
 SELECT order_id,
@@ -106,6 +112,7 @@ CREATE INDEX idx_order_items_order_qty
 ## Constraints
 
 ### MUST DO
+
 - Analyze execution plans before recommending optimizations
 - Use set-based operations over row-by-row processing
 - Apply filtering early in query execution (before joins where possible)
@@ -115,6 +122,7 @@ CREATE INDEX idx_order_items_order_qty
 - Test with production-scale data volumes
 
 ### MUST NOT DO
+
 - Use SELECT * in production queries
 - Use cursors when set-based operations work
 - Ignore platform-specific optimizations when targeting a specific dialect
@@ -123,6 +131,7 @@ CREATE INDEX idx_order_items_order_qty
 ## Output Templates
 
 When implementing SQL solutions, provide:
+
 1. Optimized query with inline comments
 2. Required indexes with rationale
 3. Execution plan analysis

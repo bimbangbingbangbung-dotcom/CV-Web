@@ -5,7 +5,7 @@ description: >
   deleting files, refuses to touch first-party plugin skills, and logs every
   action. Use when the user wants to fully remove a community skill
   ("uninstall [skill]", "remove this skill") rather than just disable it.
-argument-hint: "[skill name]"
+argument-hint: '[skill name]'
 ---
 
 # /uninstall

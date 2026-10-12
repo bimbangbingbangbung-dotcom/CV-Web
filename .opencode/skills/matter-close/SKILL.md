@@ -1,7 +1,7 @@
 ---
 name: matter-close
 description: Close a matter — capture outcome, final exposure, and lessons, then archive it out of the active portfolio without deleting the record. Use when the user wants to close a matter, says "[matter] is done", or needs to record a settlement, dismissal, judgment, withdrawal, or consolidation outcome.
-argument-hint: "[slug]"
+argument-hint: '[slug]'
 ---
 
 # /matter-close
@@ -86,7 +86,7 @@ status: closed
 closed: [YYYY-MM-DD]
 outcome: [resolution-type]
 final_cost: [dollar amount]
-last_updated: [today]   # close is the last touch; record it
+last_updated: [today] # close is the last touch; record it
 ```
 
 Retain all existing fields. Do not delete the row.

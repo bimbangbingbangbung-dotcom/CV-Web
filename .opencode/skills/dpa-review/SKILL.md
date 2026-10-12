@@ -5,7 +5,7 @@ description: >
   whether you're processor or controller and applies the right half of the playbook.
   Use when the user says "review this DPA", "check this data processing addendum",
   "customer sent their DPA", "is this DPA okay", or attaches a DPA.
-argument-hint: "[file | Drive link | paste text]"
+argument-hint: '[file | Drive link | paste text]'
 ---
 
 # /dpa-review
@@ -75,6 +75,7 @@ Before walking the term-by-term review, answer: **does the data flowing through 
 > **Activity-based federal overlays — ask first:**
 >
 > Does this processing touch:
+>
 > - **Financial account data or "nonpublic personal information" about consumers** (GLBA / Reg P)? If yes, the DPA needs: (a) an NPI-sharing restriction consistent with 15 U.S.C. § 6802(a)-(c) and Reg P (no sharing for marketing to non-affiliated third parties without opt-out / opt-in), (b) safeguards language aligned with the Safeguards Rule (16 C.F.R. Part 314), (c) incident notification that reaches FTC/OCC timing where applicable, (d) a clean carve-out so a CCPA § 1798.145(e) exemption doesn't accidentally waive GLBA-level obligations.
 > - **Protected health information held by a covered entity or business associate** (HIPAA Privacy / Security Rules)? If yes, the DPA needs: a Business Associate Agreement (BAA) layered with or integrated into the DPA per 45 C.F.R. § 164.504(e), breach notification timing aligned with HITECH (60 days to CE; CE 60 days to HHS; 500+ threshold for media), permitted-uses clause, subcontractor BAA flow-down. A commercial DPA without BAA flow-down for PHI is a defect.
 > - **Education records held by a school or a service provider acting for a school** (FERPA)? If yes, the DPA needs: a "school official" / directory-information framing consistent with 34 C.F.R. § 99.31, parental-consent flow-through, state student-privacy analog handling (NY Ed Law 2-d, CA SOPIPA, IL SOPPA).
@@ -89,7 +90,7 @@ If no sectoral overlay applies, note that explicitly — "no federally-regulated
 
 ### Core terms (check every DPA)
 
-Walk every DPA through these terms, clause by clause. The *specific* numeric and substantive positions (notice periods, breach timelines, acceptable/unacceptable floors) come from `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## DPA playbook`. The regulatory floors that any DPA has to clear come from primary law — **research the currently operative rule** for each applicable regime and cite primary sources before stating a floor.
+Walk every DPA through these terms, clause by clause. The _specific_ numeric and substantive positions (notice periods, breach timelines, acceptable/unacceptable floors) come from `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## DPA playbook`. The regulatory floors that any DPA has to clear come from primary law — **research the currently operative rule** for each applicable regime and cite primary sources before stating a floor.
 
 > **No silent supplement.** If a research query to the configured legal research tool returns few or no results for a regime's breach window, transfer-mechanism requirement, subprocessor-change rule, or any other floor, report what was found and stop. Do NOT fill the gap from web search or model knowledge without asking. Say: "The search returned [N] results from [tool]. Coverage appears thin for [regime / topic]. Options: (1) broaden the search query, (2) try a different research tool, (3) search the web — results will be tagged `[web search — verify]` and should be checked against a primary source before relying, or (4) flag as unverified and stop. Which would you like?" A lawyer decides whether to accept lower-confidence sources.
 >
@@ -101,45 +102,45 @@ Walk every DPA through these terms, clause by clause. The *specific* numeric and
 >
 > Tool-retrieved citations keep their source tag (`[Westlaw]`, `[Commission / regulator site]`, or the MCP tool name); web-search citations remain `[web search — verify]`; user-supplied citations remain `[user provided]`. The tiering surfaces the real verification work — a reader who verifies everything verifies nothing. Never strip or collapse the tags.
 
-| Term | Looking for | Playbook field | Common fights |
-|---|---|---|---|
-| **Roles** | Clear controller/processor designation; matches reality | — | Counterparty labels the relationship (e.g., "joint controller") in a way that doesn't match reality |
-| **Processing scope** | Limited to documented instructions; defined purposes | — | Open-ended scope expanders ("and related purposes") |
-| **Subprocessors** | Current list disclosed, change mechanism defined | Subprocessor changes | Blanket approval vs. veto vs. notice-only |
-| **Security measures** | Annex references specific controls or standards | Security standards | "appropriate technical and organizational measures" with no annex = empty promise |
-| **Breach notification** | Defined trigger ("discovery" vs "confirmation"), defined timeline | Breach notification | Timeline tightness; clock trigger; "without undue delay" is vague |
-| **Audit rights** | Method (report vs. on-site), frequency, notice, cost allocation | Audit rights | On-site audits on tight notice |
-| **International transfers** | Transfer mechanism identified, supplementary measures, transfer impact assessment reference | Transfers | Outdated or missing transfer mechanisms |
-| **Deletion/return** | Timeline post-termination, certification, backup carveout | Deletion on termination | "Commercially reasonable" deletion = ??? |
-| **Liability** | Within MSA cap or separate; carveouts | Liability for data | Uncapped data breach liability = existential |
+| Term                        | Looking for                                                                                 | Playbook field          | Common fights                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------- |
+| **Roles**                   | Clear controller/processor designation; matches reality                                     | —                       | Counterparty labels the relationship (e.g., "joint controller") in a way that doesn't match reality |
+| **Processing scope**        | Limited to documented instructions; defined purposes                                        | —                       | Open-ended scope expanders ("and related purposes")                                                 |
+| **Subprocessors**           | Current list disclosed, change mechanism defined                                            | Subprocessor changes    | Blanket approval vs. veto vs. notice-only                                                           |
+| **Security measures**       | Annex references specific controls or standards                                             | Security standards      | "appropriate technical and organizational measures" with no annex = empty promise                   |
+| **Breach notification**     | Defined trigger ("discovery" vs "confirmation"), defined timeline                           | Breach notification     | Timeline tightness; clock trigger; "without undue delay" is vague                                   |
+| **Audit rights**            | Method (report vs. on-site), frequency, notice, cost allocation                             | Audit rights            | On-site audits on tight notice                                                                      |
+| **International transfers** | Transfer mechanism identified, supplementary measures, transfer impact assessment reference | Transfers               | Outdated or missing transfer mechanisms                                                             |
+| **Deletion/return**         | Timeline post-termination, certification, backup carveout                                   | Deletion on termination | "Commercially reasonable" deletion = ???                                                            |
+| **Liability**               | Within MSA cap or separate; carveouts                                                       | Liability for data      | Uncapped data breach liability = existential                                                        |
 
 ### When we're the processor: defensive review
 
 Customer DPAs try to push operational burden onto us. For each clause below, compare the customer's ask to the playbook. Where the customer's ask is outside the playbook, push back to the team's standard position (from the config CLAUDE.md) and be ready to fall back to the acceptable position.
 
-| Clause | Risk | Research / playbook lookup |
-|---|---|---|
-| Subprocessor approval right (veto) | Can't add infrastructure without customer-by-customer approval | Apply playbook position on subprocessor changes |
-| On-site audit on short notice | Unworkable at scale | Apply playbook position on audit rights |
-| Aggressive breach notification window | Often demands notice before we know what happened | Research the regulatory floor for each applicable regime (cite primary sources); compare to playbook position |
-| Hard data residency (single country/DC) | May not match architecture | Apply playbook position on data location; confirm what we can actually commit to |
-| Processor liability uncapped | Bet-the-company | Apply playbook position on liability for data |
-| Customer may issue binding "instructions" | Open-ended operational control | Define instructions as "documented in the Agreement or agreed in writing" |
-| Deletion on very short timeline | Backup and log retention makes this impossible | Apply playbook position on deletion on termination; document backup rotation carveout |
+| Clause                                    | Risk                                                           | Research / playbook lookup                                                                                    |
+| ----------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Subprocessor approval right (veto)        | Can't add infrastructure without customer-by-customer approval | Apply playbook position on subprocessor changes                                                               |
+| On-site audit on short notice             | Unworkable at scale                                            | Apply playbook position on audit rights                                                                       |
+| Aggressive breach notification window     | Often demands notice before we know what happened              | Research the regulatory floor for each applicable regime (cite primary sources); compare to playbook position |
+| Hard data residency (single country/DC)   | May not match architecture                                     | Apply playbook position on data location; confirm what we can actually commit to                              |
+| Processor liability uncapped              | Bet-the-company                                                | Apply playbook position on liability for data                                                                 |
+| Customer may issue binding "instructions" | Open-ended operational control                                 | Define instructions as "documented in the Agreement or agreed in writing"                                     |
+| Deletion on very short timeline           | Backup and log retention makes this impossible                 | Apply playbook position on deletion on termination; document backup rotation carveout                         |
 
 ### When we're the controller: protective review
 
 Vendor DPAs try to give us nothing. For each clause below, compare to the controller-side playbook.
 
-| Clause | Gap | Research / playbook lookup |
-|---|---|---|
-| No subprocessor list | Don't know who touches our data | Require published current list + advance notice per playbook |
-| "Industry standard security" | Means nothing | Require annex with specific controls, or reference to a named standard (e.g., SOC 2, ISO 27001) |
-| No breach notification timeline | They tell us whenever | Research applicable regulatory floor; require playbook position |
-| No audit rights at all | Can't verify anything | Require at minimum an independent audit report per playbook |
-| Vendor can use data for "service improvement" | Potential training on our data | Strike; processing limited to providing the service to us |
-| No international transfer mechanism | No lawful transfer mechanism | **Research the currently operative transfer mechanism** for the corridor in question (origin/destination jurisdictions, applicable regime, any adequacy decision, any supplementary measures). Cite primary sources and verify currency. |
-| No deletion commitment | Data lives forever | Require playbook position on deletion + certification on request |
+| Clause                                        | Gap                             | Research / playbook lookup                                                                                                                                                                                                               |
+| --------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No subprocessor list                          | Don't know who touches our data | Require published current list + advance notice per playbook                                                                                                                                                                             |
+| "Industry standard security"                  | Means nothing                   | Require annex with specific controls, or reference to a named standard (e.g., SOC 2, ISO 27001)                                                                                                                                          |
+| No breach notification timeline               | They tell us whenever           | Research applicable regulatory floor; require playbook position                                                                                                                                                                          |
+| No audit rights at all                        | Can't verify anything           | Require at minimum an independent audit report per playbook                                                                                                                                                                              |
+| Vendor can use data for "service improvement" | Potential training on our data  | Strike; processing limited to providing the service to us                                                                                                                                                                                |
+| No international transfer mechanism           | No lawful transfer mechanism    | **Research the currently operative transfer mechanism** for the corridor in question (origin/destination jurisdictions, applicable regime, any adequacy decision, any supplementary measures). Cite primary sources and verify currency. |
+| No deletion commitment                        | Data lives forever              | Require playbook position on deletion + certification on request                                                                                                                                                                         |
 
 ## Consistency check: privacy policy
 
@@ -156,6 +157,7 @@ Flag mismatches. They're usually the privacy policy being stale, not the DPA bei
 **Edit at the smallest possible granularity.** A redline is a negotiation artifact, not a rewrite. Wholesale clause replacement signals "we threw out your drafting" — it's aggressive, it forces the counterparty to re-read the whole clause, and it discards the parts of their drafting that were fine. Surgical redlines — strike a word, insert a phrase, restructure a subclause — signal "we have specific asks" and are faster to read, understand, and accept.
 
 Default to the smallest edit that achieves the playbook position:
+
 - Replace a **word** before a phrase. ("twelve (12)" → "twenty-four (24)")
 - Replace a **phrase** before a sentence. ("paid by the Buyer" → "paid and payable by the Buyer")
 - Restructure a **subclause** before replacing the sentence. (Add "(a)" and "(b)" to split a compound condition.)
@@ -222,7 +224,7 @@ If a transfer mechanism is missing and there is an international transfer, that 
 
 ## Gate: signing a DPA
 
-Reviewing a DPA is research. *Signing* it — or instructing someone to countersign on our behalf — is the consequential act.
+Reviewing a DPA is research. _Signing_ it — or instructing someone to countersign on our behalf — is the consequential act.
 
 **Before proceeding to sign or countersign a DPA (including returning an executed version, consenting to automatic execution on a counterparty platform, or instructing a signatory to execute):** Read `## Who's using this` in `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`. If the Role is Non-lawyer:
 

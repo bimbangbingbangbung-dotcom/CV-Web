@@ -7,7 +7,7 @@ description: >
   user says "new reg just dropped", "does [regulation] affect us", "gap analysis
   for EU AI Act", "compliance check against [AI law or guidance]", or pastes
   regulatory text.
-argument-hint: "[regulation name, or paste regulatory text, or attach a document]"
+argument-hint: '[regulation name, or paste regulatory text, or attach a document]'
 ---
 
 # /reg-gap-analysis
@@ -43,6 +43,7 @@ judgment call.
 ## Load current state
 
 Read `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`:
+
 - `## Regulatory footprint` — what already applies
 - `## Use case registry` — what AI you're actually running, and under what conditions
 - `## AI policy commitments` — what you've publicly or contractually committed to
@@ -78,7 +79,7 @@ Before diffing, answer:
 
 - **Does it apply?** Jurisdiction, threshold, sector carve-outs, builder vs. deployer distinction. Research the specific scoping rules in the regulation — don't assume.
 
-  *Builder/deployer matters a lot here.* Many AI regimes impose different obligations on the entity that develops/provides the AI system versus the entity that deploys/uses it. Research which role the company occupies under each regime's definitions. Scope first; don't gap-analyze a law that doesn't apply.
+  _Builder/deployer matters a lot here._ Many AI regimes impose different obligations on the entity that develops/provides the AI system versus the entity that deploys/uses it. Research which role the company occupies under each regime's definitions. Scope first; don't gap-analyze a law that doesn't apply.
 
 - **When?** Effective date. Enforcement date (often different). Phase-in periods for specific provisions. Verify currency.
 
@@ -88,11 +89,12 @@ Before diffing, answer:
 
 Read the regulation, guidance, or summary. List every substantive requirement:
 
-| # | Requirement | Citation | Category |
-|---|---|---|---|
-| 1 | [requirement] | [section] | [see categories below] |
+| #   | Requirement   | Citation  | Category               |
+| --- | ------------- | --------- | ---------------------- |
+| 1   | [requirement] | [section] | [see categories below] |
 
 **Categories:**
+
 - **Transparency** — disclosures to users, employees, or affected parties about AI use
 - **Impact assessment** — required documentation before deployment
 - **Human oversight** — mandatory human review, override, or appeals mechanisms
@@ -150,9 +152,9 @@ Not every gap is equal. Sort by:
 
 ### Must-do before enforcement
 
-| Gap | Fix | Owner | Due | Status |
-|---|---|---|---|---|
-| [gap] | [specific fix] | [name] | [date] | [ ] |
+| Gap   | Fix            | Owner  | Due    | Status |
+| ----- | -------------- | ------ | ------ | ------ |
+| [gap] | [specific fix] | [name] | [date] | [ ]    |
 
 ### Should-do (important but not blocking enforcement)
 

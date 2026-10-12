@@ -8,7 +8,7 @@ description: >
   plugin config. Use on fresh install, when CLAUDE.md still has [PLACEHOLDER]
   markers, when starting a new deal, or to re-check integrations or refresh a
   module.
-argument-hint: "[--redo | --new-deal | --check-integrations | --module [m&a | board | public | entities]]"
+argument-hint: '[--redo | --new-deal | --check-integrations | --module [m&a | board | public | entities]]'
 ---
 
 # /cold-start-interview
@@ -29,6 +29,7 @@ Corporate counsel roles vary more than almost any other in-house function. A sol
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`:
+
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -59,7 +60,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -93,7 +94,7 @@ Corollary: the interview's inputs are the user's typed answers and documents the
 ## Interview pacing
 
 - **Assume the answer exists somewhere.** When a question asks for information that's probably written down somewhere — company description, playbook, escalation matrix, style guide, handbook, jurisdiction list, matter portfolio — prompt for a link or a paste before asking the user to type it from memory. "Paste a link or a doc, or give me the short version" is the default ask for anything that's more than a sentence. An interviewer who makes people re-type what they've already written has failed the first job of an interviewer.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 
 **Pause for real answers.** Some questions are quick (entity type, exchange, fiscal year end). Others need the user to type, describe, or upload (prior issues memo, board minutes, consent precedent, org chart). When a question needs more than a quick tap:
 
@@ -148,7 +149,7 @@ If the answer is 3, add:
 
 > This plugin can work with: VDR (Intralinks, Datasite, Box), board portal (Diligent, BoardEffect), document storage, and Slack. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -298,11 +299,13 @@ Write to `## M&A` in the config.
 - How many regular board meetings per year, and roughly what months?
 
 **Minutes:**
+
 - Long-form narrative minutes, action minutes, or something in between?
 - How quickly do you turn minutes around after a meeting?
 - How do they get approved — circulated for written comments, or ratified at the next meeting?
 
 **Written consents:**
+
 - Do you routinely use written consents in lieu of meetings? For what types of board or committee action — routine officer appointments, equity grants, annual actions, or more broadly?
 - Any limits on what can be approved by consent versus requiring a meeting (charter restrictions, committee charters, or just practice)?
 
@@ -313,6 +316,7 @@ Write to `## M&A` in the config.
 > If you don't have shareable minutes right now, you can add them later with `/corporate-legal:cold-start-interview --module board`. The board-minutes skill will prompt you for them if they're missing.
 
 From the seed minutes, extract:
+
 - Overall structure and section order
 - Header format (company name, meeting type, date, location)
 - Attendance recording format (directors present/absent, management, guests)
@@ -333,6 +337,7 @@ Write extracted format as a `**Minutes template:**` block in `## Board & Secreta
 > If you don't have a centralized repository: upload 3–5 prior consents now for format learning. The skill will still work — it just won't have precedent search capability until a repository is set up.
 
 From the repository or seed consents, extract:
+
 - House resolution language (exact phrasing: "RESOLVED, THAT" / "BE IT RESOLVED" / other)
 - Recital structure (WHEREAS / NOW, THEREFORE depth and style)
 - Authorisation language (officer delegation language at the end)
@@ -342,6 +347,7 @@ From the repository or seed consents, extract:
 Write to `## Board & Secretary` → `**Consents repository:**` and `**Consent format:**` in the config.
 
 **Annual governance cycle:**
+
 - What annual items do you manage? (Director elections, auditor ratification, equity plan approvals, say-on-pay if public, annual board self-assessment — whatever applies to you.)
 
 Write to `## Board & Secretary` in the config.
@@ -355,20 +361,24 @@ Write to `## Board & Secretary` in the config.
 - What's your filer status — large accelerated, accelerated, or non-accelerated?
 
 **Disclosure committee:**
+
 - Do you have a formal disclosure committee? Who's on it — CFO, CAO, IR, Legal, others?
 - How often does it meet — quarterly pre-earnings, or as needed?
 
 **§16 reporting:**
+
 - Who tracks §16 filer transactions — you, outside counsel, IR, or a combination?
 - What's your internal target for getting Form 4 filed? (SEC requires 2 business days; internal targets are often tighter.)
 - Does your insider trading policy require pre-clearance? Who approves?
 
 **Insider trading policy:**
+
 - When are your trading windows open relative to earnings?
 - Who is covered by pre-clearance requirements — all officers and directors, or a broader list?
 - What's the process for a blackout exception if one is ever needed?
 
 **Earnings call:**
+
 - What's legal's role in earnings call prep — reviewing scripts, preparing Q&A, something else, or no direct role?
 - How far in advance of the call are you typically involved?
 
@@ -383,6 +393,7 @@ Write to `## Public Company` in the config.
 > If you don't have one handy, answer the questions below and I'll build a starter entity table from your answers.
 
 **From uploaded org chart or entity list, extract:**
+
 - Entity names and entity types (Corp, LLC, Ltd, branch, etc.)
 - Jurisdiction of formation for each
 - Ownership chain and percentages
@@ -424,7 +435,6 @@ If yes, show this tailored list (not a generic template — these are the concre
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
 
-
 **Research connector prompt.** Before showing the active modules, say:
 
 > "Before your first diligence extraction or consent: connect a research tool. Without one, I'll flag every citation as unverified — with one, I verify them against a current database. In Cowork: Settings → Connectors. In Claude Code: authorize when a skill prompts you."
@@ -432,6 +442,7 @@ This solves the cold-start problem (the supervisor doesn't know what to do first
 Then show the active modules and the populated sections:
 
 > Here's what I've captured: [list active modules]. Practice Profile is written. A few things to check:
+>
 > - [Flag any thin or ambiguous answers worth revisiting]
 > - [If M&A active and no seed docs provided: "Ping me with your request list and a prior issues memo when you have them — I'll update the diligence structure and memo format sections."]
 > - [If M&A active: "When a deal comes in, run `/corporate-legal:cold-start-interview --new-deal` to set up deal-specific context on top of the house approach. M&A skills available now: diligence extraction, deal team summaries, material contracts schedule, closing checklist, and post-closing integration."]
@@ -469,6 +480,7 @@ After writing the practice profile, close with this note:
 When a live deal starts, run a lighter interview focused only on deal-specific context. House approach stays from the plugin config.
 
 Ask:
+
 - Deal code name
 - Side for this deal (buy-side or sell-side — may differ from the house default)
 - Target or acquirer name
@@ -485,6 +497,7 @@ Write to `~/.claude/plugins/config/claude-for-legal/corporate-legal/deals/[code-
 ## Practice Profile quality check
 
 Before finishing, re-read what was written. Flag:
+
 - Any section still showing a placeholder because the answer was skipped or vague — ask again
 - Any active module where no seed document was provided — note it and ask the user to provide one when available
 - The `*Active modules:*` line at the top of the plugin config — update it to list exactly which modules are on

@@ -7,7 +7,7 @@ description: >
   style, escalation contacts, severity vocabulary, or matter workspace
   paths. Use when the user says "change my [thing]", "update my profile",
   "edit my config", or "customize".
-argument-hint: "[section name, or describe what you want to change]"
+argument-hint: '[section name, or describe what you want to change]'
 ---
 
 # /customize
@@ -34,8 +34,8 @@ cold-start interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting *(shared across all 12 plugins — changes flow through
-     `company-profile.md`)*
+     setting _(shared across all 12 plugins — changes flow through
+     `company-profile.md`)_
    - **Practice role** — in-house counsel / outside counsel / solo / clinic
    - **Side** — plaintiff / defense / mixed, and any posture nuances (class
      action defense, regulatory enforcement defense, commercial
@@ -64,13 +64,13 @@ cold-start interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - *Side mixed → defense-only:* "`/matter-intake` will stop asking the
+   - _Side mixed → defense-only:_ "`/matter-intake` will stop asking the
      plaintiff-side questions. `/demand-draft` will still work for
      defense-side pre-suit demands but the starting frame will be different."
-   - *Risk calibration tightening high-risk threshold:* "More inbound
+   - _Risk calibration tightening high-risk threshold:_ "More inbound
      demands and subpoenas will route through `/matter-briefing` and
      `/oc-status`."
-   - *New standing OC for IP matters:* "`/oc-status` will include this firm
+   - _New standing OC for IP matters:_ "`/oc-status` will include this firm
      in weekly sweeps for IP-tagged matters."
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,

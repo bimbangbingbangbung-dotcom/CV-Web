@@ -19,26 +19,26 @@ Do not invent TAM, retention, willingness to pay, or distribution. Mark absent e
 
 Use `venture-case` for every VC review and map the five review degrees without changing that target:
 
-| Degree | VC depth |
-|---|---|
-| `quick-check` | `screening` |
+| Degree          | VC depth               |
+| --------------- | ---------------------- |
+| `quick-check`   | `screening`            |
 | `strict-review` | `structured-diligence` |
-| `launch-gate` | `partner-review` |
-| `real-stakes` | `full-diligence` |
+| `launch-gate`   | `partner-review`       |
+| `real-stakes`   | `full-diligence`       |
 | `life-or-death` | `investment-committee` |
 
 ## VC rubric
 
-| Dimension | Weight | Core question |
-|---|---:|---|
-| Problem pull | 15 | Is the problem specific, frequent, and costly enough to change behavior? |
-| Behavioral evidence | 20 | What did users actually do, repeat, or pay for? |
-| Retention and habit | 15 | Does value persist after novelty and founder assistance? |
-| Wedge and alternatives | 10 | Why this narrow entry point versus the current workaround? |
-| Distribution | 15 | Is there a repeatable path to the next users? |
-| Economics and dependencies | 10 | Can the value support acquisition, serving cost, and platform risk? |
-| Defensibility and expansion | 5 | What compounds, and what adjacent claim remains plausible? |
-| Learning velocity | 10 | Can the team run the next falsifiable experiment quickly and honestly? |
+| Dimension                   | Weight | Core question                                                            |
+| --------------------------- | -----: | ------------------------------------------------------------------------ |
+| Problem pull                |     15 | Is the problem specific, frequent, and costly enough to change behavior? |
+| Behavioral evidence         |     20 | What did users actually do, repeat, or pay for?                          |
+| Retention and habit         |     15 | Does value persist after novelty and founder assistance?                 |
+| Wedge and alternatives      |     10 | Why this narrow entry point versus the current workaround?               |
+| Distribution                |     15 | Is there a repeatable path to the next users?                            |
+| Economics and dependencies  |     10 | Can the value support acquisition, serving cost, and platform risk?      |
+| Defensibility and expansion |      5 | What compounds, and what adjacent claim remains plausible?               |
+| Learning velocity           |     10 | Can the team run the next falsifiable experiment quickly and honestly?   |
 
 ## Stage-aware verdict
 

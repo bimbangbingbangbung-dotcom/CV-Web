@@ -28,7 +28,7 @@ spec:
           forProvider:
             dbInstanceClass: db.t3.micro
             engine: postgres
-            engineVersion: "15"
+            engineVersion: '15'
             masterUsername: admin
             allocatedStorage: 20
 ```
@@ -330,10 +330,10 @@ metadata:
   namespace: team-payments
 spec:
   hard:
-    requests.cpu: "20"
+    requests.cpu: '20'
     requests.memory: 40Gi
-    persistentvolumeclaims: "10"
-    services.loadbalancers: "2"
+    persistentvolumeclaims: '10'
+    services.loadbalancers: '2'
 ---
 # RBAC: Namespace admin
 apiVersion: rbac.authorization.k8s.io/v1

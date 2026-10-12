@@ -14,16 +14,16 @@ Load this file only when the user explicitly requests a numeric grade, compariso
 
 Use these weights for `ship-fast` unless a dimension is truly inapplicable. Explain and redistribute any removed weight before scoring. Other modes take their weights from their route reference.
 
-| Dimension | Weight | Credit |
-|---|---:|---|
-| Product promise and scope | 10 | Built behavior matches the claimed job and target |
-| Critical user journeys | 20 | Golden, failure, retry, refresh, and recovery paths close correctly |
-| UX and accessibility | 10 | Users can understand, operate, and recover through core flows |
-| Data and state integrity | 15 | Invariants survive duplicate, concurrent, partial, and out-of-order actions |
-| Security and privacy | 15 | Identity, role, ownership, tenant, secret, and data boundaries hold |
-| Reliability and operations | 10 | Dependencies, deployment, rollback, monitoring, and support are proportionate |
-| Change safety | 10 | Design is understandable, testable, and appropriate to the stage |
-| Verification quality | 10 | Evidence targets actual risks rather than vanity coverage |
+| Dimension                  | Weight | Credit                                                                        |
+| -------------------------- | -----: | ----------------------------------------------------------------------------- |
+| Product promise and scope  |     10 | Built behavior matches the claimed job and target                             |
+| Critical user journeys     |     20 | Golden, failure, retry, refresh, and recovery paths close correctly           |
+| UX and accessibility       |     10 | Users can understand, operate, and recover through core flows                 |
+| Data and state integrity   |     15 | Invariants survive duplicate, concurrent, partial, and out-of-order actions   |
+| Security and privacy       |     15 | Identity, role, ownership, tenant, secret, and data boundaries hold           |
+| Reliability and operations |     10 | Dependencies, deployment, rollback, monitoring, and support are proportionate |
+| Change safety              |     10 | Design is understandable, testable, and appropriate to the stage              |
+| Verification quality       |     10 | Evidence targets actual risks rather than vanity coverage                     |
 
 Score each dimension from 0–100:
 

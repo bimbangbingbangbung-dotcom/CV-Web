@@ -1,7 +1,7 @@
 ---
 name: litigation-cold-start-interview
 description: House cold-start for the litigation plugin — branches by role (in-house, firm associate, solo) and side (plaintiff, defense, both), captures risk calibration, landscape, and house style, and writes the practice profile CLAUDE.md. Use on a fresh install, when the user wants to set up or redo the practice profile, or to re-check available integrations.
-argument-hint: "[--redo | --check-integrations]"
+argument-hint: '[--redo | --check-integrations]'
 ---
 
 # /cold-start-interview
@@ -13,6 +13,7 @@ argument-hint: "[--redo | --check-integrations]"
    - **Side** routes calibration vocabulary: **plaintiff** (asserting, case value, contingency, SOL cliff), **defense** (responding, exposure, reserves where applicable, insurance tender), or **both/varies** (captures a default and lets per-matter skills re-ask).
 
    After Part 0, walk the sections that match the selected role. Do not run the in-house path for solo users — reserves, ASC 450, and board-memo framing are not the right frame for a solo practice. Offer defaults; capture freeform overrides. Ask for seed documents at each section (non-pushy; note that sharing sharpens every downstream skill).
+
 4. Surface gaps. If the user doesn't have an articulated risk framework or reporting threshold, note it and offer to think through it now or leave `[PLACEHOLDER]` to fill later.
 5. Migration: if a populated CLAUDE.md (no `[PLACEHOLDER]` markers) exists at `~/.claude/plugins/cache/claude-for-legal/litigation-legal/*/CLAUDE.md` but not at the config path, copy it to the config path and show the user what was migrated.
 6. Write `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`. Date the footer.
@@ -42,6 +43,7 @@ The interview also asks which side the user mostly represents — plaintiff (ass
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`:
+
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -64,7 +66,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -102,7 +104,7 @@ Draw the practice profile only from the user's typed answers and documents they 
 
 **Pause for real answers.** Some questions have quick tap-through answers. Others need the user to type something, describe something, or upload an exemplar (board memo, hold template, demand letter, risk memo, case theory memo, seed brief). When a question needs more than a quick tap:
 
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 - **Ask the question and wait.** Say explicitly: "This one needs a typed answer — I'll wait." Do not move to the next question until the user responds. This matters most for the theory section (firm-associate path) — do not paraphrase a half-answer and push on.
 - **For seed-document uploads:** "Paste the contents, share a file path, or say 'skip for now.' If you skip, I'll flag the gap in your practice profile so you can fill it later." Then actually wait.
 - **Before writing the practice profile:** review every captured answer. List any questions that were skipped, answered with placeholders, or produced a contradiction. Say: "Before I write your practice profile, here's what's still open: [list]. Want to fill any of these now, or leave them as placeholders?" Then wait.
@@ -191,7 +193,7 @@ Record under `## Side` in the practice profile (`plaintiff | defense | both [def
 
 This refines escalation / supervision language in the practice profile:
 
-- **Solo / small without hierarchy (1, 2):** Reframe authority-ladder questions as "when do you call in outside counsel or a colleague for a second opinion." Escalation maps to *consult* not *route for approval*.
+- **Solo / small without hierarchy (1, 2):** Reframe authority-ladder questions as "when do you call in outside counsel or a colleague for a second opinion." Escalation maps to _consult_ not _route for approval_.
 - **Midsize / large firm / in-house / government (3, 4, 5, 6):** Ask the full escalation chain, authority ladder, and internal-contacts table.
 - **Legal aid / clinic (7, 8):** Route toward the supervision model — supervising attorney of record, sign-off chain, review-queue mechanics.
 - **Other (9):** Ask for a one-sentence description, then pick the closest branch.
@@ -202,7 +204,7 @@ This refines escalation / supervision language in the practice profile:
 
 > This plugin can work with: DMS (iManage), document storage (Google Drive, SharePoint, Box), Gmail, scheduled-tasks, CLM (Ironclad), eDiscovery (Everlaw, Relativity, DISCO, Aurora), legal research (CourtListener, Descrybe, Trellis), outside-counsel recommendations (TopCounsel). Let me check which connectors you have configured — features that need them will work, and features that don't will fall back gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -224,7 +226,7 @@ Write a `## Role`, `## Who's using this`, and `## Available integrations` sectio
 
 ## In-house path (role == `in-house`)
 
-*Skip this whole section if the user's role is `firm-associate` or `solo`.*
+_Skip this whole section if the user's role is `firm-associate` or `solo`._
 
 > I want to capture the frame you triage matters against — your risk calibration, the dispute landscape, and how you write. Once, so every matter intake reads from it. I'll offer defaults where there are reasonable ones. You can accept, edit, or leave blank to come back to.
 >
@@ -253,7 +255,7 @@ If not:
 
 **Severity × likelihood (3–5 min)** — offer the default 3×3. Severity bands (dollar and non-dollar triggers). Likelihood bands. If unarticulated: "Fair. A lot of counsel don't. Want to sketch now, or leave the default?"
 
-**Materiality thresholds (2–3 min)** — reserve trigger, disclosure trigger, board/audit committee, GC-only escalation. *Seed doc opportunity:* reserve memo template or disclosure checklist.
+**Materiality thresholds (2–3 min)** — reserve trigger, disclosure trigger, board/audit committee, GC-only escalation. _Seed doc opportunity:_ reserve memo template or disclosure checklist.
 
 **Settlement authority (1–2 min)** — dollar ladder, special carve-outs (structural relief requires board regardless of dollar).
 
@@ -269,12 +271,12 @@ If not:
 
 ### Pillar 2 — Landscape
 
-*Company profile lives in Pillar 0. Landscape is litigation-specific.*
+_Company profile lives in Pillar 0. Landscape is litigation-specific._
 
 - Business context (30 sec) — one-paragraph on what we do and why we get sued.
 - Dispute patterns (2–3 min) — matter types, frequency, posture.
 - Frequent adversaries (1–2 min).
-- Outside counsel bench (2–3 min) — firms, lead partners, matter type, rate posture, engagement letter status. *Seed doc:* outside counsel guidelines. (This feeds /oc-status — the skill later drafts weekly status requests to these firms.)
+- Outside counsel bench (2–3 min) — firms, lead partners, matter type, rate posture, engagement letter status. _Seed doc:_ outside counsel guidelines. (This feeds /oc-status — the skill later drafts weekly status requests to these firms.)
 - Frequent fora (30 sec).
 - Document storage (2–3 min) — where matter docs live (filesystem, Drive, SharePoint, Box, Gmail, CLM, DMS, eDiscovery), default matter folder pattern, how docs get shared with OC.
 - Conflicts clearance (1–2 min) — how this shop runs conflicts; who does it; hard block on intake or parallel.
@@ -285,13 +287,13 @@ If not:
 
 If not:
 
-- Board / audit committee memo (2 min) — format, tone, cadence. *Seed doc:* recent board memo (redacted fine).
-- Reserve memo — format and approver. *Seed doc:* sample reserve memo.
+- Board / audit committee memo (2 min) — format, tone, cadence. _Seed doc:_ recent board memo (redacted fine).
+- Reserve memo — format and approver. _Seed doc:_ sample reserve memo.
 - Outside counsel directives — email format, cadence, budget posture.
 - Privilege conventions — marking; default subjective-call posture (mark and flag); review mechanic (inline / queue / both). (This feeds /privilege-log-review — the skill applies your marking rules and review mechanic on every priv-log pass.)
-- Legal hold — template, issuance protocol, refresh cadence. *Seed doc:* hold template. (This feeds /legal-hold — the skill issues, refreshes, and releases holds using your house template.)
+- Legal hold — template, issuance protocol, refresh cadence. _Seed doc:_ hold template. (This feeds /legal-hold — the skill issues, refreshes, and releases holds using your house template.)
 - Escalation — channel norms, subject-line convention.
-- Demand-letter practice — *not asked here.* Demand posture (tone, time limits, marking, signer) is set per matter, not per practice. `/litigation-legal:demand-intake` and `/litigation-legal:demand-draft` will ask when they need it — those calls depend on the relationship, the amount, and whether litigation is likely, and a practice-level default tends to mis-calibrate the specific letter. What the setup interview *does* want here: insurance-tender timing (who you notify and when, before sending) and materiality threshold for matter creation (below $X, record only; above, create a matter). Those are practice-level.
+- Demand-letter practice — _not asked here._ Demand posture (tone, time limits, marking, signer) is set per matter, not per practice. `/litigation-legal:demand-intake` and `/litigation-legal:demand-draft` will ask when they need it — those calls depend on the relationship, the amount, and whether litigation is likely, and a practice-level default tends to mis-calibrate the specific letter. What the setup interview _does_ want here: insurance-tender timing (who you notify and when, before sending) and materiality threshold for matter creation (below $X, record only; above, create a matter). Those are practice-level.
 
 **Offer:** "If you didn't upload a house-style guide or templates, want me to write your house-style rules up as a standalone style memo?"
 
@@ -299,7 +301,7 @@ If not:
 
 ## Solo path (role == `solo`)
 
-*Skip this whole section if the user's role is `in-house` or `firm-associate`. Solo users run this path **and** the Firm-associate path that follows.*
+_Skip this whole section if the user's role is `in-house` or `firm-associate`. Solo users run this path **and** the Firm-associate path that follows._
 
 > Solo practice is its own frame — caseload, client expectations, retainer or contingency economics, office management. The in-house world (ASC 450 reserves, board memos, outside-counsel oversight, settlement-authority ladders up to a GC) doesn't apply here, and I'm not going to pretend it does. The firm-world reserves questions don't apply either. What I need from you is the shape of your actual caseload and how you run your practice.
 >
@@ -315,7 +317,7 @@ If not:
 
 ### Section S2 — Client expectations and economics
 
-*This replaces what the in-house path calls "risk calibration / reserve methodology / settlement authority ladder." Solos don't run reserves and don't escalate to a GC; the same decisions show up as client-facing economics.*
+_This replaces what the in-house path calls "risk calibration / reserve methodology / settlement authority ladder." Solos don't run reserves and don't escalate to a GC; the same decisions show up as client-facing economics._
 
 **Fee structure (the main driver).** Pick the one that fits most of your work:
 
@@ -338,11 +340,11 @@ If not:
 
 > Give me a name, a role, or "nobody — I decide on my own."
 
-**Client updates in writing (1 min).** *Seed doc opportunity:* a recent client update email or letter (redacted). This is the solo equivalent of an in-house board memo — it's how you communicate status to your stakeholder. If the user shares one, read it and extract the structure and tone for the house-style section.
+**Client updates in writing (1 min).** _Seed doc opportunity:_ a recent client update email or letter (redacted). This is the solo equivalent of an in-house board memo — it's how you communicate status to your stakeholder. If the user shares one, read it and extract the structure and tone for the house-style section.
 
 ### Section S3 — Office management and landscape
 
-*Skip any question where the answer is obvious from earlier context.*
+_Skip any question where the answer is obvious from earlier context._
 
 - **Statute of limitations tracking** — how do you track SOL cutoffs across the caseload? (Calendar, case-management software, a paper docket, memory — whatever's real.) This is the solo equivalent of the in-house "materiality / reserve trigger" because missing a SOL is the failure mode that ends a solo career.
 - **Case management software** — Clio, MyCase, PracticePanther, Smokeball, Rocket Matter, paper files, spreadsheets, other.
@@ -356,11 +358,11 @@ If not:
 
 Skip the board-memo / reserve-memo / outside-counsel-directive questions entirely. Solo house style is:
 
-- **Client update** — format, tone, cadence. *Seed doc:* a recent update letter or email.
-- **Retainer / engagement agreement** — template. *Seed doc:* the exemplar (redacted fine).
+- **Client update** — format, tone, cadence. _Seed doc:_ a recent update letter or email.
+- **Retainer / engagement agreement** — template. _Seed doc:_ the exemplar (redacted fine).
 - **Privilege conventions** — marking; review mechanic.
-- **Legal hold** — even for a solo, preservation matters when litigation is anticipated. Template, if any. *Seed doc:* hold notice if issued.
-- **Demand-letter practice** — *not asked here.* Demand posture (tone, time limits, marking, signer) is set per matter, not per practice — the solo equivalent of "who signs" answers itself (you), and tone/marking/timing depend on the specific dispute. `/litigation-legal:demand-intake` will ask when it drafts.
+- **Legal hold** — even for a solo, preservation matters when litigation is anticipated. Template, if any. _Seed doc:_ hold notice if issued.
+- **Demand-letter practice** — _not asked here._ Demand posture (tone, time limits, marking, signer) is set per matter, not per practice — the solo equivalent of "who signs" answers itself (you), and tone/marking/timing depend on the specific dispute. `/litigation-legal:demand-intake` will ask when it drafts.
 
 **Offer:** "If you didn't upload a client-update exemplar or retainer, want me to write your house-style rules up as a standalone memo you can reuse?"
 
@@ -406,6 +408,7 @@ After Section S3, continue to the **Firm-associate path** below. Solo practition
 > Before the questions: do you have a privilege-log format, a chronology format, or a review-protocol doc I can read? Paste the contents, share file paths, or say 'no' and I'll ask one at a time.
 
 If not:
+
 - eDiscovery platform (Everlaw, Relativity, DISCO, Aurora)
 - Review protocol — coding categories, who makes priv calls
 - Privilege log format
@@ -444,6 +447,7 @@ Where a template section carries in-house-only vocabulary ("ASC 450 reserves", "
 After the interview, before writing, summarize and **wait for an answer**:
 
 > Here's what I captured. Gaps I noticed:
+>
 > - [list any skipped sections, placeholders left blank, questions where the user said "come back later"]
 >
 > Want to fill any of these now, or leave them as placeholders? You can also fill them later via `/litigation-legal:cold-start-interview --redo` or by editing the plugin config directly. This one is worth thinking about before I write: [name the most important gap and why].
@@ -470,7 +474,6 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Run `/portfolio-status` — it shows you at a glance where the portfolio sits, and it's zero-input to try. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
-
 
 - If `in-house`: "The in-house practice profile is now written. Every matter intake will read from it. Want to run `/litigation-legal:matter-intake` on your most live matter to see it in action?"
 - If `firm-associate`: "Here's the theory as I captured it. Read the pivot fact — did I get it right? What's the next deadline? Let's start there."

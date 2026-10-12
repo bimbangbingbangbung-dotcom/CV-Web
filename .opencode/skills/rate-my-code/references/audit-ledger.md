@@ -397,15 +397,15 @@ Give each `ReleaseCheck` a stable unique ID using the same 1–128-character pri
 
 Every evidence record answers both “what record does this support?” and “what procedure produced it?”:
 
-| Procedure | Required subject |
-|---|---|
-| `reproduction` | Its `F-###` |
-| `acceptance` | Its `F-###` |
-| `adjacent-regression` | Its `F-###` |
-| `mutation` | Its `F-###` |
-| `unknown-resolution` | Its `U-###` |
-| `release-lane` | `null` |
-| `class-sweep` | A non-null `F-###` or `U-###` |
+| Procedure             | Required subject              |
+| --------------------- | ----------------------------- |
+| `reproduction`        | Its `F-###`                   |
+| `acceptance`          | Its `F-###`                   |
+| `adjacent-regression` | Its `F-###`                   |
+| `mutation`            | Its `F-###`                   |
+| `unknown-resolution`  | Its `U-###`                   |
+| `release-lane`        | `null`                        |
+| `class-sweep`         | A non-null `F-###` or `U-###` |
 
 Original finding evidence must be `reproduction` evidence bound to that finding. A confirmed finding needs at least one E1/E2/E3 `fail` or `mixed` record; E0 never proves a finding, clears an unknown, resolves a workflow blocker, closes a fix, closes a gate, passes a release check, proves a venture signal, or passes a lane. Unknown clearance requires fresh current-release E2/E3 passing runtime, test, log, metric, or eval evidence. A gate-bound record must name the gate, point to one of its linked findings, and appear in that gate's evidence or retest list. A workflow-blocker, release-check, or venture-signal record must use `procedure: release-lane`, a null `subject_id`, and its matching optional binding field, and it must appear in the named blocker, check, or signal. One evidence record may carry at most one of `gate_id`, `workflow_blocker_id`, `release_check_id`, and `venture_signal_id`; do not cite unrelated proof merely because its result is favorable.
 
@@ -415,24 +415,24 @@ Lane status is release-level evidence, not a finding status. `PASS` and `FAIL` r
 
 For a probabilistic lane `PASS` or `FAIL`, cite at least two total runs with one identical immutable model, prompt, eval-set, judge, and threshold policy. Include `system` provenance for `agent`, `rag`, or `mixed` behavior. Set the predeclared minimum pass rate no lower than the target threshold and the maximum standard deviation no higher than the target cap:
 
-| Target | Minimum pass rate | Maximum standard deviation |
-|---|---:|---:|
-| `internal-demo` | 50 | 30 |
-| `private-beta` | 65 | 25 |
-| `public-launch` | 75 | 20 |
-| `real-money` | 85 | 15 |
-| `high-stakes` | 90 | 10 |
+| Target          | Minimum pass rate | Maximum standard deviation |
+| --------------- | ----------------: | -------------------------: |
+| `internal-demo` |                50 |                         30 |
+| `private-beta`  |                65 |                         25 |
+| `public-launch` |                75 |                         20 |
+| `real-money`    |                85 |                         15 |
+| `high-stakes`   |                90 |                         10 |
 
 A probabilistic `PASS` also requires each cited record's observed pass rate to meet its predeclared minimum and its observed standard deviation not to exceed its predeclared maximum. A probabilistic `FAIL` requires at least one cited record whose observed pass rate is below its minimum or whose observed standard deviation exceeds its maximum; a fail label without an observed threshold miss is invalid.
 
 Required lanes are fail-closed:
 
-| Review target or behavior | Required lane |
-|---|---|
-| Every non-VC target, including `internal-demo` | `critical-journey-e2e` |
+| Review target or behavior                                    | Required lane          |
+| ------------------------------------------------------------ | ---------------------- |
+| Every non-VC target, including `internal-demo`               | `critical-journey-e2e` |
 | `private-beta`, `public-launch`, `real-money`, `high-stakes` | `deterministic-checks` |
-| `public-launch`, `real-money`, `high-stakes` | `continuous-evidence` |
-| Any non-VC `llm`, `agent`, `rag`, or `mixed` behavior | `probabilistic-eval` |
+| `public-launch`, `real-money`, `high-stakes`                 | `continuous-evidence`  |
+| Any non-VC `llm`, `agent`, `rag`, or `mixed` behavior        | `probabilistic-eval`   |
 
 For non-VC reviews, probabilistic eval must be `N/A` with a reason when `ai_behavior` is `none`; otherwise it cannot be `N/A`. A `READY` or `READY_WITH_CONDITIONS` non-VC decision requires every target-required lane to be `PASS`. For `venture-case`, set all four software-release lanes to `N/A` with individual reasons regardless of `ai_behavior`, and use `venture_assessment` for the venture decision.
 
@@ -463,18 +463,18 @@ These are the only venture decision tokens. Neither investability nor lack of it
 
 Use these states:
 
-| State | Meaning | Technically closed? |
-|---|---|---|
-| `open` | Confirmed and not being changed | No |
-| `fixing` | A user-authorized agent fix is in progress | No |
-| `fixed-pending-retest` | A change exists but has not passed an independent same-path retest | No |
-| `verified-fixed` | Acceptance and adjacent checks passed on the current release in a fresh review context | Yes |
-| `partially-fixed` | Re-review classified the finding `PARTIALLY_FIXED` | No |
-| `not-fixed` | Re-review classified the finding `NOT_FIXED` | No |
-| `regressed` | Re-review classified the finding `REGRESSED` | No |
-| `unverifiable` | Re-review classified the finding `UNVERIFIABLE`; render under pending verification | No |
-| `blocked` | The fix or required verification cannot proceed; a `Blocker` names why, what is missing, and how to resume | No |
-| `accepted-risk` | The user explicitly chose to stop work on an unresolved risk | No |
+| State                  | Meaning                                                                                                    | Technically closed? |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------- |
+| `open`                 | Confirmed and not being changed                                                                            | No                  |
+| `fixing`               | A user-authorized agent fix is in progress                                                                 | No                  |
+| `fixed-pending-retest` | A change exists but has not passed an independent same-path retest                                         | No                  |
+| `verified-fixed`       | Acceptance and adjacent checks passed on the current release in a fresh review context                     | Yes                 |
+| `partially-fixed`      | Re-review classified the finding `PARTIALLY_FIXED`                                                         | No                  |
+| `not-fixed`            | Re-review classified the finding `NOT_FIXED`                                                               | No                  |
+| `regressed`            | Re-review classified the finding `REGRESSED`                                                               | No                  |
+| `unverifiable`         | Re-review classified the finding `UNVERIFIABLE`; render under pending verification                         | No                  |
+| `blocked`              | The fix or required verification cannot proceed; a `Blocker` names why, what is missing, and how to resume | No                  |
+| `accepted-risk`        | The user explicitly chose to stop work on an unresolved risk                                               | No                  |
 
 ```text
 open ──authorized-agent──> fixing ──change──> fixed-pending-retest
@@ -493,12 +493,12 @@ A diff by itself moves a finding only to `fixed-pending-retest`. Map re-review c
 
 Across a validated snapshot chain, apply these transition limits in addition to each state's evidence requirements:
 
-| Prior state | Allowed next state |
-|---|---|
-| `open` | Any lifecycle state |
-| `fixing`, `partially-fixed`, `not-fixed`, `regressed`, `unverifiable`, `blocked`, or `accepted-risk` | Any state except `open` |
-| `fixed-pending-retest` | Any state except `open` or `fixing` |
-| `verified-fixed` | `verified-fixed`, `regressed`, `accepted-risk`, or `blocked`; leaving verified closure also needs a fresh independent non-`FIXED` retest |
+| Prior state                                                                                          | Allowed next state                                                                                                                       |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `open`                                                                                               | Any lifecycle state                                                                                                                      |
+| `fixing`, `partially-fixed`, `not-fixed`, `regressed`, `unverifiable`, `blocked`, or `accepted-risk` | Any state except `open`                                                                                                                  |
+| `fixed-pending-retest`                                                                               | Any state except `open` or `fixing`                                                                                                      |
+| `verified-fixed`                                                                                     | `verified-fixed`, `regressed`, `accepted-risk`, or `blocked`; leaving verified closure also needs a fresh independent non-`FIXED` retest |
 
 The renderer distinguishes a technically verified closure from a workflow stopped with accepted risk. Never describe `accepted-risk`, `blocked`, `fixed-pending-retest`, passing CI alone, or a code diff as fixed.
 

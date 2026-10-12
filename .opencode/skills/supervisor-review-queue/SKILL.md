@@ -52,15 +52,15 @@ Lives at `references/review-queue.yaml`. Each entry:
 
 ```yaml
 - id: Q-001
-  type: "draft"  # intake | draft | memo | status | client-letter
-  client: "[name or ID]"
-  student: "[name]"
+  type: 'draft' # intake | draft | memo | status | client-letter
+  client: '[name or ID]'
+  student: '[name]'
   submitted: [timestamp]
   flags:
-    - rule: "Court filing"
-      detail: "Eviction answer — always queued"
-  content_path: "[path to the document]"
-  status: "pending"  # pending | approved | edited-approved | returned
+    - rule: 'Court filing'
+      detail: 'Eviction answer — always queued'
+  content_path: '[path to the document]'
+  status: 'pending' # pending | approved | edited-approved | returned
 ```
 
 ## Modes
@@ -73,13 +73,16 @@ Lives at `references/review-queue.yaml`. Each entry:
 **Pending:** [N] | **Oldest:** [N] hours
 
 ### 🔴 Deadline-sensitive
-| ID | Type | Client | Student | Why flagged | Waiting |
-|---|---|---|---|---|---|
+
+| ID  | Type | Client | Student | Why flagged | Waiting |
+| --- | ---- | ------ | ------- | ----------- | ------- |
 
 ### Standard
+
 [same table]
 
 ### By student
+
 [Breakdown — spot patterns: who's queueing a lot, who might need a check-in]
 ```
 

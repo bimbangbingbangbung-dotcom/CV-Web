@@ -87,6 +87,7 @@ Ask the user which sections the policy should cover. Present as a checklist —
 the user picks, you build. Do not pre-decide.
 
 > **What should the AI policy cover? Pick the sections you want in the draft:**
+>
 > 1. **Scope** — who the policy applies to (all staff, certain roles, contractors), what tools it covers (GenAI only, all AI, specific vendors), what data is in/out of scope.
 > 2. **Permitted and prohibited uses** — the approved categories, the red lines, the "ask first" cases.
 > 3. **Approval and review** — who approves a new tool, who approves a new use case, how the review request is filed, what the SLA is.
@@ -103,6 +104,7 @@ the user picks, you build. Do not pre-decide.
 After the user picks, ask the second question:
 
 > **Two more inputs before I draft:**
+>
 > - **Audience** — who's reading this? (All staff / legal team only / attorneys plus staff / client-facing version also needed) This drives tone and the glossary.
 > - **Deployment context** — (a) law firm, (b) in-house legal at a company (policy covers legal or company-wide?), (c) legal aid / clinic, (d) government. This drives which model policies I search.
 
@@ -113,14 +115,14 @@ policies and guidance.
 
 **Derive the model policy sources from the practice profile's `## Regulatory footprint`.** Don't hardcode US sources for a global user.
 
-| Jurisdiction | Model policy sources |
-|---|---|
-| US | ABA Formal Opinion 512, state bar guidance (CA, FL, NY, TX all have published AI guidance), ILTA model policy, CLOC templates, peer firm published AI policies |
-| UK | Solicitors Regulation Authority risk outlook, Law Society AI principles, ICO AI guidance, Bar Council guidance |
-| EU | EU AI Act compliance framework (Article 4 AI literacy, Article 17 quality management), national DPA AI guidance (CNIL, DSB, Garante, AEPD), EDPB guidelines, EU institutions' AI policies |
-| Australia | Law Council of Australia AI guidelines, OAIC AI guidance, state law society guidance, Australian AI Ethics Framework |
-| Singapore | PDPC Model AI Governance Framework, MinLaw guidance, MAS AI fairness principles (for financial services) |
-| Canada | Law Society of Ontario/BC/Alberta AI guidance, OPC AI guidance, TBS Directive on Automated Decision-Making |
+| Jurisdiction       | Model policy sources                                                                                                                                                                                     |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| US                 | ABA Formal Opinion 512, state bar guidance (CA, FL, NY, TX all have published AI guidance), ILTA model policy, CLOC templates, peer firm published AI policies                                           |
+| UK                 | Solicitors Regulation Authority risk outlook, Law Society AI principles, ICO AI guidance, Bar Council guidance                                                                                           |
+| EU                 | EU AI Act compliance framework (Article 4 AI literacy, Article 17 quality management), national DPA AI guidance (CNIL, DSB, Garante, AEPD), EDPB guidelines, EU institutions' AI policies                |
+| Australia          | Law Council of Australia AI guidelines, OAIC AI guidance, state law society guidance, Australian AI Ethics Framework                                                                                     |
+| Singapore          | PDPC Model AI Governance Framework, MinLaw guidance, MAS AI fairness principles (for financial services)                                                                                                 |
+| Canada             | Law Society of Ontario/BC/Alberta AI guidance, OPC AI guidance, TBS Directive on Automated Decision-Making                                                                                               |
 | Multi-jurisdiction | Use all applicable, and note where they diverge (e.g., EU requires human oversight documentation US doesn't; Australia focuses on voluntary ethics frameworks; Singapore focuses on sectoral regulation) |
 
 If the practice profile's footprint is empty or `[PLACEHOLDER]`, ask: "What jurisdiction(s) does your organization operate in? I'll draft from the model policies that match your regulatory environment and professional responsibility framework, not a US-centric template."
@@ -157,14 +159,14 @@ a starting draft for their review, not a policy you can adopt."
 
 A table of the model policies / guidance / regulations the draft drew from:
 
-| Source | URL | Accessed | What the draft took from it |
-|---|---|---|---|
-| ABA Formal Op. 512 | [url] | [date] | Disclosure and competence framing |
-| ILTA Model AI Policy v.[X] | [url] | [date] | Approval workflow, data handling |
-| [State] Bar Op. [X] | [url] | [date] | Disclosure to clients |
-| [peer firm] published AI policy | [url] | [date] | Scope language |
-| Colorado SB 24-205 | [url] | [date] | High-risk AI definition |
-| EU AI Act, Art. [X] | [url] | [date] | Vendor flow-down |
+| Source                          | URL   | Accessed | What the draft took from it       |
+| ------------------------------- | ----- | -------- | --------------------------------- |
+| ABA Formal Op. 512              | [url] | [date]   | Disclosure and competence framing |
+| ILTA Model AI Policy v.[X]      | [url] | [date]   | Approval workflow, data handling  |
+| [State] Bar Op. [X]             | [url] | [date]   | Disclosure to clients             |
+| [peer firm] published AI policy | [url] | [date]   | Scope language                    |
+| Colorado SB 24-205              | [url] | [date]   | High-risk AI definition           |
+| EU AI Act, Art. [X]             | [url] | [date]   | Vendor flow-down                  |
 
 ### Executive summary
 
@@ -180,7 +182,7 @@ Only the sections the user picked, in the order above. For each:
   specific threshold, number, named tool, named vendor, or escalation contact
   is `[review]`. Example: "Confidential client data may not be entered into
   [general-purpose consumer AI tools] `[review — list tools, or reference the
-  approved-tools list]`. Use of such data in [approved firm-licensed tools]
+approved-tools list]`. Use of such data in [approved firm-licensed tools]
   `[review — list tools]` is permitted subject to the data handling section."
 - **Source attribution** inline where a rule is adapted from a specific source.
   Example: "Attorneys must verify the accuracy of all AI-generated work product
@@ -213,6 +215,7 @@ The standard reviewer note above the header, per the `## Outputs` section of
 the practice profile. Use the block format:
 
 > **⚠️ Reviewer note**
+>
 > - **Sources:** web search ✓ / not connected — cites from training knowledge
 > - **Read:** practice profile · [N] published model policies
 > - **Flagged for your judgment:** [N] `[review]` items inline · [N] open questions per section

@@ -8,7 +8,7 @@ description: >
   company. Use when the user says "ai inventory", "add an ai system",
   "what systems do we have", "classify this ai system", "eu ai act
   register", or "ai system registry".
-argument-hint: "[list | add | edit <id> | classify <id> | show <id>]"
+argument-hint: '[list | add | edit <id> | classify <id> | show <id>]'
 ---
 
 # /ai-inventory
@@ -17,8 +17,8 @@ argument-hint: "[list | add | edit <id> | classify <id> | show <id>]"
 
 The user wants to manage their AI system inventory under the EU AI Act. The
 core idea the skill exists to enforce: **role and tier are per-system, not
-per-company.** A single organization can be a *provider* of System A, a
-*deployer* of System B, and an *importer* of System C. Each combination
+per-company.** A single organization can be a _provider_ of System A, a
+_deployer_ of System B, and an _importer_ of System C. Each combination
 triggers a different set of obligations under the AI Act. The inventory
 exists so those assessments are tracked where you can find them — the
 obligations themselves are derived in conversation, not from a table.
@@ -60,10 +60,10 @@ obligations themselves are derived in conversation, not from a table.
 
 Render as a compact table:
 
-| ID | Name | Owner | Status | EU nexus | Role | Tier | Next review |
-|----|------|-------|--------|----------|------|------|-------------|
-| sys-001 | Resume screening | HR / Jamie | in_production | yes | deployer | high_risk | 2026-08-01 |
-| sys-002 | Email drafting assistant | IT / Priya | in_production | no | deployer | limited | 2026-12-01 |
+| ID      | Name                     | Owner      | Status        | EU nexus | Role     | Tier      | Next review |
+| ------- | ------------------------ | ---------- | ------------- | -------- | -------- | --------- | ----------- |
+| sys-001 | Resume screening         | HR / Jamie | in_production | yes      | deployer | high_risk | 2026-08-01  |
+| sys-002 | Email drafting assistant | IT / Priya | in_production | no       | deployer | limited   | 2026-12-01  |
 
 Under the table, show counts by tier and a line: "N systems flagged for
 review within 30 days."
@@ -135,6 +135,7 @@ Check in order:
 text — Article 5]`
 
 Summaries, not definitive text:
+
 - Subliminal or deceptive techniques materially distorting behavior
 - Exploiting vulnerabilities (age, disability, socio-economic status) to
   materially distort behavior
@@ -156,6 +157,7 @@ the governance team's prohibited-practice workflow.
 Annex III]`
 
 Summaries:
+
 1. Biometric identification and categorization
 2. Critical infrastructure (digital infrastructure, road traffic, supply of
    water / gas / heating / electricity)
@@ -195,6 +197,7 @@ Annex entry that matched, tagged `[verify against current AI Act text]`.
 ### Step 3: Recommendations
 
 Offer three next steps:
+
 1. "Want me to walk through obligations for this system? I'll do it in
    conversation — I don't derive them from a table."
 2. "Want to run `/ai-governance-legal:aia-generation` to produce a full
@@ -206,21 +209,21 @@ Offer three next steps:
 ```yaml
 systems:
   - id: sys-001
-    name: "Resume screening tool"
-    owner: "HR / Jamie"
-    description: "Filters inbound CVs against job criteria"
-    status: in_production          # planned | in_development | in_production | deprecated
-    eu_nexus: true                 # deployed, offered, or affects people in the EU/EEA
-    role: deployer                 # provider | deployer | importer | distributor | authorized_rep | product_manufacturer
-    role_basis: "We license from VendorX and deploy internally [verify against current AI Act text]"
-    tier: high_risk                # prohibited | high_risk | limited | minimal | gpai | gpai_systemic
-    tier_basis: "Annex III(4)(a) — employment, recruitment selection [verify against current AI Act text]"
+    name: 'Resume screening tool'
+    owner: 'HR / Jamie'
+    description: 'Filters inbound CVs against job criteria'
+    status: in_production # planned | in_development | in_production | deprecated
+    eu_nexus: true # deployed, offered, or affects people in the EU/EEA
+    role: deployer # provider | deployer | importer | distributor | authorized_rep | product_manufacturer
+    role_basis: 'We license from VendorX and deploy internally [verify against current AI Act text]'
+    tier: high_risk # prohibited | high_risk | limited | minimal | gpai | gpai_systemic
+    tier_basis: 'Annex III(4)(a) — employment, recruitment selection [verify against current AI Act text]'
     obligations_assessed: false
-    obligations_note: "To assess: as deployer of a high-risk system — human oversight, input data quality, monitoring, record-keeping, informing workers, FRIA if public body/service — see Article 26 [verify against current AI Act text]"
-    next_review: "2026-08-01"
-    review_trigger: "on substantial modification or annually"
-    created: "2026-05-11"
-    updated: "2026-05-11"
+    obligations_note: 'To assess: as deployer of a high-risk system — human oversight, input data quality, monitoring, record-keeping, informing workers, FRIA if public body/service — see Article 26 [verify against current AI Act text]'
+    next_review: '2026-08-01'
+    review_trigger: 'on substantial modification or annually'
+    created: '2026-05-11'
+    updated: '2026-05-11'
 ```
 
 ## Why this skill does NOT auto-derive obligations
@@ -234,6 +237,7 @@ does the analysis **in conversation**, tagged `[verify]`, and routes to
 if needed.
 
 This is deliberate:
+
 - Article mapping is complex and the AI Act is phasing in through 2027.
 - Confident-and-wrong on a compliance obligation ends up in a board memo.
 - The inventory is a registry for the lawyer. The lawyer owns the

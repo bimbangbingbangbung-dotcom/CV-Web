@@ -34,13 +34,13 @@ Reviews an inbound agreement against the playbook in `~/.claude/plugins/config/c
 
    Map each identified document or section to a skill:
 
-   | Document / section title contains | Skill |
-   |---|---|
-   | Non-Disclosure, NDA, Confidentiality Agreement (as the *main* agreement) | **nda-review** |
-   | Master Services Agreement, Professional Services, Statement of Work, Consulting Agreement | **vendor-agreement-review** |
-   | Subscription, SaaS, Cloud Services, Order Form with auto-renewal, Software License with recurring fees | **saas-msa-review** (overlay on vendor-agreement-review) |
-   | Data Processing Addendum, DPA, Data Processing Agreement (as exhibit or standalone) | note for **vendor-agreement-review** → data protection section |
-   | Service Level Agreement, SLA (as exhibit) | note for **saas-msa-review** → SLA section |
+   | Document / section title contains                                                                      | Skill                                                          |
+   | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+   | Non-Disclosure, NDA, Confidentiality Agreement (as the _main_ agreement)                               | **nda-review**                                                 |
+   | Master Services Agreement, Professional Services, Statement of Work, Consulting Agreement              | **vendor-agreement-review**                                    |
+   | Subscription, SaaS, Cloud Services, Order Form with auto-renewal, Software License with recurring fees | **saas-msa-review** (overlay on vendor-agreement-review)       |
+   | Data Processing Addendum, DPA, Data Processing Agreement (as exhibit or standalone)                    | note for **vendor-agreement-review** → data protection section |
+   | Service Level Agreement, SLA (as exhibit)                                                              | note for **saas-msa-review** → SLA section                     |
 
    Multiple skills may apply. Common combinations:
    - MSA + DPA exhibit → vendor-agreement-review, with DPA noted
@@ -85,7 +85,7 @@ Add to `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` �
 ```markdown
 ## Review preferences
 
-confirm_routing: true   # Set to false to skip routing confirmation and proceed automatically
+confirm_routing: true # Set to false to skip routing confirmation and proceed automatically
 ```
 
 The cold-start interview should ask about this preference. Default is `true` — confirmation on. As trust builds, the user can set it to `false`.

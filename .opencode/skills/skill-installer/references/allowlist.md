@@ -18,7 +18,7 @@ whose enforcement does not depend on Claude correctly analyzing the skill.
 
 ```yaml
 # allowlist.yaml
-mode: permissive    # permissive | restrictive
+mode: permissive # permissive | restrictive
 
 registries:
   - https://github.com/legalopsconsulting/lpm-skills
@@ -140,7 +140,7 @@ choose permissive.
 
 ## Limits of this mechanism
 
-The allowlist controls *what sources the installer will accept*. It does not
+The allowlist controls _what sources the installer will accept_. It does not
 analyze the skill's behavior — a malicious skill from a trusted publisher is
 still malicious. Pair with the trust-check step and the skills-qa heuristic
 scan, and read the raw SKILL.md yourself. The allowlist reduces the attack

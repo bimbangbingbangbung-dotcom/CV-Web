@@ -26,11 +26,11 @@ spec:
             - containerPort: 3000
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
+              memory: '128Mi'
+              cpu: '100m'
             limits:
-              memory: "256Mi"
-              cpu: "500m"
+              memory: '256Mi'
+              cpu: '500m'
           livenessProbe:
             httpGet:
               path: /health
@@ -94,8 +94,8 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  LOG_LEVEL: "info"
-  API_TIMEOUT: "30s"
+  LOG_LEVEL: 'info'
+  API_TIMEOUT: '30s'
 ---
 apiVersion: v1
 kind: Secret
@@ -103,7 +103,7 @@ metadata:
   name: app-secrets
 type: Opaque
 stringData:
-  database-url: "postgres://user:pass@host:5432/db"
+  database-url: 'postgres://user:pass@host:5432/db'
 ```
 
 ## Horizontal Pod Autoscaler
@@ -131,15 +131,15 @@ spec:
 
 ## Quick Reference
 
-| Resource | Purpose |
-|----------|---------|
+| Resource   | Purpose                              |
+| ---------- | ------------------------------------ |
 | Deployment | Manages ReplicaSets, rolling updates |
-| Service | Internal load balancing, DNS |
-| Ingress | External HTTP/HTTPS routing |
-| ConfigMap | Non-sensitive configuration |
-| Secret | Sensitive data (base64 encoded) |
-| HPA | Auto-scaling based on metrics |
-| PVC | Persistent storage claims |
+| Service    | Internal load balancing, DNS         |
+| Ingress    | External HTTP/HTTPS routing          |
+| ConfigMap  | Non-sensitive configuration          |
+| Secret     | Sensitive data (base64 encoded)      |
+| HPA        | Auto-scaling based on metrics        |
+| PVC        | Persistent storage claims            |
 
 ## Common kubectl Commands
 

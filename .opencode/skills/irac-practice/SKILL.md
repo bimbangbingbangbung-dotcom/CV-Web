@@ -5,7 +5,7 @@ description: >
   depth, and organization. Does NOT rewrite the essay or show a model answer;
   tracks patterns across sessions. Use when the user says "grade my IRAC",
   "check my essay", or "I wrote this, give me feedback".
-argument-hint: "[paste essay OR path to draft OR --generate-hypo]"
+argument-hint: '[paste essay OR path to draft OR --generate-hypo]'
 ---
 
 # /irac-practice
@@ -29,7 +29,7 @@ Watch for: real names, real addresses, real dates, specific dollar amounts, "my 
 
 ## Purpose
 
-1L writing is mostly IRAC. 2L-3L writing that touches legal analysis is IRAC under the hood. The exam rewards structure as much as content. This skill grades *structure* — did you spot the issues, did you state the rules correctly, did you apply rules to facts or just restate both?
+1L writing is mostly IRAC. 2L-3L writing that touches legal analysis is IRAC under the hood. The exam rewards structure as much as content. This skill grades _structure_ — did you spot the issues, did you state the rules correctly, did you apply rules to facts or just restate both?
 
 **Does not rewrite the essay.** Ever. The whole point is that you learn by writing, getting specific structural feedback, and rewriting yourself.
 
@@ -145,6 +145,7 @@ Append to `~/.claude/plugins/config/claude-for-legal/law-student/irac-sessions/[
 
 ```markdown
 ## [date] — [subject / hypo topic]
+
 - Issues missed: [list]
 - Rule accuracy: [% or qualitative]
 - Analysis gap: [specific pattern — e.g., "restates rule without applying"]
@@ -152,6 +153,7 @@ Append to `~/.claude/plugins/config/claude-for-legal/law-student/irac-sessions/[
 ```
 
 After 3+ sessions, surface patterns:
+
 - "You keep missing counterarguments — three sessions in a row."
 - "You're strong on Issue + Rule but consistently weak on Application."
 - "Your organization is strong; the gap is at rule-accuracy. Drill black-letter rules with /law-student:flashcards."

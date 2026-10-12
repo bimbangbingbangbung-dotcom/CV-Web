@@ -107,15 +107,15 @@ If the supervisor names a document type the skills don't currently have, record 
 
 Present the options as a table the supervisor fills in:
 
-| Work product | Gate |
-|---|---|
-| Intake summary | [student writes; supervisor reviews at case rounds / supervisor reviews before client sees / student keeps] |
-| Memo (internal) | [supervisor reviews / student keeps] |
-| Client letter (appointment / doc request / brief status) | [supervisor reviews / student sends directly] |
-| Client letter (substantive advice / bad news) | [always supervisor — cannot override] |
-| Draft filing (court / agency) | [always supervisor — cannot override] |
-| Status update to court | [always supervisor — cannot override] |
-| Research-start roadmap | [student works from it directly] |
+| Work product                                             | Gate                                                                                                        |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Intake summary                                           | [student writes; supervisor reviews at case rounds / supervisor reviews before client sees / student keeps] |
+| Memo (internal)                                          | [supervisor reviews / student keeps]                                                                        |
+| Client letter (appointment / doc request / brief status) | [supervisor reviews / student sends directly]                                                               |
+| Client letter (substantive advice / bad news)            | [always supervisor — cannot override]                                                                       |
+| Draft filing (court / agency)                            | [always supervisor — cannot override]                                                                       |
+| Status update to court                                   | [always supervisor — cannot override]                                                                       |
+| Research-start roadmap                                   | [student works from it directly]                                                                            |
 
 Some gates are non-negotiable: client letters that give substantive advice, court filings, and status to courts always route through the supervisor per the clinic's supervision structure. Flag those as fixed; the configurable gates are the routine ones.
 
@@ -145,7 +145,7 @@ Write to `~/.claude/plugins/config/claude-for-legal/legal-clinic/guides/<practic
 ```markdown
 # Practice-area guide: [Practice area]
 
-*Authored by the supervising attorney via `/legal-clinic:build-guide`. Student-facing skills read this before producing output. Edit directly anytime.*
+_Authored by the supervising attorney via `/legal-clinic:build-guide`. Student-facing skills read this before producing output. Edit directly anytime._
 
 **Last updated:** [date]
 **Authored by:** [supervising attorney name from CLAUDE.md]
@@ -155,19 +155,23 @@ Write to `~/.claude/plugins/config/claude-for-legal/legal-clinic/guides/<practic
 ## Intake
 
 **Questions to ask** (supplement/replace the generic defaults):
+
 - [question 1]
 - [question 2]
 - ...
 
 **Red flags** (surface these in the intake summary if present):
+
 - [flag 1]
 - [flag 2]
 
 **Good-fit criteria** (cases this clinic takes):
+
 - [criterion 1]
 - [criterion 2]
 
 **Refer-out criteria** (cases this clinic does not take):
+
 - [criterion 1]
 - [criterion 2]
 
@@ -178,6 +182,7 @@ Write to `~/.claude/plugins/config/claude-for-legal/legal-clinic/guides/<practic
 `pedagogy_posture_default: [assist | guide | teach]`
 
 Per-document overrides (optional):
+
 - `pedagogy_posture_client_letter: [assist | guide | teach]`
 - `pedagogy_posture_memo: [assist | guide | teach]`
 - `pedagogy_posture_draft: [assist | guide | teach]`
@@ -188,23 +193,23 @@ Per-document overrides (optional):
 
 ## Review gates
 
-| Work product | Gate |
-|---|---|
-| Intake summary | [gate] |
-| Memo (internal) | [gate] |
-| Client letter — routine | [gate] |
+| Work product                | Gate               |
+| --------------------------- | ------------------ |
+| Intake summary              | [gate]             |
+| Memo (internal)             | [gate]             |
+| Client letter — routine     | [gate]             |
 | Client letter — substantive | supervisor (fixed) |
-| Draft filing | supervisor (fixed) |
-| Court-facing status | supervisor (fixed) |
-| Research roadmap | [gate] |
+| Draft filing                | supervisor (fixed) |
+| Court-facing status         | supervisor (fixed) |
+| Research roadmap            | [gate]             |
 
 ---
 
 ## Cross-plugin checks
 
-| Skill | When students use it | Supervision wrapper |
-|---|---|---|
-| [plugin:skill] | [situation] | [wrapper] |
+| Skill          | When students use it | Supervision wrapper |
+| -------------- | -------------------- | ------------------- |
+| [plugin:skill] | [situation]          | [wrapper]           |
 
 ---
 
@@ -212,6 +217,7 @@ Per-document overrides (optional):
 
 **Court(s):** [from CLAUDE.md or additional courts for this practice area]
 **Practice-area-specific local rules and forms:**
+
 - [pointer 1]
 - [pointer 2]
 ```

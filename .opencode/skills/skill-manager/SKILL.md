@@ -59,6 +59,7 @@ later re-install).
 ### Step 3: Show and confirm
 
 Display:
+
 - The skill's install directory path
 - Every file that will be deleted
 - Any config directories that will NOT be deleted (with a note that the user

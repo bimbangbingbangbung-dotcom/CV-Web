@@ -4,7 +4,7 @@ description: >
   Draft or update the privileged investigation memo from the investigation log.
   Use when an investigation is far enough along to write the first memo cut, or
   when new data has been added and the existing draft needs updating.
-argument-hint: "[matter name]"
+argument-hint: '[matter name]'
 ---
 
 # /investigation-memo

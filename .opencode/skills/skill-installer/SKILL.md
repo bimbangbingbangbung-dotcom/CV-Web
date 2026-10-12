@@ -6,7 +6,7 @@ description: >
   checks, runs skills-qa, and only writes files after explicit user approval.
   Use when the user says "install [skill]", picks install from browse, or
   provides a direct skill URL.
-argument-hint: "[skill name or registry URL]"
+argument-hint: '[skill name or registry URL]'
 ---
 
 # /skill-installer

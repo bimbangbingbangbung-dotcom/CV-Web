@@ -6,7 +6,7 @@ description: >
   renewing soon", "what renewals are due", "did we miss a cancellation window", "add
   this to the renewal tracker", or on a scheduled basis. Receives handoffs from
   saas-msa-review.
-argument-hint: "[--days N to change window | --missed for lapsed windows]"
+argument-hint: '[--days N to change window | --missed for lapsed windows]'
 ---
 
 # /renewal-tracker
@@ -54,27 +54,27 @@ This skill maintains the renewal register and surfaces what's coming.
 Lives at `~/.claude/plugins/config/claude-for-legal/commercial-legal/renewal-register.yaml` (the config directory — survives plugin updates). Each entry:
 
 ```yaml
-- counterparty: "Acme SaaS Inc."
-  agreement: "Acme Platform Subscription Agreement"
+- counterparty: 'Acme SaaS Inc.'
+  agreement: 'Acme Platform Subscription Agreement'
   signed_date: 2025-06-15
   initial_term_end: 2026-06-15
-  current_term_end: 2026-06-15     # rolls forward after each auto-renewal; compute cancel_by_* from this
-  renewal_mechanism: "auto-renew annual"
+  current_term_end: 2026-06-15 # rolls forward after each auto-renewal; compute cancel_by_* from this
+  renewal_mechanism: 'auto-renew annual'
   notice_period_days: 60
-  notice_method: "email"           # email / portal / certified mail / registered post / courier / per contract §X
-  transit_buffer_days: 0           # 0 for electronic, 5 for domestic certified mail, 10 for international registered post — or per contract if specified
-  cancel_by_calendar: 2026-04-16    # current_term_end minus notice_period_days
-  cancel_by_effective: 2026-04-16   # rolled back to last business day if needed
-  send_by_effective: 2026-04-16    # cancel_by_effective minus transit_buffer_days — the date you must SEND the notice
-  cancel_by_roll_note: ""           # e.g., "rolled back from Sunday 2026-11-01; verify against contract's business-day definition"
-  cancel_by_provenance: "[model calculation — verify against the notice clause]"
-  price_on_renewal: "then-current list (uncapped)"
+  notice_method: 'email' # email / portal / certified mail / registered post / courier / per contract §X
+  transit_buffer_days: 0 # 0 for electronic, 5 for domestic certified mail, 10 for international registered post — or per contract if specified
+  cancel_by_calendar: 2026-04-16 # current_term_end minus notice_period_days
+  cancel_by_effective: 2026-04-16 # rolled back to last business day if needed
+  send_by_effective: 2026-04-16 # cancel_by_effective minus transit_buffer_days — the date you must SEND the notice
+  cancel_by_roll_note: '' # e.g., "rolled back from Sunday 2026-11-01; verify against contract's business-day definition"
+  cancel_by_provenance: '[model calculation — verify against the notice clause]'
+  price_on_renewal: 'then-current list (uncapped)'
   annual_value: 48000
-  business_owner: "jane@company.com"
-  clm_id:        "IC-12345"        # if connected
-  docusign_envelope: "abc-123"   # if connected
-  status: "active"               # active | cancelled | renewed | lapsed
-  notes: "Pricing uncapped — revisit before renewal. Alt vendors: X, Y."
+  business_owner: 'jane@company.com'
+  clm_id: 'IC-12345' # if connected
+  docusign_envelope: 'abc-123' # if connected
+  status: 'active' # active | cancelled | renewed | lapsed
+  notes: 'Pricing uncapped — revisit before renewal. Alt vendors: X, Y.'
 ```
 
 **Notice transit time — alert off `send_by_effective`, not `cancel_by_effective`.** A 60-day window with a certified-mail requirement is really ~55 days. The tracker that alerts on the received-by date is the tracker that misses the deadline. Compute `send_by_effective = cancel_by_effective - transit_buffer_days` and fire alerts (the 🔴 / 🟠 / 🟡 urgency bands in Mode 2) off `send_by_effective`. Mode 2's urgency column shows `send_by_effective`; a detail column surfaces `cancel_by_effective`, `notice_method`, and `transit_buffer_days` so the reader can see the delta and challenge the buffer.
@@ -124,9 +124,9 @@ When saas-msa-review or vendor-agreement-review finds a renewal clause, it hands
 
 ### 🔴 Cancel-by deadline in 0–13 days
 
-| Counterparty | Cancel by | Renewal date | Annual $ | Owner | Notes |
-|---|---|---|---|---|---|
-| [name] | **[date]** | [date] | $[n] | [email] | [notes] |
+| Counterparty | Cancel by  | Renewal date | Annual $ | Owner   | Notes   |
+| ------------ | ---------- | ------------ | -------- | ------- | ------- |
+| [name]       | **[date]** | [date]       | $[n]     | [email] | [notes] |
 
 ### 🟠 Cancel-by deadline in 14–44 days
 
@@ -139,6 +139,7 @@ When saas-msa-review or vendor-agreement-review finds a renewal clause, it hands
 ---
 
 **Recommended actions:**
+
 - [ ] [Counterparty] — ping [business owner]: do we want to keep this?
 - [ ] [Counterparty] — pricing is uncapped; get a quote from an alternative before we lose leverage
 ```
@@ -164,11 +165,12 @@ This is a one-time bulk load. After that, ingest happens at review time.
 The following agreements had cancel-by deadlines that have passed and no
 cancellation was recorded:
 
-| Counterparty | Cancel-by was | Renewal date | Status |
-|---|---|---|---|
-| [name] | [date] | [date] | Will auto-renew on [date] |
+| Counterparty | Cancel-by was | Renewal date | Status                    |
+| ------------ | ------------- | ------------ | ------------------------- |
+| [name]       | [date]        | [date]       | Will auto-renew on [date] |
 
 **Options:**
+
 - Negotiate late cancellation (rarely works but worth asking)
 - Accept the renewal, mark next year's cancel-by now
 - Check the agreement for any other termination rights (for convenience, for cause)
@@ -176,7 +178,7 @@ cancellation was recorded:
 
 ## Gate: accepting or declining a renewal
 
-Tracking a renewal date is research. *Acting* on it — sending a notice of non-renewal, letting an auto-renewal fire, or countersigning a renewal form — is a consequential legal step.
+Tracking a renewal date is research. _Acting_ on it — sending a notice of non-renewal, letting an auto-renewal fire, or countersigning a renewal form — is a consequential legal step.
 
 **Before proceeding to accept or decline a renewal (including sending a non-renewal notice or letting an auto-renewal run past the cancel-by date):** Read `## Who's using this` in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`. If the Role is Non-lawyer:
 

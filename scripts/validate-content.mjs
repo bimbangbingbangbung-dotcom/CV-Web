@@ -55,10 +55,13 @@ if (!validate(content)) {
 // catches identical objects, not repeated ids).
 const ids = (content.sections ?? []).map((s) => s.id);
 const dupes = ids.filter((id, i) => ids.indexOf(id) !== i);
-if (dupes.length) errors.push(`/sections — duplicate section id(s): ${[...new Set(dupes)].join(', ')}`);
+if (dupes.length)
+  errors.push(`/sections — duplicate section id(s): ${[...new Set(dupes)].join(', ')}`);
 
 if (errors.length) {
-  console.error(`✖ public/content.json is invalid (${errors.length} problem${errors.length > 1 ? 's' : ''}):`);
+  console.error(
+    `✖ public/content.json is invalid (${errors.length} problem${errors.length > 1 ? 's' : ''}):`,
+  );
   errors.forEach((e, i) => console.error(`  ${i + 1}. ${e}`));
   process.exit(1);
 }

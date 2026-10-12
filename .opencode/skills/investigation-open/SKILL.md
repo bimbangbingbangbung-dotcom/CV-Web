@@ -5,7 +5,7 @@ description: >
   checklist, and creates the persistent investigation log. Use when a complaint
   or allegation comes in and the attorney needs to stand up a privileged
   investigation workspace.
-argument-hint: "[brief description of the allegation]"
+argument-hint: '[brief description of the allegation]'
 ---
 
 # /investigation-open

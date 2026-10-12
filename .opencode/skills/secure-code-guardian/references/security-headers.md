@@ -8,20 +8,22 @@ import helmet from 'helmet';
 app.use(helmet()); // Enable all defaults
 
 // Or configure individually
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+      },
     },
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true,
-  },
-}));
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+  }),
+);
 ```
 
 ## Manual Headers
@@ -81,35 +83,39 @@ app.post('/api/register', authLimiter, registerHandler);
 import cors from 'cors';
 
 // Strict CORS
-app.use(cors({
-  origin: ['https://example.com', 'https://app.example.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  maxAge: 86400, // Cache preflight for 24 hours
-}));
+app.use(
+  cors({
+    origin: ['https://example.com', 'https://app.example.com'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    maxAge: 86400, // Cache preflight for 24 hours
+  }),
+);
 
 // Dynamic origin validation
-app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = ['https://example.com'];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = ['https://example.com'];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  }),
+);
 ```
 
 ## Cookie Security
 
 ```typescript
 res.cookie('session', token, {
-  httpOnly: true,      // No JavaScript access
-  secure: true,        // HTTPS only
-  sameSite: 'strict',  // CSRF protection
-  maxAge: 900000,      // 15 minutes
+  httpOnly: true, // No JavaScript access
+  secure: true, // HTTPS only
+  sameSite: 'strict', // CSRF protection
+  maxAge: 900000, // 15 minutes
   path: '/',
   domain: '.example.com',
 });
@@ -117,17 +123,17 @@ res.cookie('session', token, {
 
 ## Quick Reference
 
-| Header | Value | Purpose |
-|--------|-------|---------|
-| X-Frame-Options | DENY | Clickjacking |
-| X-Content-Type-Options | nosniff | MIME sniffing |
-| Strict-Transport-Security | max-age=31536000 | Force HTTPS |
-| Content-Security-Policy | default-src 'self' | XSS |
-| Referrer-Policy | strict-origin-when-cross-origin | Privacy |
+| Header                    | Value                           | Purpose       |
+| ------------------------- | ------------------------------- | ------------- |
+| X-Frame-Options           | DENY                            | Clickjacking  |
+| X-Content-Type-Options    | nosniff                         | MIME sniffing |
+| Strict-Transport-Security | max-age=31536000                | Force HTTPS   |
+| Content-Security-Policy   | default-src 'self'              | XSS           |
+| Referrer-Policy           | strict-origin-when-cross-origin | Privacy       |
 
-| Cookie Flag | Purpose |
-|-------------|---------|
-| httpOnly | No JS access |
-| secure | HTTPS only |
+| Cookie Flag     | Purpose         |
+| --------------- | --------------- |
+| httpOnly        | No JS access    |
+| secure          | HTTPS only      |
 | sameSite=strict | CSRF protection |
-| maxAge | Expiration |
+| maxAge          | Expiration      |

@@ -29,7 +29,7 @@ Most inbound NDAs are fine. A few have landmines. This skill sorts them in under
 
 **Which side?** Before applying the playbook, determine which side the company is on for this NDA. Usually obvious from the context: if the counterparty is a vendor or partner evaluating your product, you're sales-side; if you're evaluating theirs, you're purchasing-side. Mutual NDAs still have a side — whose paper is it, and which direction is the evaluation running. If it's not obvious, ask. Read the matching playbook section (`### Sales-side playbook` or `### Purchasing-side playbook`) from the config. Note which side in the output so the reviewer knows which playbook was applied. If the matching side is `[Not configured]`, stop and tell the user to run `/commercial-legal:cold-start-interview --side <side>` before this triage can proceed.
 
-**Before triaging anything, read `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` → `## Playbook` → the matching side → `NDA triage positions`.** That section is the source of truth for what makes an NDA GREEN, YELLOW, or RED for *this* team on *this* side. This skill does not ship with default positions on NDA terms — the law, the market, and each team's risk tolerance vary too much for hardcoded defaults to be safe.
+**Before triaging anything, read `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` → `## Playbook` → the matching side → `NDA triage positions`.** That section is the source of truth for what makes an NDA GREEN, YELLOW, or RED for _this_ team on _this_ side. This skill does not ship with default positions on NDA terms — the law, the market, and each team's risk tolerance vary too much for hardcoded defaults to be safe.
 
 If `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` doesn't have an `NDA triage positions` section yet, or it's silent on a term that comes up in the NDA you're reviewing, ask the user:
 
@@ -49,7 +49,7 @@ Do not silently push a document labeled "NDA" through NDA triage when the substa
 
 ## The triage
 
-Classify the NDA into one of three buckets by applying the positions from `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`. The bucket definitions below are stable; the *criteria* that fill each bucket come from the playbook.
+Classify the NDA into one of three buckets by applying the positions from `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`. The bucket definitions below are stable; the _criteria_ that fill each bucket come from the playbook.
 
 ### GREEN — route to signature
 
@@ -76,8 +76,8 @@ GREEN — route to signature
 
 No red flags identified under the playbook. Route for signature per standard process.
 
-| Check | Status | Playbook reference |
-|---|---|---|
+| Check                 | Status      | Playbook reference                                                               |
+| --------------------- | ----------- | -------------------------------------------------------------------------------- |
 | [Each playbook check] | [pass/fail] | [`~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` section] |
 
 **Next step:** [Submit to [CLM] standard NDA workflow | Send to [approver from `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`] for signature]
@@ -116,18 +116,18 @@ YELLOW — flag for [approver name from `~/.claude/plugins/config/claude-for-leg
 ### Flagged items
 
 **1. [Issue]** — Section [X]
-   What: [one line]
-   Why flagged: [one line — which playbook position this hits, or "playbook is silent on this"]
-   **Legal risk:** [🔴/🟠/🟡/🟢] | **Business friction:** [🔴 Blocks deals / 🟠 Slows deals / 🟡 Confuses customers / 🟢 Invisible]
-   Likely resolution: [accept / push back on X / depends on deal context]
+What: [one line]
+Why flagged: [one line — which playbook position this hits, or "playbook is silent on this"]
+**Legal risk:** [🔴/🟠/🟡/🟢] | **Business friction:** [🔴 Blocks deals / 🟠 Slows deals / 🟡 Confuses customers / 🟢 Invisible]
+Likely resolution: [accept / push back on X / depends on deal context]
 
 [repeat for each flag]
 
 ### Everything else
 
-| Check | Status | Playbook reference |
-|---|---|---|
-| [playbook checks that passed] | pass | [`~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` section] |
+| Check                         | Status | Playbook reference                                                               |
+| ----------------------------- | ------ | -------------------------------------------------------------------------------- |
+| [playbook checks that passed] | pass   | [`~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` section] |
 
 **Next step:** Ask [approver] about the flagged items, then route to signature if they're okay with it.
 ```
@@ -155,10 +155,11 @@ RED — do not submit, talk to legal first
 ### Critical issues
 
 **1. [Issue]** — Section [X]
-   > "[exact quote]"
-   Why this is a problem: [specific risk; cite the playbook position it violates]
-   **Legal risk:** [🔴/🟠/🟡/🟢] | **Business friction:** [🔴 Blocks deals / 🟠 Slows deals / 🟡 Confuses customers / 🟢 Invisible]
-   Recommended response: [use our paper instead | push back with specific language | walk]
+
+> "[exact quote]"
+> Why this is a problem: [specific risk; cite the playbook position it violates]
+> **Legal risk:** [🔴/🟠/🟡/🟢] | **Business friction:** [🔴 Blocks deals / 🟠 Slows deals / 🟡 Confuses customers / 🟢 Invisible]
+> Recommended response: [use our paper instead | push back with specific language | walk]
 
 **Next step:** Send this triage to [GC or named escalation person from `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`]. Do not send to [CLM or approvals workflow]. Do not tell the counterparty we'll sign.
 ```
@@ -168,6 +169,7 @@ RED — do not submit, talk to legal first
 **Edit at the smallest possible granularity.** A redline is a negotiation artifact, not a rewrite. Wholesale clause replacement signals "we threw out your drafting" — it's aggressive, it forces the counterparty to re-read the whole clause, and it discards the parts of their drafting that were fine. Surgical redlines — strike a word, insert a phrase, restructure a subclause — signal "we have specific asks" and are faster to read, understand, and accept.
 
 Default to the smallest edit that achieves the playbook position:
+
 - Replace a **word** before a phrase. ("twelve (12)" → "twenty-four (24)")
 - Replace a **phrase** before a sentence. ("paid by the Buyer" → "paid and payable by the Buyer")
 - Restructure a **subclause** before replacing the sentence. (Add "(a)" and "(b)" to split a compound condition.)
@@ -197,7 +199,7 @@ Do not produce a lengthy report for a clean NDA.
 
 ## Detailed check reference
 
-For each check below, the bucket (GREEN/YELLOW/RED) is determined by `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`. This skill lists the *categories* to check; it does not hardcode thresholds.
+For each check below, the bucket (GREEN/YELLOW/RED) is determined by `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`. This skill lists the _categories_ to check; it does not hardcode thresholds.
 
 ### Mutuality
 
@@ -269,6 +271,7 @@ Per `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` `## P
 ## Integration: CLM
 
 If connected:
+
 - GREEN → offer to create the CLM record in the standard NDA workflow
 - YELLOW → offer to create it with a note attached listing the flagged items
 - RED → do not create a record; the lawyer decides what happens next
@@ -309,4 +312,3 @@ a standing instruction at the end of every review."
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
-

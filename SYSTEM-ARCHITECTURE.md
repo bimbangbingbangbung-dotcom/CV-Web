@@ -11,13 +11,13 @@
 
 ### Goals
 
-| Goal | Meaning |
-|---|---|
-| Fast & lightweight | Loads quickly on mobile, works well on cheap hosting |
-| Low cost | Runs on a single small server (or free tier where possible) |
-| Easy to update | CV content edited through an admin panel, stored in SQLite |
-| Maintainable | Standard Next.js conventions, typed end-to-end, minimal moving parts |
-| Safe by default | Validated inputs, hashed secrets, rate limiting, automated backups |
+| Goal               | Meaning                                                              |
+| ------------------ | -------------------------------------------------------------------- |
+| Fast & lightweight | Loads quickly on mobile, works well on cheap hosting                 |
+| Low cost           | Runs on a single small server (or free tier where possible)          |
+| Easy to update     | CV content edited through an admin panel, stored in SQLite           |
+| Maintainable       | Standard Next.js conventions, typed end-to-end, minimal moving parts |
+| Safe by default    | Validated inputs, hashed secrets, rate limiting, automated backups   |
 
 ### Non-goals (v1)
 
@@ -31,34 +31,34 @@
 
 ### Core (chosen)
 
-| Layer | Technology | Why |
-|---|---|---|
-| Frontend framework | **Next.js** (App Router, latest stable) | React with server-side rendering, file routing, image optimization and ISR caching built in |
-| UI library | **React** | Component model, ecosystem, hiring-market standard |
-| Styling / UI-UX | **Tailwind CSS v4** | Utility-first styling, design tokens via CSS variables, dark mode for free |
-| Backend | **Next.js Route Handlers** (Node.js runtime) | API lives in the same app — one deployable, no separate server to manage |
-| Database | **SQLite** (WAL mode) | Zero-ops, single-file, perfectly sufficient for a personal site; backed up by copying one file |
+| Layer              | Technology                                   | Why                                                                                            |
+| ------------------ | -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Frontend framework | **Next.js** (App Router, latest stable)      | React with server-side rendering, file routing, image optimization and ISR caching built in    |
+| UI library         | **React**                                    | Component model, ecosystem, hiring-market standard                                             |
+| Styling / UI-UX    | **Tailwind CSS v4**                          | Utility-first styling, design tokens via CSS variables, dark mode for free                     |
+| Backend            | **Next.js Route Handlers** (Node.js runtime) | API lives in the same app — one deployable, no separate server to manage                       |
+| Database           | **SQLite** (WAL mode)                        | Zero-ops, single-file, perfectly sufficient for a personal site; backed up by copying one file |
 
 ### Added as necessary
 
-| Concern | Technology | Why it's needed |
-|---|---|---|
-| Language | **TypeScript** | Type safety across frontend, API and DB — catches mistakes before runtime |
-| DB access layer | **Drizzle ORM** + `better-sqlite3` | Typed queries, migrations, and safe prepared statements (SQL-injection protection) out of the box |
-| Validation | **Zod** | One schema validates both API input and form data; generates TS types automatically |
-| Forms | **React Hook Form** | Handle submit states, errors and accessibility with little boilerplate |
-| UI components | **shadcn/ui** (Radix primitives + Tailwind) | Accessible dialogs/menus/toast out of the box, still fully Tailwind-styled |
-| Icons | **lucide-react** | Consistent icon set matching the Tailwind aesthetic |
-| Auth (admin) | **Auth.js (NextAuth)** — credentials provider | Session cookie login for `/admin` without building sessions from scratch |
-| Password hashing | **bcryptjs** (or Argon2) | Admin password never stored in plain text |
-| Email (contact notifications) | **Nodemailer → SMTP** (or Resend API) | Owner gets an email when someone submits the contact form |
-| Runtime | **Node.js LTS (22+)** with **pnpm** | pnpm is fast, strict about dependencies |
-| Containerization | **Docker** + **Docker Compose** | Identical dev/prod environments, one-command deploys |
-| Reverse proxy / TLS | **Caddy** (alternative: Nginx) | Automatic HTTPS, gzip/brotli, security headers — ~10 lines of config |
-| Testing | **Vitest** (unit) + **Playwright** (E2E) | Keeps forms, auth and rendering regression-free |
-| Lint / format | **ESLint** + **Prettier** | Consistent code style, enforced in CI |
-| CI/CD | **GitHub Actions** | Lint → test → build → Docker image on every push |
-| Analytics | **Page-view logging into SQLite** (privacy-friendly, IP-hashed) | Avoids third-party trackers; simple `page_views` table is enough |
+| Concern                       | Technology                                                      | Why it's needed                                                                                   |
+| ----------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Language                      | **TypeScript**                                                  | Type safety across frontend, API and DB — catches mistakes before runtime                         |
+| DB access layer               | **Drizzle ORM** + `better-sqlite3`                              | Typed queries, migrations, and safe prepared statements (SQL-injection protection) out of the box |
+| Validation                    | **Zod**                                                         | One schema validates both API input and form data; generates TS types automatically               |
+| Forms                         | **React Hook Form**                                             | Handle submit states, errors and accessibility with little boilerplate                            |
+| UI components                 | **shadcn/ui** (Radix primitives + Tailwind)                     | Accessible dialogs/menus/toast out of the box, still fully Tailwind-styled                        |
+| Icons                         | **lucide-react**                                                | Consistent icon set matching the Tailwind aesthetic                                               |
+| Auth (admin)                  | **Auth.js (NextAuth)** — credentials provider                   | Session cookie login for `/admin` without building sessions from scratch                          |
+| Password hashing              | **bcryptjs** (or Argon2)                                        | Admin password never stored in plain text                                                         |
+| Email (contact notifications) | **Nodemailer → SMTP** (or Resend API)                           | Owner gets an email when someone submits the contact form                                         |
+| Runtime                       | **Node.js LTS (22+)** with **pnpm**                             | pnpm is fast, strict about dependencies                                                           |
+| Containerization              | **Docker** + **Docker Compose**                                 | Identical dev/prod environments, one-command deploys                                              |
+| Reverse proxy / TLS           | **Caddy** (alternative: Nginx)                                  | Automatic HTTPS, gzip/brotli, security headers — ~10 lines of config                              |
+| Testing                       | **Vitest** (unit) + **Playwright** (E2E)                        | Keeps forms, auth and rendering regression-free                                                   |
+| Lint / format                 | **ESLint** + **Prettier**                                       | Consistent code style, enforced in CI                                                             |
+| CI/CD                         | **GitHub Actions**                                              | Lint → test → build → Docker image on every push                                                  |
+| Analytics                     | **Page-view logging into SQLite** (privacy-friendly, IP-hashed) | Avoids third-party trackers; simple `page_views` table is enough                                  |
 
 ### Deliberate constraints
 
@@ -247,16 +247,16 @@ erDiagram
 
 Public pages are server-rendered directly from the DB — no public JSON API needed in v1.
 
-| Method | Endpoint | Auth | Purpose |
-|---|---|---|---|
-| `POST` | `/api/contact` | — (rate-limited, honeypot) | Store message + email notification |
-| `GET` | `/api/healthz` | — | Liveness probe for uptime monitoring |
-| `POST` | `/api/admin/login` | — | Credentials login → session cookie |
-| `POST` | `/api/admin/logout` | session | Clear session |
-| `GET/PUT` | `/api/admin/profile` | session | Edit profile block |
-| `GET/POST/PATCH/DELETE` | `/api/admin/{experiences|educations|projects|skills}` | session | CRUD on CV sections |
-| `GET/PATCH` | `/api/admin/messages` | session | List / mark contact messages |
-| `GET` | `/api/admin/stats` | session | Visitors, top pages |
+| Method                  | Endpoint                 | Auth                       | Purpose                              |
+| ----------------------- | ------------------------ | -------------------------- | ------------------------------------ |
+| `POST`                  | `/api/contact`           | — (rate-limited, honeypot) | Store message + email notification   |
+| `GET`                   | `/api/healthz`           | —                          | Liveness probe for uptime monitoring |
+| `POST`                  | `/api/admin/login`       | —                          | Credentials login → session cookie   |
+| `POST`                  | `/api/admin/logout`      | session                    | Clear session                        |
+| `GET/PUT`               | `/api/admin/profile`     | session                    | Edit profile block                   |
+| `GET/POST/PATCH/DELETE` | `/api/admin/{experiences | educations                 | projects                             | skills}` | session | CRUD on CV sections |
+| `GET/PATCH`             | `/api/admin/messages`    | session                    | List / mark contact messages         |
+| `GET`                   | `/api/admin/stats`       | session                    | Visitors, top pages                  |
 
 **Conventions:** Zod-validated JSON bodies · `401` without a valid session · errors return `{ error: { code, message } }` · all mutating endpoints check `Origin` + SameSite cookies (CSRF).
 
@@ -317,10 +317,10 @@ sequenceDiagram
 
 ### Environments
 
-| Env | How it runs | DB file |
-|---|---|---|
-| **Development** | `pnpm dev` on the laptop | `./data/dev.db` (git-ignored) |
-| **Production** | Docker Compose on a VPS: `app` + `caddy` containers, named volume `/data` | `/data/cv.db` (persisted + backed up) |
+| Env             | How it runs                                                               | DB file                               |
+| --------------- | ------------------------------------------------------------------------- | ------------------------------------- |
+| **Development** | `pnpm dev` on the laptop                                                  | `./data/dev.db` (git-ignored)         |
+| **Production**  | Docker Compose on a VPS: `app` + `caddy` containers, named volume `/data` | `/data/cv.db` (persisted + backed up) |
 
 ### Docker Compose (shape)
 
@@ -330,11 +330,11 @@ services:
     build: .
     env_file: .env
     volumes:
-      - cv-data:/data          # SQLite lives here
+      - cv-data:/data # SQLite lives here
     restart: unless-stopped
   caddy:
     image: caddy:2
-    ports: ["80:80", "443:443"]
+    ports: ['80:80', '443:443']
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy-data:/data
@@ -372,17 +372,17 @@ RATE_LIMIT_PER_MINUTE=5
 
 ## 9. Security
 
-| Risk | Mitigation |
-|---|---|
-| SQL injection | Drizzle prepared statements only — no string-built SQL |
-| XSS | React auto-escaping; CSP header via Caddy; no `dangerouslySetInnerHTML` without sanitization |
-| CSRF | SameSite=Lax cookies + `Origin` check on mutations |
-| Brute force (login, contact) | DB-backed sliding-window rate limit by salted IP hash; login adds exponential backoff |
-| Credential theft | bcrypt hashes; `AUTH_SECRET` only in `.env` (never committed); rotate on suspicion |
-| Spam bots | Honeypot field + minimum-fill-time trap + rate limit |
-| Transport | HTTPS enforced by Caddy (auto-renew), HSTS header |
-| Secrets in logs | `.env` git-ignored; error pages never echo stack traces in production |
-| Dependencies | `pnpm audit` in CI; Dependabot alerts on |
+| Risk                         | Mitigation                                                                                   |
+| ---------------------------- | -------------------------------------------------------------------------------------------- |
+| SQL injection                | Drizzle prepared statements only — no string-built SQL                                       |
+| XSS                          | React auto-escaping; CSP header via Caddy; no `dangerouslySetInnerHTML` without sanitization |
+| CSRF                         | SameSite=Lax cookies + `Origin` check on mutations                                           |
+| Brute force (login, contact) | DB-backed sliding-window rate limit by salted IP hash; login adds exponential backoff        |
+| Credential theft             | bcrypt hashes; `AUTH_SECRET` only in `.env` (never committed); rotate on suspicion           |
+| Spam bots                    | Honeypot field + minimum-fill-time trap + rate limit                                         |
+| Transport                    | HTTPS enforced by Caddy (auto-renew), HSTS header                                            |
+| Secrets in logs              | `.env` git-ignored; error pages never echo stack traces in production                        |
+| Dependencies                 | `pnpm audit` in CI; Dependabot alerts on                                                     |
 
 ---
 
@@ -408,13 +408,13 @@ RATE_LIMIT_PER_MINUTE=5
 
 ## 12. Evolution Path (future, not v1)
 
-| If we need… | Then… |
-|---|---|
-| More traffic / HA | Move to Postgres (Drizzle schema ports over), add replicas |
-| Richer CMS | Add MDX-based blog or integrate PayloadCMS |
-| Global CDN caching | Cloudflare in front of Caddy (proxy mode) |
-| Multi-language CV | `next-intl` with per-locale routes |
-| PWA / offline | `manifest.json` + service worker |
+| If we need…        | Then…                                                      |
+| ------------------ | ---------------------------------------------------------- |
+| More traffic / HA  | Move to Postgres (Drizzle schema ports over), add replicas |
+| Richer CMS         | Add MDX-based blog or integrate PayloadCMS                 |
+| Global CDN caching | Cloudflare in front of Caddy (proxy mode)                  |
+| Multi-language CV  | `next-intl` with per-locale routes                         |
+| PWA / offline      | `manifest.json` + service worker                           |
 
 ---
 

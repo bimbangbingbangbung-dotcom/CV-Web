@@ -5,7 +5,7 @@ description: >
   against your calibration. Use when the user says "is this a problem", "quick
   question", "can we do X", "do I need legal review for", "sanity check", or
   pastes a PM's question that needs a same-minute fine / needs a look / hold call.
-argument-hint: "[the question]"
+argument-hint: '[the question]'
 ---
 
 # /is-this-a-problem
@@ -64,20 +64,20 @@ Does the question match a pattern in the calibration table?
 
 Some questions are fine on the surface but have a twist. Recognize the fact pattern, ask the catch question, then research the applicable doctrine for the specific fact pattern before concluding whether it's a problem or not.
 
-| Question sounds like | Why it might not be simple | Catch it by asking |
-|---|---|---|
-| "Can we add [vendor] to the integration?" | Vendor touches a new data category — flag as potentially implicating privacy and vendor-risk regimes and route for research | "What data flows to them?" |
-| "Can we A/B test the pricing page?" | Differential pricing by segment can implicate consumer-protection and anti-discrimination regimes — flag and route for research | "Are both arms seeing the same price for the same thing? How are users assigned to arms?" |
-| "Can we auto-enroll users in the new feature?" | Default-on behavior for users who previously opted out can implicate consent and consumer-protection rules — flag and route for research | "Does this respect existing preferences?" |
-| "Can we use customer logos on the site?" | Logo use is a separate permission from the contract relationship — flag as potentially implicating publicity / endorsement rules and the customer's own contract terms | "What does the contract say about publicity? Do we have written permission?" |
-| "Can we train on this data?" | Usage rights for the original collection purpose may not extend to training — flag and research the notice/consent the users were given at collection | "What did we tell users when we collected it? What jurisdictions are the users in?" |
-| "It's just an internal tool" | Internal tools still process personal data — flag as potentially implicating privacy regimes and route for research | "Whose data does it touch? Employees, customers, third parties?" |
-| "We already do something similar" | "Similar" is doing a lot of work — the delta is where the issue usually is | "Similar how? What's actually different?" |
-| "Can we use [AI vendor / LLM] for this?" | Vendor AI terms may permit training on inputs; use case may need an AIA — flag and route to `/ai-governance-legal:use-case-triage` | "Is there an AI addendum? What data goes into the model?" |
-| "Can we add AI to this feature?" | May be a new use case not in the registry; may trigger AIA requirement — flag and route to `/ai-governance-legal:use-case-triage` | "What does the AI do — assistive or automated? Who does it act on?" |
-| "The model just decides automatically" | Automated decision-making without human review is regulated in some jurisdictions — flag and research the applicable rules for the affected users' jurisdictions | "Who's affected? Is there a human in the loop? Where are the affected users?" |
-| "It's AI-generated content" | Output IP and disclosure duties vary by jurisdiction and vendor terms — flag and route for research | "What's the content type? Does the vendor's ToS address output ownership? Who is the audience?" |
-| "We're just fine-tuning on our data" | Training data rights, output IP, and vendor obligations all change — flag and route to `/ai-governance-legal:vendor-ai-review` | "What's in the training data? Is any of it customer or employee data?" |
+| Question sounds like                           | Why it might not be simple                                                                                                                                             | Catch it by asking                                                                              |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| "Can we add [vendor] to the integration?"      | Vendor touches a new data category — flag as potentially implicating privacy and vendor-risk regimes and route for research                                            | "What data flows to them?"                                                                      |
+| "Can we A/B test the pricing page?"            | Differential pricing by segment can implicate consumer-protection and anti-discrimination regimes — flag and route for research                                        | "Are both arms seeing the same price for the same thing? How are users assigned to arms?"       |
+| "Can we auto-enroll users in the new feature?" | Default-on behavior for users who previously opted out can implicate consent and consumer-protection rules — flag and route for research                               | "Does this respect existing preferences?"                                                       |
+| "Can we use customer logos on the site?"       | Logo use is a separate permission from the contract relationship — flag as potentially implicating publicity / endorsement rules and the customer's own contract terms | "What does the contract say about publicity? Do we have written permission?"                    |
+| "Can we train on this data?"                   | Usage rights for the original collection purpose may not extend to training — flag and research the notice/consent the users were given at collection                  | "What did we tell users when we collected it? What jurisdictions are the users in?"             |
+| "It's just an internal tool"                   | Internal tools still process personal data — flag as potentially implicating privacy regimes and route for research                                                    | "Whose data does it touch? Employees, customers, third parties?"                                |
+| "We already do something similar"              | "Similar" is doing a lot of work — the delta is where the issue usually is                                                                                             | "Similar how? What's actually different?"                                                       |
+| "Can we use [AI vendor / LLM] for this?"       | Vendor AI terms may permit training on inputs; use case may need an AIA — flag and route to `/ai-governance-legal:use-case-triage`                                     | "Is there an AI addendum? What data goes into the model?"                                       |
+| "Can we add AI to this feature?"               | May be a new use case not in the registry; may trigger AIA requirement — flag and route to `/ai-governance-legal:use-case-triage`                                      | "What does the AI do — assistive or automated? Who does it act on?"                             |
+| "The model just decides automatically"         | Automated decision-making without human review is regulated in some jurisdictions — flag and research the applicable rules for the affected users' jurisdictions       | "Who's affected? Is there a human in the loop? Where are the affected users?"                   |
+| "It's AI-generated content"                    | Output IP and disclosure duties vary by jurisdiction and vendor terms — flag and route for research                                                                    | "What's the content type? Does the vendor's ToS address output ownership? Who is the audience?" |
+| "We're just fine-tuning on our data"           | Training data rights, output IP, and vendor obligations all change — flag and route to `/ai-governance-legal:vendor-ai-review`                                         | "What's in the training data? Is any of it customer or employee data?"                          |
 
 If a trap might be present, ask the one question before answering. One question, not a checklist. When the answer suggests a real issue, flag for research and route — don't pattern-match to a legal conclusion from the question alone.
 

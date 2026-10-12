@@ -7,7 +7,7 @@ description: >
   style, DSAR process, or matter workspace paths. Use when the user says
   "change my [thing]", "update my profile", "edit my playbook", or
   "customize".
-argument-hint: "[section name, or describe what you want to change]"
+argument-hint: '[section name, or describe what you want to change]'
 ---
 
 # /customize
@@ -34,8 +34,8 @@ cold-start interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting, controller vs. processor orientation *(shared across all 12
-     plugins — changes flow through `company-profile.md`)*
+     setting, controller vs. processor orientation _(shared across all 12
+     plugins — changes flow through `company-profile.md`)_
    - **Risk posture** — conservative / middle / aggressive, what each means
      for processor obligations, cross-border transfers, and retention
    - **People** — DPO, privacy team, engineering liaison, outside counsel,
@@ -63,12 +63,12 @@ cold-start interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - *Sub-processor notice 30 days → 14 days:* "`/dpa-review` will now flag
+   - _Sub-processor notice 30 days → 14 days:_ "`/dpa-review` will now flag
      anything shorter than 14 days as a deviation. Existing DPAs stay as
      logged."
-   - *New DSAR exemption in the playbook:* "`/dsar-response` will surface this
+   - _New DSAR exemption in the playbook:_ "`/dsar-response` will surface this
      exemption in the assessment step where the facts match."
-   - *Risk posture middle → conservative:* "I'll flag more activities for
+   - _Risk posture middle → conservative:_ "I'll flag more activities for
      PIA escalation, recommend stricter SCC clauses, and be more
      conservative on retention."
 

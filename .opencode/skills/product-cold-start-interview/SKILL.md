@@ -5,7 +5,7 @@ description: >
   learns your risk calibration. Use on fresh install, when onboarding product
   counsel, or when the plugin config has placeholders. Run with --redo to
   re-interview, or --check-integrations to re-probe connectors only.
-argument-hint: "[--redo] [--check-integrations to re-probe integrations only]"
+argument-hint: '[--redo] [--check-integrations to re-probe integrations only]'
 ---
 
 # /cold-start-interview
@@ -39,11 +39,12 @@ When probing: only report ✓ if an MCP tool call actually succeeded. Configured
 
 Product counsel is company-specific in a way other legal practices aren't. What counts as a launch blocker at a fintech is an FYI at an ad-tech company. The same feature is high-risk for a company under a consent decree and routine for a company the FTC has never heard of.
 
-This interview learns *your* company's risk calibration by reading your actual launch review docs — where you blocked, where you waved through, and what you spent time on.
+This interview learns _your_ company's risk calibration by reading your actual launch review docs — where you blocked, where you waved through, and what you spent time on.
 
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md`:
+
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -68,7 +69,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -106,7 +107,7 @@ Do not read the user's home-directory `~/CLAUDE.md`, `~/user.md`, or other perso
 ## Interview pacing
 
 - **Assume the answer exists somewhere.** When a question asks for information that's probably written down somewhere — company description, playbook, escalation matrix, style guide, handbook, jurisdiction list, matter portfolio — prompt for a link or a paste before asking the user to type it from memory. "Paste a link or a doc, or give me the short version" is the default ask for anything that's more than a sentence. An interviewer who makes people re-type what they've already written has failed the first job of an interviewer.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 
 **Pause for real answers.** Some questions have quick tap-through answers. Others need the user to type, describe, or upload something. When a question needs more than a quick tap:
 
@@ -124,7 +125,7 @@ Do not read the user's home-directory `~/CLAUDE.md`, `~/user.md`, or other perso
 
 > Product counsel is the practice where legal is closest to the company — it changes the most from place to place. I need to learn what "risky" means here before I can tell you whether something is risky.
 >
-> I'm going to ask about your company, your review process, and what you've blocked before. Then I want to read ten of your past launch reviews. Not the PRDs — *your* reviews. That's where your calibration lives.
+> I'm going to ask about your company, your review process, and what you've blocked before. Then I want to read ten of your past launch reviews. Not the PRDs — _your_ reviews. That's where your calibration lives.
 
 ### Part 0: Who's using this, and what's connected
 
@@ -155,7 +156,7 @@ If the answer is 3, add:
 
 > This plugin can work with: launch tracker (Jira, Linear, Asana), document storage (Google Drive, SharePoint), and Slack. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -191,7 +192,7 @@ Write `## Who's using this` and `## Available integrations` sections immediately
 
 Use this to branch later questions:
 
-- **Solo / small firm (no hierarchy):** Skip escalation-chain questions in Part 1 and elsewhere. Reframe: instead of "who approves above your threshold," ask "when do you call in outside counsel or a colleague for a second opinion." In the practice profile, the escalation matrix maps to *consult* not *route for approval*, and the "GC asks in every review" question becomes "what do you always double-check before shipping."
+- **Solo / small firm (no hierarchy):** Skip escalation-chain questions in Part 1 and elsewhere. Reframe: instead of "who approves above your threshold," ask "when do you call in outside counsel or a colleague for a second opinion." In the practice profile, the escalation matrix maps to _consult_ not _route for approval_, and the "GC asks in every review" question becomes "what do you always double-check before shipping."
 - **Midsize / large firm:** Ask about the approval chain, billing thresholds, and who signs off above the user.
 - **In-house:** Ask the escalation matrix, who the GC/CLO is, and when something goes to the business.
 - **Government / legal aid / clinic:** Substitute the supervision chain used in that setting (supervising attorney, director, oversight committee). Ask about any restrictions on practice. Keep the escalation structure but relabel the roles.
@@ -203,6 +204,7 @@ Record the practice setting in the practice profile under `## Who's using this`.
 **What does [your company] do?** This is the single most important context — a SaaS vendor's playbook, a hardware distributor's playbook, and a services firm's playbook are completely different. You don't have to type it out: paste a link to your company website, your "about" page, your Wikipedia article, or your latest 10-K, and I'll extract what I need. Or give me the one-sentence version: what you sell, to whom, and how (direct sales / channel / marketplace / subscription).
 
 **What are we?**
+
 - What does the company make?
 - Who uses it?
 - Is the company consumer, B2B, or both?
@@ -215,23 +217,27 @@ Record the practice setting in the practice profile under `## Who's using this`.
 - If so, which countries matter most for legal calibration?
 
 **Company stage and funding posture:**
+
 - What stage is the company — pre-seed, Series A-D, pre-IPO, post-IPO / public, PE-owned, other?
 - Any investor-driven risk overlays (board reporting, D&O constraints, public-company disclosure gating) that affect how you calibrate risk?
 
 **Jurisdiction footprint (even rough is fine):**
+
 - Where are the users — US-only, US + EU, global?
 - Where are the employees and data centers?
 - Any markets that drive a disproportionate amount of risk calibration (e.g., heavy EU exposure, a specific state regime you watch, a country with a local regulator you're in dialogue with)?
 
-**Risk appetite:** *(This feeds `/launch-review` and `/is-this-a-problem` — sets what counts as a P0 blocker at your company vs. an FYI.)*
+**Risk appetite:** _(This feeds `/launch-review` and `/is-this-a-problem` — sets what counts as a P0 blocker at your company vs. an FYI.)_
+
 - On a "conservative / middle / aggressive" scale, where does leadership sit on product-launch risk? Any specific category where that's different (e.g., aggressive on pricing experiments, conservative on anything children-touching)?
 - Is there a "move fast and defend later" posture or a "get it right before we ship" posture — and does it vary by product area?
 
-**What keeps you up at night?** *(This feeds `/launch-review` — the questions the GC always asks become mandatory checks on every launch memo.)*
+**What keeps you up at night?** _(This feeds `/launch-review` — the questions the GC always asks become mandatory checks on every launch memo.)_
+
 - If something went wrong with a product launch, what's the worst case that's actually realistic? (Not "someone sues us" — who, for what, and would it stick?)
 - What's the thing your GC asks about in every launch review?
 
-**Escalation — who signs off above you?** *(This feeds every skill's routing — `/launch-review`, `/is-this-a-problem`, and `/marketing-claims-review` all know when to say "you can handle this" vs. "loop in [X]".)*
+**Escalation — who signs off above you?** _(This feeds every skill's routing — `/launch-review`, `/is-this-a-problem`, and `/marketing-claims-review` all know when to say "you can handle this" vs. "loop in [X]".)_
 
 > "When a review finds something that needs someone more senior to sign off — a launch risk above your policy calibration, a marketing claim that needs scrutiny, a novel issue you haven't seen before, or a decision that's above your authority — who does that go to? Give me a name or a role (the GC, your boss, the head of product counsel), or say 'I decide myself.' This is how the plugin knows when to say 'you can handle this' versus 'loop in [X].'"
 
@@ -242,16 +248,19 @@ Before the structured questions: "Do you have an existing launch review framewor
 If the user uploads: read it, extract the framework, confirm what you found, and skip the corresponding detailed questions.
 
 **How do launches get to you?**
+
 - Launch tracker — Jira? Linear? Asana? A spreadsheet?
 - Do PMs know to loop you in, or do you find out from the launch calendar?
 - How much lead time do you usually get? Is it enough?
 
-**What's your framework?** *(This feeds `/launch-review` — the categories you check here become the section headings of every launch memo.)*
+**What's your framework?** _(This feeds `/launch-review` — the categories you check here become the section headings of every launch memo.)_
+
 - Do you have categories you check every launch against? (Contractual, privacy, IP, regulatory, etc.)
 - Formal sign-off, or advisory?
 - What's the output — a memo, a ticket comment, a Slack thread?
 
 **P0 vs. FYI — this is the key question:**
+
 - What's an example of something you blocked a launch over?
 - What's an example of something that looked scary but you said "ship it"?
 - What's the thing PMs keep asking about that's almost never a problem?
@@ -260,7 +269,7 @@ If the user uploads: read it, extract the framework, confirm what you found, and
 
 ### Part 3: Marketing and claims (1-2 min)
 
-*(This feeds `/marketing-claims-review` — substantiation standard and comparative-claims posture drive how the skill flags marketing copy.)*
+_(This feeds `/marketing-claims-review` — substantiation standard and comparative-claims posture drive how the skill flags marketing copy.)_
 
 - Who reviews marketing copy — you, or a separate marketing legal function?
 - Comparative claims ("faster than X") — allowed, discouraged, banned?
@@ -268,7 +277,7 @@ If the user uploads: read it, extract the framework, confirm what you found, and
 
 ### Part 4: Seed documents (3-4 min)
 
-> I want to read ten of your recent launch reviews. Not ten PRDs — ten of *your* docs. Where you said "here's what I'm worried about" or "this is fine, ship it."
+> I want to read ten of your recent launch reviews. Not ten PRDs — ten of _your_ docs. Where you said "here's what I'm worried about" or "this is fine, ship it."
 >
 > If you have a launch tracker connected, I can find them. Otherwise, point me at a folder or a few docs.
 
@@ -283,19 +292,19 @@ If the user uploads: read it, extract the framework, confirm what you found, and
 
 **The calibration table (this is the key output):**
 
-| Issue seen | How often | Typical call | Example |
-|---|---|---|---|
-| New data collection | 8/10 | PIA required, rarely blocks | "Analytics event added — PIA done, shipped" |
-| Third-party integration | 6/10 | DPA check, rarely blocks | "Stripe webhook — existing DPA covers it" |
-| Comparative marketing claim | 3/10 | Substantiation required | "'Fastest' claim blocked until benchmarks" |
-| Children's data | 1/10 | **Blocked pending full review** | "School district pilot — COPPA review first" |
+| Issue seen                  | How often | Typical call                    | Example                                      |
+| --------------------------- | --------- | ------------------------------- | -------------------------------------------- |
+| New data collection         | 8/10      | PIA required, rarely blocks     | "Analytics event added — PIA done, shipped"  |
+| Third-party integration     | 6/10      | DPA check, rarely blocks        | "Stripe webhook — existing DPA covers it"    |
+| Comparative marketing claim | 3/10      | Substantiation required         | "'Fastest' claim blocked until benchmarks"   |
+| Children's data             | 1/10      | **Blocked pending full review** | "School district pilot — COPPA review first" |
 
 ## Writing the practice profile
 
 ```markdown
 # Product Counsel Practice Profile
 
-*Written by cold-start on [DATE]. Edit directly.*
+_Written by cold-start on [DATE]. Edit directly._
 
 ---
 
@@ -308,6 +317,7 @@ If the user uploads: read it, extract the framework, confirm what you found, and
 **Investor-driven risk overlays:** [board reporting, D&O constraints, public-company disclosure gating, none]
 
 **Jurisdiction footprint:**
+
 - Users: [US-only / US + EU / global — specifics]
 - Employees and data: [where]
 - High-leverage jurisdictions for calibration: [states, countries, regulators]
@@ -331,13 +341,13 @@ children-touching features"]
 
 ## Available integrations
 
-| Integration | Status | Fallback if unavailable |
-|---|---|---|
-| Launch tracker (Jira / Linear / Asana) | [✓ / ✗] | User pastes or links PRDs directly per review |
-| Document storage (Drive / SharePoint) | [✓ / ✗] | Review memos saved locally; seed-doc pulls done manually |
-| Slack | [✓ / ✗] | Triage replies delivered inline instead of posted |
+| Integration                            | Status  | Fallback if unavailable                                  |
+| -------------------------------------- | ------- | -------------------------------------------------------- |
+| Launch tracker (Jira / Linear / Asana) | [✓ / ✗] | User pastes or links PRDs directly per review            |
+| Document storage (Drive / SharePoint)  | [✓ / ✗] | Review memos saved locally; seed-doc pulls done manually |
+| Slack                                  | [✓ / ✗] | Triage replies delivered inline instead of posted        |
 
-*Re-check: `/product-legal:cold-start-interview --check-integrations`*
+_Re-check: `/product-legal:cold-start-interview --check-integrations`_
 
 ---
 
@@ -363,36 +373,36 @@ Toggle the header off for externally-facing deliverables (public FAQs, customer-
 
 ## Review framework
 
-*Categories checked on every launch (extracted from seed docs + interview):*
+_Categories checked on every launch (extracted from seed docs + interview):_
 
 1. **[Category]** — [what you check, what triggers escalation]
 2. **[Category]** — [...]
-[etc. — use their categories if they have them; offer the 7-cat framework
-from launch-review skill if they don't]
+   [etc. — use their categories if they have them; offer the 7-cat framework
+   from launch-review skill if they don't]
 
 ---
 
 ## Risk calibration
 
-*Learned from [N] past launch reviews. This is what P0 vs. FYI actually means here.*
+_Learned from [N] past launch reviews. This is what P0 vs. FYI actually means here._
 
 ### Usually blocks
 
-| Pattern | Why it blocks here | Resolution path |
-|---|---|---|
+| Pattern                 | Why it blocks here                      | Resolution path                      |
+| ----------------------- | --------------------------------------- | ------------------------------------ |
 | [e.g., Children's data] | [e.g., COPPA + we're not set up for it] | [Full review, parental consent flow] |
 
 ### Usually requires work but ships
 
-| Pattern | Work required | Typical timeline |
-|---|---|---|
-| [e.g., New data collection] | [PIA] | [1-2 days] |
+| Pattern                     | Work required | Typical timeline |
+| --------------------------- | ------------- | ---------------- |
+| [e.g., New data collection] | [PIA]         | [1-2 days]       |
 
 ### Usually FYI
 
-| Pattern | Why it's fine here | Caveat |
-|---|---|---|
-| [e.g., New vendor already on approved list] | [DPA exists] | [Unless they're touching new data category] |
+| Pattern                                     | Why it's fine here | Caveat                                      |
+| ------------------------------------------- | ------------------ | ------------------------------------------- |
+| [e.g., New vendor already on approved list] | [DPA exists]       | [Unless they're touching new data category] |
 
 ---
 
@@ -407,11 +417,11 @@ from launch-review skill if they don't]
 
 ## Escalation
 
-| Trigger | Escalates to | Via |
-|---|---|---|
-| [Pattern from "usually blocks"] | [GC] | [method] |
-| Novel issue not in calibration table | [You, then GC if unclear] | |
-| Regulatory inquiry tied to a launch | [GC immediately] | |
+| Trigger                              | Escalates to              | Via      |
+| ------------------------------------ | ------------------------- | -------- |
+| [Pattern from "usually blocks"]      | [GC]                      | [method] |
+| Novel issue not in calibration table | [You, then GC if unclear] |          |
+| Regulatory inquiry tied to a launch  | [GC immediately]          |          |
 
 ---
 
@@ -425,13 +435,13 @@ from launch-review skill if they don't]
 
 ## Seed reviews
 
-| Launch | Date | Call | Notes |
-|---|---|---|---|
+| Launch | Date   | Call                                          | Notes          |
+| ------ | ------ | --------------------------------------------- | -------------- |
 | [name] | [date] | [blocked / shipped / shipped with conditions] | [key learning] |
 
 ---
 
-*Re-run: `/product-legal:cold-start-interview --redo`*
+_Re-run: `/product-legal:cold-start-interview --redo`_
 ```
 
 ## After writing
@@ -451,7 +461,6 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Run `/is-this-a-problem` on one PM question you already answered — see if the answer matches how you calibrated it. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
-
 
 1. **Show the calibration table.** "This is what I learned from your past reviews — does this match your sense of what blocks and what doesn't?"
 

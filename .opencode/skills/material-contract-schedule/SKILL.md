@@ -6,7 +6,7 @@ description: >
   per the agreement's schedule format. Use when user says "build the contracts
   schedule", "disclosure schedule", "schedule 3.X", "material contracts list",
   or when drafting disclosure schedules.
-argument-hint: "[purchase agreement path, or paste the Material Contract definition]"
+argument-hint: '[purchase agreement path, or paste the Material Contract definition]'
 ---
 
 # /material-contract-schedule
@@ -59,12 +59,13 @@ The PA's definition is the test. Apply it mechanically — every contract that m
 
 For each contract reviewed in diligence:
 
-| Contract | Meets prong(s) | Include |
-|---|---|---|
-| [name] | [$X+ annual value; CoC provision] | Yes |
-| [name] | [none] | No |
+| Contract | Meets prong(s)                    | Include |
+| -------- | --------------------------------- | ------- |
+| [name]   | [$X+ annual value; CoC provision] | Yes     |
+| [name]   | [none]                            | No      |
 
 **Edge cases to flag for human decision:**
+
 - Contract is $X-1 (just under threshold) but important to the business
 - Contract meets a prong but is being terminated anyway
 - Oral agreements or side letters that may or may not count
@@ -73,16 +74,16 @@ For each contract reviewed in diligence:
 
 For each included contract, the schedule typically needs:
 
-| Field | Source |
-|---|---|
-| Counterparty name | Contract |
-| Contract title/type | Contract |
-| Date | Contract |
-| Term / expiration | Contract |
-| Annual/total value | Contract or management data |
-| Which materiality prong it meets | Step 2 analysis |
-| Consent required for the deal | Diligence finding |
-| VDR reference | Diligence inventory |
+| Field                            | Source                      |
+| -------------------------------- | --------------------------- |
+| Counterparty name                | Contract                    |
+| Contract title/type              | Contract                    |
+| Date                             | Contract                    |
+| Term / expiration                | Contract                    |
+| Annual/total value               | Contract or management data |
+| Which materiality prong it meets | Step 2 analysis             |
+| Consent required for the deal    | Diligence finding           |
+| VDR reference                    | Diligence inventory         |
 
 Pull from existing diligence extractions. If a field is missing, flag it — don't guess.
 
@@ -120,10 +121,9 @@ Separately (not in the schedule itself — this is internal), track which schedu
 
 > The consent overlay and any pre-delivery working draft of the schedule are derived from privileged diligence materials and inherit their privilege and confidentiality status — distribution beyond the privilege circle can waive privilege. The schedule itself, once delivered as an exhibit to the executed PA, is a deal document and is not privileged; strip any internal annotations before delivery.
 
-
-| Schedule # | Counterparty | Consent required | Status | Owner | Due |
-|---|---|---|---|---|---|
-| 3.X(a)(1) | [name] | Yes — CoC §12.2 | Requested | [name] | [date] |
+| Schedule # | Counterparty | Consent required | Status    | Owner  | Due    |
+| ---------- | ------------ | ---------------- | --------- | ------ | ------ |
+| 3.X(a)(1)  | [name]       | Yes — CoC §12.2  | Requested | [name] | [date] |
 
 This feeds closing-checklist.
 

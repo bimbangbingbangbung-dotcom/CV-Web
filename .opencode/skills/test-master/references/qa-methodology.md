@@ -3,18 +3,21 @@
 ## Manual Testing Types
 
 ### Exploratory Testing
+
 ```markdown
 **Charter**: Explore {feature} with focus on {aspect}
 **Duration**: 60-90 min
 **Mission**: Find defects in {specific functionality}
 
 Test Ideas:
+
 - Boundary conditions & edge cases
 - Error handling & recovery
 - User workflow variations
 - Integration points
 
 Findings:
+
 1. [HIGH] {Issue + impact}
 2. [MED] {Issue + impact}
 
@@ -22,29 +25,32 @@ Coverage: {Areas explored} | Risks: {Identified risks}
 ```
 
 ### Usability Testing
+
 ```markdown
 **Task**: Can users complete {action} intuitively?
 **Metrics**: Time to complete, errors made, satisfaction (1-5)
 **Success**: 80% complete without help in <5 min
 
 Observations:
+
 - Navigation confusing at {step}
 - Users expect {A} but get {B}
 - Positive: {feature feedback}
 ```
 
 ### Accessibility Testing (WCAG 2.1 AA)
+
 ```typescript
 test('accessibility compliance', async ({ page }) => {
   // Keyboard navigation
   await page.keyboard.press('Tab');
   expect(['A', 'BUTTON', 'INPUT']).toContain(
-    await page.evaluate(() => document.activeElement.tagName)
+    await page.evaluate(() => document.activeElement.tagName),
   );
-  
+
   // ARIA labels
   expect(await page.getByRole('button').first().getAttribute('aria-label')).toBeTruthy();
-  
+
   // Color contrast (axe-core)
   const violations = await page.evaluate(async () => {
     const axe = await import('axe-core');
@@ -55,8 +61,10 @@ test('accessibility compliance', async ({ page }) => {
 ```
 
 ### Localization Testing
+
 ```markdown
 **Test**: {Feature} in {language/locale}
+
 - [ ] Text displays without truncation
 - [ ] Date/time/currency formats correct
 - [ ] Right-to-left layout (Arabic, Hebrew)
@@ -65,6 +73,7 @@ test('accessibility compliance', async ({ page }) => {
 ```
 
 ### Compatibility Matrix
+
 ```markdown
 | Browser | Version | OS | Status |
 |---------|---------|----|----- --|
@@ -77,6 +86,7 @@ test('accessibility compliance', async ({ page }) => {
 ## Test Design Techniques
 
 ### Pairwise Testing
+
 ```typescript
 // Test all parameter pairs efficiently
 const pairwiseTests = [
@@ -88,18 +98,20 @@ const pairwiseTests = [
 ```
 
 ### Risk-Based Testing
+
 ```markdown
-| Risk | Probability | Impact | Priority | Test Effort |
-|------|-------------|--------|----------|-------------|
-| Critical | High | High | P0 | Exhaustive |
-| High | Med-High | High | P1 | Comprehensive |
-| Medium | Low-Med | Med | P2 | Standard |
-| Low | Low | Low | P3 | Smoke only |
+| Risk     | Probability | Impact | Priority | Test Effort   |
+| -------- | ----------- | ------ | -------- | ------------- |
+| Critical | High        | High   | P0       | Exhaustive    |
+| High     | Med-High    | High   | P1       | Comprehensive |
+| Medium   | Low-Med     | Med    | P2       | Standard      |
+| Low      | Low         | Low    | P3       | Smoke only    |
 ```
 
 ## Defect Management
 
 ### Root Cause Analysis (5 Whys)
+
 ```markdown
 1. Why did defect occur? {User input not validated}
 2. Why wasn't it validated? {Validation logic missing}
@@ -112,10 +124,12 @@ const pairwiseTests = [
 ```
 
 ### Defect Report Template
+
 ```markdown
 ## [CRITICAL] {Defect Title}
 
 **Steps to Reproduce**:
+
 1. {Step 1}
 2. {Step 2}
 
@@ -129,6 +143,7 @@ const pairwiseTests = [
 ## Quality Metrics
 
 ### Key Calculations
+
 ```typescript
 // Defect Removal Efficiency (target: >95%)
 const dre = (defectsInTesting / (defectsInTesting + defectsInProd)) * 100;
@@ -144,21 +159,24 @@ const roi = (timeSaved - maintenanceCost - developmentCost) / developmentCost;
 ```
 
 ### Quality Dashboard
+
 ```markdown
-| Metric | Target | Actual | Trend | Status |
-|--------|--------|--------|-------|--------|
-| Coverage | >80% | 87% | ↑ | ✓ |
-| Defect Leakage | <5% | 3% | ↓ | ✓ |
-| Automation | >70% | 68% | ↑ | ⚠ |
-| Critical Defects | 0 | 0 | → | ✓ |
-| MTTR | <48h | 36h | ↓ | ✓ |
+| Metric           | Target | Actual | Trend | Status |
+| ---------------- | ------ | ------ | ----- | ------ |
+| Coverage         | >80%   | 87%    | ↑     | ✓      |
+| Defect Leakage   | <5%    | 3%     | ↓     | ✓      |
+| Automation       | >70%   | 68%    | ↑     | ⚠      |
+| Critical Defects | 0      | 0      | →     | ✓      |
+| MTTR             | <48h   | 36h    | ↓     | ✓      |
 ```
 
 ## Continuous Testing & Shift-Left
 
 ### Shift-Left Activities
+
 ```markdown
 **Early Testing**:
+
 - Review requirements for testability
 - Create test cases during design
 - TDD: unit tests with code
@@ -170,22 +188,25 @@ const roi = (timeSaved - maintenanceCost - developmentCost) / developmentCost;
 ```
 
 ### Feedback Cycle Targets
+
 ```typescript
 const feedbackCycle = {
-  unitTests: '< 5 min',       // On save
-  integration: '< 15 min',    // On commit
-  e2e: '< 30 min',            // On PR
-  regression: '< 2 hours',    // Nightly
+  unitTests: '< 5 min', // On save
+  integration: '< 15 min', // On commit
+  e2e: '< 30 min', // On PR
+  regression: '< 2 hours', // Nightly
 };
 ```
 
 ## Quality Advocacy
 
 ### Quality Gates
+
 ```markdown
 ## Production Release Gate
 
 **Must Pass (Blockers)**:
+
 - [ ] Zero critical defects
 - [ ] Coverage >80%
 - [ ] All P0/P1 tests passing
@@ -197,6 +218,7 @@ const feedbackCycle = {
 ```
 
 ### Team Education Program
+
 ```markdown
 **Week 1-2**: Test fundamentals
 **Week 3-4**: Automation basics
@@ -207,6 +229,7 @@ const feedbackCycle = {
 ## Test Planning
 
 ### Test Plan Template
+
 ```markdown
 ## Test Plan: {Feature}
 
@@ -221,27 +244,28 @@ const feedbackCycle = {
 ```
 
 ### Environment Strategy
+
 ```markdown
-| Env | Purpose | Data | Refresh | Access |
-|-----|---------|------|---------|--------|
-| Dev | Development | Synthetic | On-demand | All |
-| Test | QA testing | Test data | Daily | QA |
-| Stage | Pre-prod | Prod-like | Weekly | Limited |
-| Prod | Live | Real | N/A | Ops |
+| Env   | Purpose     | Data      | Refresh   | Access  |
+| ----- | ----------- | --------- | --------- | ------- |
+| Dev   | Development | Synthetic | On-demand | All     |
+| Test  | QA testing  | Test data | Daily     | QA      |
+| Stage | Pre-prod    | Prod-like | Weekly    | Limited |
+| Prod  | Live        | Real      | N/A       | Ops     |
 ```
 
 ## Quick Reference
 
-| Testing Type | When | Duration |
-|--------------|------|----------|
-| Exploratory | New features | 60-120 min |
-| Usability | UI changes | 2-4 hours |
-| Accessibility | Every release | 1-2 hours |
-| Localization | Multi-region | 1 day/locale |
+| Testing Type  | When          | Duration     |
+| ------------- | ------------- | ------------ |
+| Exploratory   | New features  | 60-120 min   |
+| Usability     | UI changes    | 2-4 hours    |
+| Accessibility | Every release | 1-2 hours    |
+| Localization  | Multi-region  | 1 day/locale |
 
-| Metric | Excellent | Good | Needs Work |
-|--------|-----------|------|------------|
-| Coverage | >90% | 70-90% | <70% |
-| Leakage | <2% | 2-5% | >5% |
-| Automation | >80% | 60-80% | <60% |
-| MTTR | <24h | 24-48h | >48h |
+| Metric     | Excellent | Good   | Needs Work |
+| ---------- | --------- | ------ | ---------- |
+| Coverage   | >90%      | 70-90% | <70%       |
+| Leakage    | <2%       | 2-5%   | >5%        |
+| Automation | >80%      | 60-80% | <60%       |
+| MTTR       | <24h      | 24-48h | >48h       |

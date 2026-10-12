@@ -5,7 +5,7 @@ description: >
   (receive mode). Use when asserting your rights against an infringer with a
   demand letter calibrated to your enforcement posture, or when an incoming
   C&D needs triage into a structured options memo with a recommendation.
-argument-hint: "<--send | --receive> [context, counterparty, or path to incoming letter]"
+argument-hint: '<--send | --receive> [context, counterparty, or path to incoming letter]'
 ---
 
 # /cease-desist
@@ -149,7 +149,7 @@ Matter-level overrides in `matter.md` beat the practice default.
 
 ### Step 5.5: Counterparty diligence — REQUIRED PRECONDITION
 
-**Before drafting, run counterparty diligence and present the results to the user.** This is not conditional on "if the counterparty looks big." Every C&D assertion carries DJ / fee-shifting / bad-faith exposure calibrated to *who* the recipient is. The skill does not draft a C&D until the user has seen the diligence and confirmed they still want to pick this fight.
+**Before drafting, run counterparty diligence and present the results to the user.** This is not conditional on "if the counterparty looks big." Every C&D assertion carries DJ / fee-shifting / bad-faith exposure calibrated to _who_ the recipient is. The skill does not draft a C&D until the user has seen the diligence and confirmed they still want to pick this fight.
 
 Collect and present — in one block, for user sign-off — the following:
 
@@ -330,31 +330,37 @@ Not a legal opinion — a structured read:
 Present 4-5 options with tradeoffs:
 
 **A — Comply quickly**
+
 - When: the claim is colorable, compliance is cheap, and the fight isn't worth it
 - Tradeoff: establishes a concession they may point to later; may embolden future assertions
 - Next step: confirm compliance in writing (narrow), do not concede broader theory
 
 **B — Negotiate**
+
 - When: there's a middle-ground business deal (license, coexistence, rebranding timeline) that resolves it
 - Tradeoff: commits time; requires care on settlement-communication posture (FRE 408 or state equivalent; protection attaches from substance and context, not labeling alone)
 - Next step: holding letter + opening negotiation track
 
 **C — Respond firmly (reject)**
+
 - When: their claim is weak, overbroad, or factually wrong; we want to close this down without litigating
 - Tradeoff: locks in a position; if the claim is in fact colorable, our response becomes an exhibit
 - Next step: draft a response letter — consider running it through `/ip-legal:cease-desist --send` reframed as a response
 
 **D — Ignore (and preserve)**
+
 - When: the claim is frivolous, the sender has no apparent capacity to sue, the deadline has no legal consequence
 - Tradeoff: silence can be used as non-denial in some contexts; legal hold required regardless; risk that filing follows
 - Next step: issue legal hold via matter-level process; log the demand; move on
 
 **E — Pre-empt with a DJ action or cancellation**
+
 - When: we face real business uncertainty, the claim is weak, and we benefit from our own forum
 - Tradeoff: we go on offense; budget and leadership sign-off required; now there's a lawsuit
 - Next step: escalate to outside counsel per practice profile, do not draft
 
 **F — File to cancel their mark (TTAB) or invalidate their copyright registration**
+
 - When: their rights themselves are vulnerable and we want to take the instrument off the board
 - Tradeoff: slow, expensive, public; separate from the dispute itself
 - Next step: escalate to outside counsel
@@ -418,26 +424,32 @@ Output: `<matter-folder>/cease-desist/inbound/<slug>/triage.md` (or at practice 
 - **Sender credibility:** [troll / real claimant / repeat plaintiff — with any public-docket evidence]
 - **Collateral stakes:** [brand, customers, precedent]
 
-**Triage rating:** [substantial / debatable / weak / frivolous] — *structured read for routing, not a merit opinion; `[SME VERIFY]`*
+**Triage rating:** [substantial / debatable / weak / frivolous] — _structured read for routing, not a merit opinion; `[SME VERIFY]`_
 
 ## Options
 
 ### A. Comply quickly
+
 [Rationale, tradeoffs, next step]
 
 ### B. Negotiate
+
 [Rationale, tradeoffs, next step]
 
 ### C. Respond firmly
+
 [Rationale, tradeoffs, next step]
 
 ### D. Ignore + preserve
+
 [Rationale, tradeoffs, next step]
 
 ### E. Pre-empt (DJ)
+
 [Rationale, tradeoffs, next step]
 
 ### F. File to cancel / invalidate
+
 [Rationale, tradeoffs, next step]
 
 **Recommendation:** [A/B/C/D/E/F] — [two sentences why] — `[SME VERIFY: counsel to confirm before executing]`
@@ -460,13 +472,16 @@ Output: `<matter-folder>/cease-desist/inbound/<slug>/triage.md` (or at practice 
 **Privilege inheritance block — pick by role and matter type.** Read `## Who's using this` (Role) in the plugin config and the matter type (trademark / copyright / patent / OSS / other). This triage records a first-pass merit read on an adverse assertion; whether it's actually privileged depends on who prepared it and what it's about. Getting this wrong in either direction is harmful — a false "privileged" marking creates a discoverable admission that reads as a concession; under-marking a genuinely privileged memo can waive the protection. Insert exactly one of the following:
 
 - **Role = Lawyer / legal professional:**
+
   > **Privilege inheritance.** This triage records our first-pass merit read and response posture on an adverse assertion. It is attorney-client and/or work-product material. Do not forward, attach to an insurance tender without scrubbing, or share with counterparty. Store with privileged matter material and mark per house privilege conventions.
 
 - **Role = Registered patent agent, matter is a patent matter before the USPTO:**
-  > **Privilege (patent agent-client).** This triage is privileged under the federal patent agent-client privilege recognized in *In re Queen's University at Kingston*, 820 F.3d 1287 (Fed. Cir. 2016), because it relates to a matter reasonably necessary and incident to the prosecution of patents before the USPTO. That privilege is narrow: it does not extend to matters outside USPTO practice. Do not forward, attach to an insurance tender without scrubbing, or share with counterparty. Bring to supervising counsel for matter-specific privilege decisions.
+
+  > **Privilege (patent agent-client).** This triage is privileged under the federal patent agent-client privilege recognized in _In re Queen's University at Kingston_, 820 F.3d 1287 (Fed. Cir. 2016), because it relates to a matter reasonably necessary and incident to the prosecution of patents before the USPTO. That privilege is narrow: it does not extend to matters outside USPTO practice. Do not forward, attach to an insurance tender without scrubbing, or share with counterparty. Bring to supervising counsel for matter-specific privilege decisions.
 
 - **Role = Registered patent agent, matter is NOT a patent matter** (trademark, copyright, OSS, trade secret, contract, or anything else outside USPTO practice):
-  > **CONFIDENTIAL — NOT PRIVILEGED.** This triage is not privileged because a registered patent agent's privilege is limited to patent prosecution before the USPTO (*In re Queen's University at Kingston*, 820 F.3d 1287 (Fed. Cir. 2016)). A trademark, copyright, OSS, or other non-patent matter falls outside that privilege. Treat this document as confidential, store it with care, bring it to counsel, and let counsel mark it. Do not forward it as a privileged document.
+
+  > **CONFIDENTIAL — NOT PRIVILEGED.** This triage is not privileged because a registered patent agent's privilege is limited to patent prosecution before the USPTO (_In re Queen's University at Kingston_, 820 F.3d 1287 (Fed. Cir. 2016)). A trademark, copyright, OSS, or other non-patent matter falls outside that privilege. Treat this document as confidential, store it with care, bring it to counsel, and let counsel mark it. Do not forward it as a privileged document.
 
 - **Role = Non-lawyer and not a registered patent agent:**
   > **CONFIDENTIAL — NOT PRIVILEGED.** This document is not privileged unless and until reviewed by a licensed attorney. Treat it as confidential; do not forward to anyone outside the legal review chain; bring it to counsel and let counsel mark it. Forwarding this document as "privileged" before an attorney reviews it does not make it so and can harm you if the matter becomes contested.

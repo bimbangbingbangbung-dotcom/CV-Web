@@ -4,14 +4,14 @@ Act hostile toward the product's assumptions, never toward the author. Begin bla
 
 ## Test actors
 
-| Actor | Behaviors to try |
-|---|---|
-| Impatient | double-click, repeat submit, simultaneous parallel submits, back, refresh, abandon and resume |
-| Mistaken | empty, malformed, stale, expired, oversized, and contradictory input |
-| Multi-state | multiple tabs, devices, sessions, roles, tenants, and out-of-order responses |
-| Bad network | slow request, timeout, disconnect, retry, duplicated response, stale cache |
-| Boundary seeker | change identifiers, cross ownership, bypass UI, inject input, access deleted/private state |
-| Lifecycle user | sign up, upgrade, cancel, delete, restore, export, renew, and re-register |
+| Actor               | Behaviors to try                                                                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Impatient           | double-click, repeat submit, simultaneous parallel submits, back, refresh, abandon and resume                                                                       |
+| Mistaken            | empty, malformed, stale, expired, oversized, and contradictory input                                                                                                |
+| Multi-state         | multiple tabs, devices, sessions, roles, tenants, and out-of-order responses                                                                                        |
+| Bad network         | slow request, timeout, disconnect, retry, duplicated response, stale cache                                                                                          |
+| Boundary seeker     | change identifiers, cross ownership, bypass UI, inject input, access deleted/private state                                                                          |
+| Lifecycle user      | sign up, upgrade, cancel, delete, restore, export, renew, and re-register                                                                                           |
 | Consistency checker | meet the same state, action, status, or product fact across screens, dialogs, empty/loading/error surfaces, internal docs, machine-facing guidance, and public help |
 
 Select only actors relevant to the product promise. Do not spray every payload at every field.
@@ -35,14 +35,14 @@ After the selected journeys, compare surfaces. One state, status, action, or act
 
 ## Hostile-user rubric
 
-| Dimension | Weight |
-|---|---:|
-| Core journey under misuse | 20 |
-| State integrity under retry and concurrency | 20 |
-| Identity, ownership, and privacy boundaries | 20 |
-| Failure clarity and user recovery | 15 |
-| Lifecycle completeness | 10 |
-| Accessibility and input resilience | 10 |
-| Cross-surface consistency | 5 |
+| Dimension                                   | Weight |
+| ------------------------------------------- | -----: |
+| Core journey under misuse                   |     20 |
+| State integrity under retry and concurrency |     20 |
+| Identity, ownership, and privacy boundaries |     20 |
+| Failure clarity and user recovery           |     15 |
+| Lifecycle completeness                      |     10 |
+| Accessibility and input resilience          |     10 |
+| Cross-surface consistency                   |      5 |
 
 Prioritize surprising failure chains over a high number of isolated defects. A polished UI with a cross-tenant leak is blocked; a rough but bounded prototype can still be suitable for a controlled beta.

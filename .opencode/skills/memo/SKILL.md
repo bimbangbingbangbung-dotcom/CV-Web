@@ -6,7 +6,7 @@ description: >
   is STUDENT ANALYSIS prompts, Conclusion is blank. Use when a student needs
   to scaffold a case analysis memo, write up their analysis, or build an
   IRAC memo for a case.
-argument-hint: "[optional: specific issue to focus]"
+argument-hint: '[optional: specific issue to focus]'
 ---
 
 # /memo
@@ -67,13 +67,13 @@ For each issue:
 **Rule:** This is a research gap, not a conclusion. State what the student needs to find:
 
 > `[RESEARCH NEEDED: [State] habitability doctrine — warranty of habitability
-> elements, what conditions qualify, remedies available including rent offset.
-> Start with: [State] landlord-tenant statute, then case law on heater/heat
-> specifically. See /research-start for a roadmap.]`
+elements, what conditions qualify, remedies available including rent offset.
+Start with: [State] landlord-tenant statute, then case law on heater/heat
+specifically. See /research-start for a roadmap.]`
 
 If the skill has high confidence in the general rule framework (e.g., "most states recognize an implied warranty of habitability"), state that as a framework starting point — **but explicitly mark it as unverified**:
 
-> *Framework (unverified — confirm for [State]):* Most jurisdictions recognize
+> _Framework (unverified — confirm for [State]):_ Most jurisdictions recognize
 > an implied warranty of habitability requiring landlords to maintain
 > conditions fit for human occupation. Breach may give rise to rent withholding,
 > repair-and-deduct, or rent abatement.
@@ -82,6 +82,7 @@ If the skill has high confidence in the general rule framework (e.g., "most stat
 **Application:** This is where the student's analysis goes. Scaffold the structure, don't fill it:
 
 > `[STUDENT ANALYSIS: Apply the rule to the facts. Key facts to address:
+>
 > - Heater broken since November — how long is "unreasonable"?
 > - Client notified landlord [when? how? documented?]
 > - Landlord's response or lack thereof
@@ -93,20 +94,23 @@ List the facts that matter. Let the student do the applying.
 **Conclusion:** Explicitly blank:
 
 > `[STUDENT CONCLUSION: Based on your research and analysis above, what's the
-> likely outcome? How strong is this defense? What are the weaknesses?]`
+likely outcome? How strong is this defense? What are the weaknesses?]`
 
 ### Step 3: Identify strengths, weaknesses, open questions
 
 Separate section, after the IRAC blocks:
 
 **Strengths (apparent from facts — student should test these):**
+
 - [Fact that seems helpful and why]
 
 **Weaknesses (apparent from facts — student should assess how serious):**
+
 - [Fact that seems harmful and why]
 - `[UNCERTAIN: whether [X] is actually a weakness — depends on [State] rule on [Y]]`
 
 **Open questions (things the memo can't answer without more info):**
+
 - Factual: [what we don't know from the client]
 - Legal: [what needs research]
 - Strategic: [judgment calls for the student/professor]
@@ -115,9 +119,9 @@ Separate section, after the IRAC blocks:
 
 ```markdown
 ═══════════════════════════════════════════════════════════════════════
-  AI-ASSISTED SCAFFOLD — THE ANALYSIS IS YOURS TO WRITE
-  Every [RESEARCH NEEDED] and [STUDENT ANALYSIS] block is a prompt, not
-  a placeholder to delete. The thinking happens when you fill them in.
+AI-ASSISTED SCAFFOLD — THE ANALYSIS IS YOURS TO WRITE
+Every [RESEARCH NEEDED] and [STUDENT ANALYSIS] block is a prompt, not
+a placeholder to delete. The thinking happens when you fill them in.
 ═══════════════════════════════════════════════════════════════════════
 
 # Case Analysis Memo: [Client] — [Matter]
@@ -207,4 +211,3 @@ blocks are still empty is a memo that hasn't been written yet.
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
-

@@ -6,7 +6,7 @@ description: >
   asset, recording a maintenance filing, or auditing the register for gaps,
   lapses, and use-in-commerce questions. Receives handoffs from prosecution
   and clearance work.
-argument-hint: "[--report [--days N] | --add | --update | --audit]"
+argument-hint: '[--report [--days N] | --add | --update | --audit]'
 ---
 
 # /portfolio
@@ -166,72 +166,73 @@ Structure:
 # relevant registry or the IP management system of record before acting.
 
 metadata:
-  company: "[Company Name]"
-  generated: "[date]"
-  last_updated: "[date]"
-  last_audit: "[date or null]"
-  source_system: "[Anaqua / CPA Global / manual / none]"
+  company: '[Company Name]'
+  generated: '[date]'
+  last_updated: '[date]'
+  last_audit: '[date or null]'
+  source_system: '[Anaqua / CPA Global / manual / none]'
 
-custom_rules:   # non-built-in jurisdictions captured manually
+custom_rules: # non-built-in jurisdictions captured manually
   []
 
 assets:
-  - id: "TM-US-001"
-    type: "trademark"                          # trademark / patent / copyright / design / domain
-    jurisdiction: "US"
-    mark_or_title: "[Mark or title]"
-    owner: "[Record owner — registered entity name]"
-    status: "registered"                       # pending / registered / lapsed / abandoned / cancelled
-    application_number: "[number or null]"
-    registration_number: "[number or null]"
-    classes: ["9", "42"]                       # Nice classes for TM; CPC/IPC for patents; null otherwise
-    filing_date: "[YYYY-MM-DD or null]"
-    registration_date: "[YYYY-MM-DD or null]"
-    priority_date: "[YYYY-MM-DD or null]"
-    grant_date: "[YYYY-MM-DD or null]"         # patents
-    next_deadlines:                            # computed; refreshed on --report and --audit
-      - type: "§8 Declaration of Use"
-        due_date: "[YYYY-MM-DD]"
-        grace_end: "[YYYY-MM-DD or null]"
-        basis: "5th-6th anniversary of registration"
-        action: "File §8 Declaration of Use (or excusable nonuse)"
-        status: "upcoming"                     # upcoming / due_soon / overdue / grace / filed
-    use_in_commerce: true                      # TM only — drives §8 analysis
-    agent_managed: false                       # true for foreign associate / outside counsel managed
+  - id: 'TM-US-001'
+    type: 'trademark' # trademark / patent / copyright / design / domain
+    jurisdiction: 'US'
+    mark_or_title: '[Mark or title]'
+    owner: '[Record owner — registered entity name]'
+    status: 'registered' # pending / registered / lapsed / abandoned / cancelled
+    application_number: '[number or null]'
+    registration_number: '[number or null]'
+    classes: ['9', '42'] # Nice classes for TM; CPC/IPC for patents; null otherwise
+    filing_date: '[YYYY-MM-DD or null]'
+    registration_date: '[YYYY-MM-DD or null]'
+    priority_date: '[YYYY-MM-DD or null]'
+    grant_date: '[YYYY-MM-DD or null]' # patents
+    next_deadlines: # computed; refreshed on --report and --audit
+      - type: '§8 Declaration of Use'
+        due_date: '[YYYY-MM-DD]'
+        grace_end: '[YYYY-MM-DD or null]'
+        basis: '5th-6th anniversary of registration'
+        action: 'File §8 Declaration of Use (or excusable nonuse)'
+        status: 'upcoming' # upcoming / due_soon / overdue / grace / filed
+    use_in_commerce: true # TM only — drives §8 analysis
+    agent_managed: false # true for foreign associate / outside counsel managed
     local_agent: null
-    docket_id: "[IP-mgmt-system ID or null]"
-    outside_counsel: "[firm or null]"
-    business_owner: "[email or team]"
-    notes: ""
+    docket_id: '[IP-mgmt-system ID or null]'
+    outside_counsel: '[firm or null]'
+    business_owner: '[email or team]'
+    notes: ''
 
-  - id: "PAT-US-001"
-    type: "patent"
-    jurisdiction: "US"
-    mark_or_title: "[Invention title]"
-    owner: "[Owner]"
-    status: "granted"
-    application_number: "[number]"
-    registration_number: "[patent number]"
-    filing_date: "[YYYY-MM-DD]"
-    grant_date: "[YYYY-MM-DD]"
-    priority_date: "[YYYY-MM-DD or null]"
-    expiration_date: "[YYYY-MM-DD]"            # 20 years from earliest non-provisional filing
+  - id: 'PAT-US-001'
+    type: 'patent'
+    jurisdiction: 'US'
+    mark_or_title: '[Invention title]'
+    owner: '[Owner]'
+    status: 'granted'
+    application_number: '[number]'
+    registration_number: '[patent number]'
+    filing_date: '[YYYY-MM-DD]'
+    grant_date: '[YYYY-MM-DD]'
+    priority_date: '[YYYY-MM-DD or null]'
+    expiration_date: '[YYYY-MM-DD]' # 20 years from earliest non-provisional filing
     next_deadlines:
-      - type: "3.5-year maintenance fee"
-        due_date: "[YYYY-MM-DD]"
-        grace_end: "[YYYY-MM-DD]"
-        basis: "3.5 years from grant"
-        action: "Pay maintenance fee (small/micro entity if applicable)"
-        status: "upcoming"
+      - type: '3.5-year maintenance fee'
+        due_date: '[YYYY-MM-DD]'
+        grace_end: '[YYYY-MM-DD]'
+        basis: '3.5 years from grant'
+        action: 'Pay maintenance fee (small/micro entity if applicable)'
+        status: 'upcoming'
     claims_count: 20
-    entity_size: "large"                       # large / small / micro (drives USPTO fees)
+    entity_size: 'large' # large / small / micro (drives USPTO fees)
     docket_id: null
     outside_counsel: null
     business_owner: null
-    notes: ""
+    notes: ''
 ```
 
 Status values for `next_deadlines`:
+
 - `upcoming` — more than 90 days out
 - `due_soon` — due within 90 days, not yet filed
 - `overdue` — past the primary due date, within grace window (if any)
@@ -248,6 +249,7 @@ Run when no register exists, or with `--rebuild`.
 ### Step 1: Determine the source
 
 Read `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`:
+
 - **IP management system connected** (Anaqua, CPA Global, etc.): pull the portfolio via its integration. The IP system is the authoritative source; this register mirrors it and adds no deadlines the system doesn't already have.
 - **No IP management system, but spreadsheet / export available:** ask the user to share the export. Import what's present; flag any asset missing a registration or grant date as `unknown` for deadline computation.
 - **Nothing at hand:** walk through assets interactively — type, jurisdiction, number, key dates, owner.
@@ -260,6 +262,7 @@ decades away) are computed on demand during reports rather than stored
 speculatively.
 
 **For assets the skill cannot confidently schedule:**
+
 - Unknown jurisdiction rules → add a stub under `custom_rules` and flag the
   asset `agent_managed: true` with a TODO to confirm with the foreign associate.
 - Missing dates needed for computation (no grant date for a patent, no
@@ -332,7 +335,7 @@ SUMMARY
   Last audit: [date]
 ```
 
-Close the report with the caveat line: *"Computed from portfolio register. Verify each deadline against the USPTO/WIPO/registry of record before filing or paying."*
+Close the report with the caveat line: _"Computed from portfolio register. Verify each deadline against the USPTO/WIPO/registry of record before filing or paying."_
 
 If the report lists more than ~10 assets, or any time the user asks: offer the dashboard (see CLAUDE.md `## Outputs → Dashboard offer for data-heavy outputs`). Shape the offer for this output — counts by registration status (live / in grace / lapsed / pending), a deadline timeline, and a sortable portfolio table with jurisdiction, type, and next-action date.
 
@@ -345,6 +348,7 @@ If the report lists more than ~10 assets, or any time the user asks: offer the d
 ```
 
 Interactive add of a single asset. Ask for:
+
 1. Type (trademark / patent / copyright / design / domain)
 2. Jurisdiction
 3. Mark or title / invention name
@@ -357,6 +361,7 @@ Interactive add of a single asset. Ask for:
 10. Business owner (who does this matter to — product line, brand manager)
 
 After capture:
+
 - Compute next deadlines per the rules at the top of this file.
 - If jurisdiction rules aren't built in, walk through the `custom_rules` capture flow (see below).
 - Append to `assets:` in `portfolio.yaml`.
@@ -437,6 +442,7 @@ system doesn't.
 Broader health check beyond this month's deadlines:
 
 **Deadline hygiene**
+
 - Any deadlines in `grace` status right now? (In progress but surcharge-costing.)
 - Any `lapsed` assets that aren't marked `abandoned` or `cancelled`? Either
   revive or update status.
@@ -444,28 +450,33 @@ Broader health check beyond this month's deadlines:
   jurisdiction the skill doesn't know.
 
 **Registration gaps**
+
 - Trademark applications filed more than 18 months ago still `pending`?
   Flag for status check at the office — may need response to an action.
 - Patents filed more than 4 years ago still `pending`? Flag for prosecution
   check.
 
 **Use-in-commerce (TM only)**
+
 - §8 approaching on a mark flagged `use_in_commerce: false` or uncertain?
   The §8 requires use; mark needs a use audit before filing or an excusable
   nonuse declaration.
 
 **Ownership hygiene**
+
 - Any assets where the `owner` is not a currently active entity per the
   entity register (if available)? Flag — may need recordal of assignment.
 - Owner name inconsistencies across assets (same entity, different name
   strings)? Surface for cleanup.
 
 **Expiration horizon**
+
 - Any patents expiring in the next 24 months? Even without a maintenance
   deadline, the business may want to know — product planning, continuation
   strategy, licensing window.
 
 **Unwatched assets**
+
 - Any registered marks not on the watch list in CLAUDE.md → Brand protection?
   Flag as a gap for the attorney to decide whether to add.
 

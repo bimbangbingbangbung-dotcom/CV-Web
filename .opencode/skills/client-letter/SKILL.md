@@ -6,7 +6,7 @@ description: >
   elements, supervision routing. NOT substantive advice. Use when a student
   needs to send routine correspondence, an appointment confirmation, a
   document request letter, or a brief status note to a client.
-argument-hint: "[appointment | doc-request | update]"
+argument-hint: '[appointment | doc-request | update]'
 ---
 
 # /client-letter
@@ -62,7 +62,7 @@ Check your jurisdiction's student practice rule for required disclosure language
 
 ### Appointment confirmation
 
-*Review label for the student (not for the client — strip before sending):*
+_Review label for the student (not for the client — strip before sending):_
 `[AI-ASSISTED DRAFT — requires review per plugin config supervision step]`
 
 ```markdown
@@ -88,7 +88,7 @@ Under the supervision of [Supervising Attorney]
 
 ### Document request
 
-*Review label for the student (not for the client — strip before sending):*
+_Review label for the student (not for the client — strip before sending):_
 `[AI-ASSISTED DRAFT — requires review per plugin config supervision step]`
 
 ```markdown
@@ -119,7 +119,7 @@ Under the supervision of [Supervising Attorney]
 
 For routine "we filed it" / "we're waiting" updates. (Fuller status updates → `/status client`.)
 
-*Review label for the student (not for the client — strip before sending):*
+_Review label for the student (not for the client — strip before sending):_
 `[AI-ASSISTED DRAFT — requires review per plugin config supervision step]`
 
 ```markdown

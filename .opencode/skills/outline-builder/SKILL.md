@@ -5,7 +5,7 @@ description: >
   casebook. Scaffolds — it does not write the outline for you. Use when the
   user says "outline [subject]", "add to my outline", "build an outline
   from", or points at class materials.
-argument-hint: "[subject, or point at class notes/casebook section]"
+argument-hint: '[subject, or point at class notes/casebook section]'
 ---
 
 # /outline-builder
@@ -25,6 +25,7 @@ The outline is the thing you study from. **Building it is half the studying** �
 This is a learning-mode skill. Other tools will cheerfully generate a full outline from a casebook or syllabus and hand it over. This one refuses.
 
 **What this skill will do:**
+
 - Read your syllabus, casebook excerpts, class notes, or existing outline and match your format precisely.
 - Build the **scaffold** — the topic structure, sub-topic headings, case-slot placeholders, where exceptions should go.
 - Ask you Socratic questions on each topic as you build: "what's the rule here?", "which case did the professor use?", "what's the exception the casebook hinted at?"
@@ -33,6 +34,7 @@ This is a learning-mode skill. Other tools will cheerfully generate a full outli
 - Flag thin or confused spots and ask you to go back to your notes or casebook.
 
 **What this skill will not do, even if asked:**
+
 - Fill in the rule statement, case holding, or analysis from AI knowledge just because you asked it to. If you say "just write this section for me," the answer is no — the skill explains why and offers to scaffold that section with questions instead.
 - Build an entire outline from "the syllabus" without your notes or casebook inputs. A scaffolded topic tree, yes. Populated rules and cases, no — that's the learning work.
 - Invent rules to avoid leaving a gap. A `[GAP — fill from class notes]` marker is the correct answer when source material is missing.
@@ -80,6 +82,7 @@ If existing outlines exist: read one. Match its structure exactly. Headings, dep
 ### Step 1: Inputs
 
 What are we building from?
+
 - Class notes
 - Casebook sections
 - Case briefs (from case-brief skill or the student's own)
@@ -103,6 +106,7 @@ Never skip the scaffold step and just generate a populated outline. That is the 
 Per the student's format. Common formats:
 
 **Traditional outline:**
+
 ```
 I. [Major topic]
    A. [Subtopic]
@@ -113,6 +117,7 @@ I. [Major topic]
 ```
 
 **Rules-only (bar prep style):**
+
 ```
 ## [Topic]
 - [Rule]. [Case cite].
@@ -120,6 +125,7 @@ I. [Major topic]
 ```
 
 **Flowchart-adjacent:**
+
 ```
 [Topic] → Is [element 1] met?
   YES → Is [element 2] met?
@@ -133,6 +139,7 @@ Match theirs.
 ### Step 4: Gaps
 
 Mark where the outline is thin:
+
 - `[NEEDS CASES — rule stated but no illustrating case]`
 - `[CHECK CLASS NOTES — professor may have emphasized something here]`
 - `[EXCEPTION UNCLEAR — casebook mentions an exception, find the rule]`
@@ -147,6 +154,6 @@ In drill-me mode, after building a section: "Okay, close the outline. [Subject] 
 
 ## What this skill does not do
 
-- Replace the student's own synthesis. An outline you didn't build is an outline you won't know. This skill *helps* build — the student should be driving.
+- Replace the student's own synthesis. An outline you didn't build is an outline you won't know. This skill _helps_ build — the student should be driving.
 - Guarantee exam coverage. Outline the whole syllabus; the professor will test whatever they want.
 - **Invent rules to fill gaps.** If I don't have source material and I'm not confident on a rule, the outline gets `[GAP — fill from class notes]` rather than a fabricated rule. Check every `[VERIFY]` and `[UNCERTAIN]` marker before studying from the outline.

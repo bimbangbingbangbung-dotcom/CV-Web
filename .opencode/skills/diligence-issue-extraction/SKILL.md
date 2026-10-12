@@ -5,7 +5,7 @@ description: >
   thresholds, producing findings in house memo format. Use when user says
   "review the data room", "extract issues from [folder]", "diligence review",
   "what's in the VDR", or points at VDR documents.
-argument-hint: "[VDR folder path or category name]"
+argument-hint: '[VDR folder path or category name]'
 ---
 
 # /diligence-issue-extraction
@@ -45,12 +45,12 @@ If VDR MCP (Box/Intralinks/Datasite) is connected, pull the index. Map VDR folde
 ```markdown
 ## VDR Inventory: [Deal code]
 
-| Request category | VDR folder | Docs | Status |
-|---|---|---|---|
-| Corporate & Organizational | /01-Corporate | 45 | Reviewed |
-| Material Contracts | /02-Contracts | 312 | In progress |
-| IP | /03-IP | 89 | Not started |
-| [etc.] | | | |
+| Request category           | VDR folder    | Docs | Status      |
+| -------------------------- | ------------- | ---- | ----------- |
+| Corporate & Organizational | /01-Corporate | 45   | Reviewed    |
+| Material Contracts         | /02-Contracts | 312  | In progress |
+| IP                         | /03-IP        | 89   | Not started |
+| [etc.]                     |               |      |             |
 
 **Gaps:** [Request categories with no VDR content — follow-up request needed]
 ```
@@ -66,6 +66,7 @@ For contracts specifically: sort by stated value (if in filename/metadata) or by
 For each document read, check against the standard diligence concerns for its category:
 
 **Material contracts — standard extraction set:**
+
 - Change of control provision (triggered by this deal? consent required?)
 - Assignment restriction (can the contract move to buyer?)
 - Exclusivity / non-compete (restricts buyer's business?)
@@ -74,24 +75,28 @@ For each document read, check against the standard diligence concerns for its ca
 - Unusual indemnities or liability exposure
 
 **Corporate — standard extraction set:**
+
 - Cap table accuracy, outstanding options/warrants
 - Board consent requirements for the transaction
 - Stockholder agreement restrictions (drags, tags, ROFR)
 - Subsidiary structure and intercompany arrangements
 
 **IP — standard extraction set:**
+
 - Ownership chain (assignments from founders/employees in place?)
 - Open source in the product (copyleft risk)
 - Key IP licensed vs. owned
 - Pending or threatened IP litigation
 
 **Employment — standard extraction set:**
+
 - Change-of-control severance triggers (parachute cost)
 - Key employee retention risk
 - Pending employment litigation
 - Classification risk (contractors who look like employees)
 
 **Litigation — standard extraction set:**
+
 - Pending matters and reserves
 - Threatened claims
 - Regulatory inquiries
@@ -119,6 +124,7 @@ Recommendation: [price adjustment / indemnity / consent required / rep & warrant
 ...then use exactly that. If the seed memo was bullets, write bullets.
 
 **Severity calibration** (if house scheme is R/Y/G):
+
 - 🔴 **Red:** Affects deal value or structure. Change of control requiring major customer consent. Undisclosed material litigation. IP ownership gap.
 - 🟡 **Yellow:** Needs attention, solvable. Consent required but likely obtainable. Open source requiring remediation. Employment classification risk.
 - 🟢 **Green:** Noted for file. Consistent with reps. No action needed beyond the rep.
@@ -167,8 +173,7 @@ Group findings by request list category. Within category, sort by severity.
   - **Consents from counterparties** — change-of-control, anti-assignment, MFN-triggering consents.
   - **Releases, terminations, or pay-offs** — employment releases tied to change-of-control, payoff letters, lien releases.
   - **Escrow / holdback mechanics** — if extraction surfaces an indemnity escrow, R&W insurance deliverable, or holdback tied to a specific issue.
-  Every finding with a pre-closing action tag should reach closing-checklist, not just the ones labeled "consent." If a finding sits in the gray zone (might need a closing action, might be a post-closing covenant), hand it off with a flag — closing-checklist can drop it if the purchase agreement says otherwise. Under-handoff is a one-way door; over-handoff is corrected in review.
-
+    Every finding with a pre-closing action tag should reach closing-checklist, not just the ones labeled "consent." If a finding sits in the gray zone (might need a closing action, might be a post-closing covenant), hand it off with a flag — closing-checklist can drop it if the purchase agreement says otherwise. Under-handoff is a one-way door; over-handoff is corrected in review.
 
 **Successor liability.** Flag: pending or threatened tort/products-liability claims, environmental matters and cleanup obligations, bulk-sale/fraudulent-transfer exposure (is the seller retaining enough assets to pay its remaining creditors?), seller's post-closing dissolution plan (if seller dissolves, plaintiffs chase the buyer), and whether the purchase agreement has an assumed/excluded-liabilities schedule that actually covers the known exposures. Even in asset deals, the "de facto merger," "mere continuation," and "product line" doctrines can transfer liability — this is the analysis that surprises buy-side clients who think they're buying assets clean.
 

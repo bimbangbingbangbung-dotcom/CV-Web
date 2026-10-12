@@ -29,11 +29,11 @@ The deal lead doesn't read 200 findings. They read: what's material, what change
 
 Per `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` — what the business reads vs. what's for the file. Default tiers:
 
-| Audience | Gets | Doesn't get |
-|---|---|---|
+| Audience                 | Gets                                                            | Doesn't get                              |
+| ------------------------ | --------------------------------------------------------------- | ---------------------------------------- |
 | **Board / exec sponsor** | Top 3-5 material issues, price/structure impact, decision items | Category detail, green findings, process |
-| **Deal lead** | All reds, all yellows, progress, decision items, next steps | Green finding detail |
-| **Working team** | Everything — full findings, status by category, gaps | Nothing withheld |
+| **Deal lead**            | All reds, all yellows, progress, decision items, next steps     | Green finding detail                     |
+| **Working team**         | Everything — full findings, status by category, gaps            | Nothing withheld                         |
 
 Ask which tier if not obvious.
 
@@ -59,7 +59,7 @@ we're doing about it.]
 ## Decisions needed
 
 - [ ] [Specific decision — price adjustment, indemnity ask, walk-away trigger]
-  — [who decides] — [by when]
+      — [who decides] — [by when]
 
 ## Since last brief
 
@@ -74,16 +74,18 @@ Same as above plus:
 ## All open issues by category
 
 ### 🔴 Red
+
 [Finding title + one-line — link to full finding for detail]
 
 ### 🟡 Yellow
+
 [same]
 
 ## Progress
 
-| Category | Docs reviewed | Coverage | Reds | Yellows | Status |
-|---|---|---|---|---|---|
-| [name] | [N/M] | [%] | [N] | [N] | [Complete / In progress / Blocked] |
+| Category | Docs reviewed | Coverage | Reds | Yellows | Status                             |
+| -------- | ------------- | -------- | ---- | ------- | ---------------------------------- |
+| [name]   | [N/M]         | [%]      | [N]  | [N]     | [Complete / In progress / Blocked] |
 
 ## Gaps and follow-ups
 

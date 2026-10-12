@@ -8,7 +8,7 @@ description: >
   M&A cold-start. Use when user says "integration", "post-close", "post-closing",
   "consents outstanding", "contract assignment", "integration status", or
   "what's left on the deal".
-argument-hint: "[--init | --contracts | --report | --update | --export [--format csv|table] [--section all|consents|contracts|workplan]] [--deal [code]]"
+argument-hint: '[--init | --contracts | --report | --update | --export [--format csv|table] [--section all|consents|contracts|workplan]] [--deal [code]]'
 ---
 
 # /integration-management
@@ -53,45 +53,45 @@ items from `closing-checklist.yaml` if it exists.
 # integration-tracker.yaml
 
 metadata:
-  deal_code: "[code]"
-  target: "[company name]"
-  close_date: "[YYYY-MM-DD]"
-  deal_lead: "[name]"
-  outside_counsel: "[firm and lead attorney]"
-  last_updated: "[date]"
-  last_status_report: "[date or null]"
+  deal_code: '[code]'
+  target: '[company name]'
+  close_date: '[YYYY-MM-DD]'
+  deal_lead: '[name]'
+  outside_counsel: '[firm and lead attorney]'
+  last_updated: '[date]'
+  last_status_report: '[date or null]'
 
 pa_dates:
-  required_consents_deadline: "[YYYY-MM-DD — extract from PA]"
-  rep_survival_expires: "[YYYY-MM-DD]"
-  escrow_release: "[YYYY-MM-DD or null]"
+  required_consents_deadline: '[YYYY-MM-DD — extract from PA]'
+  rep_survival_expires: '[YYYY-MM-DD]'
+  escrow_release: '[YYYY-MM-DD or null]'
   earnout_milestones:
-    - description: "[milestone]"
-      measurement_date: "[YYYY-MM-DD]"
-      payment_date: "[YYYY-MM-DD]"
-      owner: "finance"   # always finance — legal tracks date only
+    - description: '[milestone]'
+      measurement_date: '[YYYY-MM-DD]'
+      payment_date: '[YYYY-MM-DD]'
+      owner: 'finance' # always finance — legal tracks date only
 
 workplan:
   day_1:
-    target_date: "[close_date + 7 days]"
+    target_date: '[close_date + 7 days]'
     items: []
   day_30:
-    target_date: "[close_date + 30 days]"
+    target_date: '[close_date + 30 days]'
     items: []
   day_90:
-    target_date: "[close_date + 90 days]"
+    target_date: '[close_date + 90 days]'
     items: []
   day_180:
-    target_date: "[close_date + 180 days]"
+    target_date: '[close_date + 180 days]'
     items: []
 
 required_consents: []
 desired_consents: []
 
 contracts:
-  source: "[repository / manual-upload / disclosure-schedule]"
-  repository_path: "[path or null]"
-  last_imported: "[date]"
+  source: '[repository / manual-upload / disclosure-schedule]'
+  repository_path: '[path or null]'
+  last_imported: '[date]'
   total: 0
   tier_1: []
   tier_2: []
@@ -100,50 +100,53 @@ contracts:
 ```
 
 **Workplan item structure:**
+
 ```yaml
-- id: "W-001"
-  description: "[action item]"
-  phase: "[day_1 / day_30 / day_90 / day_180]"
-  owner: "[legal-owns / legal-supports]"
-  workstream: "[legal / hr / it / finance / real-estate / other]"
-  priority: "[critical / high / medium / low]"
-  deadline: "[YYYY-MM-DD or null]"
-  deadline_basis: "[pa-obligation / regulatory / best-practice]"
-  status: "[not_started / in_progress / complete / blocked / deferred]"
-  blocker: "[description or null]"
-  depends_on: "[item id or null]"
-  notes: ""
+- id: 'W-001'
+  description: '[action item]'
+  phase: '[day_1 / day_30 / day_90 / day_180]'
+  owner: '[legal-owns / legal-supports]'
+  workstream: '[legal / hr / it / finance / real-estate / other]'
+  priority: '[critical / high / medium / low]'
+  deadline: '[YYYY-MM-DD or null]'
+  deadline_basis: '[pa-obligation / regulatory / best-practice]'
+  status: '[not_started / in_progress / complete / blocked / deferred]'
+  blocker: '[description or null]'
+  depends_on: '[item id or null]'
+  notes: ''
 ```
 
 **Consent entry structure:**
+
 ```yaml
-- id: "CON-001"
-  counterparty: "[name]"
-  contract_type: "[customer / vendor / lease / IP-license / financial / other]"
-  required_consent: true        # true = named in PA Required Consents schedule
-  pa_deadline: "[YYYY-MM-DD]"   # only for required_consent: true
-  status: "[not_started / outreach_sent / in_negotiation / obtained / waived / refused]"
-  assigned_to: "[name or null]"
-  outreach_date: "[date or null]"
-  obtained_date: "[date or null]"
-  notes: ""
+- id: 'CON-001'
+  counterparty: '[name]'
+  contract_type: '[customer / vendor / lease / IP-license / financial / other]'
+  required_consent: true # true = named in PA Required Consents schedule
+  pa_deadline: '[YYYY-MM-DD]' # only for required_consent: true
+  status: '[not_started / outreach_sent / in_negotiation / obtained / waived / refused]'
+  assigned_to: '[name or null]'
+  outreach_date: '[date or null]'
+  obtained_date: '[date or null]'
+  notes: ''
 ```
 
 **Contract entry structure:**
+
 ```yaml
-- id: "C-001"
-  name: "[contract name or filename]"
-  counterparty: "[party name]"
-  contract_type: "[MSA / SaaS / lease / IP-license / employment / NDA / other]"
-  annual_value: "[amount or unknown]"
-  assignment_mechanism: "[auto-assign / consent-required / coc-provision / silent]"
-  tier: 1   # 1=Required Consent, 2=material+consent-required, 3=CoC, 4=auto-assign
+- id: 'C-001'
+  name: '[contract name or filename]'
+  counterparty: '[party name]'
+  contract_type: '[MSA / SaaS / lease / IP-license / employment / NDA / other]'
+  annual_value: '[amount or unknown]'
+  assignment_mechanism: '[auto-assign / consent-required / coc-provision / silent]'
+  tier: 1 # 1=Required Consent, 2=material+consent-required, 3=CoC, 4=auto-assign
   required_consent: false
-  pa_deadline: "[YYYY-MM-DD or null]"
-  status: "[not_reviewed / no_action / consent_pending / outreach_sent / in_negotiation / consent_obtained / assignment_complete / waived / refused / coc_triggered]"
-  assigned_to: "[name or null]"
-  notes: ""
-  last_updated: "[date]"
+  pa_deadline: '[YYYY-MM-DD or null]'
+  status: '[not_reviewed / no_action / consent_pending / outreach_sent / in_negotiation / consent_obtained / assignment_complete / waived / refused / coc_triggered]'
+  assigned_to: '[name or null]'
+  notes: ''
+  last_updated: '[date]'
 ```
 
 ---
@@ -179,6 +182,7 @@ fills in rather than an empty page.
 > terms, and earn-out provisions.
 >
 > **Also useful — share any combination of:**
+>
 > - Deal summary or term sheet (gives me the key economics and timeline)
 > - Integration to-do list or post-close checklist from outside counsel
 > - Existing workplan or integration tracker (I'll import and continue from it)
@@ -192,27 +196,30 @@ fills in rather than an empty page.
 
 **What changes based on what's provided:**
 
-| Input | What you get |
-|---|---|
-| Full PA | Complete workplan + Required Consents with deadlines + PA dates |
-| PA + contract list | Full tracker + contract assignment tier list |
-| Deal summary / to-do list | Standard workplan skeleton, Required Consents as placeholders |
-| Nothing | Standard workplan scaffold; attorney fills in consents and contract lists |
+| Input                     | What you get                                                              |
+| ------------------------- | ------------------------------------------------------------------------- |
+| Full PA                   | Complete workplan + Required Consents with deadlines + PA dates           |
+| PA + contract list        | Full tracker + contract assignment tier list                              |
+| Deal summary / to-do list | Standard workplan skeleton, Required Consents as placeholders             |
+| Nothing                   | Standard workplan scaffold; attorney fills in consents and contract lists |
 
 The tracker is designed to be built out progressively — a skeleton today, filled
 in as more information becomes available.
 
 **From the PA extract:**
 
-*Required Consents schedule:*
+_Required Consents schedule:_
+
 - For each consent: counterparty name, contract type, and the contractual
   deadline. Set as required_consent: true with pa_deadline populated.
 
-*Post-closing obligations:*
+_Post-closing obligations:_
+
 - Map each obligation to a workplan item. Assign to the correct phase based
   on the deadline. Tag as pa-obligation in deadline_basis.
 
-*Key dates:*
+_Key dates:_
+
 - Required Consents deadline — extract from the PA
 - Rep and warranty survival expiry — pull the specific survival periods from the PA.
   General, fundamental, and tax reps typically have different survival periods; pull
@@ -227,6 +234,7 @@ Generate standard workplan items for each phase. Add PA obligations extracted
 in Step 2. Items inherited from the closing checklist are pre-populated.
 
 **Day 1 — legal-owns:**
+
 - Entity name change filing (if acquired entity is being renamed) [priority: critical]
 - Bank account signatory updates — notify bank with closing documentation [priority: critical]
 - Registered agent notification of ownership change [priority: high]
@@ -236,11 +244,13 @@ in Step 2. Items inherited from the closing checklist are pre-populated.
 - Secretary of State ownership notifications where required by state law [priority: high]
 
 **Day 1 — legal-supports:**
+
 - Employee announcement and communications (HR owns, legal reviews) [priority: critical]
 - Benefits day-1 coverage confirmation (HR owns, legal advises on COBRA and plan terms)
 - Customer communication letters (business owns, legal reviews for accuracy)
 
 **Day 30 — legal-owns:**
+
 - Required Consents initial push — contact all counterparties, document outreach [priority: critical]
 - IP assignment recordal at USPTO (patents, trademarks) [priority: high]
 - Copyright assignment filing [priority: medium]
@@ -249,10 +259,12 @@ in Step 2. Items inherited from the closing checklist are pre-populated.
 - Insurance tail policy final confirmation [priority: high]
 
 **Day 30 — legal-supports:**
+
 - Data migration privacy review (IT owns, legal advises on data transfer mechanisms)
 - Real estate lease review for assignment provisions (facilities owns, legal advises)
 
 **Day 90 — legal-owns:**
+
 - Required Consents deadline — all Required Consents must be obtained or escalated [priority: critical, deadline: pa_dates.required_consents_deadline]
 - Entity rationalization decision — recommend keep separate / merge / dissolve [priority: high]
 - Benefits plan assumption or termination documentation [priority: high]
@@ -260,9 +272,11 @@ in Step 2. Items inherited from the closing checklist are pre-populated.
 - Tier 3 change of control contract resolution [priority: critical]
 
 **Day 90 — legal-supports:**
+
 - Full HR harmonization documentation (HR owns, legal advises on employment law)
 
 **Day 180 — legal-owns:**
+
 - Entity merger filing — if rationalization decision is to merge [priority: high]
 - Entity dissolution filing — if rationalization decision is to wind down [priority: high]
 - Full contract novation — contracts requiring acquiror's name [priority: high]
@@ -313,6 +327,7 @@ Two paths — use whichever applies:
 > assignment clause and counterparty.
 
 Search the connected repository. For each document found:
+
 - Extract filename and file path
 - Read the document — identify: contract party (counterparty name), contract
   type (from header or subject matter), assignment clause text, change of
@@ -321,6 +336,7 @@ Search the connected repository. For each document found:
 **Path B: Manual list upload**
 
 > Upload a contract list. This can be:
+>
 > - The Material Contracts schedule from the PA disclosure schedules
 > - A CSV or Excel export from their contract management system
 > - A manually prepared list
@@ -342,13 +358,13 @@ clauses will need manual review.
 
 For each contract, classify the assignment mechanism:
 
-| Mechanism | Definition | Tier |
-|---|---|---|
-| `consent-required` | Explicit clause prohibiting assignment without counterparty consent | 1 or 2 |
-| `coc-provision` | Change of control clause giving counterparty termination or consent right triggered by the deal | 3 |
-| `auto-assign` | No restriction, or explicit permission to assign to affiliates or successors | 4 |
-| `silent` | No assignment clause — default to governing law. Research the governing-law default for contract assignment when the contract is silent and cite the controlling rule. Flag for attorney review. | 2 |
-| `not_reviewed` | Could not read or locate assignment clause | Flag for manual review |
+| Mechanism          | Definition                                                                                                                                                                                       | Tier                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| `consent-required` | Explicit clause prohibiting assignment without counterparty consent                                                                                                                              | 1 or 2                 |
+| `coc-provision`    | Change of control clause giving counterparty termination or consent right triggered by the deal                                                                                                  | 3                      |
+| `auto-assign`      | No restriction, or explicit permission to assign to affiliates or successors                                                                                                                     | 4                      |
+| `silent`           | No assignment clause — default to governing law. Research the governing-law default for contract assignment when the contract is silent and cite the controlling rule. Flag for attorney review. | 2                      |
+| `not_reviewed`     | Could not read or locate assignment clause                                                                                                                                                       | Flag for manual review |
 
 For contracts flagged in the Required Consents PA schedule: override tier to 1
 regardless of assignment mechanism classification.
@@ -382,6 +398,7 @@ that is running right now.
 ### Step 4: Generate status entries
 
 For each contract, create a tracker entry with:
+
 - All extracted fields (counterparty, type, value, mechanism, tier)
 - Initial status: tier 4 → `no_action`; tier 3 → `coc_triggered`; tiers 1/2 → `consent_pending`; not_reviewed → `not_reviewed`
 - pa_deadline populated for tier 1 from Required Consents schedule
@@ -487,6 +504,7 @@ Flag any items in the update that don't match an existing tracker entry —
 may be new items to add.
 
 After any update, show:
+
 ```
 Updated [N] items.
 
@@ -512,11 +530,11 @@ Produces a flat CSV or markdown table. Default: all sections, CSV.
 CSV format — one row per item, section indicated by a `section` column.
 Columns vary by section:
 
-*Workplan:* id, phase, description, owner, workstream, priority, deadline, status, blocker
+_Workplan:_ id, phase, description, owner, workstream, priority, deadline, status, blocker
 
-*Consents:* id, counterparty, contract_type, required_consent, pa_deadline, status, assigned_to, obtained_date, notes
+_Consents:_ id, counterparty, contract_type, required_consent, pa_deadline, status, assigned_to, obtained_date, notes
 
-*Contracts:* id, name, counterparty, contract_type, annual_value, assignment_mechanism, tier, required_consent, pa_deadline, status, assigned_to, notes
+_Contracts:_ id, name, counterparty, contract_type, annual_value, assignment_mechanism, tier, required_consent, pa_deadline, status, assigned_to, notes
 
 Export is the shareable format — suitable for outside counsel, corp dev, or a
 board integration update.
@@ -539,7 +557,6 @@ board integration update.
 - It does not read contracts in real time during status reporting. Contract
   status is what the attorney has updated in the tracker. The skill reads the
   tracker, not the contracts, at report time.
-
 
 ## Formula injection defense
 

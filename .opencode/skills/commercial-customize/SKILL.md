@@ -7,7 +7,7 @@ description: >
   house style, review preferences, or matter workspace paths. Use when the
   user says "change my [thing]", "update my profile", "edit my playbook",
   "tune my config", or "customize".
-argument-hint: "[section name, or describe what you want to change]"
+argument-hint: '[section name, or describe what you want to change]'
 ---
 
 # /customize
@@ -34,8 +34,8 @@ cold-start interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting, sales-side vs. purchasing-side orientation *(shared across all
-     12 plugins — changes flow through `company-profile.md`)*
+     setting, sales-side vs. purchasing-side orientation _(shared across all
+     12 plugins — changes flow through `company-profile.md`)_
    - **Risk posture** — conservative / middle / aggressive, what each means
      for fallback positions and escalation triggers
    - **People** — escalation chain, approvers by dollar threshold and by
@@ -63,13 +63,13 @@ cold-start interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - *Liability cap fallback 12 months → 6 months:* "`/review` will now flag
+   - _Liability cap fallback 12 months → 6 months:_ "`/review` will now flag
      anything above 6 months as a deviation; existing deal-debrief entries
      stay as logged."
-   - *New escalation approver:* "Any redline exceeding your own authority
+   - _New escalation approver:_ "Any redline exceeding your own authority
      will now route to this approver — `/escalation-flagger` will include them by
      default for the matching risk band."
-   - *Risk posture middle → aggressive:* "I'll accept more vendor-friendly
+   - _Risk posture middle → aggressive:_ "I'll accept more vendor-friendly
      positions without flagging them and shift the `[review]` bar higher."
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,

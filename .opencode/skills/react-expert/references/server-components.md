@@ -10,13 +10,15 @@ async function ProductList() {
   const products = await db.products.findMany();
   return (
     <ul>
-      {products.map(p => <ProductCard key={p.id} product={p} />)}
+      {products.map((p) => (
+        <ProductCard key={p.id} product={p} />
+      ))}
     </ul>
   );
 }
 
 // Client Component (explicit)
-'use client';
+('use client');
 import { useState } from 'react';
 
 function AddToCartButton({ productId }: { productId: string }) {
@@ -36,8 +38,8 @@ function AddToCartButton({ productId }: { productId: string }) {
 export default async function ProductsPage() {
   // Runs on server only - no client bundle impact
   const products = await fetch('https://api.example.com/products', {
-    next: { revalidate: 3600 } // Cache for 1 hour
-  }).then(res => res.json());
+    next: { revalidate: 3600 }, // Cache for 1 hour
+  }).then((res) => res.json());
 
   return <ProductGrid products={products} />;
 }
@@ -129,15 +131,15 @@ export default function NewPost() {
 
 ## Quick Reference
 
-| Type | Can Use | Cannot Use |
-|------|---------|------------|
-| Server | async/await, db, fs | useState, onClick |
-| Client | hooks, events, browser APIs | async component |
+| Type   | Can Use                     | Cannot Use        |
+| ------ | --------------------------- | ----------------- |
+| Server | async/await, db, fs         | useState, onClick |
+| Client | hooks, events, browser APIs | async component   |
 
-| Pattern | Use Case |
-|---------|----------|
+| Pattern          | Use Case                  |
+| ---------------- | ------------------------- |
 | Server Component | Data fetching, heavy deps |
-| Client Component | Interactivity, state |
-| `'use client'` | Mark client boundary |
-| `'use server'` | Server Action |
-| Suspense | Streaming, loading states |
+| Client Component | Interactivity, state      |
+| `'use client'`   | Mark client boundary      |
+| `'use server'`   | Server Action             |
+| Suspense         | Streaming, loading states |

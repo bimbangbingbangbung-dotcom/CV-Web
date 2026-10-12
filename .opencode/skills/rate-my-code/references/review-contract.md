@@ -15,14 +15,14 @@ Load this contract for every review. It is the canonical definition of targets, 
 
 ## Target ladder
 
-| Target ID | Supported use | Minimum evidence expected |
-|---|---|---|
-| `internal-demo` | Controlled demonstration | Golden path runs and failure is recoverable in the controlled environment |
-| `private-beta` | Limited real users | Critical journeys, access boundaries, and recovery are tested |
-| `public-launch` | Public availability | Runtime evidence covers critical journeys, abuse boundaries, and operations |
-| `real-money` | Money or sensitive data | Payment/data invariants, retries, authorization, recovery, and monitoring are verified |
-| `high-stakes` | Regulated or consequential use | Domain review, compliance controls, rollback, auditability, and incident response are verified |
-| `venture-case` | Venture judgment | Product and market evidence matches the diligence depth; do not treat this as a software release tier |
+| Target ID       | Supported use                  | Minimum evidence expected                                                                             |
+| --------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `internal-demo` | Controlled demonstration       | Golden path runs and failure is recoverable in the controlled environment                             |
+| `private-beta`  | Limited real users             | Critical journeys, access boundaries, and recovery are tested                                         |
+| `public-launch` | Public availability            | Runtime evidence covers critical journeys, abuse boundaries, and operations                           |
+| `real-money`    | Money or sensitive data        | Payment/data invariants, retries, authorization, recovery, and monitoring are verified                |
+| `high-stakes`   | Regulated or consequential use | Domain review, compliance controls, rollback, auditability, and incident response are verified        |
+| `venture-case`  | Venture judgment               | Product and market evidence matches the diligence depth; do not treat this as a software release tier |
 
 When even `internal-demo` is unsupported, say `no supported release tier` or describe the narrower fixture actually proven. Never rename an unrun golden path an internal demo.
 
@@ -30,12 +30,12 @@ Every `skeptical-vc` review uses `venture-case`. Its degree maps to an exact sta
 
 ## Evidence states
 
-| State | Meaning | Typical support |
-|---|---|---|
-| `E3 REPRODUCED` | Direct, repeatable observation | Browser or network trace, database before/after, exact failing request, repeated runtime test |
-| `E2 INSTRUMENTED` | Independent machine-produced support | Automated test, log, metric, trace, persisted state |
-| `E1 STATIC` | Reachable code, configuration, or document fact with runtime consequence still inferred | Missing ownership predicate, charge retry without an idempotency control, conflicting current documentation text |
-| `E0 UNVERIFIED` | Claim, guess, generic concern, or unavailable evidence | Founder statement, documentation promise, checklist speculation |
+| State             | Meaning                                                                                 | Typical support                                                                                                  |
+| ----------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `E3 REPRODUCED`   | Direct, repeatable observation                                                          | Browser or network trace, database before/after, exact failing request, repeated runtime test                    |
+| `E2 INSTRUMENTED` | Independent machine-produced support                                                    | Automated test, log, metric, trace, persisted state                                                              |
+| `E1 STATIC`       | Reachable code, configuration, or document fact with runtime consequence still inferred | Missing ownership predicate, charge retry without an idempotency control, conflicting current documentation text |
+| `E0 UNVERIFIED`   | Claim, guess, generic concern, or unavailable evidence                                  | Founder statement, documentation promise, checklist speculation                                                  |
 
 Severity and evidence strength are independent. An E1 defect may fail a required check and make a target `NOT_READY`, but activate a runtime veto only with E3/E2 evidence or complete deployment evidence that rules out a compensating layer. An E3 cosmetic failure can remain low severity.
 
@@ -71,12 +71,12 @@ EvidenceLanes = {
 
 Required software-release lanes apply only to non-VC targets:
 
-| Scope | Required lane |
-|---|---|
-| Every non-VC target | `critical-journey-e2e` |
-| `private-beta` and above | `deterministic-checks` |
-| `public-launch` and above | `continuous-evidence` |
-| Non-VC LLM, agent, RAG, or mixed behavior | `probabilistic-eval` |
+| Scope                                     | Required lane          |
+| ----------------------------------------- | ---------------------- |
+| Every non-VC target                       | `critical-journey-e2e` |
+| `private-beta` and above                  | `deterministic-checks` |
+| `public-launch` and above                 | `continuous-evidence`  |
+| Non-VC LLM, agent, RAG, or mixed behavior | `probabilistic-eval`   |
 
 For non-VC reviews, mark probabilistic eval `N/A` with a reason when `ai_behavior` is `none`; otherwise it cannot be `N/A`. For `venture-case`, mark all four software-release lanes `N/A`, each with a reason, regardless of `ai_behavior`; judge real users, retention, and repeatable distribution through separate venture signals. Record a separately requested software-release judgment in a separate review.
 
@@ -245,7 +245,7 @@ The same defect class found at a second location is a new finding, not a reopeni
 That rule assumes the second instance was found. Finding it is a separate obligation, and it splits into two questions that behave differently:
 
 - **Extent of condition** — where else does this same defect sit? Broad but shallow, usually one re-runnable expression, and it terminates. Do it when the root cause is formed, before authorizing a fix: three call sites and forty call sites deserve different fixes, and the user is authorizing a different amount of work in each case. Discovering the count after hand-editing three of forty means the fix was designed on a false premise and now adds a second inconsistency.
-- **Extent of cause** — what *else* did this same cause produce? Narrow but deep, judgment-bound, and it expands without a natural boundary. Do it after the root cause is established, and only where the consequence justifies the cost.
+- **Extent of cause** — what _else_ did this same cause produce? Narrow but deep, judgment-bound, and it expands without a natural boundary. Do it after the root cause is established, and only where the consequence justifies the cost.
 
 Keep them apart. They are answered at different times, cost different amounts, and drive different actions: the first bounds the current batch, the second opens new ones. Collapsing them is what turns a bounded sweep into an unbounded one.
 

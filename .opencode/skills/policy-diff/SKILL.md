@@ -1,7 +1,7 @@
 ---
 name: policy-diff
 description: Diff a specific regulatory change against the indexed policy library. Use when a reg has changed and you need to know which policies it touches and what the gap is, when the user says "diff this reg against our policies", "which policy does this affect", or "gap analysis", or when reg-feed-watcher hands off a material item.
-argument-hint: "[reg name, or paste reg text/summary]"
+argument-hint: '[reg name, or paste reg text/summary]'
 ---
 
 # /policy-diff
@@ -64,9 +64,9 @@ Rule-status uncertainty travels downstream. When handing off a gap to `gap-surfa
 
 Read the regulatory change. List each discrete new or changed requirement:
 
-| # | Requirement | Effective | Citation |
-|---|---|---|---|
-| 1 | [what it requires] | [date] | [section] |
+| #   | Requirement        | Effective | Citation  |
+| --- | ------------------ | --------- | --------- |
+| 1   | [what it requires] | [date]    | [section] |
 
 Be specific. "Enhanced disclosure requirements" is not a requirement. "Must disclose X in Y format at Z point in the flow" is.
 
@@ -88,6 +88,7 @@ For each direct or indirect hit, read the policy and compare:
 **New rule requires:** [requirement]
 
 **Our policy ([name], last updated [date]) says:**
+
 > "[relevant excerpt]"
 
 **Gap:** [None — policy already covers this | Partial — policy addresses X but not Y | Full — policy contradicts or doesn't address]
@@ -107,6 +108,7 @@ Requirements with no policy match get called out separately:
 Requirement [N]: [requirement]
 
 No existing policy covers this. Options:
+
 - Draft new policy (suggested owner: [whoever owns the closest topic])
 - Add to existing [related policy] as a new section
 - Determine this doesn't need a policy (one-off compliance, not ongoing)
@@ -161,9 +163,9 @@ Full per-requirement analysis as specified below. The detailed diff format is fo
 
 ### Summary
 
-| # | Requirement | Policy affected | Gap | Owner |
-|---|---|---|---|---|
-| 1 | [short] | [policy name or "none"] | None/Partial/Full | [name] |
+| #   | Requirement | Policy affected         | Gap               | Owner  |
+| --- | ----------- | ----------------------- | ----------------- | ------ |
+| 1   | [short]     | [policy name or "none"] | None/Partial/Full | [name] |
 
 ### Detailed diffs
 

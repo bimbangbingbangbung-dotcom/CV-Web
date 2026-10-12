@@ -49,6 +49,7 @@ If `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` con
 > I notice you haven't configured your practice profile yet — that's how I tailor the use case registry, red lines, and governance tiers to your practice.
 >
 > **Two choices:**
+>
 > - Run `/ai-governance-legal:cold-start-interview` (2 minutes) to configure your profile, then I'll triage tailored to YOUR practice.
 > - Say **"provisional"** and I'll triage against generic defaults — US jurisdiction, middle risk appetite, lawyer role, no playbook — and tag every output `[PROVISIONAL — configure your profile for tailored output]` so you can see what I do before committing.
 
@@ -135,6 +136,7 @@ Do not soften red line outcomes. If it's a no, it's a no.
 **Jurisdictional scope.** Ask: "Who's affected, and where are they? (Employees / customers / the general public / specific groups.) Which jurisdictions? (Not just where your company is — where the affected people are.)"
 
 Then check the use case against EVERY regime in the practice profile's `## Regulatory footprint`, not just the primary one. Flag conflicts:
+
 - "APPROVED under US law, but triggers EU AI Act Article 27 FRIA if EU residents are affected — confirm whether any affected individuals are in the EU."
 - "Standard tier under your governance framework, but NYC LL144 requires a bias audit if used for hiring decisions affecting NYC residents."
 - "Low risk under Australian AI Ethics Framework, but may be high-risk under the Colorado AI Act if Colorado residents are affected."
@@ -188,16 +190,16 @@ what red line or policy position applies.]
 
 ---
 
-*If CONDITIONAL — required before proceeding:*
+_If CONDITIONAL — required before proceeding:_
 
-| Requirement | Owner | Done? |
-|---|---|---|
-| [e.g., AI impact assessment] | [AI governance counsel] | ☐ |
-| [e.g., Privacy review / PIA] | [Privacy counsel] | ☐ |
-| [e.g., Human-in-the-loop requirement — no automated decisions] | [Product] | ☐ |
-| [e.g., Disclosure to affected parties] | [Product / Legal] | ☐ |
-| [e.g., Specific vendor only — [approved vendor name]] | [Procurement] | ☐ |
-| [e.g., Legal sign-off] | [GC] | ☐ |
+| Requirement                                                    | Owner                   | Done? |
+| -------------------------------------------------------------- | ----------------------- | ----- |
+| [e.g., AI impact assessment]                                   | [AI governance counsel] | ☐     |
+| [e.g., Privacy review / PIA]                                   | [Privacy counsel]       | ☐     |
+| [e.g., Human-in-the-loop requirement — no automated decisions] | [Product]               | ☐     |
+| [e.g., Disclosure to affected parties]                         | [Product / Legal]       | ☐     |
+| [e.g., Specific vendor only — [approved vendor name]]          | [Procurement]           | ☐     |
+| [e.g., Legal sign-off]                                         | [GC]                    | ☐     |
 
 **Governance tier:** [Standard / Elevated / High — per `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`]
 
@@ -220,7 +222,7 @@ The AIA can be run any time with:
 
 ---
 
-*If NOT APPROVED:*
+_If NOT APPROVED:_
 
 **Reason:** [Specific red line, policy prohibition, or registry entry]
 
@@ -273,11 +275,11 @@ If the user presents multiple use cases at once — a list, a backlog, a product
 roadmap — run through each one and output a summary table first, then expand
 each conditional or not-approved entry:
 
-| # | Use case | Classification | Key condition / blocker |
-|---|---|---|---|
-| 1 | [use case] | 🟢 Approved | — |
-| 2 | [use case] | 🟡 Conditional | Impact assessment required |
-| 3 | [use case] | 🔴 Not approved | Automated adverse decision — red line |
+| #   | Use case   | Classification  | Key condition / blocker               |
+| --- | ---------- | --------------- | ------------------------------------- |
+| 1   | [use case] | 🟢 Approved     | —                                     |
+| 2   | [use case] | 🟡 Conditional  | Impact assessment required            |
+| 3   | [use case] | 🔴 Not approved | Automated adverse decision — red line |
 
 Then expand each row that isn't a clean approved.
 
@@ -291,6 +293,7 @@ say so plainly, and before classifying from scratch, search the registry for an
 existing entry covering the deployed version. Retroactive triages often surface a
 superseded registry entry whose conditions have drifted from current practice;
 updating that entry is usually the right follow-up rather than adding a new row.
+
 > "This looks like retroactive triage. If this is already running without an
 > assessment, that's a gap to document, not to wave through. I'm searching the
 > registry for any existing entry covering this deployment before running the
@@ -306,6 +309,7 @@ reduces risk.
 
 **"The vendor says it's safe":**
 Vendor representations don't substitute for your own impact assessment. Flag it:
+
 > "The vendor's position doesn't substitute for your own assessment — especially
 > for anything in the elevated or high tier."
 
@@ -317,4 +321,3 @@ assessment, the pilot should have one too.
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
-

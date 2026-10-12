@@ -1,7 +1,7 @@
 ---
 name: demand-draft
 description: Draft a demand letter from a completed intake, gated on a privilege / FRE 408 / waiver / admission checklist, with a .docx output, post-send checklist, and an offer to create a matter. Use when the user says "draft the demand", "write the [type] letter", or has a finished demand intake ready to turn into a sendable draft.
-argument-hint: "[slug] [--skip-gate] [--version=N]"
+argument-hint: '[slug] [--skip-gate] [--version=N]'
 ---
 
 # /demand-draft
@@ -65,11 +65,12 @@ For in-house defense practitioners who receive demand letters more than they sen
 Before the pre-draft gate, confirm the matter-level posture. Demand-letter tone and terms are case-by-case, not a practice default. Confirm with the user (reading the intake's `## Posture` section if present; asking if not):
 
 > **Posture for this matter.** Demand-letter tone and terms are case-by-case, not a practice default. Ask:
+>
 > - **Tone:** measured / assertive / aggressive? (depends on the relationship, the amount, and whether litigation is likely)
 > - **Response window:** what's reasonable given the claim? (14 days is common for payment demands; 30 days for cure; 7 days for cease-and-desist — but the contract or protocol may set it)
 > - **Marking:** does this need a "without prejudice" or "without prejudice save as to costs" marking? (settlement communications do; assertions of claim often don't; jurisdiction matters — ask if unsure)
 > - **Signer:** you, the client, the GC, instructed solicitor/counsel?
-> Don't assume. Read the prior demand correspondence in the matter file if there is any — it establishes the register.
+>   Don't assume. Read the prior demand correspondence in the matter file if there is any — it establishes the register.
 
 The answers drive tone verb choice, the consequence language, the `Without prejudice` header (or its absence), the signature block, and the compliance deadline. A posture that wasn't captured in intake gets captured here — do not fall back to a practice-level default.
 
@@ -155,6 +156,7 @@ Check `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` →
 Each is a skeleton — headings and expected content. Deviate when the facts require.
 
 **Payment demand skeleton:**
+
 1. Parties and relationship context (1 paragraph)
 2. Facts — the obligation and its source (contract § / invoice / order), dates
 3. The default — what's owed, when due, what happened (or didn't)
@@ -164,6 +166,7 @@ Each is a skeleton — headings and expected content. Deviate when the facts req
 7. Signature block
 
 **Breach / cure notice skeleton:**
+
 1. Parties and agreement (identify the contract — effective date, parties)
 2. The obligation alleged breached — contract section, plain language
 3. The breach — specific facts, dates, evidence available
@@ -173,6 +176,7 @@ Each is a skeleton — headings and expected content. Deviate when the facts req
 7. Signature block
 
 **Cease & desist skeleton:**
+
 1. Parties and our rights (trademark/copyright/contract/common law — identify the right)
 2. The infringement / violation — specific acts, dates, evidence
 3. Demand — cease immediately, remove, account for past use, confirm compliance in writing
@@ -182,6 +186,7 @@ Each is a skeleton — headings and expected content. Deviate when the facts req
 7. Signature block
 
 **Employment separation demand skeleton:**
+
 1. Parties and relationship context (ex-employee, dates of employment)
 2. The obligation — post-employment obligations breached (confidentiality, non-solicit, non-compete, IP assignment); cite the agreement
 3. The specific conduct alleged
@@ -192,6 +197,7 @@ Each is a skeleton — headings and expected content. Deviate when the facts req
 8. Signature block
 
 **Preservation demand skeleton:**
+
 1. Parties and context — what dispute is anticipated
 2. Scope — categories of documents, data, systems, communications
 3. Custodians — named individuals expected to have relevant material
@@ -228,7 +234,8 @@ Single-delivery breach: use § 2-601 perfect-tender framing. Installment: use §
    - `scorched-earth`: "Failure to cure within [N] days will result in immediate legal action, including [specific relief]."
 
 5. **Inline alternative phrasings.** Where tone could shift, the draft includes a compact alternative. Format:
-   > *The attached invoice of $X remains unpaid.* [or more assertive: *You have failed to pay the attached invoice of $X, due [date].*]
+
+   > _The attached invoice of $X remains unpaid._ [or more assertive: _You have failed to pay the attached invoice of $X, due [date]._]
 
 6. **No settlement discussion on the record unless intended.** If the intake flagged the communication as not carrying settlement-communication protection in the forum, the draft does not include any offer to compromise, any "without prejudice" framing, or any language that could be characterized as a settlement communication. Remember that protection attaches from conduct and context; labeling alone is not a cure.
 
@@ -239,6 +246,7 @@ Single-delivery breach: use § 2-601 perfect-tender framing. Installment: use §
 ### Primary: `~/.claude/plugins/config/claude-for-legal/litigation-legal/demand-letters/[slug]/draft-v[N].docx`
 
 Use the `docx` skill to produce a letter-formatted .docx:
+
 - Letterhead / sender address block
 - Date
 - Recipient address block
@@ -331,6 +339,7 @@ After drafting and writing the checklist, assess materiality per heuristic:
 - **Default no otherwise**
 
 Present the call:
+
 > Materiality heuristic: [result]. [One-sentence reason.]
 > Create a tracked matter in `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml`? (default: [yes/no])
 

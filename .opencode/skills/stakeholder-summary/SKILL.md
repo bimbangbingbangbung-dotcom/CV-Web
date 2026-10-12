@@ -34,13 +34,13 @@ Read `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` → 
 
 Different audiences need different summaries:
 
-| Audience | Cares about | Doesn't care about |
-|---|---|---|
-| **Procurement** | Price, renewal mechanics, approval routing | Liability cap structure |
-| **Department head (budget owner)** | Can their team use it, what happens if it breaks, cost | Indemnity scope |
-| **Finance** | Total cost of ownership, renewal price risk, off-balance-sheet commitments | Governing law |
-| **Security / IT** | Data handling, subprocessors, SOC 2, where data lives | Everything else |
-| **Executive sponsor** | Is this going to embarrass us, is legal a blocker | Details |
+| Audience                           | Cares about                                                                | Doesn't care about      |
+| ---------------------------------- | -------------------------------------------------------------------------- | ----------------------- |
+| **Procurement**                    | Price, renewal mechanics, approval routing                                 | Liability cap structure |
+| **Department head (budget owner)** | Can their team use it, what happens if it breaks, cost                     | Indemnity scope         |
+| **Finance**                        | Total cost of ownership, renewal price risk, off-balance-sheet commitments | Governing law           |
+| **Security / IT**                  | Data handling, subprocessors, SOC 2, where data lives                      | Everything else         |
+| **Executive sponsor**              | Is this going to embarrass us, is legal a blocker                          | Details                 |
 
 Ask who this is for if it's not obvious from context.
 
@@ -49,6 +49,7 @@ Ask who this is for if it's not obvious from context.
 ### Length cap — enforced
 
 The summary is:
+
 - **One paragraph** for the verdict and what this is (business terms, plain English)
 - **One paragraph** for the catch — the thing the stakeholder would be surprised by later if nobody told them now
 - **A 2-3 item checklist** for what the stakeholder actually needs to do (at most three items; if you want a fourth, the first three aren't tight enough)
@@ -96,23 +97,24 @@ asserting them below. -->
 Claiming a tracker entry exists when it does not is worse than omitting the reassurance. The stakeholder then trusts the reminder that will never fire. If the truthful statement is "tracked," the skill runs the tracker. If it's "you should add this to your calendar — I haven't logged it," say that.
 
 **What you need to do:**
+
 - [ ] [Action item, if any — "confirm the team is okay with data living in EU"
-  or "nothing — I'll route for signature"]
+      or "nothing — I'll route for signature"]
 
 **Approval:** [who's approving and expected timing]
 ```
 
 ### What to translate
 
-| Legal finding | Business translation |
-|---|---|
-| "Liability capped at 12 months fees" | "If they break something, the most we can recover is a year's worth of what we paid them." |
-| "No termination for convenience" | "Once we sign, we're locked in for the full term — we can't just cancel if we stop using it." |
-| "Auto-renewal with 60-day notice" | "This renews automatically every year. To cancel, we have to tell them two months before the renewal date." |
-| "No IP indemnity" | "If someone sues us claiming this tool infringes their patent, the vendor isn't on the hook to defend us." |
-| "Subprocessor list not disclosed" | "We don't know what other companies will have access to our data through them." |
-| "Data deletion within 30 days of termination" | "When we cancel, they delete our data within a month. Export anything you need before then." |
-| "SLA credits capped at 10% of monthly fee" | "If the service goes down, we get a small credit back. It won't cover the cost of the downtime to the business." |
+| Legal finding                                 | Business translation                                                                                             |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| "Liability capped at 12 months fees"          | "If they break something, the most we can recover is a year's worth of what we paid them."                       |
+| "No termination for convenience"              | "Once we sign, we're locked in for the full term — we can't just cancel if we stop using it."                    |
+| "Auto-renewal with 60-day notice"             | "This renews automatically every year. To cancel, we have to tell them two months before the renewal date."      |
+| "No IP indemnity"                             | "If someone sues us claiming this tool infringes their patent, the vendor isn't on the hook to defend us."       |
+| "Subprocessor list not disclosed"             | "We don't know what other companies will have access to our data through them."                                  |
+| "Data deletion within 30 days of termination" | "When we cancel, they delete our data within a month. Export anything you need before then."                     |
+| "SLA credits capped at 10% of monthly fee"    | "If the service goes down, we get a small credit back. It won't cover the cost of the downtime to the business." |
 
 ### What NOT to include
 
@@ -142,10 +144,11 @@ from our data"]. We've asked them to strike it. [Realistic assessment: "They'll
 probably agree" / "This might be a sticking point — will keep you posted."]
 
 **What you need to do:**
+
 - [ ] Nothing yet — I'll let you know when it's back from them.
-  OR
+      OR
 - [ ] [Business decision they need to make: "If they won't budge on X, are you
-  okay with Y, or do we walk?"]
+      okay with Y, or do we walk?"]
 ```
 
 ## Handoffs
@@ -168,11 +171,13 @@ Include a short reconciliation block in the summary — above the checklist, bel
 
 ```markdown
 **Escalation status:** [M] of [N] escalation targets routed. The following have not been routed and require action:
+
 - [Approver name] — [one line on the finding that named them]
 - [Approver name] — [one line]
 ```
 
 If all N have been routed:
+
 ```markdown
 **Escalation status:** [N] of [N] escalation targets routed.
 ```

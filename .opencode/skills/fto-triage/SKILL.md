@@ -122,6 +122,7 @@ If `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` contains `[PLA
 > I notice you haven't configured your practice profile yet — that's how I tailor posture, jurisdictions, and approval chain to your practice.
 >
 > **Two choices:**
+>
 > - Run `/ip-legal:cold-start-interview` (2 minutes) to configure your profile, then I'll run this tailored to YOUR practice.
 > - Say **"provisional"** and I'll run this against generic defaults — US jurisdiction, middle risk appetite, lawyer role, no playbook — and tag every output `[PROVISIONAL — configure your profile for tailored output]` so you can see what I do before committing.
 
@@ -170,7 +171,7 @@ push once:
 `RE`, or `PP` prefix, flag it and route out, do not claim-chart it:
 
 - **`D` (design patent).** Different test entirely — ordinary observer under
-  *Egyptian Goddess, Inc. v. Swisa, Inc.*, 543 F.3d 665 (Fed. Cir. 2008) (en
+  _Egyptian Goddess, Inc. v. Swisa, Inc._, 543 F.3d 665 (Fed. Cir. 2008) (en
   banc), overall ornamental appearance, no claim chart. Route to the
   `infringement-triage` design patent branch and to design patent counsel.
   **Design patents are not analyzed in this FTO triage** — a design-patent
@@ -181,9 +182,9 @@ push once:
 
 Also cross-flag **trade dress**: if the product's appearance is the risk,
 the same facts may be a §43(a) product-configuration claim that requires
-secondary meaning (*Wal-Mart Stores, Inc. v. Samara Bros., Inc.*, 529 U.S.
-205 (2000)) and non-functionality (*TrafFix Devices, Inc. v. Marketing
-Displays, Inc.*, 532 U.S. 23 (2001)). Flag as a parallel track.
+secondary meaning (_Wal-Mart Stores, Inc. v. Samara Bros., Inc._, 529 U.S.
+205 (2000)) and non-functionality (_TrafFix Devices, Inc. v. Marketing
+Displays, Inc._, 532 U.S. 23 (2001)). Flag as a parallel track.
 
 ---
 
@@ -271,12 +272,12 @@ each independent claim element-by-element.
 
 **For each selected patent, write out one claim chart per independent claim:**
 
-| Claim element | Does the product practice this? | Basis |
-|---|---|---|
-| "A [preamble phrase]" | [yes / no / possibly / depends on construction] | [one sentence — what in the product maps; what doesn't; what's ambiguous] |
-| "comprising [element 1]" | [yes / no / possibly] | [mapping or gap] |
-| "wherein [element 2]" | [yes / no / possibly] | [mapping or gap] |
-| [continue for every element] | | |
+| Claim element                | Does the product practice this?                 | Basis                                                                     |
+| ---------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------- |
+| "A [preamble phrase]"        | [yes / no / possibly / depends on construction] | [one sentence — what in the product maps; what doesn't; what's ambiguous] |
+| "comprising [element 1]"     | [yes / no / possibly]                           | [mapping or gap]                                                          |
+| "wherein [element 2]"        | [yes / no / possibly]                           | [mapping or gap]                                                          |
+| [continue for every element] |                                                 |                                                                           |
 
 **Rules for the chart:**
 
@@ -296,6 +297,7 @@ each independent claim element-by-element.
   require patent counsel.
 
 > **Patent systems differ by jurisdiction.** The US claim chart (all-elements rule, doctrine of equivalents, prosecution history estoppel, §284/§289 damages) does not transfer to other systems:
+>
 > - **Germany:** Utility models (Gebrauchsmuster), the Schneidmesser/Kunststoffrohrteil questions for DOE, bifurcated validity/infringement proceedings.
 > - **China:** Utility models (shiyong xinxing), CNIPA examination, different claim construction.
 > - **Japan:** Utility models, JPO examination, a narrower DOE.
@@ -339,7 +341,7 @@ List them plainly.
 Bucket by what the triage found:
 
 - **If every element of an independent claim maps to the product (literal read):**
-  *Stop and get patent counsel.* Options typically include formal FTO opinion,
+  _Stop and get patent counsel._ Options typically include formal FTO opinion,
   design-around, license, challenge validity (IPR/PGR), or (rarely) proceed at
   risk. The choice is a business decision informed by counsel.
 - **If elements cut both ways or claim construction is dispositive:**
@@ -393,7 +395,7 @@ on this for a product decision.
 - **What wasn't searched:** [named-assignee sweeps, SEP declarations, NPE
   portfolios, design patents, foreign equivalents — as applicable]
 
-*If no database search was run:* **No patent database search was run.** This
+_If no database search was run:_ **No patent database search was run.** This
 triage did not hit Solve Intelligence Patents, USPTO Patents Full-Text,
 EPO Espacenet, Google Patents, PatSnap, or any other patent corpus. A
 structured search across the jurisdictions in scope is required before
@@ -401,9 +403,9 @@ relying on this triage for any launch decision.
 
 ## Patents identified
 
-| Patent | Jurisdiction | Assignee | Priority / Issue | Expiration | In-force? | Source |
-|---|---|---|---|---|---|---|
-| [number] | [US/EP/...] | [assignee] | [dates] | [date] | [yes/no/unverified] | [search result link or "user-supplied"] |
+| Patent   | Jurisdiction | Assignee   | Priority / Issue | Expiration | In-force?           | Source                                  |
+| -------- | ------------ | ---------- | ---------------- | ---------- | ------------------- | --------------------------------------- |
+| [number] | [US/EP/...]  | [assignee] | [dates]          | [date]     | [yes/no/unverified] | [search result link or "user-supplied"] |
 
 ## Claim charts — first pass
 
@@ -411,10 +413,10 @@ relying on this triage for any launch decision.
 
 > "[Exact text of Claim N]"
 
-| Element | Practiced by the product? | Basis |
-|---|---|---|
-| [element 1] | [yes/no/possibly] | [mapping or gap] |
-| [element 2] | [yes/no/possibly] | [mapping or gap] |
+| Element     | Practiced by the product? | Basis            |
+| ----------- | ------------------------- | ---------------- |
+| [element 1] | [yes/no/possibly]         | [mapping or gap] |
+| [element 2] | [yes/no/possibly]         | [mapping or gap] |
 
 **Literal read:** [every element maps / one or more elements do not clearly
 map / claim construction is dispositive on element [Y]]
@@ -427,7 +429,7 @@ prosecution history suggests estoppel]
 induced, contributory, or divided infringement theories — attorney analysis
 required]
 
-*(Repeat for each independent claim of each selected patent.)*
+_(Repeat for each independent claim of each selected patent.)_
 
 ## Open questions
 

@@ -6,7 +6,7 @@ description: >
   context from one client engagement never leaks into another. Use when a
   multi-client practitioner says "new matter", "switch matter", "list my
   matters", "close this matter", or needs to manage which matter is active.
-argument-hint: "<new | list | switch | close | none> [slug]"
+argument-hint: '<new | list | switch | close | none> [slug]'
 ---
 
 # /matter-workspace
@@ -93,7 +93,7 @@ The `Active matter:` line under `## Matter workspaces` in the practice-level CLA
 Enumerate `matters/*/matter.md`. Read each file's front-matter or first few lines to extract status. Print a table:
 
 | Slug | Client | Matter type | Status | Opened | Active |
-|---|---|---|---|---|---|
+| ---- | ------ | ----------- | ------ | ------ | ------ |
 
 Mark the currently-active matter with `*`. Include `_archived/*` under a separate "Archived" heading if any exist.
 
@@ -143,7 +143,7 @@ Set `Active matter:` in the practice-level CLAUDE.md to `none — practice-level
 
 ## Matter-specific overrides
 
-*Any deviation from the practice-level playbook that applies to this matter and only this matter.*
+_Any deviation from the practice-level playbook that applies to this matter and only this matter._
 
 - [e.g., "LoL cap: client requires 24 months, not house standard 12."]
 - [e.g., "Tone: relationship-preserving — counterparty is a strategic partner."]
@@ -183,5 +183,5 @@ When it's `on`, a skill may read files across matter folders only when the user 
 
 - **Run a conflicts check.** Conflicts are the practitioner's/firm's job; the intake captures what the user declares.
 - **Enforce retention.** Closing archives a matter; it does not delete. Retention policy is out of scope.
-- **Auto-route outputs.** The substantive skill decides where to write; this skill tells it *which folder* is active, not what to put in it.
+- **Auto-route outputs.** The substantive skill decides where to write; this skill tells it _which folder_ is active, not what to put in it.
 - **Decide whether cross-matter is appropriate.** It reads the flag and obeys.

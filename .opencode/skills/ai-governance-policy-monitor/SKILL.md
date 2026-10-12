@@ -6,12 +6,13 @@ description: >
   new AI practice. Use when user says "policy sweep", "does our AI policy cover
   this", "we want to start doing X — does the policy need updating", "run the
   policy monitor", or on a recurring schedule.
-argument-hint: "[describe a proposed new AI practice — or omit / use --sweep for crawl mode]"
+argument-hint: '[describe a proposed new AI practice — or omit / use --sweep for crawl mode]'
 ---
 
 # /policy-monitor
 
 **Sweep mode** (no argument or `--sweep`):
+
 1. Read `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → outputs folder path, AI policy document, last sweep date.
 2. Use the framework below. Scan outputs folder for files since last sweep.
 3. For each output: extract approved practices → diff against current policy commitments and use case registry.
@@ -21,6 +22,7 @@ argument-hint: "[describe a proposed new AI practice — or omit / use --sweep f
 7. Present results to the human. Only after acknowledgment, update `Last policy sweep` and `gaps_found` in `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`.
 
 **Direct query mode** (with description argument):
+
 1. Read `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → current policy commitments, use case registry, actual policy document.
 2. Parse proposed practice. Diff against policy: use case coverage, automation level, affected parties, disclosure, vendor data use, oversight.
 3. Output: covered / missing / conflicting + suggested language for each gap + registry entry if needed + timing recommendation.
@@ -56,11 +58,13 @@ The output is always the same: here's the gap, here's the suggested language.
 ## Load current state
 
 Read `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`:
+
 - `## AI policy commitments` — commitments extracted from the published policy
 - `## Use case registry` — approved, conditional, and never use cases
 - `## Outputs` — outputs folder path, AI policy document location, last sweep date
 
 If `## Outputs` contains `[PLACEHOLDER]`:
+
 > "Outputs aren't configured yet. I can still run a direct-query check — describe
 > what you're planning to do and I'll diff it against your current AI policy. To
 > enable the crawl sweep, run `/ai-governance-legal:cold-start-interview` and provide the outputs
@@ -91,6 +95,7 @@ outputs folder dated after that date. If no date is recorded, scan all files and
 note: "First sweep — scanning all outputs."
 
 If the outputs folder is empty or has no new files since the last sweep:
+
 > "No new outputs since [last sweep date]. AI policy appears current with recent
 > practice. Next scheduled sweep: [date]."
 
@@ -104,6 +109,7 @@ Updating the stamp before acknowledgment would let an unreviewed sweep silently 
 ### What to read in each output type
 
 **AIAs (AI Impact Assessments):**
+
 - Extract: use case approved, AI system description, deployment mode (assistive /
   augmentative / automated), conditions imposed, affected parties, vendor used,
   any disclosure requirements to affected individuals
@@ -112,12 +118,14 @@ Updating the stamp before acknowledgment would let an unreviewed sweep silently 
   deployed where policy implies human oversight
 
 **Triage results (CONDITIONAL / APPROVED outcomes):**
+
 - Extract: use case classified, tier assigned, conditions imposed
 - Flag: new use case categories not in registry, conditions that imply policy
   commitments (e.g., "must disclose to affected parties" — does the policy say you
   do this?), newly approved practices that expand policy scope
 
 **Vendor AI reviews (signed / approved):**
+
 - Extract: vendor added, data use terms agreed to, any AI-specific provisions
   accepted that differ from standard positions in `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`
 - Flag: vendors added whose data use terms the policy should reference (e.g., "we
@@ -125,6 +133,7 @@ Updating the stamp before acknowledgment would let an unreviewed sweep silently 
   deviations from standard positions that the policy implies you hold
 
 **Use case registry updates:**
+
 - If new entries were added to the registry since the last sweep (directly, not
   through an AIA), check whether the policy reflects those approved categories.
 
@@ -155,7 +164,7 @@ affects external parties or creates a reasonable expectation.
 ```markdown
 [WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]
 
-*This sweep is derived from AIAs, triage results, and vendor AI reviews that carry the plugin's privilege/confidentiality marking. The sweep inherits that status. Distribute deliberately — forwarding gap findings outside the privilege circle can waive privilege on the underlying assessments.*
+_This sweep is derived from AIAs, triage results, and vendor AI reviews that carry the plugin's privilege/confidentiality marking. The sweep inherits that status. Distribute deliberately — forwarding gap findings outside the privilege circle can waive privilege on the underlying assessments._
 
 # AI Policy Monitor — Sweep Report
 
@@ -175,7 +184,8 @@ affects external parties or creates a reasonable expectation.
 **Gap:** [what's missing or inconsistent]
 
 **Suggested language:**
-> *Add to / update [section name]:*
+
+> _Add to / update [section name]:_
 > "[Drafted policy text — specific, consistent with house style of the actual policy]"
 
 ---
@@ -192,7 +202,8 @@ affects external parties or creates a reasonable expectation.
 **What's happening:** [description]
 **Current policy:** [quote or "Silent"]
 **Suggested language:**
-> *Add to / update [section]:*
+
+> _Add to / update [section]:_
 > "[Drafted text]"
 
 ---
@@ -213,7 +224,7 @@ registry — suggest registry entries to add]
 ## Next steps
 
 - [ ] Review REQUIRED updates — decisions needed before the associated use cases
-  go live (or immediately if already live)
+      go live (or immediately if already live)
 - [ ] Review ADVISABLE updates — lower urgency, address at next policy refresh
 - [ ] Add new use cases to registry (if any flagged above)
 - [ ] Next scheduled sweep: [date]
@@ -226,6 +237,7 @@ registry — suggest registry entries to add]
 ### Parse the proposed practice
 
 Extract from the user's description:
+
 - What AI system or capability is being introduced?
 - What does it do — assistive, automated decisions, content generation?
 - Who does it affect — employees, customers, third parties?
@@ -241,14 +253,14 @@ If the description is vague, ask one clarifying question. Don't run a long intak
 
 Check the proposed practice against the current policy and use case registry:
 
-| Check | Current policy / registry | Proposed practice | Verdict |
-|---|---|---|---|
-| Use case category | [registry — approved / conditional / never / not present] | [new use case] | 🟢 Covered / 🟡 Gap / 🔴 Conflict |
-| Scope of AI use | [what policy says AI is used for] | [new use] | |
-| Automated decisions | [policy position on automation] | [is this automated?] | |
-| Disclosure to affected parties | [what policy commits to] | [what this requires] | |
-| Vendor data use | [policy position on vendor AI] | [this vendor's terms] | |
-| Human oversight | [policy statement if any] | [what's actually in place] | |
+| Check                          | Current policy / registry                                 | Proposed practice          | Verdict                           |
+| ------------------------------ | --------------------------------------------------------- | -------------------------- | --------------------------------- |
+| Use case category              | [registry — approved / conditional / never / not present] | [new use case]             | 🟢 Covered / 🟡 Gap / 🔴 Conflict |
+| Scope of AI use                | [what policy says AI is used for]                         | [new use]                  |                                   |
+| Automated decisions            | [policy position on automation]                           | [is this automated?]       |                                   |
+| Disclosure to affected parties | [what policy commits to]                                  | [what this requires]       |                                   |
+| Vendor data use                | [policy position on vendor AI]                            | [this vendor's terms]      |                                   |
+| Human oversight                | [policy statement if any]                                 | [what's actually in place] |                                   |
 
 ### Direct query output format
 
@@ -271,10 +283,12 @@ Check the proposed practice against the current policy and use case registry:
 **What's needed:** [why this gap matters — legal, reputational, or expectation reason]
 
 **Suggested language:**
-> *Add to [section]:*
+
+> _Add to [section]:_
 > "[Drafted text]"
 
 ### [Gap 2]
+
 [same format]
 
 ## What conflicts
@@ -292,7 +306,9 @@ or policy is updated to a defensible new position; never silently accept both]
 
 [If this use case isn't in the registry: "Add to `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → Use case registry:"]
 ```
+
 | [use case] | [Approved/Conditional] | [conditions] | — |
+
 ```
 
 ---

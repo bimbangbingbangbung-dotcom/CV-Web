@@ -151,7 +151,10 @@
           "type": "boolean",
           "description": "Show a thin accent line at the top edge until first interaction."
         },
-        "showEditLink": { "type": "boolean", "description": "Show the subtle Edit link in the footer." }
+        "showEditLink": {
+          "type": "boolean",
+          "description": "Show the subtle Edit link in the footer."
+        }
       }
     },
 
@@ -216,8 +219,14 @@
           "pattern": "^[A-Z]{1,3}$",
           "description": "1–3 capitals for the avatar fallback; derived from fullName when omitted."
         },
-        "languages": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } },
-        "interests": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } },
+        "languages": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 60 }
+        },
+        "interests": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 60 }
+        },
         "now": {
           "type": "array",
           "items": {
@@ -272,8 +281,14 @@
           "start": { "$ref": "#/$defs/dateOrPresent" },
           "end": { "$ref": "#/$defs/dateOrPresent" },
           "gpa": { "type": ["string", "null"], "maxLength": 20 },
-          "coursework": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } },
-          "honors": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } }
+          "coursework": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 60 }
+          },
+          "honors": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 60 }
+          }
         }
       }
     },
@@ -318,7 +333,10 @@
           "description": { "type": "string", "minLength": 1, "maxLength": 360 },
           "role": { "type": "string", "minLength": 1, "maxLength": 80 },
           "year": { "type": "string", "pattern": "^\\d{4}$" },
-          "tech": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+          "tech": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 40 }
+          },
           "links": {
             "type": "array",
             "items": {
@@ -328,7 +346,10 @@
               "properties": {
                 "label": { "type": "string", "minLength": 1, "maxLength": 40 },
                 "url": { "$ref": "#/$defs/url" },
-                "kind": { "type": "string", "enum": ["repo", "demo", "case-study", "slides", "other"] }
+                "kind": {
+                  "type": "string",
+                  "enum": ["repo", "demo", "case-study", "slides", "other"]
+                }
               }
             }
           },
@@ -339,10 +360,7 @@
           },
           "featured": { "type": "boolean" },
           "detail": {
-            "anyOf": [
-              { "$ref": "#/$defs/projectDetail" },
-              { "type": "null" }
-            ],
+            "anyOf": [{ "$ref": "#/$defs/projectDetail" }, { "type": "null" }],
             "description": "Optional expandable detail view (problem → solution → result), or null."
           }
         }
@@ -374,10 +392,21 @@
           "end": { "$ref": "#/$defs/dateOrPresent" },
           "type": {
             "type": "string",
-            "enum": ["internship", "part-time", "full-time", "freelance", "volunteer", "leadership", "organization"]
+            "enum": [
+              "internship",
+              "part-time",
+              "full-time",
+              "freelance",
+              "volunteer",
+              "leadership",
+              "organization"
+            ]
           },
           "description": { "type": "string", "minLength": 1, "maxLength": 420 },
-          "highlights": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 160 } }
+          "highlights": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 160 }
+          }
         }
       }
     },
@@ -392,7 +421,10 @@
           "title": { "type": "string", "minLength": 1, "maxLength": 120 },
           "issuer": { "type": "string", "minLength": 1, "maxLength": 100 },
           "date": { "$ref": "#/$defs/dateOrPresent" },
-          "category": { "type": "string", "enum": ["award", "certification", "honor", "competition"] },
+          "category": {
+            "type": "string",
+            "enum": ["award", "certification", "honor", "competition"]
+          },
           "url": {
             "type": ["string", "null"],
             "format": "uri",

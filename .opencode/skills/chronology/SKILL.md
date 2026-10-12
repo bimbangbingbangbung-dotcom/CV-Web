@@ -1,7 +1,7 @@
 ---
 name: chronology
 description: Build or update a chronology from declared document sources and uploads — dated events extracted, de-duped, and tagged by significance per the matter theory. Use when the user asks to build a chronology or timeline from a production or matter file, says "chron from the production" or "what happened when", or needs a working, statement-of-facts, or witness-specific timeline.
-argument-hint: "[slug] [--format=working|sof|witness-[name]]"
+argument-hint: '[slug] [--format=working|sof|witness-[name]]'
 ---
 
 # /chronology
@@ -50,8 +50,8 @@ If `## Role` is `solo` or `other`, default to `--matter` but mention both modes 
 
 The same event is significant in different ways depending on whether the practitioner is proving a claim or disproving it. Read `## Side` in the practice profile (and the per-matter posture if the matter overrides the default):
 
-- **Plaintiff (offensive framing)** — 🔴 marks events that *establish* elements of the claim (liability, causation, damages, notice), *close* gaps the defense will try to open, or *start* statute-of-limitations clocks in the plaintiff's favor. 🟡 marks events that support the claim but are subject to impeachment. ⚪ is background context.
-- **Defense (defensive framing)** — 🔴 marks events that *break* elements of the claim (failure of causation, notice, reliance), *open* statute-of-limitations or jurisdictional defenses, or *support* affirmative defenses (release, waiver, assumption of risk, comparative fault). 🟡 marks events that undermine the plaintiff's narrative. ⚪ is background.
+- **Plaintiff (offensive framing)** — 🔴 marks events that _establish_ elements of the claim (liability, causation, damages, notice), _close_ gaps the defense will try to open, or _start_ statute-of-limitations clocks in the plaintiff's favor. 🟡 marks events that support the claim but are subject to impeachment. ⚪ is background context.
+- **Defense (defensive framing)** — 🔴 marks events that _break_ elements of the claim (failure of causation, notice, reliance), _open_ statute-of-limitations or jurisdictional defenses, or _support_ affirmative defenses (release, waiver, assumption of risk, comparative fault). 🟡 marks events that undermine the plaintiff's narrative. ⚪ is background.
 - **Both / varies** — ask the user per-chronology which side's framing to apply for significance tags. The underlying timeline is side-neutral; only the significance read changes.
 
 Note the applied framing at the top of the output: `Significance tags applied from [plaintiff / defense] perspective.` When producing a Statement of Facts variant, use the side default unless the user specifies otherwise.
@@ -59,15 +59,18 @@ Note the applied framing at the top of the output: `Significance tags applied fr
 ## Load context
 
 Common:
+
 - Plugin configuration CLAUDE.md → case theory context (in-house: `## Landscape` for document sources; firm associate: `## Case theory` and `## Document review` for platform + custodians), `## Outputs` for the work-product header, `## Decision posture` for the privilege-flagging rule.
 - Prior `chronology.md` for this matter, if it exists.
 - Any files the user uploads or paths they provide in-session.
 
 `--matter` mode also reads:
+
 - `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/matter.md` → case theory, key facts, pivot fact (for significance tagging), key dates.
 - Default matter folder pattern from CLAUDE.md → where docs for this slug live.
 
 `--documents` mode also reads:
+
 - eDiscovery platform metadata if a connector is available (Everlaw, Relativity, DISCO, Aurora) — by custodian + date range.
 - Bates-range manifest or production index if the user points at one.
 
@@ -81,7 +84,7 @@ Do not proceed on an unintaken matter. Intake is what runs conflicts and writes 
 
 ### Step 0: Privilege gate (runs first, every time)
 
-Chronology work pulls from documents. Documents are often privileged (attorney-client, work product, common interest, joint defense) — in-house matter files often are by default; eDiscovery productions, especially rolling productions or common-interest productions, often contain privileged or unreviewed material. Extracting content from a privileged document into a chronology that later gets shared can *risk* waiver, depending on who receives it and under what doctrine (common-interest, joint-defense, Kovel, and work-product protections may apply). Waiver analysis is fact-specific — get counsel sign-off before distributing.
+Chronology work pulls from documents. Documents are often privileged (attorney-client, work product, common interest, joint defense) — in-house matter files often are by default; eDiscovery productions, especially rolling productions or common-interest productions, often contain privileged or unreviewed material. Extracting content from a privileged document into a chronology that later gets shared can _risk_ waiver, depending on who receives it and under what doctrine (common-interest, joint-defense, Kovel, and work-product protections may apply). Waiver analysis is fact-specific — get counsel sign-off before distributing.
 
 The skill will not extract until the user picks a privilege posture:
 
@@ -191,14 +194,14 @@ Location: `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[s
 **Entries:** [N] ([N] 🔴 / [N] 🟡 / [N] ⚪)
 **Pivot fact:** [one sentence]
 **Privilege posture:** A-cleared | B-mixed | C-aborted
-**Flagged entries:** [N] 🔒 *(only present when posture == B-mixed)*
+**Flagged entries:** [N] 🔒 _(only present when posture == B-mixed)_
 
 ---
 
 ## Timeline
 
-| Date | Event | Tag | 🔒 | Sources |
-|---|---|---|---|---|
+| Date         | Event                         | Tag      | 🔒                            | Sources               |
+| ------------ | ----------------------------- | -------- | ----------------------------- | --------------------- |
 | [YYYY-MM-DD] | [what happened, one sentence] | 🔴/🟡/⚪ | [blank / 🔒-flag / 🔒-review] | [file paths or Bates] |
 
 ---
@@ -208,6 +211,7 @@ Location: `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[s
 [Pulled out, each with a line on why it matters to the theory.]
 
 ### [date] — [event title]
+
 - What: [one line]
 - Theory tie: [why this matters]
 - Sources: [list]
@@ -237,6 +241,7 @@ Location: `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[s
 ---
 
 ## Version
+
 - v[N] built on [date] from [source summary]
 - v[N-1] built on [date] (prior, superseded)
 ```

@@ -1,7 +1,7 @@
 ---
 name: policy-redraft
 description: Produce a proposed marked-up policy redraft that closes a gap found by /regulatory-legal:gaps or /regulatory-legal:policy-diff. A first draft for internal review — not for direct application to approved policy documents. Use when the user says "redraft the policy", "draft the policy fix", "mark up the policy", or when gap-surfacer hands off a gap for drafting.
-argument-hint: "[GAP-ID or gap description]"
+argument-hint: '[GAP-ID or gap description]'
 ---
 
 # /policy-redraft
@@ -46,6 +46,7 @@ Three inputs are required. If any is missing, ask — don't infer.
 ### 1a. The gap
 
 One of:
+
 - A `GAP-ID` from the gap tracker — load the entry from `~/.claude/plugins/config/claude-for-legal/regulatory-legal/gap-tracker.yaml` (or the matter-level equivalent).
 - A gap described in the user's message — capture the requirement, the regulation, and the affected policy.
 - A diff summary pasted from `/regulatory-legal:policy-diff` output.
@@ -53,6 +54,7 @@ One of:
 ### 1b. The current policy text
 
 One of:
+
 - A file path — read it, then ask: "Is this the approved version of the policy, and is it the latest? A redraft against an outdated policy creates divergence." Note the answer in the reviewer note.
 - Pasted text — trust but flag in the reviewer note: "Policy text was pasted directly; I assumed it was the current approved version. Confirm before applying."
 - Neither — ask for one. Do not guess at the policy text from the gap tracker or from web search.
@@ -60,6 +62,7 @@ One of:
 ### 1c. The rule text
 
 One of:
+
 - The diff output (already has the rule extracted and tagged).
 - A fetched regulation — note the source with a provenance tag.
 - Pasted rule text from the user — tag `[user provided]`.
@@ -114,6 +117,7 @@ If you see a second gap while redrafting — a provision that's clearly out of s
 [WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]
 
 > **⚠️ Reviewer note**
+>
 > - **Sources:** [Research connector: CourtListener ✓ verified | not connected — cites from training knowledge, verify before relying]
 > - **Read:** [sections of the policy reviewed; what wasn't read]
 > - **Flagged for your judgment:** [N items marked `[review]` inline | none]
@@ -137,10 +141,10 @@ If you see a second gap while redrafting — a provision that's clearly out of s
 
 ### Change summary
 
-| # | Provision | Current | Proposed | Why | Verify |
-|---|---|---|---|---|---|
-| 1 | §2.1 PII definition | "…names, addresses, SSNs…" | "…names, addresses, SSNs, biometric identifiers…" | COPPA 2025 amendments expand PII to cover biometrics | [Federal Register] |
-| 2 | §4.3 Retention period | "30 days" | "14 days" | New rule imposes 14-day cap | `[verify — model knowledge]` |
+| #   | Provision             | Current                    | Proposed                                          | Why                                                  | Verify                       |
+| --- | --------------------- | -------------------------- | ------------------------------------------------- | ---------------------------------------------------- | ---------------------------- |
+| 1   | §2.1 PII definition   | "…names, addresses, SSNs…" | "…names, addresses, SSNs, biometric identifiers…" | COPPA 2025 amendments expand PII to cover biometrics | [Federal Register]           |
+| 2   | §4.3 Retention period | "30 days"                  | "14 days"                                         | New rule imposes 14-day cap                          | `[verify — model knowledge]` |
 
 ### Before applying — checklist
 

@@ -29,19 +29,21 @@ function HtmlContent({ html }: { html: string }) {
 ```typescript
 import helmet from 'helmet';
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'"],
-    styleSrc: ["'self'", "'unsafe-inline'"],
-    imgSrc: ["'self'", "data:", "https:"],
-    connectSrc: ["'self'", "https://api.example.com"],
-    fontSrc: ["'self'"],
-    objectSrc: ["'none'"],
-    frameSrc: ["'none'"],
-    upgradeInsecureRequests: [],
-  },
-}));
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", 'data:', 'https:'],
+      connectSrc: ["'self'", 'https://api.example.com'],
+      fontSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      frameSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  }),
+);
 ```
 
 ### Input Sanitization
@@ -110,13 +112,15 @@ if (req.cookies.csrf !== req.headers['x-csrf-token']) {
 
 ```typescript
 // Modern CSRF protection
-app.use(session({
-  cookie: {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'strict', // Or 'lax' for GET requests
-  },
-}));
+app.use(
+  session({
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict', // Or 'lax' for GET requests
+    },
+  }),
+);
 ```
 
 ## HTTP Headers
@@ -142,16 +146,16 @@ app.use((req, res, next) => {
 
 ## Quick Reference
 
-| Attack | Prevention |
-|--------|------------|
-| Reflected XSS | Output encoding |
-| Stored XSS | Input sanitization + encoding |
-| DOM XSS | Avoid innerHTML, use textContent |
-| CSRF | Tokens + SameSite cookies |
+| Attack        | Prevention                       |
+| ------------- | -------------------------------- |
+| Reflected XSS | Output encoding                  |
+| Stored XSS    | Input sanitization + encoding    |
+| DOM XSS       | Avoid innerHTML, use textContent |
+| CSRF          | Tokens + SameSite cookies        |
 
-| Header | Purpose |
-|--------|---------|
-| CSP | Script/resource restrictions |
-| X-Frame-Options | Clickjacking |
-| X-Content-Type-Options | MIME sniffing |
-| SameSite | CSRF protection |
+| Header                 | Purpose                      |
+| ---------------------- | ---------------------------- |
+| CSP                    | Script/resource restrictions |
+| X-Frame-Options        | Clickjacking                 |
+| X-Content-Type-Options | MIME sniffing                |
+| SameSite               | CSRF protection              |

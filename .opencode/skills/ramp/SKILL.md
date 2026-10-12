@@ -6,7 +6,7 @@ description: >
   setup and teaches it interactively. Use when a new clinic student says
   "onboard me", "I'm new to the clinic", "getting started", or at the start of
   each semester; pass --card for the one-page reference.
-argument-hint: "[--card for the one-page reference]"
+argument-hint: '[--card for the one-page reference]'
 ---
 
 # /ramp
@@ -66,14 +66,14 @@ Don't lecture — check understanding. "So if a client comes in with an eviction
 
 Walk through each command the student will actually use:
 
-| Command | When you use it | What you get |
-|---|---|---|
-| `/client-intake` | Client interview | Formatted case summary with issues spotted, conflict flags, triage |
-| `/draft [doc type]` | Need a first draft of a common document | Practice-area template filled from case notes — *starting point, not final* |
-| `/memo` | Need to analyze a case internally | IRAC-format memo with research gaps flagged |
-| `/research-start [issue]` | Starting legal research | Roadmap: statutes to check, case law areas, search terms — *leads, not authoritative cites* |
-| `/status [audience]` | Updating someone on a case | Summary tailored to client / professor / court |
-| `/client-letter [type]` | Routine correspondence | Appointment confirm, doc request, status update from templates |
+| Command                   | When you use it                         | What you get                                                                                |
+| ------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `/client-intake`          | Client interview                        | Formatted case summary with issues spotted, conflict flags, triage                          |
+| `/draft [doc type]`       | Need a first draft of a common document | Practice-area template filled from case notes — _starting point, not final_                 |
+| `/memo`                   | Need to analyze a case internally       | IRAC-format memo with research gaps flagged                                                 |
+| `/research-start [issue]` | Starting legal research                 | Roadmap: statutes to check, case law areas, search terms — _leads, not authoritative cites_ |
+| `/status [audience]`      | Updating someone on a case              | Summary tailored to client / professor / court                                              |
+| `/client-letter [type]`   | Routine correspondence                  | Appointment confirm, doc request, status update from templates                              |
 
 For each: what it does, what it explicitly doesn't do, what the student verifies before relying on it.
 
@@ -82,13 +82,15 @@ For each: what it does, what it explicitly doesn't do, what the student verifies
 **Low-stakes. Fake client. Real tools.**
 
 **Exercise 1 — Practice intake:**
+
 > Here's a fake client scenario: [practice-area-appropriate hypo — e.g., for a housing clinic, "Maria got a 3-day notice to quit last Tuesday. She's two months behind on rent after losing her job. The apartment has had a broken heater since November. She has two kids."]
 >
 > Run `/client-intake` and interview me as if I'm Maria. I'll answer as Maria would. At the end, look at the case summary it produces — what issues did it spot? Did it catch the habitability defense?
 
-Debrief: what the intake caught, what the *student* should have probed deeper on, what gets flagged for the professor.
+Debrief: what the intake caught, what the _student_ should have probed deeper on, what gets flagged for the professor.
 
 **Exercise 2 — Practice draft:**
+
 > Using Maria's intake, run `/draft eviction-answer`. You'll get a first draft.
 >
 > Read it. What's right about it? What's wrong? What would you change before showing it to [Professor]?
@@ -96,6 +98,7 @@ Debrief: what the intake caught, what the *student* should have probed deeper on
 The point: the draft is competent but not final. The student learns to read critically, not accept.
 
 **Exercise 3 — Research roadmap:**
+
 > Run `/research-start "habitability defense to eviction in [state]"`. You'll get a roadmap — statutes, case law areas, search terms.
 >
 > None of those citations are verified. That's on purpose. Pick one statute from the roadmap and tell me how you'd verify it's current and applies here.
@@ -132,5 +135,5 @@ Printable. One page. Hand it out on day one.
 ## What this skill does NOT do
 
 - Replace the professor's orientation. It covers procedures and tools; the professor covers judgment, strategy, and the things you only learn by watching someone good do it.
-- Teach substantive law. Practice-area *orientation*, not a doctrinal course.
+- Teach substantive law. Practice-area _orientation_, not a doctrinal course.
 - Certify the student as ready. The professor decides when a student takes a real case.

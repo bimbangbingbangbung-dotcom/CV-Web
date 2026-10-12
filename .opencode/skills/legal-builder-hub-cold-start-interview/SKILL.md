@@ -7,7 +7,7 @@ description: >
   on fresh install, when the user says "get me started" or "what should I
   install", or to re-run the integration-availability check after adding or
   removing an MCP connector.
-argument-hint: "[--redo] [--check-integrations]"
+argument-hint: '[--redo] [--check-integrations]'
 ---
 
 # /cold-start-interview
@@ -27,6 +27,7 @@ When probing: only report ✓ if an MCP tool call actually succeeded. Configured
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md`:
+
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -55,7 +56,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -95,7 +96,7 @@ Short as this interview is, the five questions vary — practice area and indust
 - **If anything gets skipped:** "Skip for now and I'll flag it in your profile — you can fill it in with `--redo` later." Then move on, but track the skip.
 - **Before writing the profile and recommending a starter pack:** if any answer was skipped or left as a placeholder, list them and ask: "Want to fill any of these now, or leave them as placeholders? Your starter-pack recommendation is only as good as the profile." Then wait.
 - **Never** write the profile with silent gaps — every placeholder should be a deliberate skip the user confirmed.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 - **Pause and resume.** Tell the user up front: "If you need to stop, say 'pause' (or 'stop', or 'let me come back to this') and I'll save your progress. Run `/legal-builder-hub:cold-start-interview` again later and I'll pick up where you left off." When the user pauses, write a partial configuration to `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md` with a `<!-- SETUP PAUSED AT: [section name] — run /legal-builder-hub:cold-start-interview to resume -->` comment at the top and `[PENDING]` markers (distinct from `[PLACEHOLDER]`) on unanswered fields. When setup re-runs and finds a paused config, greet the user: "Welcome back. You paused at [section]. Your earlier answers are saved. Pick up where we left off, or start over?" Do not re-ask questions already answered.
 
 **Verify user-stated legal facts as they come up in setup.** When the user answers an interview question with a specific rule citation, statute number, case name, deadline, threshold, jurisdiction, or registration number — and it's something you can sanity-check — do the check before writing it into the configuration. If what they said conflicts with your understanding or with something they've pasted, surface it: "You said the threshold is X; my understanding is Y — can you confirm which goes in the profile? `[premise flagged — verify]`" A wrong fact written into CLAUDE.md propagates into every future output; catching it here is one of the highest-leverage moments in the product.
@@ -130,7 +131,7 @@ If the answer is 3, add:
 
 > This plugin can work with: Slack (for new-skill / update notifications). Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -183,12 +184,12 @@ Write the answer to a `## Freshness reminders` section in the profile (insert af
 ```markdown
 ## Freshness reminders
 
-| Content category | Max age before reminder | Rationale |
-|---|---|---|
-| regulatory | 6 months | Regulators update frequently; enforcement priorities shift |
-| procedural | 12 months | Court rules and procedures change slower |
-| stylistic | 24 months | House style, formatting templates |
-| unknown | 3 months | A skill that doesn't declare freshness is treated cautiously |
+| Content category | Max age before reminder | Rationale                                                    |
+| ---------------- | ----------------------- | ------------------------------------------------------------ |
+| regulatory       | 6 months                | Regulators update frequently; enforcement priorities shift   |
+| procedural       | 12 months               | Court rules and procedures change slower                     |
+| stylistic        | 24 months               | House style, formatting templates                            |
+| unknown          | 3 months                | A skill that doesn't declare freshness is treated cautiously |
 
 When a skill's `last_verified` + `freshness_window` is past, or the user's threshold (above) is past — whichever is tighter — the skill-installer surfaces a warning before running.
 ```
@@ -215,14 +216,14 @@ If the user gave tighter numbers, write those in place of the defaults. If the u
 
 Map the profile to registry skills:
 
-| Profile | Starter pack |
-|---|---|
-| In-house commercial, tech | commercial-legal plugin + lpm-skills (matter intake, scope control) |
-| Privacy counsel | privacy-legal plugin + any community DPA/PIA skills |
-| Product counsel | product-legal plugin + community marketing-review skills |
-| Firm litigation | litigation-legal plugin + lpm-skills (matter planning, budget) |
-| Solo / small team | Everything lightweight — triage skills over full review skills |
-| Builder | the raw registries and the skills-qa framework — they'll build and validate their own |
+| Profile                   | Starter pack                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------- |
+| In-house commercial, tech | commercial-legal plugin + lpm-skills (matter intake, scope control)                   |
+| Privacy counsel           | privacy-legal plugin + any community DPA/PIA skills                                   |
+| Product counsel           | product-legal plugin + community marketing-review skills                              |
+| Firm litigation           | litigation-legal plugin + lpm-skills (matter planning, budget)                        |
+| Solo / small team         | Everything lightweight — triage skills over full review skills                        |
+| Builder                   | the raw registries and the skills-qa framework — they'll build and validate their own |
 
 For each recommended skill: show the SKILL.md description. Let them pick — don't install anything without a yes.
 
@@ -249,7 +250,6 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Browse the registry and pick one skill that matches a current project — install it and see how the allowlist gate feels. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
-
 
 - "Here's what I installed. Want to see what else is in the registries?"
 - "The related-skills-surfacer will nudge you when you're doing something the community has a skill for. Want that on or off?"

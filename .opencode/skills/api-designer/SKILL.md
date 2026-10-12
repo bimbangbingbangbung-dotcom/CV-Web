@@ -5,7 +5,7 @@ license: MIT
 metadata:
   author: https://github.com/Jeffallan
   company: https://synergetic.solutions
-  version: "1.1.0"
+  version: '1.1.0'
   domain: api-architecture
   triggers: API design, REST API, OpenAPI, API specification, API architecture, resource modeling, API versioning, GraphQL schema, API documentation
   role: architect
@@ -31,17 +31,18 @@ Senior API architect specializing in REST and GraphQL APIs with comprehensive Op
 
 Load detailed guidance based on context:
 
-| Topic | Reference | Load When |
-|-------|-----------|-----------|
-| REST Patterns | `references/rest-patterns.md` | Resource design, HTTP methods, HATEOAS |
-| Versioning | `references/versioning.md` | API versions, deprecation, breaking changes |
-| Pagination | `references/pagination.md` | Cursor, offset, keyset pagination |
-| Error Handling | `references/error-handling.md` | Error responses, RFC 7807, status codes |
-| OpenAPI | `references/openapi.md` | OpenAPI 3.1, documentation, code generation |
+| Topic          | Reference                      | Load When                                   |
+| -------------- | ------------------------------ | ------------------------------------------- |
+| REST Patterns  | `references/rest-patterns.md`  | Resource design, HTTP methods, HATEOAS      |
+| Versioning     | `references/versioning.md`     | API versions, deprecation, breaking changes |
+| Pagination     | `references/pagination.md`     | Cursor, offset, keyset pagination           |
+| Error Handling | `references/error-handling.md` | Error responses, RFC 7807, status codes     |
+| OpenAPI        | `references/openapi.md`        | OpenAPI 3.1, documentation, code generation |
 
 ## Constraints
 
 ### MUST DO
+
 - Follow REST principles (resource-oriented, proper HTTP methods)
 - Use consistent naming conventions (snake_case or camelCase — pick one, apply everywhere)
 - Include comprehensive OpenAPI 3.1 specification
@@ -52,6 +53,7 @@ Load detailed guidance based on context:
 - Provide request/response examples
 
 ### MUST NOT DO
+
 - Use verbs in resource URIs (use `/users/{id}`, not `/getUser/{id}`)
 - Return inconsistent response structures
 - Skip error code documentation
@@ -66,10 +68,10 @@ Load detailed guidance based on context:
 ### OpenAPI 3.1 Resource Endpoint (copy-paste starter)
 
 ```yaml
-openapi: "3.1.0"
+openapi: '3.1.0'
 info:
   title: Example API
-  version: "1.1.0"
+  version: '1.1.0'
 paths:
   /users:
     get:
@@ -85,7 +87,7 @@ paths:
           in: query
           schema: { type: integer, default: 20, maximum: 100 }
       responses:
-        "200":
+        '200':
           description: Paginated list of users
           content:
             application/json:
@@ -95,12 +97,12 @@ paths:
                 properties:
                   data:
                     type: array
-                    items: { $ref: "#/components/schemas/User" }
+                    items: { $ref: '#/components/schemas/User' }
                   pagination:
-                    $ref: "#/components/schemas/CursorPage"
-        "400": { $ref: "#/components/responses/BadRequest" }
-        "401": { $ref: "#/components/responses/Unauthorized" }
-        "429": { $ref: "#/components/responses/TooManyRequests" }
+                    $ref: '#/components/schemas/CursorPage'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/TooManyRequests' }
   /users/{id}:
     get:
       summary: Get a user
@@ -112,12 +114,12 @@ paths:
           required: true
           schema: { type: string, format: uuid }
       responses:
-        "200":
+        '200':
           description: User found
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/User" }
-        "404": { $ref: "#/components/responses/NotFound" }
+              schema: { $ref: '#/components/schemas/User' }
+        '404': { $ref: '#/components/responses/NotFound' }
 
 components:
   schemas:
@@ -125,9 +127,9 @@ components:
       type: object
       required: [id, email, created_at]
       properties:
-        id:    { type: string, format: uuid, readOnly: true }
+        id: { type: string, format: uuid, readOnly: true }
         email: { type: string, format: email }
-        name:  { type: string }
+        name: { type: string }
         created_at: { type: string, format: date-time, readOnly: true }
 
     CursorPage:
@@ -135,41 +137,42 @@ components:
       required: [next_cursor, has_more]
       properties:
         next_cursor: { type: string, nullable: true }
-        has_more:    { type: boolean }
+        has_more: { type: boolean }
 
-    Problem:                       # RFC 7807 Problem Details
+    Problem: # RFC 7807 Problem Details
       type: object
       required: [type, title, status]
       properties:
-        type:     { type: string, format: uri, example: "https://api.example.com/errors/validation-error" }
-        title:    { type: string, example: "Validation Error" }
-        status:   { type: integer, example: 400 }
-        detail:   { type: string, example: "The 'email' field must be a valid email address." }
-        instance: { type: string, format: uri, example: "/users/req-abc123" }
+        type:
+          { type: string, format: uri, example: 'https://api.example.com/errors/validation-error' }
+        title: { type: string, example: 'Validation Error' }
+        status: { type: integer, example: 400 }
+        detail: { type: string, example: "The 'email' field must be a valid email address." }
+        instance: { type: string, format: uri, example: '/users/req-abc123' }
 
   responses:
     BadRequest:
       description: Invalid request parameters
       content:
         application/problem+json:
-          schema: { $ref: "#/components/schemas/Problem" }
+          schema: { $ref: '#/components/schemas/Problem' }
     Unauthorized:
       description: Missing or invalid authentication
       content:
         application/problem+json:
-          schema: { $ref: "#/components/schemas/Problem" }
+          schema: { $ref: '#/components/schemas/Problem' }
     NotFound:
       description: Resource not found
       content:
         application/problem+json:
-          schema: { $ref: "#/components/schemas/Problem" }
+          schema: { $ref: '#/components/schemas/Problem' }
     TooManyRequests:
       description: Rate limit exceeded
       headers:
         Retry-After: { schema: { type: integer } }
       content:
         application/problem+json:
-          schema: { $ref: "#/components/schemas/Problem" }
+          schema: { $ref: '#/components/schemas/Problem' }
 
   securitySchemes:
     BearerAuth:
@@ -190,9 +193,7 @@ security:
   "status": 422,
   "detail": "The 'email' field must be a valid email address.",
   "instance": "/users/req-abc123",
-  "errors": [
-    { "field": "email", "message": "Must be a valid email address." }
-  ]
+  "errors": [{ "field": "email", "message": "Must be a valid email address." }]
 }
 ```
 
@@ -204,6 +205,7 @@ security:
 ## Output Checklist
 
 When delivering an API design, provide:
+
 1. Resource model and relationships (diagram or table)
 2. Endpoint specifications with URIs and HTTP methods
 3. OpenAPI 3.1 specification (YAML)

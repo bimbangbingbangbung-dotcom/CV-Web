@@ -2,12 +2,12 @@
 
 ## Strategy Comparison
 
-| Strategy | Use When | Rollback | Risk |
-|----------|----------|----------|------|
-| **Rolling** | Standard updates, can tolerate mixed versions | Automatic via health checks | Low |
-| **Blue-Green** | Zero downtime, instant rollback needed | Switch traffic to old env | Medium |
-| **Canary** | Risk mitigation, gradual rollout | Scale down canary | Low |
-| **Recreate** | Stateful apps, breaking changes | Redeploy previous version | High |
+| Strategy       | Use When                                      | Rollback                    | Risk   |
+| -------------- | --------------------------------------------- | --------------------------- | ------ |
+| **Rolling**    | Standard updates, can tolerate mixed versions | Automatic via health checks | Low    |
+| **Blue-Green** | Zero downtime, instant rollback needed        | Switch traffic to old env   | Medium |
+| **Canary**     | Risk mitigation, gradual rollout              | Scale down canary           | Low    |
+| **Recreate**   | Stateful apps, breaking changes               | Redeploy previous version   | High   |
 
 ## Rolling Deployment (Kubernetes)
 
@@ -18,8 +18,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 25%        # Max pods above desired
-      maxUnavailable: 25%  # Max pods unavailable
+      maxSurge: 25% # Max pods above desired
+      maxUnavailable: 25% # Max pods unavailable
 ```
 
 ## Blue-Green with Ingress
@@ -48,7 +48,7 @@ metadata:
   name: app
 spec:
   selector:
-    version: blue  # Switch to 'green' for cutover
+    version: blue # Switch to 'green' for cutover
 ```
 
 ## Canary with Istio
@@ -65,7 +65,7 @@ spec:
     - match:
         - headers:
             canary:
-              exact: "true"
+              exact: 'true'
       route:
         - destination:
             host: app-canary
@@ -81,6 +81,7 @@ spec:
 ## Rollback Procedures
 
 ### Kubernetes Rollback
+
 ```bash
 # View rollout history
 kubectl rollout history deployment/app
@@ -96,11 +97,13 @@ kubectl rollout status deployment/app
 ```
 
 ### ArgoCD Rollback
+
 ```bash
 argocd app rollback app-prod --revision=123
 ```
 
 ### Terraform Rollback
+
 ```bash
 # Identify previous state
 terraform state list
@@ -141,6 +144,7 @@ curl -f https://app.example.com/health
 ## Deployment Metrics (DORA)
 
 Track four key metrics:
+
 - **Deployment Frequency**: Target 10+/day
 - **Lead Time for Changes**: Target <1 hour
 - **Change Failure Rate**: Target <5%
@@ -206,7 +210,7 @@ spec:
         timeout: 5s
         metadata:
           type: bash
-          cmd: "hey -z 1m -q 10 http://api-canary:8080/"
+          cmd: 'hey -z 1m -q 10 http://api-canary:8080/'
 ```
 
 ## Shadow Deployment
@@ -224,7 +228,7 @@ spec:
     - match:
         - headers:
             x-test-version:
-              exact: "v2"
+              exact: 'v2'
       route:
         - destination:
             host: api

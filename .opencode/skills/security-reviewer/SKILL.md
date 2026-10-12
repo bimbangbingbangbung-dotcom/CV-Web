@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob
 metadata:
   author: https://github.com/Jeffallan
   company: https://synergetic.solutions
-  version: "1.1.1"
+  version: '1.1.1'
   domain: security
   triggers: security review, vulnerability scan, SAST, security audit, penetration test, code audit, security analysis, infrastructure security, DevSecOps, cloud security, compliance audit
   role: specialist
@@ -45,18 +45,19 @@ Security analyst specializing in code review, vulnerability identification, pene
 
 Load detailed guidance based on context:
 
-| Topic | Reference | Load When |
-|-------|-----------|-----------|
-| SAST Tools | `references/sast-tools.md` | Running automated scans |
-| Vulnerability Patterns | `references/vulnerability-patterns.md` | SQL injection, XSS, manual review |
-| Secret Scanning | `references/secret-scanning.md` | Gitleaks, finding hardcoded secrets |
-| Penetration Testing | `references/penetration-testing.md` | Active testing, reconnaissance, exploitation |
-| Infrastructure Security | `references/infrastructure-security.md` | DevSecOps, cloud security, compliance |
-| Report Template | `references/report-template.md` | Writing security report |
+| Topic                   | Reference                               | Load When                                    |
+| ----------------------- | --------------------------------------- | -------------------------------------------- |
+| SAST Tools              | `references/sast-tools.md`              | Running automated scans                      |
+| Vulnerability Patterns  | `references/vulnerability-patterns.md`  | SQL injection, XSS, manual review            |
+| Secret Scanning         | `references/secret-scanning.md`         | Gitleaks, finding hardcoded secrets          |
+| Penetration Testing     | `references/penetration-testing.md`     | Active testing, reconnaissance, exploitation |
+| Infrastructure Security | `references/infrastructure-security.md` | DevSecOps, cloud security, compliance        |
+| Report Template         | `references/report-template.md`         | Writing security report                      |
 
 ## Constraints
 
 ### MUST DO
+
 - Check authentication/authorization first
 - Run automated tools before manual review
 - Provide specific file/line locations
@@ -69,6 +70,7 @@ Load detailed guidance based on context:
 - Report critical findings immediately
 
 ### MUST NOT DO
+
 - Skip manual review (tools miss things)
 - Test on production systems without authorization
 - Ignore "low" severity issues

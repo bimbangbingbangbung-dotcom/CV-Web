@@ -1,7 +1,7 @@
 ---
 name: legal-hold
 description: Issue, refresh, release, or report on legal holds — drafts the hold notice as .docx, updates legal_hold fields in _log.yaml, and calendars the next refresh. Use when the user says "issue a hold", "refresh hold", "release hold", or asks for a portfolio-wide hold status report.
-argument-hint: "[slug] [--issue | --refresh | --release | --status]"
+argument-hint: '[slug] [--issue | --refresh | --release | --status]'
 ---
 
 # /legal-hold
@@ -65,6 +65,7 @@ Do not send the notice without an explicit yes. Drafting and scoping do not requ
 > **External deliverable:** the notice below is sent to custodians. Do NOT include a `PRIVILEGED & CONFIDENTIAL — ATTORNEY WORK PRODUCT — PREPARED AT THE DIRECTION OF COUNSEL` header on the outgoing notice; use the attorney-client marking in the template. Confirm the correct marking for your jurisdiction and matter.
 
 **Inputs:**
+
 1. **Scope** — categories of documents, data, communications. Start specific: contracts with counterparty, all communications referencing [project/subject], related financial records, calendar entries. `[SME VERIFY — scope too broad = operational burden; too narrow = spoliation risk]`
 2. **Custodians** — named individuals likely to hold responsive material. Pull suggestions from matter.md internal_owners and from common roles (business lead, HR partner if employment, CISO if data). `[SME VERIFY — the custodian list is the difference between defensible preservation and a gap argument]`
 3. **Date range** — when to start preserving from (usually: triggering event or earlier), through the present + ongoing.
@@ -134,6 +135,7 @@ release. You may be asked to reaffirm compliance at periodic intervals.
 > This is a draft legal hold notice for attorney review, not a notice ready to issue. Issuing a hold triggers preservation obligations the company will be judged on in any later spoliation argument, and the notice itself may be discoverable. A licensed attorney reviews, approves, and issues. Do not distribute this draft unreviewed.
 
 **Writes:**
+
 - `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/legal-hold-v1.docx` via the `docx` skill
 - Appends to `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/history.md`:
   ```
@@ -148,10 +150,10 @@ release. You may be asked to reaffirm compliance at periodic intervals.
   legal_hold:
     issued: true
     issued_date: [YYYY-MM-DD]
-    scope: "[one-line summary]"
+    scope: '[one-line summary]'
     custodians: [list]
-    last_refresh: [YYYY-MM-DD]   # same as issued_date on first issuance
-    next_refresh: [YYYY-MM-DD]   # default: issued_date + 6 months
+    last_refresh: [YYYY-MM-DD] # same as issued_date on first issuance
+    next_refresh: [YYYY-MM-DD] # default: issued_date + 6 months
     released: null
   ```
 
@@ -160,6 +162,7 @@ release. You may be asked to reaffirm compliance at periodic intervals.
 Refresh cadence: default 6 months; adjustable per matter. When `next_refresh < today` (or user invokes manually), the skill drafts a refresh notice.
 
 **Inputs:**
+
 1. Any **scope changes** since last refresh (new topics surfaced in discovery, new custodians, new systems).
 2. Any **custodians to add or remove** (departures need special handling — see below).
 3. Re-confirmation language.
@@ -169,6 +172,7 @@ Refresh cadence: default 6 months; adjustable per matter. When `next_refresh < t
 **Departed custodians:** if a custodian has left the company since last refresh, the skill flags this as a preservation action item — the departing employee's files and email archive need to be preserved at IT level, not just via notice to the individual. Records this in history.md as a separate entry requiring action.
 
 **Writes:**
+
 - `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/legal-hold-v[N].docx` (next version number)
 - `history.md` entry
 - `_log.yaml`: updates `last_refresh` and `next_refresh` fields; modifies `custodians` list if changed
@@ -188,6 +192,7 @@ Usually at matter close. Confirm the matter is truly over (not on appeal, not li
 Do not send the release notice without an explicit yes.
 
 **Inputs:**
+
 1. Confirmation of release authority (usually the signer or GC).
 2. Release date.
 3. Retention instruction — what happens to the material that was under hold? (Return to normal retention? Continue preserving for defined period? Transfer to archive?)
@@ -195,6 +200,7 @@ Do not send the release notice without an explicit yes.
 **Release notice template:** one paragraph, formal. "The litigation hold issued [date] regarding [matter] is released effective [date]. Normal retention resumes."
 
 **Writes:**
+
 - `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/legal-hold-release.docx`
 - `history.md` entry
 - `_log.yaml`: sets `released: [YYYY-MM-DD]`
@@ -208,9 +214,9 @@ Read `_log.yaml`. Produce a report:
 
 ## Active holds
 
-| Matter | Issued | Last refresh | Next refresh | Custodians | Status |
-|---|---|---|---|---|---|
-| [slug] | [date] | [date] | [date] | [N] | [ok / ⚠️ refresh due / ❌ overdue] |
+| Matter | Issued | Last refresh | Next refresh | Custodians | Status                             |
+| ------ | ------ | ------------ | ------------ | ---------- | ---------------------------------- |
+| [slug] | [date] | [date]       | [date]       | [N]        | [ok / ⚠️ refresh due / ❌ overdue] |
 
 ## ⚠️ Attention
 

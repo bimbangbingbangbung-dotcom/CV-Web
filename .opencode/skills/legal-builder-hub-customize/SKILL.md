@@ -6,7 +6,7 @@ description: >
   installed starter pack, watched registries, update preferences, or QA
   strictness. Use when the user says "change my [thing]", "add a registry",
   "update my profile", "edit my config", or "customize".
-argument-hint: "[section name, or describe what you want to change]"
+argument-hint: '[section name, or describe what you want to change]'
 ---
 
 # /customize
@@ -33,8 +33,8 @@ whole cold-start interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting *(shared across all 12 plugins — changes flow through
-     `company-profile.md`)*
+     setting _(shared across all 12 plugins — changes flow through
+     `company-profile.md`)_
    - **Your practice profile** — practice areas in scope, used to recommend
      community skills
    - **Installed starter pack** — which plugins and skills are installed via
@@ -59,11 +59,11 @@ whole cold-start interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - *Adding a new watched registry:* "`/registry-browser` will search this registry
+   - _Adding a new watched registry:_ "`/registry-browser` will search this registry
      alongside the existing ones. `/auto-updater` will check it on its next run."
-   - *QA strictness strict → middle:* "`/skills-qa` will report the same findings
+   - _QA strictness strict → middle:_ "`/skills-qa` will report the same findings
      but not block install on the medium band unless you confirm."
-   - *Auto-update on → off:* "The hub will prompt you before applying
+   - _Auto-update on → off:_ "The hub will prompt you before applying
      updates instead of applying them automatically."
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,

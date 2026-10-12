@@ -5,7 +5,7 @@ description: >
   outputs a gap list and a remediation plan with owners and dates. Use when a new
   reg drops, the user asks "does [regulation] affect us", "gap analysis for
   [state privacy law]", "compliance check against [reg]", or pastes regulatory text.
-argument-hint: "[regulation name, or paste reg text/summary]"
+argument-hint: '[regulation name, or paste reg text/summary]'
 ---
 
 # /reg-gap-analysis
@@ -39,6 +39,7 @@ This skill diffs the new requirement against what you currently do (per `~/.clau
 ## Load current state
 
 Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`:
+
 - `## Privacy policy commitments` — what you've publicly promised
 - `## Regulatory footprint` — what already applies
 - `## DSAR process` → systems list — what you actually do operationally
@@ -59,11 +60,12 @@ Before diffing, answer:
 
 Read the regulation (or summary/guidance). List every substantive requirement as a discrete item:
 
-| # | Requirement | Citation | Category |
-|---|---|---|---|
-| 1 | [requirement as stated] | [section] | [Notice / Rights / Security / Vendor / Other] |
+| #   | Requirement             | Citation  | Category                                      |
+| --- | ----------------------- | --------- | --------------------------------------------- |
+| 1   | [requirement as stated] | [section] | [Notice / Rights / Security / Vendor / Other] |
 
 **Categories:**
+
 - **Notice** — what you have to tell users (privacy policy content)
 - **Rights** — what users can ask for (DSAR-adjacent)
 - **Security** — technical/organizational measures
@@ -117,9 +119,9 @@ Prepend the work-product header from `~/.claude/plugins/config/claude-for-legal/
 
 ### Must-do before enforcement
 
-| Gap | Fix | Owner | Due | Status |
-|---|---|---|---|---|
-| [gap] | [specific fix] | [name] | [date] | [ ] |
+| Gap   | Fix            | Owner  | Due    | Status |
+| ----- | -------------- | ------ | ------ | ------ |
+| [gap] | [specific fix] | [name] | [date] | [ ]    |
 
 ### Should-do (lower risk, not blocking)
 

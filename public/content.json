@@ -132,7 +132,11 @@
       "year": "2026",
       "tech": ["ESP32", "MQTT", "Python", "InfluxDB", "Grafana"],
       "links": [
-        { "label": "Repository", "url": "https://github.com/todo-jmreyes/smart-irrigation", "kind": "repo" },
+        {
+          "label": "Repository",
+          "url": "https://github.com/todo-jmreyes/smart-irrigation",
+          "kind": "repo"
+        },
         { "label": "Live demo", "url": "https://todo-example.vercel.app", "kind": "demo" }
       ],
       "image": null,
@@ -150,7 +154,11 @@
       "year": "2025",
       "tech": ["Verilog", "Vivado", "RISC-V", "FPGA"],
       "links": [
-        { "label": "Repository", "url": "https://github.com/todo-jmreyes/riscv-single-cycle", "kind": "repo" }
+        {
+          "label": "Repository",
+          "url": "https://github.com/todo-jmreyes/riscv-single-cycle",
+          "kind": "repo"
+        }
       ],
       "image": null,
       "featured": false,
@@ -163,7 +171,11 @@
       "year": "2025",
       "tech": ["TypeScript", "SQLite", "Node.js"],
       "links": [
-        { "label": "Case study", "url": "https://github.com/todo-jmreyes/request-tracker#readme", "kind": "case-study" }
+        {
+          "label": "Case study",
+          "url": "https://github.com/todo-jmreyes/request-tracker#readme",
+          "kind": "case-study"
+        }
       ],
       "image": null,
       "featured": false,
@@ -234,7 +246,11 @@
     },
     "socials": [
       { "platform": "github", "label": "GitHub", "url": "https://github.com/todo-jmreyes" },
-      { "platform": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/in/todo-jmreyes" },
+      {
+        "platform": "linkedin",
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/todo-jmreyes"
+      },
       { "platform": "email", "label": "Email", "url": "mailto:todo.juanmiguel@example.com" },
       { "platform": "x", "label": "X", "url": "https://x.com/todo-jmreyes" }
     ]

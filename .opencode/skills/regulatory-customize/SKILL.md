@@ -7,7 +7,7 @@ description: >
   process, feed configuration, or matter workspace paths. Use when the user
   says "change my [thing]", "add a regulator", "update my watchlist", "edit
   my threshold", or "customize".
-argument-hint: "[section name, or describe what you want to change]"
+argument-hint: '[section name, or describe what you want to change]'
 ---
 
 # /customize
@@ -34,8 +34,8 @@ without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting *(shared across all 12 plugins — changes flow through
-     `company-profile.md`)*
+     setting _(shared across all 12 plugins — changes flow through
+     `company-profile.md`)_
    - **Regulators we watch** — agencies / bodies / SROs / state regulators
      in scope, and which are "leading" (most likely to drive policy
      impact) vs. "monitor"
@@ -64,13 +64,13 @@ without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - *Adding a regulator to the watchlist:* "`/reg-feed-watcher` will sweep this
+   - _Adding a regulator to the watchlist:_ "`/reg-feed-watcher` will sweep this
      regulator on its next run. `/policy-diff` will accept inputs from this
      regulator's rulemaking feed."
-   - *Tightening materiality threshold:* "`/reg-feed-watcher` digest will be
+   - _Tightening materiality threshold:_ "`/reg-feed-watcher` digest will be
      shorter — items below the new threshold will drop from the weekly
      digest but stay searchable."
-   - *New policy added to the library:* "`/policy-diff` will include this policy
+   - _New policy added to the library:_ "`/policy-diff` will include this policy
      when matching new rules against the library. The comment tracker
      will tag comments affecting this policy."
 

@@ -46,19 +46,13 @@ interface TokenPayload {
 }
 
 function generateAccessToken(userId: string): string {
-  return jwt.sign(
-    { sub: userId, type: 'access' },
-    JWT_SECRET,
-    { expiresIn: ACCESS_TOKEN_EXPIRY }
-  );
+  return jwt.sign({ sub: userId, type: 'access' }, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
 }
 
 function generateRefreshToken(userId: string): string {
-  return jwt.sign(
-    { sub: userId, type: 'refresh' },
-    JWT_SECRET,
-    { expiresIn: REFRESH_TOKEN_EXPIRY }
-  );
+  return jwt.sign({ sub: userId, type: 'refresh' }, JWT_SECRET, {
+    expiresIn: REFRESH_TOKEN_EXPIRY,
+  });
 }
 
 function verifyToken(token: string): TokenPayload {
@@ -121,16 +115,16 @@ async function handleLoginAttempt(email: string, success: boolean) {
 
 ## Quick Reference
 
-| Practice | Implementation |
-|----------|----------------|
-| Password hash | bcrypt (12+ rounds) |
-| Token expiry | Access: 15m, Refresh: 7d |
-| Lockout | 5 attempts, 15min lockout |
-| MFA | TOTP (authenticator apps) |
+| Practice      | Implementation            |
+| ------------- | ------------------------- |
+| Password hash | bcrypt (12+ rounds)       |
+| Token expiry  | Access: 15m, Refresh: 7d  |
+| Lockout       | 5 attempts, 15min lockout |
+| MFA           | TOTP (authenticator apps) |
 
-| JWT Claim | Purpose |
-|-----------|---------|
-| `sub` | User ID |
-| `exp` | Expiration |
-| `iat` | Issued at |
-| `type` | access/refresh |
+| JWT Claim | Purpose        |
+| --------- | -------------- |
+| `sub`     | User ID        |
+| `exp`     | Expiration     |
+| `iat`     | Issued at      |
+| `type`    | access/refresh |

@@ -5,7 +5,7 @@ description: >
   jurisdiction. Tracks misses and comes back to patterns. Use when the user
   says "bar prep", "MBE questions", "practice essay", or "test me for the
   bar".
-argument-hint: "[subject, or --mbe / --essay / --session <n>]"
+argument-hint: '[subject, or --mbe / --essay / --session <n>]'
 ---
 
 # /bar-prep-questions
@@ -44,6 +44,7 @@ Do not assume the subject list. Before generating any questions:
 2. If the practice profile does not specify which exam format the student is sitting for (NextGen / traditional UBE / state-specific), **ask**:
 
    > Which bar exam are you sitting for?
+   >
    > 1. **NextGen Bar Exam** (NCBE, launched July 2026 in some jurisdictions)
    > 2. **Traditional Uniform Bar Exam (UBE)** (MBE + MEE + MPT)
    > 3. **State-specific exam** (California, Louisiana, Puerto Rico, Washington, etc. — tell me which)
@@ -177,7 +178,7 @@ session_history:
     n_questions: 10
     score: 6
     weak_subtopics: [hearsay-exceptions, character-evidence]
-    jurisdiction_mode: mixed  # or ube / state-specific
+    jurisdiction_mode: mixed # or ube / state-specific
 ```
 
 If no `study-plan.yaml` exists, write session history to `~/.claude/plugins/config/claude-for-legal/law-student/session-history.yaml` instead so future sessions can still weight appropriately.
@@ -226,6 +227,7 @@ Keep a running tally: which subjects, which sub-topics, which wrong-answer traps
 ### Generate a prompt
 
 Bar essay format for the student's exam and jurisdiction.
+
 - **Traditional UBE states:** MEE format.
 - **NextGen jurisdictions:** NextGen integrated performance task / short-answer format (per current NCBE released samples).
 - **State-specific exams:** that state's essay format (California, Louisiana, etc.).

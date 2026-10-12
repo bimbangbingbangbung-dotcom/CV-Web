@@ -18,16 +18,16 @@ This is the compatibility-preserving systems and backend route for unqualified S
 
 ## Deep-review rubric
 
-| Dimension | Weight |
-|---|---:|
-| Product contract and critical flows | 20 |
-| State and data invariants | 15 |
-| Security and privacy boundaries | 15 |
-| Failure, concurrency, and recovery | 15 |
-| Tests and evidence | 10 |
-| Observability and operability | 10 |
-| Architecture and change safety | 10 |
-| UX and accessibility of recovery | 5 |
+| Dimension                           | Weight |
+| ----------------------------------- | -----: |
+| Product contract and critical flows |     20 |
+| State and data invariants           |     15 |
+| Security and privacy boundaries     |     15 |
+| Failure, concurrency, and recovery  |     15 |
+| Tests and evidence                  |     10 |
+| Observability and operability       |     10 |
+| Architecture and change safety      |     10 |
+| UX and accessibility of recovery    |      5 |
 
 Use the finding and target-scoped veto protocol in `references/review-contract.md`. Every deduction must point to a relevant consequence in this product. Do not deduct for absent queues, microservices, caching, transactions, design patterns, or abstractions that the artifact does not need.
 

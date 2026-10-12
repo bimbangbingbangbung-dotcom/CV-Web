@@ -25,22 +25,22 @@ Review the shipped client experience as a Staff Frontend engineer: correct, incl
 
 Rate only dimensions that apply to the product and target. For numeric scoring, use these weights and the anchors in `references/numeric-scoring.md`:
 
-| Dimension | Weight |
-|---|---:|
-| Browser and runtime correctness | 12 |
-| Real data and real behavior | 12 |
-| State and data flow | 10 |
-| Accessibility and inclusive input | 12 |
-| Performance and perceived responsiveness | 9 |
-| Responsive and cross-browser behavior | 3 |
-| Design-system consistency | 3 |
-| Typography and text setting | 3 |
-| Forms, errors, and recovery | 9 |
-| Interaction and motion craft | 3 |
-| Client security and privacy boundaries | 9 |
-| Testability | 7 |
-| Observability | 3 |
-| Change safety | 5 |
+| Dimension                                | Weight |
+| ---------------------------------------- | -----: |
+| Browser and runtime correctness          |     12 |
+| Real data and real behavior              |     12 |
+| State and data flow                      |     10 |
+| Accessibility and inclusive input        |     12 |
+| Performance and perceived responsiveness |      9 |
+| Responsive and cross-browser behavior    |      3 |
+| Design-system consistency                |      3 |
+| Typography and text setting              |      3 |
+| Forms, errors, and recovery              |      9 |
+| Interaction and motion craft             |      3 |
+| Client security and privacy boundaries   |      9 |
+| Testability                              |      7 |
+| Observability                            |      3 |
+| Change safety                            |      5 |
 
 A hardcoded value is the defect this audience ships most and the one a review is least likely to catch: it renders, it never crashes, every test passes, and it looks exactly like the real thing. Three checks, cheapest first. Load the screen fresh and watch the network — data on screen with no request behind it is fabricated. Open the same screen as a second account and compare; a real value differs, an invented one does not. Change the underlying record and reload; a real value moves.
 
@@ -87,16 +87,26 @@ rectangles into lines with a tolerance, and read the last group:
 const lh = parseFloat(getComputedStyle(el).lineHeight) || 24;
 const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
 const chars = [];
-for (let n; (n = walker.nextNode()); )
+for (let n; (n = walker.nextNode());)
   for (let i = 0; i < n.length; i++) {
-    const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1);
+    const r = document.createRange();
+    r.setStart(n, i);
+    r.setEnd(n, i + 1);
     const b = r.getBoundingClientRect();
     if (b.width > 0) chars.push({ c: n.data[i], y: Math.round(b.bottom) });
   }
-const rows = [...new Set(chars.map(c => c.y))].sort((a, b) => a - b)
-  .reduce((g, y) => (g.length && y - g.at(-1).at(-1) <= lh * 0.6 ? g.at(-1).push(y) : g.push([y]), g), []);
+const rows = [...new Set(chars.map((c) => c.y))]
+  .sort((a, b) => a - b)
+  .reduce(
+    (g, y) => (g.length && y - g.at(-1).at(-1) <= lh * 0.6 ? g.at(-1).push(y) : g.push([y]), g),
+    [],
+  );
 const last = new Set(rows.at(-1));
-const text = chars.filter(c => last.has(c.y)).map(c => c.c).join('').trim();
+const text = chars
+  .filter((c) => last.has(c.y))
+  .map((c) => c.c)
+  .join('')
+  .trim();
 ```
 
 Score `text` by units, not by width: words for Latin, characters for CJK. A last line whose ratio to the block width

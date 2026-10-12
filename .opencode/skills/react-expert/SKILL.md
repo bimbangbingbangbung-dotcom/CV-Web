@@ -5,7 +5,7 @@ license: MIT
 metadata:
   author: https://github.com/Jeffallan
   company: https://synergetic.solutions
-  version: "1.1.0"
+  version: '1.1.0'
   domain: frontend
   triggers: React, JSX, hooks, useState, useEffect, useContext, Server Components, React 19, Suspense, TanStack Query, Redux, Zustand, component, frontend
   role: specialist
@@ -41,19 +41,20 @@ Senior React specialist with deep expertise in React 19, Server Components, and 
 
 Load detailed guidance based on context:
 
-| Topic | Reference | Load When |
-|-------|-----------|-----------|
-| Server Components | `references/server-components.md` | RSC patterns, Next.js App Router |
-| React 19 | `references/react-19-features.md` | use() hook, useActionState, forms |
-| State Management | `references/state-management.md` | Context, Zustand, Redux, TanStack |
-| Hooks | `references/hooks-patterns.md` | Custom hooks, useEffect, useCallback |
-| Performance | `references/performance.md` | memo, lazy, virtualization |
-| Testing | `references/testing-react.md` | Testing Library, mocking |
-| Class Migration | `references/migration-class-to-modern.md` | Converting class components to hooks/RSC |
+| Topic             | Reference                                 | Load When                                |
+| ----------------- | ----------------------------------------- | ---------------------------------------- |
+| Server Components | `references/server-components.md`         | RSC patterns, Next.js App Router         |
+| React 19          | `references/react-19-features.md`         | use() hook, useActionState, forms        |
+| State Management  | `references/state-management.md`          | Context, Zustand, Redux, TanStack        |
+| Hooks             | `references/hooks-patterns.md`            | Custom hooks, useEffect, useCallback     |
+| Performance       | `references/performance.md`               | memo, lazy, virtualization               |
+| Testing           | `references/testing-react.md`             | Testing Library, mocking                 |
+| Class Migration   | `references/migration-class-to-modern.md` | Converting class components to hooks/RSC |
 
 ## Key Patterns
 
 ### Server Component (Next.js App Router)
+
 ```tsx
 // app/users/page.tsx — Server Component, no "use client"
 import { db } from '@/lib/db';
@@ -77,6 +78,7 @@ export default async function UsersPage() {
 ```
 
 ### React 19 Form with `useActionState`
+
 ```tsx
 'use client';
 import { useActionState } from 'react';
@@ -103,6 +105,7 @@ export function GreetForm() {
 ```
 
 ### Custom Hook with Cleanup
+
 ```tsx
 import { useState, useEffect } from 'react';
 
@@ -122,6 +125,7 @@ function useWindowWidth(): number {
 ## Constraints
 
 ### MUST DO
+
 - Use TypeScript with strict mode
 - Implement error boundaries for graceful failures
 - Use `key` props correctly (stable, unique identifiers)
@@ -131,6 +135,7 @@ function useWindowWidth(): number {
 - Use Suspense boundaries for async operations
 
 ### MUST NOT DO
+
 - Mutate state directly
 - Use array index as key for dynamic lists
 - Create functions inside JSX (causes re-renders)
@@ -141,6 +146,7 @@ function useWindowWidth(): number {
 ## Output Templates
 
 When implementing React features, provide:
+
 1. Component file with TypeScript types
 2. Test file if non-trivial logic
 3. Brief explanation of key decisions

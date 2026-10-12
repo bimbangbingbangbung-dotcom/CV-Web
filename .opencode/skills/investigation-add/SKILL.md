@@ -6,7 +6,7 @@ description: >
   surfaces significant items, and logs everything reviewed for coverage
   verification. Use when new evidence, interview notes, or document
   productions come in for an open investigation.
-argument-hint: "[matter name or slug, then paste or attach data]"
+argument-hint: '[matter name or slug, then paste or attach data]'
 ---
 
 # /investigation-add

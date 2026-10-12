@@ -6,7 +6,7 @@ description: >
   mix — and forecast likely emphases for the upcoming exam. Use when the user
   says "what's on the exam", "analyze past exams", "predict the exam", or
   shares past exams.
-argument-hint: "[class name, with past exams shared or paths to them]"
+argument-hint: '[class name, with past exams shared or paths to them]'
 ---
 
 # /exam-forecast
@@ -72,16 +72,19 @@ For each past exam:
 Roll up what's consistent across exams:
 
 **Stable patterns (appeared in most/all past exams):**
+
 - Subject weights (e.g., "consideration and modification account for 30% of exam points consistently")
 - Question style (e.g., "always one long issue-spotter + two short-answer hypos")
 - Professor hobby horses (e.g., "always tests third-party beneficiaries even when it's a minor topic in class")
 
 **Variable patterns (appeared in some but not all):**
+
 - Policy essays (e.g., "appeared in 2 of 4 past exams — usually when the semester covered a policy-heavy topic late")
 - Open-book vs. closed-book differences
 - Take-home vs. in-class differences
 
 **Absent patterns worth noting:**
+
 - Topics covered in class that have NEVER been tested in past exams — don't skip these, but don't weight them heavily either
 - Topics tested in past exams that aren't in your current syllabus — probably not coming back
 
@@ -108,9 +111,9 @@ STUDY NOTES — NOT LEGAL ADVICE
 
 ## Subject weighting (historical)
 
-| Topic | Past exam weight (avg) | In current syllabus? | Forecast weight |
-|---|---|---|---|
-| [topic 1] | [%] | [yes/partial/no] | [heavier / stable / lighter] |
+| Topic     | Past exam weight (avg) | In current syllabus? | Forecast weight              |
+| --------- | ---------------------- | -------------------- | ---------------------------- |
+| [topic 1] | [%]                    | [yes/partial/no]     | [heavier / stable / lighter] |
 
 ## Question-style forecast
 

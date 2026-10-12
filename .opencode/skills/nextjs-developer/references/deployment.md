@@ -66,10 +66,10 @@ NEXT_PUBLIC_API_URL="https://api.example.com"
 
 ```tsx
 // Access in Server Components
-const dbUrl = process.env.DATABASE_URL
+const dbUrl = process.env.DATABASE_URL;
 
 // Access in Client Components (must be prefixed with NEXT_PUBLIC_)
-const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 ```
 
 ## Self-Hosting
@@ -81,9 +81,9 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ```bash
@@ -173,7 +173,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/myapp
       - NEXTAUTH_URL=http://localhost:3000
@@ -242,31 +242,31 @@ const nextConfig = {
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'SAMEORIGIN',
           },
           {
             key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            value: 'nosniff',
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            value: '1; mode=block',
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
+            value: 'origin-when-cross-origin',
           },
         ],
       },
-    ]
+    ];
   },
 
   // Experimental features
@@ -277,21 +277,19 @@ const nextConfig = {
   // Bundle analyzer
   webpack: (config, { isServer }) => {
     if (process.env.ANALYZE === 'true') {
-      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
       config.plugins.push(
         new BundleAnalyzerPlugin({
           analyzerMode: 'static',
-          reportFilename: isServer
-            ? '../analyze/server.html'
-            : './analyze/client.html',
-        })
-      )
+          reportFilename: isServer ? '../analyze/server.html' : './analyze/client.html',
+        }),
+      );
     }
-    return config
+    return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### Bundle Analysis
@@ -311,14 +309,10 @@ npm run build -- --experimental-build-mode=compile
 
 ```tsx
 // app/layout.tsx
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body>
@@ -327,7 +321,7 @@ export default function RootLayout({
         <Analytics />
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -338,17 +332,15 @@ export default function RootLayout({
 ```js
 // next.config.js
 const nextConfig = {
-  assetPrefix: process.env.NODE_ENV === 'production'
-    ? 'https://cdn.example.com'
-    : '',
-}
+  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://cdn.example.com' : '',
+};
 ```
 
 ### Edge Runtime
 
 ```tsx
 // app/api/edge/route.ts
-export const runtime = 'edge'
+export const runtime = 'edge';
 
 export async function GET(request: Request) {
   return new Response('Hello from Edge!', {
@@ -356,14 +348,14 @@ export async function GET(request: Request) {
     headers: {
       'content-type': 'text/plain',
     },
-  })
+  });
 }
 
 // app/page.tsx
-export const runtime = 'edge'
+export const runtime = 'edge';
 
 export default async function Page() {
-  return <div>Edge-rendered page</div>
+  return <div>Edge-rendered page</div>;
 }
 ```
 
@@ -373,11 +365,11 @@ export default async function Page() {
 
 ```tsx
 // app/blog/[slug]/page.tsx
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 3600; // Revalidate every hour
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const post = await fetchPost(params.slug)
-  return <article>{post.content}</article>
+  const post = await fetchPost(params.slug);
+  return <article>{post.content}</article>;
 }
 ```
 
@@ -385,21 +377,21 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
 ```tsx
 // app/api/revalidate/route.ts
-import { revalidatePath } from 'next/cache'
-import { NextRequest } from 'next/server'
+import { revalidatePath } from 'next/cache';
+import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const secret = request.nextUrl.searchParams.get('secret')
+  const secret = request.nextUrl.searchParams.get('secret');
 
   if (secret !== process.env.REVALIDATE_SECRET) {
-    return Response.json({ message: 'Invalid secret' }, { status: 401 })
+    return Response.json({ message: 'Invalid secret' }, { status: 401 });
   }
 
-  const path = request.nextUrl.searchParams.get('path') || '/'
+  const path = request.nextUrl.searchParams.get('path') || '/';
 
-  revalidatePath(path)
+  revalidatePath(path);
 
-  return Response.json({ revalidated: true, now: Date.now() })
+  return Response.json({ revalidated: true, now: Date.now() });
 }
 ```
 
@@ -407,45 +399,45 @@ export async function POST(request: NextRequest) {
 
 ```ts
 // lib/db.ts
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
 const globalForPrisma = global as unknown as {
-  prisma: PrismaClient | undefined
-}
+  prisma: PrismaClient | undefined;
+};
 
 export const db =
   globalForPrisma.prisma ??
   new PrismaClient({
     log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-  })
+  });
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db;
 ```
 
 ## Health Check Endpoint
 
 ```tsx
 // app/api/health/route.ts
-import { db } from '@/lib/db'
+import { db } from '@/lib/db';
 
 export async function GET() {
   try {
     // Check database connection
-    await db.$queryRaw`SELECT 1`
+    await db.$queryRaw`SELECT 1`;
 
     return Response.json({
       status: 'ok',
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
-    })
+    });
   } catch (error) {
     return Response.json(
       {
         status: 'error',
         message: 'Database connection failed',
       },
-      { status: 503 }
-    )
+      { status: 503 },
+    );
   }
 }
 ```
@@ -498,33 +490,29 @@ jobs:
 
 ```tsx
 // app/error.tsx
-'use client'
+'use client';
 
-import * as Sentry from '@sentry/nextjs'
-import { useEffect } from 'react'
+import * as Sentry from '@sentry/nextjs';
+import { useEffect } from 'react';
 
-export default function Error({
-  error,
-}: {
-  error: Error & { digest?: string }
-}) {
+export default function Error({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {
-    Sentry.captureException(error)
-  }, [error])
+    Sentry.captureException(error);
+  }, [error]);
 
-  return <div>Something went wrong!</div>
+  return <div>Something went wrong!</div>;
 }
 ```
 
 ## Quick Reference
 
-| Platform | Best For | Effort |
-|----------|----------|--------|
-| **Vercel** | Zero-config, optimal performance | Low |
-| **Netlify** | Alternative to Vercel | Low |
-| **Railway** | Simple hosting with databases | Medium |
-| **AWS/GCP** | Enterprise, custom needs | High |
-| **Docker** | Self-hosting, full control | High |
+| Platform    | Best For                         | Effort |
+| ----------- | -------------------------------- | ------ |
+| **Vercel**  | Zero-config, optimal performance | Low    |
+| **Netlify** | Alternative to Vercel            | Low    |
+| **Railway** | Simple hosting with databases    | Medium |
+| **AWS/GCP** | Enterprise, custom needs         | High   |
+| **Docker**  | Self-hosting, full control       | High   |
 
 ## Production Checklist
 

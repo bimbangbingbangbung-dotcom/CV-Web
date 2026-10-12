@@ -33,6 +33,7 @@ The output is a review memo the lawyer can act on in one pass. Every issue has a
 > I notice you haven't configured your practice profile yet — that's how I tailor playbook positions, escalation, and house style to your practice.
 >
 > **Two choices:**
+>
 > - Run `/commercial-legal:cold-start-interview` (2 minutes) to configure your profile, then I'll review tailored to YOUR playbook.
 > - Say **"provisional"** and I'll review against generic defaults — US jurisdiction, middle risk appetite, lawyer role, no playbook (flag all common vendor-contract risks from first principles) — and tag every output `[PROVISIONAL — configure your profile for tailored output]` so you can see what I do before committing.
 
@@ -47,7 +48,8 @@ If the user says "provisional," run the review normally using these generic defa
 This skill is typically used for purchasing-side contracts (vendors supplying you), but the side check still applies — a "vendor agreement" could be your own template sent to a vendor as part of a reseller arrangement (sales-side).
 
 The playbook in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` is the source of truth. It tells you:
-- What this team's standard positions are (not market standard — *their* standard)
+
+- What this team's standard positions are (not market standard — _their_ standard)
 - What fallbacks they've accepted before
 - What they never accept
 - Who approves what
@@ -61,19 +63,20 @@ If the contract has the deal-breaker, flag it at the top of the memo and stop th
 
 Read the whole agreement once, fast. Answer:
 
-| Question | Answer |
-|---|---|
+| Question                        | Answer                                                            |
+| ------------------------------- | ----------------------------------------------------------------- |
 | What kind of agreement is this? | MSA / SaaS subscription / Professional services / License / Other |
-| Who are we? | Customer / Vendor (this plugin assumes customer — flag if not) |
-| Counterparty | Name, and are they a BigCo (won't negotiate) or a startup (will)? |
-| Dollar value | Annual / total contract value if stated |
-| Term | Length, renewal mechanics |
-| Is there a DPA? | Attached / referenced by URL / missing |
-| Is there an order form? | Separate doc or integrated |
+| Who are we?                     | Customer / Vendor (this plugin assumes customer — flag if not)    |
+| Counterparty                    | Name, and are they a BigCo (won't negotiate) or a startup (will)? |
+| Dollar value                    | Annual / total contract value if stated                           |
+| Term                            | Length, renewal mechanics                                         |
+| Is there a DPA?                 | Attached / referenced by URL / missing                            |
+| Is there an order form?         | Separate doc or integrated                                        |
 
 **Dollar-value handling.** If the main agreement does not state a dollar value (the MSA sets terms but the Order Form carries price, which is typical), **stop and ask** before running escalation math or applying dollar thresholds:
 
 > The MSA itself doesn't state an annual contract value. The Order Form carries the price. Your escalation threshold is $[X from the matrix]. Before I route this, I need the ACV. Options:
+>
 > 1. Paste the Order Form value (preferred — I'll use it for routing and the memo).
 > 2. Tell me if this is above or below $[threshold] and I'll route accordingly; the memo will flag that the routing assumed [above/below threshold] without an ACV in hand.
 > 3. Route conservatively to the higher approver regardless — safer for a review you haven't priced.
@@ -119,6 +122,7 @@ For each playbook category in `~/.claude/plugins/config/claude-for-legal/commerc
 **Playbook says:** [our standard position, quoted from `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`]
 
 **Contract says:**
+
 > "[exact quote from the contract]"
 
 **Gap:** [Missing term | Weaker than standard | Weaker than fallback | Non-standard structure | Unacceptable]
@@ -130,6 +134,7 @@ For each playbook category in `~/.claude/plugins/config/claude-for-legal/commerc
 for the business if this term stays as-is]
 
 **Proposed redline:**
+
 > "[the specific replacement language — ready to paste into a markup]"
 
 **If they won't move:** [the fallback from `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`, or "escalate to [person]"
@@ -138,14 +143,14 @@ if no fallback exists]
 
 **Severity calibration:**
 
-| Level | Means |
-|---|---|
+| Level       | Means                                                                                                                                                             |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 🔴 Critical | Don't sign without fixing. A term on the team's "never accept" list in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`, or a deal-breaker. |
-| 🟠 High | Strongly push; escalate if they won't move. A term outside the playbook's stated fallback range. |
-| 🟡 Medium | Push in first round; accept if it's the last open item. A term inside the fallback range but short of the standard position. |
-| 🟢 Low | Note it, don't spend capital. A term the playbook explicitly tolerates, or a purely stylistic deviation. |
+| 🟠 High     | Strongly push; escalate if they won't move. A term outside the playbook's stated fallback range.                                                                  |
+| 🟡 Medium   | Push in first round; accept if it's the last open item. A term inside the fallback range but short of the standard position.                                      |
+| 🟢 Low      | Note it, don't spend capital. A term the playbook explicitly tolerates, or a purely stylistic deviation.                                                          |
 
-Severity is always applied *against `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`*. If a term doesn't map cleanly to a playbook position, ask the user which bucket it belongs in and offer to record the answer in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`.
+Severity is always applied _against `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`_. If a term doesn't map cleanly to a playbook position, ask the user which bucket it belongs in and offer to record the answer in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`.
 
 #### Liability cap decision procedure
 
@@ -182,6 +187,7 @@ Two short lists:
 ### Step 5: Escalation routing
 
 Check the escalation matrix in `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` against:
+
 - Contract dollar value
 - Presence of any 🔴 critical issues
 - Any automatic-escalation triggers (unlimited liability, IP assignment, etc.)
@@ -215,6 +221,7 @@ Do not proceed past this gate without an explicit yes.
 **Edit at the smallest possible granularity.** A redline is a negotiation artifact, not a rewrite. Wholesale clause replacement signals "we threw out your drafting" — it's aggressive, it forces the counterparty to re-read the whole clause, and it discards the parts of their drafting that were fine. Surgical redlines — strike a word, insert a phrase, restructure a subclause — signal "we have specific asks" and are faster to read, understand, and accept.
 
 Default to the smallest edit that achieves the playbook position:
+
 - Replace a **word** before a phrase. ("twelve (12)" → "twenty-four (24)")
 - Replace a **phrase** before a sentence. ("paid by the Buyer" → "paid and payable by the Buyer")
 - Restructure a **subclause** before replacing the sentence. (Add "(a)" and "(b)" to split a compound condition.)
@@ -301,6 +308,7 @@ If a [CLM] MCP is connected, after the review:
 ## Integration: DocuSign
 
 If DocuSign MCP is connected and the agreement is ready to sign (all greens or all issues accepted), offer to:
+
 - Generate the envelope
 - Route to signers in the right order per the escalation matrix
 
@@ -340,4 +348,3 @@ Do not proceed past this gate without an explicit yes.
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
-

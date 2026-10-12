@@ -17,6 +17,7 @@ Do not assume write access you haven't verified. Check first; fall back graceful
 Mirror the Excel spec exactly — same sheets, same semantics, Sheets-native mechanics:
 
 **Sheet: `Review`** (the main grid)
+
 - Row 1: Work-product header (merged cell)
 - Row 2: Column labels
 - Row 3+: One row per document
@@ -27,12 +28,15 @@ Mirror the Excel spec exactly — same sheets, same semantics, Sheets-native mec
 - A `Verified` column after each group: blank by default, data validation dropdown `✓ | ✗ | ?` via `setDataValidation`.
 
 **Sheet: `Flags`**
+
 - Same as Excel spec. One row per flagged cell.
 
 **Sheet: `_schema`**
+
 - Column definitions from `.review-schema.yaml`.
 
 **Sheet: `_summary`**
+
 - Counts, flagged columns, verification reminder.
 
 ## Sheets-specific advantages to use
@@ -53,14 +57,13 @@ Mirror the Excel spec exactly — same sheets, same semantics, Sheets-native mec
 
 Same as the Excel spec: no confidence percentages, no truncated quotes, no merged cells in the data region, and always write the `_schema` and `_summary` sheets.
 
-
 ## Formula injection defense
 
-Before writing any cell in Excel, Sheets, or CSV output, neutralize formula injection. Counterparty-sourced text (contract quotes, party names, registered agent data, CLM exports) is attacker-controlled. A cell starting with `=`, `+`, `-`, `@`, `	`, ``, or `
+Before writing any cell in Excel, Sheets, or CSV output, neutralize formula injection. Counterparty-sourced text (contract quotes, party names, registered agent data, CLM exports) is attacker-controlled. A cell starting with `=`, `+`, `-`, `@`, `	`, `
+`, or `
 ` will be interpreted as a formula or break the row structure.
 
 - **Prefix with a single quote:** `'=SUM(A1:A10)` → `=SUM(A1:A10)` (displayed as text, not executed)
 - **Applies to every cell that contains text sourced from a document, a tool result, or a user paste.** Column headers you control and computed values you produce are safe.
 - **CSV: also escape embedded commas, double quotes, newlines** (RFC 4180 quoting).
 - This is not optional. A spreadsheet your user opens in Excel that triggers a macro or exfiltrates data via DDE is a supply-chain attack on your user.
-

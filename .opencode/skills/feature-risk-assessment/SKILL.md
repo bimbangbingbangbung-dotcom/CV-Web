@@ -88,11 +88,11 @@ Don't overweight precedent. Regulators change priorities; one company getting aw
 Present 2-3 realistic paths:
 
 ```markdown
-| Option | Description | Risk reduction | Cost |
-|---|---|---|---|
-| A: Ship as designed | [current plan] | None | None |
-| B: Ship with [mitigation] | [change] | [how much] | [eng effort, timeline, UX] |
-| C: Don't ship [component] | [scope cut] | [how much] | [product impact] |
+| Option                    | Description    | Risk reduction | Cost                       |
+| ------------------------- | -------------- | -------------- | -------------------------- |
+| A: Ship as designed       | [current plan] | None           | None                       |
+| B: Ship with [mitigation] | [change]       | [how much]     | [eng effort, timeline, UX] |
+| C: Don't ship [component] | [scope cut]    | [how much]     | [product impact]           |
 ```
 
 ### 6. Recommendation
@@ -111,7 +111,7 @@ Pick one. Explain why. Acknowledge what you're trading off.
 
 Before finalizing, check against `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` → Risk calibration:
 
-- Is this risk assessment calibrated to *this company*, or is it generic?
+- Is this risk assessment calibrated to _this company_, or is it generic?
 - A risk that's "High" at a company under a consent decree might be "Medium" at one that isn't
 - The assessment should reflect the actual regulatory posture, litigation history, and risk appetite captured in the practice profile
 

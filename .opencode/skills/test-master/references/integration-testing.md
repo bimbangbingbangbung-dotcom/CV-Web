@@ -30,9 +30,7 @@ describe('POST /api/users', () => {
   });
 
   it('returns 401 without auth token', async () => {
-    await request(app)
-      .get('/api/users/me')
-      .expect(401);
+    await request(app).get('/api/users/me').expect(401);
   });
 });
 ```
@@ -51,10 +49,7 @@ describe('Protected endpoints', () => {
   });
 
   it('accesses protected route', async () => {
-    await request(app)
-      .get('/api/users/me')
-      .set('Authorization', `Bearer ${authToken}`)
-      .expect(200);
+    await request(app).get('/api/users/me').set('Authorization', `Bearer ${authToken}`).expect(200);
   });
 });
 ```
@@ -111,10 +106,10 @@ async def test_invalid_email(client: AsyncClient):
 
 ## Quick Reference
 
-| Method | Purpose |
-|--------|---------|
-| `.send(body)` | Send request body |
-| `.set(header, value)` | Set header |
-| `.expect(status)` | Assert status code |
-| `.expect('Content-Type', /json/)` | Assert header |
-| `response.body` | Parsed JSON body |
+| Method                            | Purpose            |
+| --------------------------------- | ------------------ |
+| `.send(body)`                     | Send request body  |
+| `.set(header, value)`             | Set header         |
+| `.expect(status)`                 | Assert status code |
+| `.expect('Content-Type', /json/)` | Assert header      |
+| `response.body`                   | Parsed JSON body   |

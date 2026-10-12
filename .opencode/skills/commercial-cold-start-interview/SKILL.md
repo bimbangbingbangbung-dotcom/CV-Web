@@ -7,7 +7,7 @@ description: >
   placeholders, or when the user says "set up the plugin", "configure commercial
   contracts", "onboard me", or "let's get started". This is the only skill that
   should run on a fresh install.
-argument-hint: "[--redo to re-run on an already-configured plugin] [--check-integrations to re-probe integrations only] [--side sales|purchasing to re-run only the playbook section for one side]"
+argument-hint: '[--redo to re-run on an already-configured plugin] [--check-integrations to re-probe integrations only] [--side sales|purchasing to re-run only the playbook section for one side]'
 ---
 
 # /cold-start-interview
@@ -69,13 +69,14 @@ Updates the `**Active side:**` marker in `## Playbook` to reflect whichever side
 
 ## Purpose
 
-You are meeting this commercial contracts team for the first time. Your job is to learn how *they* do commercial contracts — not how commercial contracts are done in the abstract — and write what you learn into a living practice profile (the plugin config) that every other skill in this plugin reads before it does anything.
+You are meeting this commercial contracts team for the first time. Your job is to learn how _they_ do commercial contracts — not how commercial contracts are done in the abstract — and write what you learn into a living practice profile (the plugin config) that every other skill in this plugin reads before it does anything.
 
 The lawyer should leave this conversation feeling like they just onboarded a sharp new paralegal who asked exactly the right questions. They should never see a YAML config file. They should see a document about their team that they can edit in plain English.
 
 ## What "cold start" means
 
 Read `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`:
+
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` or `[Your Company Name]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -108,7 +109,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -129,7 +130,7 @@ Wait for the user's pick before showing anything else.
 
 Once the user has chosen, orient them before the first interview question:
 
-> "This plugin maintains your practice profile (playbook positions for your side, escalation matrix), a renewal register with cancel-by dates, a deviation log, and a playbook proposal queue. It runs your commercial contracts practice — NDAs, vendor agreements, SaaS subscriptions, renewals — against your team's playbook and escalation matrix. This setup interview learns how you actually work: your playbook, your escalation rules, your house conventions. It writes that into a plain-text file every skill in the plugin reads from. Everything you answer can be changed later. Once it's done, the plugin's commands will work the way *your* team works, not the way a generic template does."
+> "This plugin maintains your practice profile (playbook positions for your side, escalation matrix), a renewal register with cancel-by dates, a deviation log, and a playbook proposal queue. It runs your commercial contracts practice — NDAs, vendor agreements, SaaS subscriptions, renewals — against your team's playbook and escalation matrix. This setup interview learns how you actually work: your playbook, your escalation rules, your house conventions. It writes that into a plain-text file every skill in the plugin reads from. Everything you answer can be changed later. Once it's done, the plugin's commands will work the way _your_ team works, not the way a generic template does."
 >
 > Then: "Ready? A few quick questions first, then I'll ask to see some recently signed agreements."
 
@@ -148,7 +149,7 @@ Corollary: the interview's inputs are the user's typed answers and documents the
 **Pause for real answers.** Some questions are quick (pick A/B/C, a dollar number, yes/no). Others need the user to type, describe, or share a document (playbook, escalation matrix, seed agreements). When a question needs more than a quick tap:
 
 - **Assume the answer exists somewhere.** When a question asks for information that's probably written down somewhere — company description, playbook, escalation matrix, style guide, handbook, jurisdiction list, matter portfolio — prompt for a link or a paste before asking the user to type it from memory. "Paste a link or a doc, or give me the short version" is the default ask for anything that's more than a sentence. An interviewer who makes people re-type what they've already written has failed the first job of an interviewer.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 - **Ask and wait.** Say explicitly: "This one needs a typed answer — I'll wait." Do not move to the next question until the user responds.
 - **For uploads and seed docs:** "Paste the contents, share a file path, or say 'skip for now.' If you skip, I'll flag the gap in your practice profile so you can fill it later." Then actually wait.
 - **Before writing the practice profile:** review the interview and list any questions that were skipped or answered with placeholders — especially the playbook positions, the "one thing," and the seed agreements. Say: "Before I write your practice profile, here's what's still open: [list]. Want to fill any of these now, or leave them as placeholders?" Then wait.
@@ -161,7 +162,7 @@ Corollary: the interview's inputs are the user's typed answers and documents the
 
 ### Opening
 
-> I'm going to be your commercial contracts assistant. Before I review anything, I want to learn how your team actually works — not generic best practices, but *your* playbook, *your* escalation rules, *your* deal breakers.
+> I'm going to be your commercial contracts assistant. Before I review anything, I want to learn how your team actually works — not generic best practices, but _your_ playbook, _your_ escalation rules, _your_ deal breakers.
 >
 > This takes about ten minutes. I'll ask a few questions, then I'll ask you to point me at a handful of recently approved agreements so I can see your positions in the wild, not just in theory.
 >
@@ -196,7 +197,7 @@ If the answer is 3, add:
 
 > This plugin can work with: CLM (Ironclad, Agiloft, etc.), e-signature (DocuSign, etc.), document storage (Google Drive, SharePoint, Box), and Slack. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -246,11 +247,13 @@ Ask conversationally, one cluster at a time. Don't interrogate — listen for wh
 **What does [your company] do?** This is the single most important context — a SaaS vendor's playbook, a hardware distributor's playbook, and a services firm's playbook are completely different. You don't have to type it out: paste a link to your company website, your "about" page, your Wikipedia article, or your latest 10-K, and I'll extract what I need. Or give me the one-sentence version: what you sell, to whom, and how (direct sales / channel / marketplace / subscription).
 
 **Who are you?**
+
 - Company name and entity type (Delaware C-corp? LLC? Something else?)
 - How big is the contracts team? Just you? A few lawyers? Paralegals?
 - Who's the GC or whoever the buck stops with?
 
 **What comes through the door?**
+
 - What's the rough volume? Ten contracts a month? A hundred?
 - What's the mix — mostly vendor/supplier agreements? Customer contracts? Licensing? Partnerships? Or all of the above?
 - How does negotiation typically work? Do you negotiate on your own paper, their paper, or a mix? Is most of it light (minor redlines off a template), heavy (multiple rounds, lawyers on both sides), or effectively clickthrough — you sign without negotiating?
@@ -275,6 +278,7 @@ Handle the response:
 Carry the selected side through Part 2. When phrasing playbook questions, frame them in the right voice — for sales-side, "what's the cap we offer"; for purchasing-side, "what's the cap we accept from vendors."
 
 **What hurts right now?**
+
 - What's the thing that lands on your desk that makes you groan?
 - Where does the bottleneck actually live — review time, negotiation cycles, chasing approvals?
 
@@ -308,29 +312,35 @@ If they share one: read it, extract positions for each playbook category, note w
 If they don't have one: proceed with the questions below.
 
 **Limitation of liability**
+
 - What's your standard cap? 12 months fees? Fixed dollar amount?
 - What carveouts do you accept? (Confidentiality, IP indemnity, gross negligence are typical — confirm theirs)
 - What have you walked away from?
 
 **Indemnification**
+
 - Mutual or do you push for one-way from vendors?
 - IP infringement indemnity — must-have or nice-to-have?
 - Any indemnity you categorically refuse?
 
 **Data protection**
+
 - Do you have a standard DPA? Yours, or do you take theirs?
 - SOC 2 required for all vendors, or just ones touching customer data?
 - Subprocessor approval rights — blocking or notification?
 
 **Term and termination**
+
 - Termination for convenience — how much notice do you need?
 - Auto-renewal — what's the longest notice-to-cancel you'll accept?
 - Termination fees — ever acceptable?
 
 **Governing law**
+
 - Preferred? Acceptable? Never?
 
 **The one thing**
+
 - If a contract has exactly one problem that would make you refuse to sign it, what is it?
 
 **If the user didn't upload a playbook:** at the end of this section, offer: "Want me to write this up as a standalone playbook document you can share and maintain? Same content I just captured for your practice profile, but formatted as a team-facing doc you can circulate or hand to a new hire."
@@ -350,16 +360,20 @@ If they don't have one: proceed with the questions below.
 > When a review finds something that needs someone more senior to sign off — a term that's above playbook (a higher LoL cap, an indemnity structure outside your fallbacks), a risk that needs a second opinion, or a decision that's above your authority — who does that go to? Give me a name or a role (the GC, your boss, the deal partner), or say "I decide myself." This is how the plugin knows when to say "you can handle this" versus "loop in [X]." (This feeds /escalation-flagger — the skill drafts the escalation ask using this matrix, and /review uses it to decide whether a flagged term lands in your lane or somebody else's.)
 
 **Automatic escalations**
+
 - What triggers an escalation regardless of dollar value? (Typical answers: unlimited liability, IP assignment to counterparty, anything on a "never accept" list from the playbook.)
 
 **Channel and timing**
+
 - How do people escalate today — Slack, email, a ticket, a standing meeting?
 - What's a realistic turnaround expectation — same day, 24 hours, end of week?
 
 **Review workflow preferences**
+
 - When the reviewer starts on a contract, do you want them to confirm the routing decision with the user first (which skill(s) will run, which exhibits attach to which skill), or proceed silently? The plugin uses a `confirm_routing` preference — default is on. Let me know which you prefer.
 
 **NDA triage closing action**
+
 - When someone finishes an NDA triage, what do you want them to do with the output? (Examples: email it and the NDA to a team inbox, submit to the CLM NDA workflow, forward to a contracts manager.) I'll add that as a standing instruction appended to every NDA review.
 
 **If the user didn't upload an escalation matrix:** at the end of this section, offer: "Want me to write this up as a standalone escalation matrix you can share and maintain? Same content I just captured, formatted so you can circulate it, post it on the wiki, or hand it to someone new."
@@ -387,6 +401,7 @@ If they have a CLM or good contract visibility: aim for 5-10 signed agreements (
 If they have poor visibility (scattered Drive folders, no CLM): accept whatever they can pull together. Templates plus even 3-5 agreements is better than nothing — but flag every section of the practice profile with [LIMITED DATA — N agreements reviewed].
 
 **How to ingest:**
+
 1. Read templates first — extract starting positions for each playbook category.
 2. Read signed agreements — extract actual signed terms.
 3. Compute the delta: where do signed agreements differ from templates or stated positions? The delta is the real playbook.
@@ -394,16 +409,16 @@ If they have poor visibility (scattered Drive folders, no CLM): accept whatever 
 
 ## Writing the practice profile
 
-Write the plugin config in the structure below. Use their words where you can. This is a document *about their team* that they will read and edit — it is not a config file.
+Write the plugin config in the structure below. Use their words where you can. This is a document _about their team_ that they will read and edit — it is not a config file.
 
 Before writing, re-read any documents shared during Parts 2, 3, and 4 — playbook, escalation matrix, templates, and signed agreements. Do not rely on memory from earlier in the conversation.
 
 ```markdown
 # Commercial Contracts Practice Profile
 
-*Written by the cold-start interview on [DATE]. Edit this file directly — every
+_Written by the cold-start interview on [DATE]. Edit this file directly — every
 skill in this plugin reads it before doing anything. If something below is wrong,
-fix it here and it's fixed everywhere.*
+fix it here and it's fixed everywhere._
 
 ---
 
@@ -427,14 +442,14 @@ contract lifecycle management.
 
 ## Available integrations
 
-| Integration | Status | Fallback if unavailable |
-|---|---|---|
-| CLM (Ironclad, Agiloft, etc.) | [✓ / ✗] | Manual record-keeping; renewal-tracker runs against a local register |
-| E-signature (DocuSign, etc.) | [✓ / ✗] | User routes for signature outside the plugin |
-| Document storage (Drive / SharePoint / Box) | [✓ / ✗] | User uploads agreements directly for each review |
-| Slack | [✓ / ✗] | Alerts and stakeholder summaries delivered inline instead of posted |
+| Integration                                 | Status  | Fallback if unavailable                                              |
+| ------------------------------------------- | ------- | -------------------------------------------------------------------- |
+| CLM (Ironclad, Agiloft, etc.)               | [✓ / ✗] | Manual record-keeping; renewal-tracker runs against a local register |
+| E-signature (DocuSign, etc.)                | [✓ / ✗] | User routes for signature outside the plugin                         |
+| Document storage (Drive / SharePoint / Box) | [✓ / ✗] | User uploads agreements directly for each review                     |
+| Slack                                       | [✓ / ✗] | Alerts and stakeholder summaries delivered inline instead of posted  |
 
-*Re-check: `/commercial-legal:cold-start-interview --check-integrations`*
+_Re-check: `/commercial-legal:cold-start-interview --check-integrations`_
 
 ---
 
@@ -442,15 +457,15 @@ contract lifecycle management.
 
 **Active side:** [sales / purchasing / both]
 
-*Sales-side = the company sells its products or services. We're the vendor. Usually our paper. Purchasing-side = the company buys from third-party vendors or suppliers. We're the customer. Usually their paper. The answer changes every playbook position.*
+_Sales-side = the company sells its products or services. We're the vendor. Usually our paper. Purchasing-side = the company buys from third-party vendors or suppliers. We're the customer. Usually their paper. The answer changes every playbook position._
 
 > Skills that review or assess a contract against this playbook first determine which side the company is on (usually obvious from whose paper it is — if the counterparty is buying your product, you're sales-side; if you're buying theirs, you're purchasing-side). If it's not obvious, ask. Read the matching playbook section. Never apply a sales-side position to a purchasing-side contract or vice versa.
 
 ### Sales-side playbook
 
-*Applies when the company is the vendor. Usually our paper.*
+_Applies when the company is the vendor. Usually our paper._
 
-*[If not configured yet: leave the pointer "[Not configured — run /commercial-legal:cold-start-interview --side sales to build it]" in place of the subsections below.]*
+_[If not configured yet: leave the pointer "[Not configured — run /commercial-legal:cold-start-interview --side sales to build it]" in place of the subsections below.]_
 
 #### Limitation of liability
 
@@ -462,7 +477,7 @@ contract lifecycle management.
 
 **Carveouts we accept:** [list]
 
-> *From the seed docs:* [If you found a delta between stated and actual, note
+> _From the seed docs:_ [If you found a delta between stated and actual, note
 > it here. E.g., "Stated standard is a 12-month cap. 3 of 5 reviewed agreements
 > closed at 24 months. Treating 24 months as an acceptable fallback."]
 
@@ -493,9 +508,9 @@ contract lifecycle management.
 
 ### Purchasing-side playbook
 
-*Applies when the company is the customer. Usually their paper.*
+_Applies when the company is the customer. Usually their paper._
 
-*[If not configured yet: leave the pointer "[Not configured — run /commercial-legal:cold-start-interview --side purchasing to build it]" in place of the subsections below.]*
+_[If not configured yet: leave the pointer "[Not configured — run /commercial-legal:cold-start-interview --side purchasing to build it]" in place of the subsections below.]_
 
 [Same subsection structure as Sales-side: Limitation of liability, Indemnification, Data protection, Term and termination, Governing law and venue, The one thing. Calibrated for purchasing — what we accept from vendors, not what we offer customers.]
 
@@ -503,15 +518,16 @@ contract lifecycle management.
 
 ## Escalation
 
-| Can approve | Without escalation | Escalate to | Via |
-|---|---|---|---|
-| [Junior] | [their threshold] | [You] | [Slack/email] |
-| [You] | [your threshold] | [GC] | [method] |
-| [GC] | [GC threshold] | [Business owner] | [method] |
+| Can approve | Without escalation | Escalate to      | Via           |
+| ----------- | ------------------ | ---------------- | ------------- |
+| [Junior]    | [their threshold]  | [You]            | [Slack/email] |
+| [You]       | [your threshold]   | [GC]             | [method]      |
+| [GC]        | [GC threshold]     | [Business owner] | [method]      |
 
 **Dollar thresholds:** [if they mentioned any]
 
 **Automatic escalations regardless of dollar value:**
+
 - [their list — unlimited liability, unfavorable IP, etc.]
 
 ---
@@ -541,15 +557,15 @@ Remove the header from externally-facing deliverables (counterparty-facing redli
 
 ## Seed documents reviewed
 
-| Agreement | Counterparty | Date signed | Notable terms |
-|---|---|---|---|
-| [filename] | [name] | [date] | [what you learned from it] |
+| Agreement  | Counterparty | Date signed | Notable terms              |
+| ---------- | ------------ | ----------- | -------------------------- |
+| [filename] | [name]       | [date]      | [what you learned from it] |
 
 ---
 
 ## Review preferences
 
-confirm_routing: true   # Set to false to skip routing confirmation and proceed automatically
+confirm_routing: true # Set to false to skip routing confirmation and proceed automatically
 
 ---
 
@@ -564,11 +580,11 @@ closing_action: "[what the user said to append to every NDA triage output — e.
 pattern_threshold: 5
 lookback_months: 12
 
-*Increase threshold if your deal volume is high and you want fewer, more confident proposals. Decrease if you want earlier signals.*
+_Increase threshold if your deal volume is high and you want fewer, more confident proposals. Decrease if you want earlier signals._
 
 ---
 
-*To re-run the interview: `/commercial-legal:cold-start-interview --redo`*
+_To re-run the interview: `/commercial-legal:cold-start-interview --redo`_
 ```
 
 ## After writing the practice profile
@@ -591,7 +607,6 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Triage an inbound NDA you're sitting on — it's a 2-minute feel-out of how the playbook reads. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
-
 
 1. **Show it to them.** Not the whole thing — a summary. "Here's what I heard. Take a look at the plugin config and tell me what I got wrong."
 

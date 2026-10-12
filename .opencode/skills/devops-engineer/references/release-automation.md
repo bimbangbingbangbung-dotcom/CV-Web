@@ -16,7 +16,7 @@
         "countType": "imageCountMoreThan",
         "countNumber": 10
       },
-      "action": {"type": "expire"}
+      "action": { "type": "expire" }
     },
     {
       "rulePriority": 2,
@@ -27,7 +27,7 @@
         "countUnit": "days",
         "countNumber": 7
       },
-      "action": {"type": "expire"}
+      "action": { "type": "expire" }
     }
   ]
 }
@@ -120,7 +120,7 @@ spec:
       - name: load-test
         url: http://flagger-loadtester/
         metadata:
-          cmd: "hey -z 1m -q 10 http://payment-canary/"
+          cmd: 'hey -z 1m -q 10 http://payment-canary/'
 ```
 
 ## Multi-Platform CI/CD
@@ -385,9 +385,9 @@ spec:
           image: release-bot:latest
           env:
             - name: RELEASE_VERSION
-              value: "v2.5.0"
+              value: 'v2.5.0'
             - name: SERVICES
-              value: "auth,api,worker,frontend"
+              value: 'auth,api,worker,frontend'
           command:
             - /bin/bash
             - -c

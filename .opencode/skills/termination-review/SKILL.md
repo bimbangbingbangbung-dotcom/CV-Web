@@ -6,7 +6,7 @@ description: >
   consideration periods are researched per review, not stored. Use when the
   user says "reviewing a termination", "can we fire this person", "term
   review", or describes a termination scenario.
-argument-hint: "[describe the termination, or attach documentation]"
+argument-hint: '[describe the termination, or attach documentation]'
 ---
 
 # /termination-review
@@ -59,16 +59,16 @@ Prepend the work-product header from `~/.claude/plugins/config/claude-for-legal/
 This is the most important step. Check every flag from `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md`. Default
 set:
 
-| Flag | Why it's high-risk | Check |
-|---|---|---|
-| **Recent complaint** | Retaliation claim | Has this employee filed any complaint (HR, ethics hotline, regulatory) recently? |
-| **Protected leave** | Leave-law interference/retaliation | Currently on or recently returned from protected leave (FMLA/state equivalents, disability, parental, military)? |
-| **Protected class + timing** | Discrimination claim | Protected class AND recently disclosed/visible (pregnancy announcement, religious accommodation request, disability disclosure)? |
-| **Whistleblower** | Federal and state whistleblower statutes | Has this employee raised concerns about illegality, safety, fraud? |
-| **Thin documentation** | "Why now?" problem | For performance terms: is there a PIP, written warnings, documented feedback? Or did this come out of nowhere? |
-| **Comparator problem** | Disparate treatment | Is someone else doing the same thing and not being terminated? |
-| **Contract/handbook promise** | Breach | Does the offer letter, handbook, or any writing promise a process that isn't being followed? |
-| **Exempt misclassification** | FLSA + state wage claim with liquidated damages | See the classification check below. Fires on state + classification + title. |
+| Flag                          | Why it's high-risk                              | Check                                                                                                                            |
+| ----------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Recent complaint**          | Retaliation claim                               | Has this employee filed any complaint (HR, ethics hotline, regulatory) recently?                                                 |
+| **Protected leave**           | Leave-law interference/retaliation              | Currently on or recently returned from protected leave (FMLA/state equivalents, disability, parental, military)?                 |
+| **Protected class + timing**  | Discrimination claim                            | Protected class AND recently disclosed/visible (pregnancy announcement, religious accommodation request, disability disclosure)? |
+| **Whistleblower**             | Federal and state whistleblower statutes        | Has this employee raised concerns about illegality, safety, fraud?                                                               |
+| **Thin documentation**        | "Why now?" problem                              | For performance terms: is there a PIP, written warnings, documented feedback? Or did this come out of nowhere?                   |
+| **Comparator problem**        | Disparate treatment                             | Is someone else doing the same thing and not being terminated?                                                                   |
+| **Contract/handbook promise** | Breach                                          | Does the offer letter, handbook, or any writing promise a process that isn't being followed?                                     |
+| **Exempt misclassification**  | FLSA + state wage claim with liquidated damages | See the classification check below. Fires on state + classification + title.                                                     |
 
 **Exempt/non-exempt classification flag.** Fire this flag when ALL of the
 following are true:
@@ -156,6 +156,7 @@ Per `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → s
 > release requirements. Verify currency.
 
 Separately, consider whether any of the following apply to the release:
+
 - State-specific waiver restrictions (some states limit what can be released
   or require specific language).
 - Federal or state restrictions on non-disclosure or non-disparagement

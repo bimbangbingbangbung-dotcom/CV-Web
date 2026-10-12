@@ -1,7 +1,7 @@
 ---
 name: demand-received
 description: Triage an inbound demand letter — extract fields, cross-check the portfolio, assess merit, present response options with a recommendation, and hand off to matter-intake or demand-intake if escalation is warranted. Use when the user says "we got a demand letter", "triage this demand", or shares an incoming demand to evaluate.
-argument-hint: "[path-to-incoming] [--slug=custom-slug]"
+argument-hint: '[path-to-incoming] [--slug=custom-slug]'
 ---
 
 # /demand-received
@@ -82,21 +82,25 @@ Output a triage rating: **substantial merit / debatable / weak / frivolous**. Be
 Present 3-4 options with tradeoffs:
 
 **Option A — substantive response**
+
 - When: their demand has merit or is at least debatable; a reasoned reply protects the record
 - Tradeoff: commits us to a position in writing
 - Next step: `/demand-intake` with pre-populated fields for a counter-response letter
 
 **Option B — holding letter**
+
 - When: need time to investigate; don't want to concede anything or trigger their deadline math
 - Tradeoff: doesn't resolve anything; buys 2-4 weeks
 - Next step: short acknowledgment draft
 
 **Option C — settlement response**
+
 - When: early resolution is cheaper than litigation; willing to discuss without admitting
 - Tradeoff: settlement-communication posture required — research the applicable rule (FRE 408 or state equivalent) and structure the response so the substance, not just the label, qualifies as a compromise discussion. Must be careful not to waive claims.
 - Next step: `/demand-intake` with `type: settlement-response`
 
 **Option D — ignore + preserve**
+
 - When: demand is frivolous or the deadline doesn't create legal prejudice
 - Tradeoff: silence can be used against us in some contexts (e.g., account stated); legal hold still required
 - Next step: issue legal hold via `/legal-hold --issue` if not already; log the demand and move on
@@ -141,7 +145,7 @@ Output: `~/.claude/plugins/config/claude-for-legal/litigation-legal/inbound/[slu
 **Demand type:** [type]
 **Specific asks:** [list]
 **Their stated deadline:** [date]
-**Settlement-communication framing:** [labeled / substantively / neither / ambiguous] — *protection turns on conduct and context, not the label; `[SME VERIFY]` against the forum's applicable rule*
+**Settlement-communication framing:** [labeled / substantively / neither / ambiguous] — _protection turns on conduct and context, not the label; `[SME VERIFY]` against the forum's applicable rule_
 
 ## Facts alleged
 
@@ -175,22 +179,26 @@ Output: `~/.claude/plugins/config/claude-for-legal/litigation-legal/inbound/[slu
 **Damages proportionality:** [assessment]
 **Credibility of threat:** [will they sue? capacity? repeat litigant?]
 
-**Triage rating:** [substantial / debatable / weak / frivolous] — *structured read for routing, not a merit opinion; `[SME VERIFY: counsel to confirm before relying on this]`*
+**Triage rating:** [substantial / debatable / weak / frivolous] — _structured read for routing, not a merit opinion; `[SME VERIFY: counsel to confirm before relying on this]`_
 
 ---
 
 ## Response options
 
 ### A. Substantive response
+
 [Rationale, tradeoffs, next step]
 
 ### B. Holding letter
+
 [Rationale, tradeoffs, next step]
 
 ### C. Settlement response
+
 [Rationale, tradeoffs, next step]
 
 ### D. Ignore + preserve
+
 [Rationale, tradeoffs, next step]
 
 **Recommendation:** [A/B/C/D] — [two sentences why] — `[SME VERIFY: counsel to confirm before executing]`

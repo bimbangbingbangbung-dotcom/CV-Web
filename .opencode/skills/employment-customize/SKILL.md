@@ -7,7 +7,7 @@ description: >
   termination review rules, handbook positions, investigation preferences,
   or matter workspace paths. Use when the user says "change my [thing]",
   "add a jurisdiction", "update my profile", "edit my config", or "customize".
-argument-hint: "[section name, or describe what you want to change]"
+argument-hint: '[section name, or describe what you want to change]'
 ---
 
 # /customize
@@ -34,8 +34,8 @@ interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, practice setting, jurisdictions
-     *(shared across all 12 plugins — changes flow through
-     `company-profile.md`)*
+     _(shared across all 12 plugins — changes flow through
+     `company-profile.md`)_
    - **Jurisdictional footprint** — states (and countries) where employees
      work, single-state vs. multi-state, and any upcoming expansion. This
      drives state-specific supplement logic.
@@ -65,13 +65,13 @@ interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - *Adding Washington to the jurisdictional footprint:* "`/wage-hour-qa`
+   - _Adding Washington to the jurisdictional footprint:_ "`/wage-hour-qa`
      and `/termination-review` will start applying WA rules. `/handbook-
-     updates` will prompt for a WA supplement. `/hiring-review` will now
+updates` will prompt for a WA supplement. `/hiring-review` will now
      flag non-compete attempts in WA (unenforceable)."
-   - *Severance framework 2 weeks/year → 4 weeks/year:* "`/termination-
-     review` will use the new baseline in severance calculations."
-   - *Risk posture middle → conservative:* "I'll flag more terminations for
+   - _Severance framework 2 weeks/year → 4 weeks/year:_ "`/termination-
+review` will use the new baseline in severance calculations."
+   - _Risk posture middle → conservative:_ "I'll flag more terminations for
      escalation, recommend more protective release language, and be stricter
      on restrictive covenants."
 
