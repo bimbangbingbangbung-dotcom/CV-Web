@@ -39,7 +39,7 @@ console.log(
 const ctx2 = await browser.newContext({ viewport: { width: 1280, height: 800 }, colorScheme: 'dark' });
 const dpage = await ctx2.newPage();
 await dpage.goto(BASE + '/', { waitUntil: 'networkidle' });
-const dark = await new AxeBuilder({ dpage: undefined, page: dpage }).analyze();
+const dark = await new AxeBuilder({ page: dpage }).analyze();
 console.log(
   'AXE DARK serious/critical:',
   dump(dark.violations.filter((v) => ['serious', 'critical'].includes(v.impact))),
