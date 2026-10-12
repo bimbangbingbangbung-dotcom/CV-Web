@@ -6,7 +6,7 @@
  *   node scripts/generate-images.mjs   (or: npm run gen:assets)
  */
 import { chromium } from '@playwright/test';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, mkdir } from 'node:fs/promises';
 
 const content = JSON.parse(await readFile('public/content.json', 'utf8'));
 const svg = await readFile('public/favicon.svg', 'utf8');
@@ -64,4 +64,3 @@ await page.screenshot({ path: 'public/assets/og-image.png', clip: { x: 0, y: 0, 
 
 await browser.close();
 console.log('generate-images: og-image.png, favicon-192/512.png, apple-touch-icon.png → public/assets/');
-void writeFile; // (kept for symmetry with future dynamic writes)
