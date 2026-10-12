@@ -23,7 +23,8 @@
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lighthouse": "lhci autorun"
+    "lighthouse": "lhci autorun",
+    "ci": "npm run lint && npm run typecheck && npm run validate:content && npm test && npm run build && npm run check:budget"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
