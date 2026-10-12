@@ -319,7 +319,7 @@ export function openPanel(options: PanelOptions): () => void {
       fieldRow('Last updated', (() => {
         const input = h('input', { id: 'f-meta-lastUpdated', attrs: { type: 'date' } });
         input.value = draft.meta.lastUpdated;
-        input.addEventListener('change', () => store.set(['meta', 'lastUpdated'], input.value));
+        input.addEventListener('change', () => ctx.onCommit(['meta', 'lastUpdated'], input.value));
         return input;
       })(), 'Shown in the footer and sitemap — set automatically when you download.'),
       h('p', { class: 'admin-help', text: `Schema version ${draft.meta.schemaVersion} (managed by the site).` }),
