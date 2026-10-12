@@ -171,7 +171,8 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
       try {
         unlocked = sessionStorage.getItem(UNLOCK_KEY) === '1';
       } catch {
-        /* ignore */\n      }
+        /* ignore */
+      }
       if (!unlocked) {
         unlocked = await passcodeGate(content.admin.passcodeSha256);
         if (!unlocked) {
