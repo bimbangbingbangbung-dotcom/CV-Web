@@ -131,6 +131,9 @@ export function openPanel(options: PanelOptions): () => void {
   const status = h('span', { class: 'admin-status', attrs: { role: 'status', 'aria-live': 'polite' } });
   const undoBtn = iconButton('undo', 'Undo (Ctrl+Z)');
   const redoBtn = iconButton('redo', 'Redo (Ctrl+Shift+Z)');
+  // Stable ids so focus can be restored across form re-renders.
+  undoBtn.id = 'admin-undo';
+  redoBtn.id = 'admin-redo';
 
   function iconButton(glyph: 'undo' | 'redo', label: string): HTMLButtonElement {
     const btn = h('button', { class: 'icon-btn', attrs: { type: 'button', 'aria-label': label, title: label } });
