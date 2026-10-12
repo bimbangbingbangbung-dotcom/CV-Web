@@ -30,7 +30,7 @@ export const DEFAULT_CONTENT: Content = {
     showEditLink: true,
   },
   theme: { default: 'system', toggleShortcut: 'T' },
-  cv: { path: '/assets/cv.pdf', label: 'Download CV' },
+  cv: { path: './assets/cv.pdf', label: 'Download CV' },
   owner: {
     fullName: 'Your Name',
     headline: 'Computer Engineering Student',
