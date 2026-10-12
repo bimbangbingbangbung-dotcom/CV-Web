@@ -7,7 +7,7 @@ description: >
   stored. Use when the user says "review this offer", "can we use a
   non-compete here", "check this offer letter", "hiring in [state]", or
   attaches an offer.
-argument-hint: '[offer letter file, or describe the hire]'
+argument-hint: "[offer letter file, or describe the hire]"
 ---
 
 # /hiring-review
@@ -45,7 +45,7 @@ Prepend the work-product header from `~/.claude/plugins/config/claude-for-legal/
 
 ### Step 1: Jurisdiction
 
-Where will this person work? Not where HQ is — where _they_ are.
+Where will this person work? Not where HQ is — where *they* are.
 
 If remote: their home state/country governs. If hybrid: usually their home
 state, but check the offer letter's choice-of-law clause (may or may not hold
@@ -59,11 +59,11 @@ jurisdiction table doesn't cover this. Research needed before offer goes out."
 
 Exempt or non-exempt? The offer should say, and the role should support it.
 
-| Test         | Check                                              |
-| ------------ | -------------------------------------------------- |
-| Salary basis | Paid a fixed salary regardless of hours?           |
+| Test | Check |
+|---|---|
+| Salary basis | Paid a fixed salary regardless of hours? |
 | Salary level | Above the applicable federal and state thresholds? |
-| Duties test  | Does the role actually involve the exempt duties?  |
+| Duties test | Does the role actually involve the exempt duties? |
 
 > **Research before calling exemption.** Identify the currently operative
 > salary thresholds (federal and state — several states index annually and
@@ -83,7 +83,6 @@ non-solicit, or confidentiality/IP assignment:
 > offer. Non-compete enforceability in particular has shifted in multiple
 > states in recent years through legislation, agency action, and litigation —
 > do not rely on prior memory of which states permit non-competes. Note:
->
 > - The specific type of covenant (non-compete, customer non-solicit, employee
 >   non-solicit, confidentiality/trade-secret, IP assignment) — each has its
 >   own rules.
@@ -92,7 +91,7 @@ non-solicit, or confidentiality/IP assignment:
 > - Any industry-specific carve-outs (e.g., healthcare, broadcasting).
 > - Duration and geographic-scope reasonableness tests.
 > - Choice-of-law and choice-of-forum enforceability for out-of-state covenants.
->   Cite primary sources. Verify currency.
+> Cite primary sources. Verify currency.
 
 Per `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` restrictive covenant policy: does this hire even get one?
 Some companies use them selectively. Apply the house policy first, then
@@ -158,30 +157,24 @@ Read the letter. Check:
 **Overall:** [Clear to send | Changes needed | Escalate]
 
 ### Jurisdiction: [State/Country]
-
 [Jurisdiction table entry. Any auto-escalate triggers that fire.]
 
 ### Classification
-
 [Exempt/non-exempt call, grounded in researched thresholds and duties test.
 Any flags.]
 
 ### Restrictive covenants
-
 [If any. Enforceability call per researched jurisdiction rules, with pinpoint
 cites and currency note. Suggested changes.]
 
 ### Jurisdiction-specific requirements
-
 [Pay transparency, notices, salary-history rules, etc. — each researched and
 cited, or flagged as needing research.]
 
 ### Offer letter
-
 [Any issues with the letter itself]
 
 ### Action items
-
 - [ ] [specific change needed before sending]
 ```
 

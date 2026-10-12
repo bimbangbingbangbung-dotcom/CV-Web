@@ -27,7 +27,7 @@ For US depositions, declarations, and affidavits: different rules, but the same 
 
 ## Purpose
 
-A good brief section is consistent with the theory, cited to the record, written in house style, and checkable. This skill produces the first draft — emphasis on _draft_. Partner edits.
+A good brief section is consistent with the theory, cited to the record, written in house style, and checkable. This skill produces the first draft — emphasis on *draft*. Partner edits.
 
 ## Written or oral?
 
@@ -91,12 +91,12 @@ Do not proceed on an unintaken matter. Intake is what runs conflicts, sets up `m
 
 ### Step 1: Which section?
 
-| Section            | What it does                                   | Inputs needed                    |
-| ------------------ | ---------------------------------------------- | -------------------------------- |
+| Section | What it does | Inputs needed |
+|---|---|---|
 | Statement of facts | Tells the story, in our frame, cited to record | Chronology, key docs, depo cites |
-| Standard of review | Sets the bar the court applies                 | Procedural posture               |
-| Argument           | Makes the legal case                           | Issue, authorities, facts        |
-| Conclusion         | Asks for relief                                | What we want                     |
+| Standard of review | Sets the bar the court applies | Procedural posture |
+| Argument | Makes the legal case | Issue, authorities, facts |
+| Conclusion | Asks for relief | What we want |
 
 ### Step 2: Theory check
 
@@ -124,7 +124,6 @@ Every fact → record cite (Bates, depo page:line, exhibit).
 Every legal proposition → case cite with pincite.
 
 **Marker discipline — use liberally:**
-
 - `[VERIFY: specific factual assertion]` — anything not confirmed against the record
 - `[UNCERTAIN: specific legal proposition]` — anything not confirmed against current authority
 - `[CITE NEEDED: specific cite — fact/rule believed but cite not yet pinned]`

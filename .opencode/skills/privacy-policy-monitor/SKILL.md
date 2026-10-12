@@ -7,13 +7,12 @@ description: >
   "we want to start doing X — does the policy need updating", "run the policy
   monitor", "policy sweep", or wants to find where the privacy policy no longer
   matches what the team actually does.
-argument-hint: '[describe a proposed new practice — or omit / use --sweep for crawl mode]'
+argument-hint: "[describe a proposed new practice — or omit / use --sweep for crawl mode]"
 ---
 
 # /policy-monitor
 
 **Sweep mode** (no argument or `--sweep`):
-
 1. Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → outputs folder path, policy document, last sweep date.
 2. Run the workflow below. Scan outputs folder for files since last sweep.
 3. For each output: extract approved practices → diff against current policy commitments.
@@ -22,7 +21,6 @@ argument-hint: '[describe a proposed new practice — or omit / use --sweep for 
 6. Update Last policy sweep date in `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`.
 
 **Direct query mode** (with description argument):
-
 1. Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → current policy commitments + actual policy document.
 2. Parse proposed practice. Diff against policy: data categories, purposes, third parties, retention, user rights, disclosure.
 3. Output: covered / missing / conflicting + suggested language for each gap + timing recommendation.
@@ -57,13 +55,11 @@ The output is always the same: here's the gap, here's the suggested language.
 ## Load current state
 
 Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`:
-
 - `## Who we are` → `## Regulatory footprint` — the regimes in scope (GDPR, CCPA / CPRA / other state consumer privacy, GLBA, HIPAA, FERPA, COPPA, VPPA, CPNI, etc.)
 - `## Privacy policy commitments` — the commitments extracted from the published policy
 - `## Outputs` — outputs folder path, policy document location, last sweep date
 
 If `## Outputs` contains `[PLACEHOLDER]`:
-
 > "Outputs aren't configured yet. I can still run a direct-query check — describe
 > what you're planning to do and I'll diff it against your current policy. To enable
 > the crawl sweep, run `/privacy-legal:cold-start-interview` and provide the outputs
@@ -90,18 +86,17 @@ A company with a clean privacy policy and a stale App Store label is a company w
 
 The website privacy policy is one notice. Federally-regulated practices require a separate, sector-specific notice that the website policy does not substitute for. If `## Regulatory footprint` includes any of the following, the sweep diffs practice against that notice in addition to the website policy — or flags its absence if no such notice has been configured:
 
-| Footprint entry                                          | Sectoral notice to diff against                                                                      | What to flag                                                                                                                                                                                                                                              |
-| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **GLBA / Reg P** (financial institution handling NPI)    | GLBA initial + annual privacy notice (12 C.F.R. Part 1016, or the functional regulator's equivalent) | Outputs implying new NPI categories, sharing with non-affiliated third parties, or changes to opt-out mechanics that the Reg P notice doesn't reflect. A DPA signed with an analytics vendor receiving NPI with no matching Reg P notice update is a gap. |
-| **HIPAA** (covered entity or BA)                         | Notice of Privacy Practices (45 C.F.R. § 164.520)                                                    | Outputs implying new uses or disclosures, new routine categories, or changes to patient-rights mechanics. A BAA signed with a new subcontractor flowing PHI with no matching NPP refresh is a gap.                                                        |
-| **FERPA** (school or school service provider)            | Annual directory-information / rights notice (34 C.F.R. § 99.37)                                     | Outputs implying new disclosure categories to service providers under the school-official exception, new directory-information elements, or changes that implicate parental-consent flow-through.                                                         |
-| **COPPA** (operator of service directed to children <13) | Direct notice to parents + online notice (16 C.F.R. § 312.4)                                         | Outputs implying new data categories collected from children, new third-party disclosures, or changes to the verifiable-parental-consent mechanic.                                                                                                        |
-| **VPPA / CPNI / DPPA / other sectoral**                  | The regime's specific notice or consent regime                                                       | Processing activities the regime restricts that aren't reflected in the configured notice.                                                                                                                                                                |
+| Footprint entry | Sectoral notice to diff against | What to flag |
+|---|---|---|
+| **GLBA / Reg P** (financial institution handling NPI) | GLBA initial + annual privacy notice (12 C.F.R. Part 1016, or the functional regulator's equivalent) | Outputs implying new NPI categories, sharing with non-affiliated third parties, or changes to opt-out mechanics that the Reg P notice doesn't reflect. A DPA signed with an analytics vendor receiving NPI with no matching Reg P notice update is a gap. |
+| **HIPAA** (covered entity or BA) | Notice of Privacy Practices (45 C.F.R. § 164.520) | Outputs implying new uses or disclosures, new routine categories, or changes to patient-rights mechanics. A BAA signed with a new subcontractor flowing PHI with no matching NPP refresh is a gap. |
+| **FERPA** (school or school service provider) | Annual directory-information / rights notice (34 C.F.R. § 99.37) | Outputs implying new disclosure categories to service providers under the school-official exception, new directory-information elements, or changes that implicate parental-consent flow-through. |
+| **COPPA** (operator of service directed to children <13) | Direct notice to parents + online notice (16 C.F.R. § 312.4) | Outputs implying new data categories collected from children, new third-party disclosures, or changes to the verifiable-parental-consent mechanic. |
+| **VPPA / CPNI / DPPA / other sectoral** | The regime's specific notice or consent regime | Processing activities the regime restricts that aren't reflected in the configured notice. |
 
 **If no sectoral notice is configured for a regime in the footprint**, surface this as a standing gap on every sweep, not a one-time finding. The sweep output should include:
 
 > **Sectoral notice coverage:**
->
 > - [regime]: [configured notice path + last updated, or "NOT CONFIGURED — flag each sweep until resolved"]
 
 **If the sweep cannot locate the sectoral notice**, say so explicitly — do not silently default to diffing only against the website policy. A fintech DPO relying on a policy-monitor sweep that ignored GLBA would ship with an outdated regulator-facing notice and no warning. Surface the gap loudly.
@@ -129,7 +124,6 @@ outputs folder that are dated after that date. If no date is recorded, scan all
 files and note: "First sweep — scanning all outputs."
 
 If the outputs folder is empty or has no new files since the last sweep:
-
 > "No new outputs since [last sweep date]. Policy appears current with recent
 > practice. Next scheduled sweep: [date]."
 
@@ -138,26 +132,22 @@ Update **Last policy sweep** in `~/.claude/plugins/config/claude-for-legal/priva
 ### What to read in each output type
 
 **PIAs (Privacy Impact Assessments):**
-
 - Extract: data categories processed, purposes, third parties / subprocessors involved,
   retention periods, user rights implications, any conditions placed on the processing
 - Flag: anything in that list not present in the current privacy policy commitments
 
 **DPA reviews (signed or approved):**
-
 - Extract: subprocessors added, data locations agreed to, processing purposes covered,
   any obligations to data subjects created by the DPA terms
 - Flag: subprocessors not listed in the policy (if policy names them), new processing
   categories, new data locations, obligations inconsistent with policy
 
 **Triage results (PIA REQUIRED / PROCEED outcomes):**
-
 - Extract: what was approved, any conditions imposed that imply a public commitment
   (e.g., "disclosure to affected parties required before launch")
 - Flag: approved practices not covered by policy, conditions that require policy language
 
 **DSAR responses:**
-
 - Extract: any new data categories surfaced that weren't in previous DSAR responses,
   any systems added to the systems list
 - Flag: data categories collected but not stated in policy
@@ -204,8 +194,7 @@ defensible without updating, but cleaner with it.
 **Gap:** [what's missing or inconsistent]
 
 **Suggested language:**
-
-> _Add to [section name]:_
+> *Add to [section name]:*
 > "[Drafted policy text — specific, consistent with house style of the actual policy]"
 
 ---
@@ -222,8 +211,7 @@ defensible without updating, but cleaner with it.
 **What's happening:** [description]
 **Current policy:** [quote or "Silent"]
 **Suggested language:**
-
-> _Add to / update [section]:_
+> *Add to / update [section]:*
 > "[Drafted text]"
 
 ---
@@ -237,9 +225,9 @@ defensible without updating, but cleaner with it.
 ## Next steps
 
 - [ ] Review REQUIRED updates — each needs a decision before the associated
-      feature/processing goes live (or immediately if already live)
+  feature/processing goes live (or immediately if already live)
 - [ ] Review ADVISABLE updates — lower urgency but worth addressing at next
-      policy refresh
+  policy refresh
 - [ ] Next scheduled sweep: [date]
 ```
 
@@ -250,7 +238,6 @@ defensible without updating, but cleaner with it.
 ### Parse the proposed practice
 
 Extract from the user's description:
-
 - What data is being collected or processed?
 - What's the purpose?
 - Who else is involved (vendors, partners, third parties)?
@@ -265,14 +252,14 @@ run a long intake — this mode should be fast.
 
 Check the proposed practice against every relevant section of the current policy:
 
-| Check                         | Current policy says                    | Proposed practice             | Verdict                           |
-| ----------------------------- | -------------------------------------- | ----------------------------- | --------------------------------- |
-| Data categories               | [what policy lists]                    | [new category if any]         | 🟢 Covered / 🟡 Gap / 🔴 Conflict |
-| Purposes                      | [stated purposes]                      | [new purpose]                 |                                   |
-| Third parties / subprocessors | [stated parties]                       | [new party if any]            |                                   |
-| Retention                     | [retention commitment]                 | [implied retention]           |                                   |
-| User rights                   | [rights offered]                       | [any new rights implications] |                                   |
-| Disclosure / notice           | [what policy says about telling users] | [what this practice requires] |                                   |
+| Check | Current policy says | Proposed practice | Verdict |
+|---|---|---|---|
+| Data categories | [what policy lists] | [new category if any] | 🟢 Covered / 🟡 Gap / 🔴 Conflict |
+| Purposes | [stated purposes] | [new purpose] | |
+| Third parties / subprocessors | [stated parties] | [new party if any] | |
+| Retention | [retention commitment] | [implied retention] | |
+| User rights | [rights offered] | [any new rights implications] | |
+| Disclosure / notice | [what policy says about telling users] | [what this practice requires] | |
 
 ### Direct query output format
 
@@ -298,12 +285,10 @@ brief, confirms they don't need to change]
 **What's needed:** [why this gap matters — legal, reputational, or consistency reason]
 
 **Suggested language:**
-
-> _Add to [section]:_
+> *Add to [section]:*
 > "[Drafted text]"
 
 ### [Gap 2]
-
 [same format]
 
 ## What conflicts
@@ -328,7 +313,6 @@ If ADVISABLE: "Can proceed; update at next policy refresh."]
 ## Suggested language quality standards
 
 Policy language should:
-
 - Match the voice and style of the existing policy (read the actual document, not
   just the config CLAUDE.md summary, before drafting)
 - Be specific enough to be meaningful but not so specific that routine changes

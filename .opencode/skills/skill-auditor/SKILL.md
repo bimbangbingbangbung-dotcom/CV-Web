@@ -18,23 +18,23 @@ This tool scans skills **before** you install them.
 
 ## What It Checks
 
-| Check             | What It Detects                                                |
-| ----------------- | -------------------------------------------------------------- |
-| File Inventory    | Executable files, hidden files, unexpected binaries            |
-| Shell Commands    | `curl`, `wget`, `eval`, `exec`, `subprocess`, pipe-to-bash     |
-| Network Access    | External URLs, hardcoded IP addresses                          |
+| Check | What It Detects |
+|-------|----------------|
+| File Inventory | Executable files, hidden files, unexpected binaries |
+| Shell Commands | `curl`, `wget`, `eval`, `exec`, `subprocess`, pipe-to-bash |
+| Network Access | External URLs, hardcoded IP addresses |
 | Credential Access | Environment variable reads, keychain access, `.env` references |
-| Obfuscation       | Base64-encoded blobs, hex-encoded strings                      |
-| File System       | Access outside skill directory (`/etc/`, `$HOME`, `../../`)    |
-| Tool Permissions  | Reviews `allowed-tools` declarations in SKILL.md               |
+| Obfuscation | Base64-encoded blobs, hex-encoded strings |
+| File System | Access outside skill directory (`/etc/`, `$HOME`, `../../`) |
+| Tool Permissions | Reviews `allowed-tools` declarations in SKILL.md |
 
 ## Risk Levels
 
-| Level      | Score | Action                    |
-| ---------- | ----- | ------------------------- |
-| **LOW**    | 0-3   | Safe to install           |
-| **MEDIUM** | 4-8   | Manual review recommended |
-| **HIGH**   | 9+    | Auto-install blocked      |
+| Level | Score | Action |
+|-------|-------|--------|
+| **LOW** | 0-3 | Safe to install |
+| **MEDIUM** | 4-8 | Manual review recommended |
+| **HIGH** | 9+ | Auto-install blocked |
 
 ## Usage
 
@@ -182,12 +182,12 @@ Review findings above and install manually if you trust it.
 
 ## Exit Codes
 
-| Code | Meaning                                |
-| ---- | -------------------------------------- |
-| 0    | LOW risk                               |
-| 1    | MEDIUM risk                            |
-| 2    | HIGH risk                              |
-| 3    | Error (invalid path, download failure) |
+| Code | Meaning |
+|------|---------|
+| 0 | LOW risk |
+| 1 | MEDIUM risk |
+| 2 | HIGH risk |
+| 3 | Error (invalid path, download failure) |
 
 ## Installation
 

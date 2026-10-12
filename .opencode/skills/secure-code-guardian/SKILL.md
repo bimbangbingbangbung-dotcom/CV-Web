@@ -5,7 +5,7 @@ license: MIT
 metadata:
   author: https://github.com/Jeffallan
   company: https://synergetic.solutions
-  version: '1.1.0'
+  version: "1.1.0"
   domain: security
   triggers: security, authentication, authorization, encryption, OWASP, vulnerability, secure coding, password, JWT, OAuth
   role: specialist
@@ -37,18 +37,17 @@ After each implementation step, verify:
 
 Load detailed guidance based on context:
 
-| Topic            | Reference                        | Load When             |
-| ---------------- | -------------------------------- | --------------------- |
-| OWASP            | `references/owasp-prevention.md` | OWASP Top 10 patterns |
-| Authentication   | `references/authentication.md`   | Password hashing, JWT |
-| Input Validation | `references/input-validation.md` | Zod, SQL injection    |
-| XSS/CSRF         | `references/xss-csrf.md`         | XSS prevention, CSRF  |
-| Headers          | `references/security-headers.md` | Helmet, rate limiting |
+| Topic | Reference | Load When |
+|-------|-----------|-----------|
+| OWASP | `references/owasp-prevention.md` | OWASP Top 10 patterns |
+| Authentication | `references/authentication.md` | Password hashing, JWT |
+| Input Validation | `references/input-validation.md` | Zod, SQL injection |
+| XSS/CSRF | `references/xss-csrf.md` | XSS prevention, CSRF |
+| Headers | `references/security-headers.md` | Helmet, rate limiting |
 
 ## Constraints
 
 ### MUST DO
-
 - Hash passwords with bcrypt/argon2 (never MD5/SHA-1/unsalted hashes)
 - Use parameterized queries (never string-interpolated SQL)
 - Validate and sanitize all user input before use
@@ -58,7 +57,6 @@ Load detailed guidance based on context:
 - Store secrets in environment variables or secret managers (never in source code)
 
 ### MUST NOT DO
-
 - Store passwords in plaintext or reversibly encrypted form
 - Trust user input without validation
 - Expose sensitive data in logs or error responses
@@ -94,7 +92,7 @@ const pool = new Pool();
 export async function getUserByEmail(email: string) {
   const { rows } = await pool.query(
     'SELECT id, email, role FROM users WHERE email = $1',
-    [email], // value passed separately — never interpolated
+    [email]  // value passed separately — never interpolated
   );
   return rows[0] ?? null;
 }
@@ -130,7 +128,7 @@ const JWT_SECRET = process.env.JWT_SECRET!; // never hardcode
 export function verifyToken(token: string): jwt.JwtPayload {
   // Throws if expired, tampered, or wrong algorithm
   const payload = jwt.verify(token, JWT_SECRET, {
-    algorithms: ['HS256'], // explicitly allowlist algorithm
+    algorithms: ['HS256'],   // explicitly allowlist algorithm
     issuer: 'your-app',
     audience: 'your-app',
   });
@@ -152,7 +150,7 @@ app.use(express.json({ limit: '10kb' })); // limit payload size
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // 10 attempts per window per IP
+  max: 10,                   // 10 attempts per window per IP
   standardHeaders: true,
   legacyHeaders: false,
 });
@@ -169,12 +167,11 @@ app.post('/api/login', authLimiter, async (req, res) => {
   }
 
   // 3. Authorize — issue scoped, short-lived token
-  const token = jwt.sign({ sub: user.id, role: user.role }, JWT_SECRET, {
-    algorithm: 'HS256',
-    expiresIn: '15m',
-    issuer: 'your-app',
-    audience: 'your-app',
-  });
+  const token = jwt.sign(
+    { sub: user.id, role: user.role },
+    JWT_SECRET,
+    { algorithm: 'HS256', expiresIn: '15m', issuer: 'your-app', audience: 'your-app' }
+  );
 
   // 4. Secure response — token in httpOnly cookie, not body
   res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict' });
@@ -185,7 +182,6 @@ app.post('/api/login', authLimiter, async (req, res) => {
 ## Output Templates
 
 When implementing security features, provide:
-
 1. Secure implementation code
 2. Security considerations noted
 3. Configuration requirements (env vars, headers)

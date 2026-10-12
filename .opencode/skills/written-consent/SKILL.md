@@ -7,7 +7,7 @@ description: >
   tracking, with a built-in scope warning for major one-off actions. Use when
   user says "written consent", "unanimous consent", "board consent", "consent
   in lieu", "UWC", or describes an action needing board approval without a meeting.
-argument-hint: '[describe the action needing board approval]'
+argument-hint: "[describe the action needing board approval]"
 ---
 
 # /written-consent
@@ -115,7 +115,6 @@ Ask the user what action the board needs to approve. Gather:
 Classify the action before searching for precedent:
 
 **Routine — direct precedent likely:**
-
 - Officer appointment or removal
 - Equity grant (option, RSU, restricted stock) to existing plan participants
 - Bank account authorization or signatory update
@@ -125,7 +124,6 @@ Classify the action before searching for precedent:
 - Registered agent or registered office change
 
 **Review flag — major one-off, outside counsel prudent:**
-
 - M&A transaction (acquisition, merger, asset purchase, investment)
 - New financing round or debt facility
 - Equity issuance to a new investor
@@ -280,7 +278,6 @@ Produce:
    ```
 
 2. **Signatory checklist:**
-
 ```
 [WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]
 
@@ -299,7 +296,6 @@ State law notice: [confirmed-rule-for-state-of-incorporation / confirm]
 ```
 
 3. **Review prompts:**
-
 ```
 [WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]
 

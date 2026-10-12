@@ -7,11 +7,7 @@ import { z } from 'zod';
 
 const UserSchema = z.object({
   email: z.string().email().max(255),
-  name: z
-    .string()
-    .min(1)
-    .max(100)
-    .regex(/^[\w\s-]+$/),
+  name: z.string().min(1).max(100).regex(/^[\w\s-]+$/),
   age: z.number().int().min(0).max(150).optional(),
   role: z.enum(['user', 'admin']).default('user'),
 });
@@ -35,15 +31,20 @@ const bad = `SELECT * FROM users WHERE id = ${userId}`;
 const bad2 = `SELECT * FROM users WHERE name = '${name}'`;
 
 // ✅ Parameterized queries
-const good = await db.query('SELECT * FROM users WHERE id = $1 AND name = $2', [userId, name]);
+const good = await db.query(
+  'SELECT * FROM users WHERE id = $1 AND name = $2',
+  [userId, name]
+);
 
 // ✅ Use ORM
 const user = await prisma.user.findFirst({
-  where: { id: userId, name: name },
+  where: { id: userId, name: name }
 });
 
 // ✅ Query builder
-const user = await knex('users').where({ id: userId, name: name }).first();
+const user = await knex('users')
+  .where({ id: userId, name: name })
+  .first();
 ```
 
 ## Path Traversal Prevention
@@ -135,11 +136,11 @@ function validateUpload(file: Express.Multer.File) {
 
 ## Quick Reference
 
-| Input Type  | Validation                |
-| ----------- | ------------------------- |
-| Email       | Regex + max length        |
-| URL         | Protocol + host allowlist |
-| File path   | basename + resolve check  |
-| SQL         | Parameterized queries     |
-| Command     | execFile + no shell       |
+| Input Type | Validation |
+|------------|------------|
+| Email | Regex + max length |
+| URL | Protocol + host allowlist |
+| File path | basename + resolve check |
+| SQL | Parameterized queries |
+| Command | execFile + no shell |
 | File upload | Type + size + magic bytes |

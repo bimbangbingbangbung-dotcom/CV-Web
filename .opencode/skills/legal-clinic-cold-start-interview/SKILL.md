@@ -7,7 +7,7 @@ description: >
   student who runs /ramp reads from the same clinic context. Use on fresh
   install, when CLAUDE.md has placeholders, when re-doing setup with --redo,
   or when re-checking integrations with --check-integrations.
-argument-hint: '[--redo] [--check-integrations]'
+argument-hint: "[--redo] [--check-integrations]"
 ---
 
 # /cold-start-interview
@@ -36,16 +36,15 @@ When probing: only report ✓ if an MCP tool call actually succeeded. Configured
 
 Clinics are structurally capacity-constrained. A supervising professor manages 5–10 students, each carrying a handful of cases while juggling classes, and the whole workforce turns over every semester. The waitlist grows. People give up waiting.
 
-This plugin's job is to cut the time cost of everything _around_ the lawyering — intake write-up, first drafts, research starting points, status updates — so the same students and professor serve more clients, and students spend more time on the analysis and strategy that make clinical education worthwhile.
+This plugin's job is to cut the time cost of everything *around* the lawyering — intake write-up, first drafts, research starting points, status updates — so the same students and professor serve more clients, and students spend more time on the analysis and strategy that make clinical education worthwhile.
 
-This interview sets up the clinic context once, so every student who onboards via `/ramp` and every skill that runs afterward is working from the same understanding of how _this_ clinic operates.
+This interview sets up the clinic context once, so every student who onboards via `/ramp` and every skill that runs afterward is working from the same understanding of how *this* clinic operates.
 
 **Audience: the supervising professor.** Students don't run this — they run `/ramp`.
 
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md`:
-
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -66,7 +65,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -107,7 +106,7 @@ The attorney picked quick or full in the preamble. Branch:
 - **For uploads (handbook, filing guides, local rules, intake forms, example case files, sample motions, sample client letters):** "Paste the contents, share a file path, or say 'skip for now.' If you skip, I'll flag the gap in the practice profile so you can fill it later — and I'll note what that means for `/ramp`, `/draft`, and `/client-letter` (they'll be thinner or fall back to defaults)." Then actually wait. Don't silently move on.
 - **Before writing the practice profile:** review the interview. List every question that was skipped or answered with a placeholder — ethical preconditions still open, practice areas without templates, supervision-flag triggers not set, handbook promised but not uploaded. Say: "Before I write your practice profile, here's what's still open: [list]. Want to fill any of these now, or leave them as placeholders?" Then wait.
 - **Never** write a practice profile with silent gaps. Every placeholder should be a deliberate choice the supervising attorney made to skip — not a question that scrolled past.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 - **Pause and resume.** Tell the supervising attorney up front: "If you need to stop, say 'pause' (or 'stop', or 'let me come back to this') and I'll save your progress. Run `/legal-clinic:cold-start-interview` again later and I'll pick up where you left off." When the attorney pauses, write a partial configuration to `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` with a `<!-- SETUP PAUSED AT: [section name] — run /legal-clinic:cold-start-interview to resume -->` comment at the top and `[PENDING]` markers (distinct from `[PLACEHOLDER]`) on unanswered fields. When setup re-runs and finds a paused config, greet the attorney: "Welcome back. You paused at [section]. Your earlier answers are saved. Pick up where we left off, or start over?" Do not re-ask questions already answered.
 
 **Verify user-stated legal facts as they come up in setup.** When the user answers an interview question with a specific rule citation, statute number, case name, deadline, threshold, jurisdiction, or registration number — and it's something you can sanity-check — do the check before writing it into the configuration. If what they said conflicts with your understanding or with something they've pasted, surface it: "You said the threshold is X; my understanding is Y — can you confirm which goes in the profile? `[premise flagged — verify]`" A wrong fact written into CLAUDE.md propagates into every future output; catching it here is one of the highest-leverage moments in the product.
@@ -127,7 +126,7 @@ If the answer is 2, stop the interview and surface the above. Do not proceed.
 
 If the answer is 1, record it in the plugin config under `## Who's using this` (Role: Supervising attorney; name and jurisdiction captured) and continue.
 
-_Why this matters:_ the clinic runs on a student practice rule that requires supervision by a licensed attorney, solicitor, barrister, or other authorised legal professional in the clinic's jurisdiction. Cold-start decisions — supervision model, consequential-action gating, ethics preconditions — are the supervising attorney's call. The role question gates those decisions to the right person.
+*Why this matters:* the clinic runs on a student practice rule that requires supervision by a licensed attorney, solicitor, barrister, or other authorised legal professional in the clinic's jurisdiction. Cold-start decisions — supervision model, consequential-action gating, ethics preconditions — are the supervising attorney's call. The role question gates those decisions to the right person.
 
 #### Ethical & confidentiality preconditions
 
@@ -147,7 +146,7 @@ Capture the professor's answers. If any precondition is unresolved, flag that in
 
 > This plugin can work with a case management system (Clio) and document storage (Google Drive, SharePoint, Box). Let me check which connectors are configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -176,17 +175,14 @@ Write Part 0 answers to the plugin config under `## Who's using this` and `## Av
 ### Part 1: The clinic (2-3 min)
 
 **What kind of clinic?** (Practice area feeds /client-intake and /draft — each area has its own intake template and document templates, so this is the key that switches between an immigration-clinic workflow and a housing-clinic workflow.)
-
 - Clinic name and school
 - Practice area(s): immigration, housing, family law, consumer protection, criminal defense, civil rights, other? (Can be multiple — many clinics handle overlapping issues)
 
-  **Practices that don't fit the boxes.** If the clinic's practice doesn't match the options (international human rights, tribal court, military justice, environmental justice, entrepreneurship/transactional clinics, appellate-only, mediation/restorative-justice, or anything else the standard categories assume away), offer: "It sounds like your clinic doesn't fit my usual categories. Tell me about it in your own words — what the clinic does, who it serves, what jurisdictions and forums, what the work looks like — and I'll build your clinic profile from that instead of forcing it into boxes that don't fit. I'll skip or adapt the questions that don't apply." Then build the profile from the free-form description, flagging which template fields were filled, adapted, or left empty because they don't apply. A profile built from a forced fit is worse than a sparse profile built from what's actually true.
-
+   **Practices that don't fit the boxes.** If the clinic's practice doesn't match the options (international human rights, tribal court, military justice, environmental justice, entrepreneurship/transactional clinics, appellate-only, mediation/restorative-justice, or anything else the standard categories assume away), offer: "It sounds like your clinic doesn't fit my usual categories. Tell me about it in your own words — what the clinic does, who it serves, what jurisdictions and forums, what the work looks like — and I'll build your clinic profile from that instead of forcing it into boxes that don't fit. I'll skip or adapt the questions that don't apply." Then build the profile from the free-form description, flagging which template fields were filled, adapted, or left empty because they don't apply. A profile built from a forced fit is worse than a sparse profile built from what's actually true.
 - How many students this semester? How many active cases at a time, roughly?
 - How many supervising professors/attorneys?
 
 **Who are the clients?**
-
 - Typical client situations — who walks in, what are they facing?
 - Languages spoken beyond English?
 - Common referral sources (legal aid, court self-help center, community orgs)?
@@ -253,12 +249,12 @@ Note the answer in the setup state — if the supervisor wants to build a guide,
 
 For each practice area the clinic handles: what are the 3-5 documents students draft most often? (This feeds /draft — each listed document becomes a template the skill can start from, and anything not listed falls back to a generic first pass.)
 
-| Practice area | Common documents                                                                     |
-| ------------- | ------------------------------------------------------------------------------------ |
-| Immigration   | Asylum application (I-589), motion to change venue, client declaration, FOIA request |
-| Housing       | Eviction answer, demand letter, repair request, motion to stay                       |
-| Family        | Protective order petition, custody motion, financial disclosure                      |
-| Consumer      | Debt validation letter, FDCPA demand, answer to collection suit                      |
+| Practice area | Common documents |
+|---|---|
+| Immigration | Asylum application (I-589), motion to change venue, client declaration, FOIA request |
+| Housing | Eviction answer, demand letter, repair request, motion to stay |
+| Family | Protective order petition, custody motion, financial disclosure |
+| Consumer | Debt validation letter, FDCPA demand, answer to collection suit |
 
 These become the template set for `/draft`. If the professor has existing templates, ingest them. If not, note which ones to build.
 
@@ -293,7 +289,6 @@ Write into the plugin config the safeguard standards every skill will apply:
 ## Output safeguards (applied by every skill)
 
 Every output includes:
-
 - **AI-assisted label:** "[AI-ASSISTED DRAFT — requires student analysis and attorney review]"
 - **Confidence indicators:** Where the skill is uncertain, it says so explicitly
 - **Verification prompts:** Specific things the student should fact-check before relying on the output
@@ -322,6 +317,7 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Run `/ramp` yourself first so you see what your students will see at the start of the semester. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
+
 
 1. **Show the supervision style choice.** "You picked [formal queue / flags / lighter-touch]. That means [what it means in practice]. Right call?"
 

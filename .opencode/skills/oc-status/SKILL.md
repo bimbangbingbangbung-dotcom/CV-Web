@@ -1,7 +1,7 @@
 ---
 name: oc-status
 description: Generate weekly status-request email drafts to outside counsel across the active portfolio — markdown per matter, plus Gmail drafts when the MCP is available. Use when the user asks for OC status requests, weekly outside counsel check-ins, or wants per-matter status emails drafted from the portfolio log.
-argument-hint: '[--all | --slug=foo | --no-gmail]'
+argument-hint: "[--all | --slug=foo | --no-gmail]"
 ---
 
 # /oc-status
@@ -42,7 +42,6 @@ Default filter:
 Skip matters that just had a status update in the last 10 days (no need to re-ping) and matters where `outside_counsel.email` is null (email addresses needed for Gmail draft; still produce markdown).
 
 Flags:
-
 - `--all` → draft for every active matter regardless of recency
 - `--slug=[slug]` → draft for one matter only (ad-hoc request)
 - `--no-gmail` → skip Gmail draft creation even if MCP is available
@@ -128,15 +127,15 @@ After processing all matters, write `~/.claude/plugins/config/claude-for-legal/l
 
 ## Drafted for
 
-| Matter | OC lead | Last updated | Reason for inclusion                         |
-| ------ | ------- | ------------ | -------------------------------------------- |
-| [slug] | [lead]  | [date]       | [stale / upcoming deadline / --all / --slug] |
+| Matter | OC lead | Last updated | Reason for inclusion |
+|---|---|---|---|
+| [slug] | [lead] | [date] | [stale / upcoming deadline / --all / --slug] |
 
 ## Skipped
 
-| Matter | Reason                                                   |
-| ------ | -------------------------------------------------------- |
-| [slug] | recent update (last touched [date])                      |
+| Matter | Reason |
+|---|---|
+| [slug] | recent update (last touched [date]) |
 | [slug] | no OC email in log — update with `/matter-update [slug]` |
 
 ## Anomalies

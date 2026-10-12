@@ -5,7 +5,7 @@ description: >
   Use when the user says "review this marketing copy", "check these claims",
   "can we say this", "is this puffery or a problem", or pastes marketing content
   (landing pages, emails, ads, taglines).
-argument-hint: '[paste copy, or file path]'
+argument-hint: "[paste copy, or file path]"
 ---
 
 # /marketing-claims-review
@@ -36,14 +36,13 @@ Marketing wants to say the product is the best. Legal needs it to be true, or at
 ## Load standards
 
 Read `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` → `## Marketing claims`:
-
 - Comparative claims policy (allowed with substantiation / discouraged / never)
 - Substantiation standard (what's required before a claim ships)
 - Common rejected claims (learn from history)
 
 ## Research the applicable standards before clearing copy
 
-Research the currently operative advertising and substantiation standards for the applicable jurisdictions and media (for example, FTC, NAD, state UDAP regimes, sector regulators for healthcare / financial / children's products, and platform-specific policies). Identify what substantiation the _specific claim_ requires — who measured it, when, sample size, apples-to-apples basis — not just whether _some_ substantiation exists on file. Flag implied claims and comparative claims for heightened scrutiny. Verify currency: endorsement and review guides have been updated recently and continue to evolve. Cite primary sources with pinpoint references. If you cannot verify the current standard, flag for attorney verification — do not state a rule you haven't confirmed.
+Research the currently operative advertising and substantiation standards for the applicable jurisdictions and media (for example, FTC, NAD, state UDAP regimes, sector regulators for healthcare / financial / children's products, and platform-specific policies). Identify what substantiation the *specific claim* requires — who measured it, when, sample size, apples-to-apples basis — not just whether *some* substantiation exists on file. Flag implied claims and comparative claims for heightened scrutiny. Verify currency: endorsement and review guides have been updated recently and continue to evolve. Cite primary sources with pinpoint references. If you cannot verify the current standard, flag for attorney verification — do not state a rule you haven't confirmed.
 
 > **Only cite the standards that apply to the specific claims under review.** A blanket list of every FTC guideline, NAD practice note, or sector rule makes the load-bearing ones invisible. Do not cite the Endorsement Guides (16 CFR Part 255) unless the copy contains an endorsement, testimonial, or influencer content. Do not cite disclosure-overlay rules unless a claim in the asset triggers the overlay. Do not cite a sector regulator unless the copy targets or implicates that sector. A standard earns its place in the output by mapping to a specific quoted claim; otherwise drop it.
 
@@ -65,33 +64,33 @@ The categories below are structural patterns the reviewer should be able to reco
 
 Subjective assertions with no measurable content. Whether they are actionable depends on jurisdiction, context, and audience — research before concluding.
 
-| Example                                |
-| -------------------------------------- |
+| Example |
+|---|
 | "The best way to manage your projects" |
-| "You'll love it"                       |
-| "Revolutionary"                        |
+| "You'll love it" |
+| "Revolutionary" |
 
 ### Specific factual claims
 
 Measurable, specific, a reasonable person might rely on it.
 
-| Example                        | Substantiation to look for                                                |
-| ------------------------------ | ------------------------------------------------------------------------- |
-| "50% faster than [competitor]" | Benchmark data, disclosed methodology, date                               |
-| "Trusted by 10,000 companies"  | Actual count (not cumulative signups — _currently_ trusted)               |
-| "Saves 5 hours per week"       | Study or customer data, disclosed sample                                  |
-| "Enterprise-grade security"    | What does that mean? SOC 2? Spell it out or it's a promise                |
-| "HIPAA compliant"              | BAA available, actually configured for it — this is a contractual promise |
+| Example | Substantiation to look for |
+|---|---|
+| "50% faster than [competitor]" | Benchmark data, disclosed methodology, date |
+| "Trusted by 10,000 companies" | Actual count (not cumulative signups — *currently* trusted) |
+| "Saves 5 hours per week" | Study or customer data, disclosed sample |
+| "Enterprise-grade security" | What does that mean? SOC 2? Spell it out or it's a promise |
+| "HIPAA compliant" | BAA available, actually configured for it — this is a contractual promise |
 
 ### Comparative claims (heightened scrutiny)
 
 Naming a competitor or implying one. Research the applicable rules for comparative advertising in the relevant jurisdictions and media before clearing.
 
-| Example                         | Fix pattern                                                                                                                 |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| "Faster than Slack"             | Either name Slack with head-to-head data you can defend, or abstract to "faster than legacy chat tools" with substantiation |
-| "The only platform that does X" | False if anyone else does X — "The first platform to..." (if true) or drop "only"                                           |
-| "[Competitor] can't do this"    | Show your feature. Let the viewer compare.                                                                                  |
+| Example | Fix pattern |
+|---|---|
+| "Faster than Slack" | Either name Slack with head-to-head data you can defend, or abstract to "faster than legacy chat tools" with substantiation |
+| "The only platform that does X" | False if anyone else does X — "The first platform to..." (if true) or drop "only" |
+| "[Competitor] can't do this" | Show your feature. Let the viewer compare. |
 
 Per `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` — if comparative claims are "never," flag all of them. If "allowed with substantiation," check for the substantiation.
 
@@ -99,22 +98,22 @@ Per `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` — if c
 
 Not stated outright but a reasonable reader infers it. Research the treatment of implied claims under the applicable advertising regime — implied claims often carry the same substantiation burden as express ones.
 
-| Example                         | Implication                | Fix                                                          |
-| ------------------------------- | -------------------------- | ------------------------------------------------------------ |
-| "Finally, a secure alternative" | Competitors are insecure   | "Finally, security you can verify"                           |
-| Customer logos without context  | These companies endorse us | "Customers include..." is fine; "Trusted by..." implies more |
-| "Built for healthcare"          | HIPAA compliant            | Clarify or qualify                                           |
+| Example | Implication | Fix |
+|---|---|---|
+| "Finally, a secure alternative" | Competitors are insecure | "Finally, security you can verify" |
+| Customer logos without context | These companies endorse us | "Customers include..." is fine; "Trusted by..." implies more |
+| "Built for healthcare" | HIPAA compliant | Clarify or qualify |
 
 ### Absolute claims
 
 No room for error. One counter-example makes them false. Research whether qualifications cure the issue in the applicable jurisdiction.
 
-| Example            | Fix pattern                                                                        |
-| ------------------ | ---------------------------------------------------------------------------------- |
-| "Never goes down"  | "99.9% uptime" (with SLA that defines it)                                          |
-| "100% accurate"    | A specific, substantiated percentage tied to a benchmark                           |
-| "Guaranteed"       | Only if you actually offer a guarantee with terms — this creates warranty exposure |
-| "Always" / "Every" | "Typically" / "Most"                                                               |
+| Example | Fix pattern |
+|---|---|
+| "Never goes down" | "99.9% uptime" (with SLA that defines it) |
+| "100% accurate" | A specific, substantiated percentage tied to a benchmark |
+| "Guaranteed" | Only if you actually offer a guarantee with terms — this creates warranty exposure |
+| "Always" / "Every" | "Typically" / "Most" |
 
 ## The review
 
@@ -190,8 +189,8 @@ A meta-description of changes is never an acceptable output for a short asset �
 
 ## Substantiation needed before ship
 
-| Claim   | Need        | From whom              |
-| ------- | ----------- | ---------------------- |
+| Claim | Need | From whom |
+|---|---|---|
 | [claim] | [data type] | [PM / data team / eng] |
 
 ---

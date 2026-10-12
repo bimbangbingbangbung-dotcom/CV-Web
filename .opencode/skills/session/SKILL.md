@@ -6,7 +6,7 @@ description: >
   user says "run me 10 questions on [subject]", "do a session on [subject]",
   "let's do 5 cards on [subject]", or wants to drill a fixed number of
   questions and have the plan adapt.
-argument-hint: '<subject> <n> [--mbe | --essay | --flashcards]'
+argument-hint: "<subject> <n> [--mbe | --essay | --flashcards]"
 ---
 
 # /session

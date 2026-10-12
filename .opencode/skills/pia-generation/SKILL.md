@@ -6,7 +6,7 @@ description: >
   the user says "write a PIA", "privacy impact assessment for", "do we need a PIA
   for this", "privacy review this feature", or describes a new data processing
   activity.
-argument-hint: '[feature name or description]'
+argument-hint: "[feature name or description]"
 ---
 
 # /pia-generation
@@ -62,7 +62,6 @@ If a prior output is found, cite it in the PIA:
 > "Prior triage ([date]) rated this [risk level] and required [conditions]. This PIA builds on that finding — [which conditions are satisfied, which remain, which are re-scoped]."
 
 If a prior PIA exists:
-
 > "This PIA supersedes the [date] PIA because [reason — scope change, new data category, vendor change, regulatory change]. Conclusions carried over: [X]. Conclusions revised: [Y, because Z]."
 
 **Carry severity from upstream as a floor** per the cross-skill severity floor rule in `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## Shared guardrails`. A use-case-triage that rated the activity high-risk cannot become a PIA that concludes low-risk without stating why and what changed.
@@ -72,7 +71,6 @@ If no prior output is found, say so explicitly — "No prior triage or PIA on th
 ## Load house style
 
 Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## PIA house style`. That has:
-
 - What triggers a PIA here (may not match regulatory DPIA triggers — some teams PIA everything, some only high-risk)
 - The structure template extracted from the seed PIA
 - Typical depth
@@ -173,8 +171,8 @@ recommended below; no blockers identified."]
 
 ## 2. Lawful basis
 
-| Purpose     | Basis                            | Notes                                                     |
-| ----------- | -------------------------------- | --------------------------------------------------------- |
+| Purpose | Basis | Notes |
+|---|---|---|
 | [purpose 1] | [Contract / LI / Consent / etc.] | [if LI: balancing test summary; if consent: how obtained] |
 
 ---
@@ -191,9 +189,9 @@ recommended below; no blockers identified."]
 
 ## 4. Privacy policy consistency
 
-| Policy commitment                                         | Consistent? | Notes |
-| --------------------------------------------------------- | ----------- | ----- |
-| [commitment from config CLAUDE.md privacy policy section] | 🟢 / 🟡     |       |
+| Policy commitment | Consistent? | Notes |
+|---|---|---|
+| [commitment from config CLAUDE.md privacy policy section] | 🟢 / 🟡 | |
 
 [If any 🟡: policy update needed before launch, or processing needs to change]
 
@@ -201,9 +199,9 @@ recommended below; no blockers identified."]
 
 ## 5. Risks and mitigations
 
-| #   | Risk                                                                | Likelihood | Impact | Mitigation         | Status               | Owner  |
-| --- | ------------------------------------------------------------------- | ---------- | ------ | ------------------ | -------------------- | ------ |
-| 1   | [specific risk, tied to the design — not "data breach" generically] | L/M/H      | L/M/H  | [specific control] | Done / Planned / Gap | [name] |
+| # | Risk | Likelihood | Impact | Mitigation | Status | Owner |
+|---|---|---|---|---|---|---|
+| 1 | [specific risk, tied to the design — not "data breach" generically] | L/M/H | L/M/H | [specific control] | Done / Planned / Gap | [name] |
 
 **Residual risk after mitigations:** [assessment]
 
@@ -211,13 +209,13 @@ recommended below; no blockers identified."]
 
 ## 6. Data subject rights
 
-| Right       | Can be exercised? | How |
-| ----------- | ----------------- | --- |
-| Access      |                   |     |
-| Deletion    |                   |     |
-| Correction  |                   |     |
-| Portability |                   |     |
-| Objection   |                   |     |
+| Right | Can be exercised? | How |
+|---|---|---|
+| Access | | |
+| Deletion | | |
+| Correction | | |
+| Portability | | |
+| Objection | | |
 
 ---
 
@@ -226,7 +224,6 @@ recommended below; no blockers identified."]
 [APPROVED / APPROVED WITH CONDITIONS / CHANGES REQUIRED / NOT APPROVED]
 
 **Conditions (if any):**
-
 - [ ] [specific thing that has to happen before launch]
 
 **Sign-off:** [name, date]
@@ -236,11 +233,11 @@ recommended below; no blockers identified."]
 
 Risks in a PIA should be **specific and tied to the design**, not generic. Bad risks pad the document and train readers to skim.
 
-| Bad risk                   | Why bad                                               | Better                                                                                                                                       |
-| -------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Data breach"              | Applies to everything; says nothing                   | "Location history accessible by support staff via the admin panel without audit logging — a malicious insider could track a user undetected" |
-| "Non-compliance with GDPR" | Circular — the PIA is supposed to _assess_ compliance | Name the specific article and the gap                                                                                                        |
-| "Users might not like it"  | Vague                                                 | "Users who opted out of marketing may still receive this because the opt-out flag isn't checked in this flow"                                |
+| Bad risk | Why bad | Better |
+|---|---|---|
+| "Data breach" | Applies to everything; says nothing | "Location history accessible by support staff via the admin panel without audit logging — a malicious insider could track a user undetected" |
+| "Non-compliance with GDPR" | Circular — the PIA is supposed to *assess* compliance | Name the specific article and the gap |
+| "Users might not like it" | Vague | "Users who opted out of marketing may still receive this because the opt-out flag isn't checked in this flow" |
 
 Aim for 2-5 real risks, not 15 padded ones.
 
@@ -262,7 +259,7 @@ Flag every mismatch. One of them has to change before launch.
 
 ## Gate: submitting a DPIA to a regulator
 
-Producing an internal PIA is research and documentation. _Submitting a DPIA to a supervisory authority_ — or voluntarily disclosing one to a regulator in response to an inquiry — is the consequential act.
+Producing an internal PIA is research and documentation. *Submitting a DPIA to a supervisory authority* — or voluntarily disclosing one to a regulator in response to an inquiry — is the consequential act.
 
 **Before proceeding to submit a DPIA (or any equivalent impact assessment) to a regulator, supervisory authority, or enforcement body:** Read `## Who's using this` in `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`. If the Role is Non-lawyer:
 

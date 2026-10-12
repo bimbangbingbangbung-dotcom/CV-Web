@@ -1,7 +1,7 @@
 ---
 name: matter-briefing
 description: Deep briefing on one matter — current posture, what's changed, next deadline, open questions, and a risk re-assessment check, ready before a GC update or outside counsel call. Use when the user says "brief me on [matter]", "where are we on [matter]", or needs a read on a specific matter.
-argument-hint: '[slug]'
+argument-hint: "[slug]"
 ---
 
 # /matter-briefing
@@ -75,7 +75,7 @@ Slug (required). If ambiguous or missing, ask the user to pick from a list of ac
 
 ## Risk re-assessment check
 
-_A prompt, not an answer._
+*A prompt, not an answer.*
 
 - Does `risk: [rating]` still feel right, or has the case moved?
 - Does `materiality: [category]` still match? (New facts might push toward reserve or disclosure.)

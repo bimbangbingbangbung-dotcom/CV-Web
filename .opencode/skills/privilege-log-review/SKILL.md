@@ -1,7 +1,7 @@
 ---
 name: privilege-log-review
 description: First-pass privilege log review — make the obvious privilege calls and flag the hard ones for attorney review without making close calls. Use when the user says "review the privilege log", "priv log", "check privilege on these docs", or has a log to QA before production.
-argument-hint: '[log file, or document set]'
+argument-hint: "[log file, or document set]"
 ---
 
 # /privilege-log-review
@@ -83,14 +83,14 @@ Confirm the forum's waiver doctrine for each privilege claimed before recommendi
 **In-house counsel privilege is jurisdiction-specific and contested.** Before classifying any communication with in-house counsel as privileged, check the jurisdiction:
 
 - **US:** In-house counsel communications are generally privileged when made for the purpose of obtaining or providing legal advice, and the attorney is acting in a legal (not business) capacity. The legal-vs-business distinction is fact-specific and contested.
-- **EU (competition / DG COMP proceedings):** Under _Akzo Nobel Chemicals v. Commission_ (C-550/07 P), communications with in-house counsel are NOT privileged in EU competition proceedings. The CJEU held privilege applies only to communications with independent external lawyers. If the matter involves EU competition or state aid, in-house counsel documents are compellable.
+- **EU (competition / DG COMP proceedings):** Under *Akzo Nobel Chemicals v. Commission* (C-550/07 P), communications with in-house counsel are NOT privileged in EU competition proceedings. The CJEU held privilege applies only to communications with independent external lawyers. If the matter involves EU competition or state aid, in-house counsel documents are compellable.
 - **Germany (Syndikusanwalt):** The German Syndikusanwalt has a hybrid status. Privilege depends on the capacity in which the lawyer was acting and whether the communication is in the "advocate" or "employee" role. Post-2016 registration rules changed the analysis.
 - **UK:** In-house counsel privilege generally recognized, but the "dominant purpose" test applies, and the legal-vs-commercial advice distinction is scrutinized.
 - **France, Belgium, some other EU:** In-house lawyers may not be members of the bar, and their communications may have no privilege at all.
 
-**Never classify an in-house counsel communication as "confidently privileged" without stating which privilege regime applies.** If the matter involves non-US jurisdictions, especially EU competition or any EU regulator: "Documents from in-house counsel may have NO privilege in [jurisdiction]. Under _Akzo Nobel_, in-house communications are compellable in EU competition proceedings. Flag for review by a [jurisdiction] litigation specialist before asserting privilege."
+**Never classify an in-house counsel communication as "confidently privileged" without stating which privilege regime applies.** If the matter involves non-US jurisdictions, especially EU competition or any EU regulator: "Documents from in-house counsel may have NO privilege in [jurisdiction]. Under *Akzo Nobel*, in-house communications are compellable in EU competition proceedings. Flag for review by a [jurisdiction] litigation specialist before asserting privilege."
 
-The ✅ "confidently privileged, no flag" tier below is the one designed to bypass attorney review. That's exactly where the _Akzo Nobel_ risk lives. When the jurisdiction is non-US or the matter touches EU regulators, there is no ✅ tier for in-house communications — everything goes to 🟡 "flag for attorney review with jurisdiction note."
+The ✅ "confidently privileged, no flag" tier below is the one designed to bypass attorney review. That's exactly where the *Akzo Nobel* risk lives. When the jurisdiction is non-US or the matter touches EU regulators, there is no ✅ tier for in-house communications — everything goes to 🟡 "flag for attorney review with jurisdiction note."
 
 ### Confidently privileged (✅) — keep designation, no flag
 
@@ -118,11 +118,11 @@ Only for the unambiguous cases. The output still records the assessment rational
 
 - No attorney involved anywhere
 - Business advice with a lawyer CC'd (CC'ing legal doesn't make it privileged)
-- Underlying facts (facts aren't privileged — communications _about_ facts can be)
+- Underlying facts (facts aren't privileged — communications *about* facts can be)
 - Third party copied who's clearly outside privilege (breaks confidentiality)
 - Attachments that are independently non-privileged (the email might be privileged; the attached spreadsheet of sales numbers is not)
 
-If any of these is _close_ — the third party might be an agent, the lawyer's CC might actually be on a legal request — it's uncertain, not ❌. Route it to the uncertain bucket and flag.
+If any of these is *close* — the third party might be an agent, the lawyer's CC might actually be on a legal request — it's uncertain, not ❌. Route it to the uncertain bucket and flag.
 
 ## Workflow
 
@@ -130,14 +130,14 @@ If any of these is _close_ — the third party might be an agent, the lawyer's C
 
 Does the log have what it needs?
 
-| Field                                                               | Present? |
-| ------------------------------------------------------------------- | -------- |
-| Date                                                                |          |
-| Author                                                              |          |
-| Recipients (all — TO, CC, BCC)                                      |          |
-| Document type                                                       |          |
-| Privilege claimed (A/C, WP, both)                                   |          |
-| Description (enough to assess without revealing privileged content) |          |
+| Field | Present? |
+|---|---|
+| Date | |
+| Author | |
+| Recipients (all — TO, CC, BCC) | |
+| Document type | |
+| Privilege claimed (A/C, WP, both) | |
+| Description (enough to assess without revealing privileged content) | |
 
 Missing fields → flag for completion before substantive review.
 
@@ -185,16 +185,16 @@ Do not treat the log as service-ready without an explicit yes. First-pass review
 
 ### ✅ + ⚠️ Flagged — designation kept, attorney decides
 
-| Entry | Bates   | Issue               | Evidence for priv | Evidence against | Question                    |
-| ----- | ------- | ------------------- | ----------------- | ---------------- | --------------------------- |
-| [N]   | [range] | [what's subjective] | [one line]        | [one line]       | [the specific call to make] |
+| Entry | Bates | Issue | Evidence for priv | Evidence against | Question |
+|---|---|---|---|---|---|
+| [N] | [range] | [what's subjective] | [one line] | [one line] | [the specific call to make] |
 
 ### ❌ Recommend remove designation (attorney confirms before stripping)
 
 | Entry | Bates | Reason |
-| ----- | ----- | ------ |
+|---|---|---|
 
-_Recorded, not executed. The skill does not remove privilege designations from the log — the attorney does, after reviewing the rationale._
+*Recorded, not executed. The skill does not remove privilege designations from the log — the attorney does, after reviewing the rationale.*
 
 ### ✅ Privileged (no action)
 
@@ -220,10 +220,11 @@ _Recorded, not executed. The skill does not remove privilege designations from t
 ## What this skill emphatically does not do
 
 - Make close calls. ⚠️ means "a human decides." On any subjective test (dominant purpose, reasonable contemplation, common-interest scope, waiver by later sharing) the skill keeps the privilege designation on and flags.
-- Strip a privilege designation from the log based on its own assessment. ❌ is a _recommendation_ recorded for the attorney, not an action taken against the log.
+- Strip a privilege designation from the log based on its own assessment. ❌ is a *recommendation* recorded for the attorney, not an action taken against the log.
 - Produce or withhold documents. It advises; attorney decides; attorney acts.
 - Guarantee correctness on ✅ calls. The attorney is responsible for the log. This is a first pass.
 
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
+

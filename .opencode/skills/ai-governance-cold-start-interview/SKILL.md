@@ -7,7 +7,7 @@ description: >
   Use when the practice profile is missing or contains `[PLACEHOLDER]` markers,
   or when user says "set up ai governance plugin", "onboard me", "configure ai
   governance".
-argument-hint: '[--redo | --check-integrations]'
+argument-hint: "[--redo | --check-integrations]"
 ---
 
 # /cold-start-interview
@@ -35,7 +35,7 @@ When probing: only report ✓ if an MCP tool call actually succeeded. Configured
 
 ## Purpose
 
-Learn how _this_ AI governance team works — what role the company plays in the AI
+Learn how *this* AI governance team works — what role the company plays in the AI
 supply chain, which regulations actually apply to them, what their red lines are for
 AI use cases, and what good impact assessment looks like here. Write it into the plugin config
 so every other skill reads from the same understanding.
@@ -48,7 +48,6 @@ because builder obligations and deployer obligations are nearly opposite exercis
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`:
-
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -73,7 +72,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -106,7 +105,7 @@ Corollary: the interview's inputs are the user's typed answers and documents the
 ## Interview pacing
 
 - **Assume the answer exists somewhere.** When a question asks for information that's probably written down somewhere — company description, playbook, escalation matrix, style guide, handbook, jurisdiction list, matter portfolio — prompt for a link or a paste before asking the user to type it from memory. "Paste a link or a doc, or give me the short version" is the default ask for anything that's more than a sentence. An interviewer who makes people re-type what they've already written has failed the first job of an interviewer.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 
 **Pause for real answers.** Some questions are quick (pick A/B/C). Others need the user to type, describe, or share a document. When a question needs more than a quick tap:
 
@@ -184,7 +183,7 @@ Record this in the `## Company profile` → `**Practice setting:**` line of the 
 
 > This plugin can work with: document storage (Google Drive, SharePoint, Box), scheduled-tasks, Slack. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -220,7 +219,6 @@ Write a `## Who's using this` section and an `## Available integrations` section
 > the inventory for now if you're not in the EU or not ready.
 
 Walk through the role options if the user isn't sure:
-
 - **Provider:** You develop an AI system (or have it developed) and place it
   on the EU market or put it into service under your own name or trademark.
 - **Deployer:** You use an AI system under your own authority, not for
@@ -246,7 +244,6 @@ in the config and move on. The inventory can be populated later.
 
 **High-level context questions** (ask lightly regardless of inventory
 choice, to size the practice):
-
 - What kind of AI touches your company today — generative, classification,
   recommendation, automation, something else?
 - Who experiences the AI — customers, employees, candidates, no humans?
@@ -258,7 +255,6 @@ choice, to size the practice):
 - Are you using AI in any decisions that affect employees or customers?
 
 **Shadow AI discovery.** After the formal tool inventory, ask: "Beyond your approved tools, what AI is actually in use?
-
 - **Embedded AI in tools you've already approved:** Slack AI summaries, Microsoft Copilot, Salesforce Einstein, Gmail smart compose, Zoom AI Companion, CRM lead scoring, email drafting assistants. Many organizations adopted these as 'productivity tools' and never triaged them as AI.
 - **Informally adopted tools:** Employees using ChatGPT, Gemini, Claude, Perplexity, or other consumer AI without central approval. Check with IT for SaaS spend, browser extension usage, and DLP alerts.
 - **Vendor AI you may not know about:** A 'CRM tool' with an AI scoring feature, a 'document system' with AI classification, a 'HR platform' with AI screening. Ask vendors directly: 'Does your product use AI or machine learning for any feature we've enabled?'
@@ -286,14 +282,12 @@ Prompts to walk through:
 - **Contractual requirements** — do enterprise customers require AI disclosures, impact assessments, or AI-specific DPA terms?
 
 **Open regulatory matters:**
-
 - Any regulator who knows you by name? Investigations, voluntary commitments,
   consent orders relating to AI?
 - Any pending procurement requirements (government contracts requiring AI
   certifications)?
 
 **Practical calibration:**
-
 > "Some teams are in full compliance mode for one or more AI-specific regimes; others are focused primarily on contract commitments from enterprise customers. Where are you on that spectrum?"
 
 ---
@@ -306,7 +300,7 @@ If not:
 
 This is the equivalent of the DPA playbook for AI governance — most teams have
 implicit red lines but rarely write them down. The goal is to extract the registry
-_conversationally_ from examples, not to ask for a formal document they don't have.
+*conversationally* from examples, not to ask for a formal document they don't have.
 
 **Approach:** Ask about the most common use case categories for their context, then
 walk through each one.
@@ -317,8 +311,7 @@ walk through each one.
 
 **Scenario prompts (tailor to builder/deployer profile):**
 
-_For deployers / internal use:_
-
+*For deployers / internal use:*
 - "An HR team wants to use AI to screen resumes before a recruiter looks at them.
   What happens — is that approved, conditional, or a no?"
 - "A manager wants to use AI to summarize performance review notes before writing
@@ -328,8 +321,7 @@ _For deployers / internal use:_
 - "Finance wants to use an AI tool to flag anomalies in expense reports."
 - "Legal wants to use an AI assistant to first-draft NDAs."
 
-_For builders / product AI:_
-
+*For builders / product AI:*
 - "A PM wants to add an AI feature that surfaces personalized content recommendations
   based on user behavior."
 - "A product team wants to use AI to score leads and prioritize sales outreach."
@@ -337,14 +329,12 @@ _For builders / product AI:_
   What triggers a review requirement?"
 
 **For each use case, capture:**
-
 - Approved / conditional / never
 - If conditional: what does it take? (Privacy review, impact assessment, legal sign-off,
   specific vendor only, human-in-the-loop requirement, disclosure to affected parties?)
 - If never: why is it a hard no? (Specific regulation? Company policy? Past incident?)
 
 **The red lines question:**
-
 > "What's the use case that's an automatic no — the thing someone could propose
 > and you'd stop them immediately without needing to think about it?" (This feeds /use-case-triage — the skill checks proposed AI use cases against these red lines before doing anything else, and flags anything on the list as automatic stop.)
 
@@ -353,7 +343,6 @@ political/religious inference, fully automated adverse decisions affecting emplo
 or credit, uses involving children.
 
 **Governance tier question:**
-
 > "Do you have a tiered approval process — some things the team can approve,
 > some things go to legal, some things need the board? Or is it case by case?"
 
@@ -364,7 +353,6 @@ or credit, uses involving children.
 ### Part 4: Governance and escalation (2 min)
 
 **The team:**
-
 - How many people work on AI governance? Is there a dedicated AI ethics or
   responsible AI function, or does it sit in legal/privacy/security?
 - Who owns the relationship with AI vendors — legal, procurement, IT?
@@ -375,11 +363,9 @@ or credit, uses involving children.
 > "When a review finds something that needs someone more senior to sign off — a vendor AI agreement with training-on-data or liability issues, an AI use case that doesn't fit your registry, a regulatory gap that needs a decision, or a call above your authority — who does that go to? Give me a name or a role (the GC, the Chief Privacy Officer, your boss), or say 'I decide myself.' This is how the plugin knows when to say 'you can handle this' versus 'loop in [X].' (This feeds every skill's routing logic — /use-case-triage, /vendor-ai-review, and /reg-gap-analysis all check the escalation matrix before telling you to hand something up.)"
 
 Also ask:
-
 - Has anything been escalated to the board or C-suite over AI in the last year?
 
 **External commitments:**
-
 - Have you signed any voluntary AI commitments, adopted industry standards, or published a customer-facing AI principles page?
 - Do you publish an AI transparency report or have public AI principles?
 
@@ -412,7 +398,6 @@ Also ask:
 **Graceful degradation — "I have nothing" path:**
 
 If they have no seed documents:
-
 > "That's okay. Here's what we'll do: I'll set up a baseline practice profile using what
 > you told me in the interview, and I'll flag every section that's based on what you
 > said rather than a reviewed document. Those are the sections to check hardest.
@@ -452,7 +437,6 @@ whether an impact assessment was done for each. Gaps are the backlog.
   or is it ad hoc?
 
 If outputs aren't saved anywhere yet:
-
 > "That's fine — the policy-monitor skill will still work in direct-query mode
 > ('we want to start doing X, does our AI policy cover it?'). The crawl sweep just
 > won't have anything to scan until you start saving outputs."
@@ -464,7 +448,7 @@ If outputs aren't saved anywhere yet:
 ```markdown
 # AI Governance Practice Profile
 
-_Written by the cold-start interview on [DATE]. Edit this file directly._
+*Written by the cold-start interview on [DATE]. Edit this file directly.*
 
 ---
 
@@ -493,14 +477,14 @@ reports — or none]
 
 ## Use case registry
 
-_Extracted from interview on [DATE]. Add new use cases as they arise._
+*Extracted from interview on [DATE]. Add new use cases as they arise.*
 
-| Use case                                   | Approved    | Conditions / Requirements                                                          | Never — reason                       |
-| ------------------------------------------ | ----------- | ---------------------------------------------------------------------------------- | ------------------------------------ |
-| [e.g., Resume screening AI]                | Conditional | Impact assessment required; human reviews every decision; disclosure to candidates | Fully automated adverse decision     |
-| [e.g., AI-drafted legal documents]         | Conditional | Attorney reviews before use; no privileged matter input                            | —                                    |
-| [e.g., Emotion/sentiment detection for HR] | Never       | —                                                                                  | Company policy; high litigation risk |
-| [add rows from interview]                  |             |                                                                                    |                                      |
+| Use case | Approved | Conditions / Requirements | Never — reason |
+|---|---|---|---|
+| [e.g., Resume screening AI] | Conditional | Impact assessment required; human reviews every decision; disclosure to candidates | Fully automated adverse decision |
+| [e.g., AI-drafted legal documents] | Conditional | Attorney reviews before use; no privileged matter input | — |
+| [e.g., Emotion/sentiment detection for HR] | Never | — | Company policy; high litigation risk |
+| [add rows from interview] | | | |
 
 ### Red lines
 
@@ -512,11 +496,11 @@ The following are automatic nos, regardless of framing:
 
 ### Governance tiers
 
-| Risk tier | Approval path                     | Example use cases                                                   |
-| --------- | --------------------------------- | ------------------------------------------------------------------- |
-| Standard  | [team approval / department head] | Internal productivity tools, assistive drafting                     |
-| Elevated  | [Legal / privacy review required] | Customer-facing AI, HR use cases, data-heavy tools                  |
-| High      | [C-suite / board-level]           | Consequential automated decisions, biometric, new AI product launch |
+| Risk tier | Approval path | Example use cases |
+|---|---|---|
+| Standard | [team approval / department head] | Internal productivity tools, assistive drafting |
+| Elevated | [Legal / privacy review required] | Customer-facing AI, HR use cases, data-heavy tools |
+| High | [C-suite / board-level] | Consequential automated decisions, biometric, new AI product launch |
 
 ---
 
@@ -538,8 +522,8 @@ provided]
 2. [Section 2]
 3. [etc.]
 
-_Note: [If no seed doc — "Baseline structure. Update after completing first
-assessment."]_
+*Note: [If no seed doc — "Baseline structure. Update after completing first
+assessment."]*
 
 ---
 
@@ -547,14 +531,14 @@ assessment."]_
 
 ### What we require from AI vendors
 
-| Term                      | Our standard                                             | Acceptable fallback                 | Never                                 |
-| ------------------------- | -------------------------------------------------------- | ----------------------------------- | ------------------------------------- |
-| Data use                  | [e.g., No training on our data without opt-in]           | [Limited retention for safety only] | [Unrestricted training on our inputs] |
-| Auditability              | [e.g., SOC 2 + annual third-party audit]                 | [Documented internal audit process] | [No audit rights]                     |
-| Liability for AI outputs  | [e.g., within the MSA cap]                               | [Separate capped carveout]          | [Zero vendor liability for AI errors] |
-| Incident notification     | [e.g., 72 hours for AI system failures affecting us]     |                                     |                                       |
-| Human review rights       | [e.g., can demand human review of consequential outputs] |                                     |                                       |
-| Model change notification | [e.g., 30 days notice for material model changes]        |                                     |                                       |
+| Term | Our standard | Acceptable fallback | Never |
+|---|---|---|---|
+| Data use | [e.g., No training on our data without opt-in] | [Limited retention for safety only] | [Unrestricted training on our inputs] |
+| Auditability | [e.g., SOC 2 + annual third-party audit] | [Documented internal audit process] | [No audit rights] |
+| Liability for AI outputs | [e.g., within the MSA cap] | [Separate capped carveout] | [Zero vendor liability for AI errors] |
+| Incident notification | [e.g., 72 hours for AI system failures affecting us] | | |
+| Human review rights | [e.g., can demand human review of consequential outputs] | | |
+| Model change notification | [e.g., 30 days notice for material model changes] | | |
 
 ### The one thing
 
@@ -564,8 +548,8 @@ assessment."]_
 
 ## AI policy commitments
 
-_Extracted from [policy name / URL] on [date]. If the policy changes, re-run setup
-or edit this section._
+*Extracted from [policy name / URL] on [date]. If the policy changes, re-run setup
+or edit this section.*
 
 **Prohibited uses stated:** [list]
 **Required safeguards stated:** [list]
@@ -582,30 +566,30 @@ to customers, employees, or affected parties]
 **Vendor relationship owner:** [who manages AI vendor contracts]
 **AI risk owner:** [CISO / CPO / GC / dedicated role]
 
-| Issue                        | Handle at            | Escalate to            | When                                                                |
-| ---------------------------- | -------------------- | ---------------------- | ------------------------------------------------------------------- |
-| New use case — standard tier | [team / department]  | [you]                  | Ambiguous risk tier                                                 |
-| New use case — elevated tier | [you + legal review] | [GC]                   | Outside approved categories                                         |
-| New use case — high tier     | [you + GC]           | [C-suite / board]      | New consequential AI product, biometric, automated adverse decision |
-| Vendor AI incident           | [you + security]     | [GC + C-suite]         | Data exposure, model failure affecting customers                    |
-| Regulator inquiry            | —                    | [GC + you immediately] | Always                                                              |
-| Employee AI misuse           | [HR + you]           | [GC]                   | Policy violation with legal exposure                                |
+| Issue | Handle at | Escalate to | When |
+|---|---|---|---|
+| New use case — standard tier | [team / department] | [you] | Ambiguous risk tier |
+| New use case — elevated tier | [you + legal review] | [GC] | Outside approved categories |
+| New use case — high tier | [you + GC] | [C-suite / board] | New consequential AI product, biometric, automated adverse decision |
+| Vendor AI incident | [you + security] | [GC + C-suite] | Data exposure, model failure affecting customers |
+| Regulator inquiry | — | [GC + you immediately] | Always |
+| Employee AI misuse | [HR + you] | [GC] | Policy violation with legal exposure |
 
 ---
 
 ## Seed documents
 
-| Doc                         | Location    | Date reviewed | Notes                               |
-| --------------------------- | ----------- | ------------- | ----------------------------------- |
-| AI / acceptable use policy  | [path/URL]  | [date]        | [version or "none — baseline used"] |
-| Reference impact assessment | [path/link] | [date]        | "[feature/use case it was for]"     |
-| Key vendor AI agreement     | [path/link] | [date]        | "[vendor name]"                     |
-| Model inventory             | [path/link] | [date]        | "[N systems as of date — or none]"  |
-| Allowlist / blocklist       | [path/link] | [date]        |                                     |
+| Doc | Location | Date reviewed | Notes |
+|---|---|---|---|
+| AI / acceptable use policy | [path/URL] | [date] | [version or "none — baseline used"] |
+| Reference impact assessment | [path/link] | [date] | "[feature/use case it was for]" |
+| Key vendor AI agreement | [path/link] | [date] | "[vendor name]" |
+| Model inventory | [path/link] | [date] | "[N systems as of date — or none]" |
+| Allowlist / blocklist | [path/link] | [date] | |
 
 ---
 
-_Re-run: `/ai-governance-legal:cold-start-interview --redo`_
+*Re-run: `/ai-governance-legal:cold-start-interview --redo`*
 ```
 
 ## After writing
@@ -627,6 +611,7 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Triage one real use case from your backlog — it's the fastest way to feel what the registry gives you. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
+
 
 1. **Show the summary.** "Here's what I heard. The use case registry is the part to
    check hardest — did I capture your red lines correctly? Those drive the triage
@@ -692,8 +677,8 @@ After writing the practice profile, close with this note:
 - **Don't assume any specific regime applies.** Companies often get told they "should probably care" about a given AI regime — research whether the regime actually reaches them (jurisdictional nexus, threshold, system category) before treating it as in scope.
 - **Don't write a use case registry from generic positions.** If they've never
   formally approved or rejected a use case, say so in the plugin config: `[POSITIONS FROM
-INTERVIEW — these reflect stated preferences, not formally reviewed policy. Treat
-as starting points.]`
+  INTERVIEW — these reflect stated preferences, not formally reviewed policy. Treat
+  as starting points.]`
 - **Don't skip the "I have nothing" path.** Some of the best-run teams haven't
   documented anything yet. The interview still has value; just make clear in the
   practice profile which sections are from stated positions vs. reviewed documents.

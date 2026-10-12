@@ -5,7 +5,7 @@ description: >
   subjects weighted by weakness, daily session schedule, adaptive to session
   history in study-plan.yaml. Use when the user says "build a study plan",
   "plan my bar prep", "schedule my studying", or "how should I study for [X]".
-argument-hint: '[--build | --update | --status | --cram]'
+argument-hint: "[--build | --update | --status | --cram]"
 ---
 
 # /study-plan
@@ -40,7 +40,6 @@ A plan is opinion, not doctrine. The skill states clearly what's an estimate:
 ## Load context
 
 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`:
-
 - Bar jurisdiction, exam format, bar date
 - Current classes (for non-bar use)
 - Weak subjects (MBE, essay)
@@ -83,7 +82,6 @@ For (3) semester: ask for the term-end date as the anchor.
   Do not skip this step even if the practice profile's target hours number was already captured at cold-start. The profile captures what the student said; the life-context check captures whether it's sustainable. If the check produces a lower number, use the lower number for the plan and note the adjustment in the `confidence_flags` block.
 
   If the student declines to share life context ("just build it"), respect that — but add a `confidence_flags` entry: "Life-context check declined; plan assumes [N] hours/week is sustainable. Revisit at end of week 2 if adherence is below [X]%."
-
 - **Preferred study methods:** multi-select. MBE practice / essays / flashcards / outlining / drilling / re-reading. Weight the schedule toward the methods they say they'll actually do.
 - **Days off per week:** rest days matter. Plans that schedule 7/7 days fail in week 3.
 
@@ -113,7 +111,6 @@ If the student's prep course is `self` or `N/A`, skip this step — there's noth
 Calculate weeks-to-exam from today's date. Then:
 
 **Normal mode (4+ weeks out):**
-
 - Split weeks into phases:
   - **Learning phase** (first ~60% of time): one subject per ~3-5 days, mixing outlining/reading with flashcards and a few MBE/essay questions on fresh material.
   - **Drilling phase** (next ~30%): more MBE volume, more essay practice, simulated conditions, all subjects in rotation.
@@ -122,7 +119,6 @@ Calculate weeks-to-exam from today's date. Then:
 - Schedule day-by-day: which subject, which method, how long. Leave slack for the student's actual life.
 
 **Cram mode (< 4 weeks out):**
-
 - Flag it: "You're less than four weeks out. This is cram mode — the plan prioritizes high-yield topics over full coverage. You will leave gaps. That's the tradeoff at this point."
 - 80/20 prioritization: the MBE subjects that historically appear most (Civ Pro, Evidence, Con Law, Contracts) get the lion's share. Narrower subjects get minimum viable coverage.
 - Daily schedule: MBE blocks every day (volume matters now), essay practice every other day, one simulated exam per week.
@@ -133,16 +129,16 @@ Calculate weeks-to-exam from today's date. Then:
 Write to `~/.claude/plugins/config/claude-for-legal/law-student/study-plan.yaml`:
 
 ```yaml
-plan_type: bar # or law-school-exam or semester
+plan_type: bar  # or law-school-exam or semester
 exam_date: 2026-07-28
 jurisdiction: CA
-exam_format: state-specific # or NextGen / UBE
+exam_format: state-specific  # or NextGen / UBE
 created: 2026-05-08
 last_updated: 2026-05-08
 weeks_to_exam: 12
 hours_per_week: 25
 days_per_week: 6
-mode: normal # or cram
+mode: normal  # or cram
 phases:
   - name: learning
     start: 2026-05-08
@@ -158,7 +154,7 @@ phases:
     focus: weak-subtopic review, full practice exams
 subjects:
   evidence:
-    priority: high # weak
+    priority: high  # weak
     weekly_hours: 5
     methods: [mbe, flashcards, essay]
   con-law:
@@ -187,7 +183,7 @@ schedule:
         method: essay
         duration_min: 60
   # etc.
-session_history: [] # appended by bar-prep, flashcards, drill, irac as sessions complete
+session_history: []  # appended by bar-prep, flashcards, drill, irac as sessions complete
 ```
 
 ### Step 5: Confirm with the student
@@ -225,7 +221,6 @@ session_history:
 ```
 
 On the next `/law-student:study-plan --update` run (or when any skill detects the plan is stale):
-
 - Subjects with consistently low scores get promoted in `priority` and `weekly_hours`.
 - Weak subtopics within a subject get flagged for the next scheduled session on that subject.
 - If the student is falling behind (scheduled sessions not appearing in history), adjust: either compress coverage or note the gap and ask.

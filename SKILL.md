@@ -1,6 +1,6 @@
 ---
 name: website-builder-setup
-description: 'Install the full AI website builder stack — UI/UX Pro Max, Framer Motion animations, and 21st.dev components. One skill, three tools, zero coding experience needed.'
+description: "Install the full AI website builder stack — UI/UX Pro Max, Framer Motion animations, and 21st.dev components. One skill, three tools, zero coding experience needed."
 ---
 
 # Website Builder Setup
@@ -9,11 +9,11 @@ This skill walks you through installing everything you need to build professiona
 
 ## What Gets Installed
 
-| Tool               | What it does                                                                                                             |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| **UI/UX Pro Max**  | Gives Claude access to 50+ design styles, 161 color palettes, 57 font pairings. Your sites look designed, not generated. |
-| **Framer Motion**  | Adds smooth animations — page transitions, hover effects, scroll reveals. Makes sites feel alive.                        |
-| **21st.dev Magic** | A library of 100+ polished React components Claude can pull from. Production-quality building blocks.                    |
+| Tool | What it does |
+|------|-------------|
+| **UI/UX Pro Max** | Gives Claude access to 50+ design styles, 161 color palettes, 57 font pairings. Your sites look designed, not generated. |
+| **Framer Motion** | Adds smooth animations — page transitions, hover effects, scroll reveals. Makes sites feel alive. |
+| **21st.dev Magic** | A library of 100+ polished React components Claude can pull from. Production-quality building blocks. |
 
 ## Workflow
 
@@ -26,7 +26,6 @@ When this skill is triggered, walk the user through each step one at a time. Be 
 > Before we start, let me make sure you have what we need.
 
 Run this silently:
-
 ```bash
 node --version 2>&1 && npm --version 2>&1
 ```
@@ -49,13 +48,11 @@ Stop here if Node is missing.
 > Installing now...
 
 Run:
-
 ```bash
 npm install -g uipro-cli 2>&1
 ```
 
 Then:
-
 ```bash
 uipro init --ai claude 2>&1
 ```
@@ -74,7 +71,6 @@ uipro init --ai claude 2>&1
 > Installing now...
 
 Run:
-
 ```bash
 npm install framer-motion 2>&1
 ```
@@ -128,19 +124,17 @@ After writing the config:
 > - **21st.dev Magic** — 100+ production-ready components
 >
 > **To build your first website, just tell me:**
->
 > - What your business does
 > - Who it's for
 > - What vibe you want (dark, minimal, bold, playful, etc.)
 >
 > I'll handle the rest. Try something like:
 >
-> _"Build me a landing page for my consulting business targeting small business owners. Dark theme, modern, with animations."_
+> *"Build me a landing page for my consulting business targeting small business owners. Dark theme, modern, with animations."*
 >
 > **Important:** Restart Claude Code first so 21st.dev loads in. Then let's build something.
 
 ## Rules
-
 - Walk through each step ONE AT A TIME
 - Never dump all instructions at once
 - If any install fails, don't stop — acknowledge, give manual command, keep moving

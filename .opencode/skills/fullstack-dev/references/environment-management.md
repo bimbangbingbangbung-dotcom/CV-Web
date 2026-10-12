@@ -45,13 +45,11 @@ const ALLOWED_ORIGINS = {
   production: ['https://example.com', 'https://www.example.com'],
 };
 
-app.use(
-  cors({
-    origin: ALLOWED_ORIGINS[process.env.NODE_ENV || 'development'],
-    credentials: true, // needed for cookies (auth)
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  }),
-);
+app.use(cors({
+  origin: ALLOWED_ORIGINS[process.env.NODE_ENV || 'development'],
+  credentials: true,  // needed for cookies (auth)
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+}));
 ```
 
 ---
@@ -63,7 +61,6 @@ app.use(
 **Cause:** CORS is a browser security feature. Postman/curl skip it.
 
 **Fix:**
-
 1. Backend must return `Access-Control-Allow-Origin: https://your-frontend.com`
 2. For cookies/auth: `credentials: true` on both sides
 3. Check that preflight `OPTIONS` request returns correct headers

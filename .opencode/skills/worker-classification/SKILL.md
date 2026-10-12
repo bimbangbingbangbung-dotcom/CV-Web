@@ -74,7 +74,7 @@ Output exactly this block and wait for a response:
 
 > **Out of scope — existing arrangement.**
 >
-> This skill is designed to analyze a worker engagement _before it starts_, so the classification choice informs how to structure the contract and operations. You've described an arrangement that already exists. Analyzing an existing engagement retroactively is a different exercise: reclassification risk assessment coupled with remediation planning — back-pay exposure, payroll-tax back-exposure, penalty exposure, benefits exposure, IRS § 530 relief analysis, and prospective restructuring. That work should be privileged, led by an attorney, and likely coupled with outside-counsel review given the dollar and enforcement exposure.
+> This skill is designed to analyze a worker engagement *before it starts*, so the classification choice informs how to structure the contract and operations. You've described an arrangement that already exists. Analyzing an existing engagement retroactively is a different exercise: reclassification risk assessment coupled with remediation planning — back-pay exposure, payroll-tax back-exposure, penalty exposure, benefits exposure, IRS § 530 relief analysis, and prospective restructuring. That work should be privileged, led by an attorney, and likely coupled with outside-counsel review given the dollar and enforcement exposure.
 >
 > Recommended next step: escalate per your config's escalation table (for retroactive classification, this typically routes to GC + outside employment counsel). I've flagged this for escalation routing.
 >
@@ -127,7 +127,6 @@ understand what the question is testing.
 > complete the picture, the more accurate the analysis:
 >
 > **The work**
->
 > - What will this person actually do day-to-day?
 > - Is this work part of your company's core business, or peripheral to it?
 >   (e.g., a software engineer at a software company = core; an IT
@@ -137,7 +136,6 @@ understand what the question is testing.
 >   doesn't?
 >
 > **Control**
->
 > - Who sets their hours and schedule — them or you?
 > - Where will they work — your office, their location, or either?
 > - Will you direct how they do the work (methods, process, sequence), or
@@ -145,7 +143,6 @@ understand what the question is testing.
 > - Will they supervise any of your employees?
 >
 > **Economics**
->
 > - How will they be paid — hourly, daily, or fixed project fee?
 > - Will you provide equipment, tools, or software, or do they use their own?
 > - Do they work for other companies, or will this be exclusive?
@@ -154,7 +151,6 @@ understand what the question is testing.
 > - Do they have their own business entity (LLC, S-corp, sole proprietor)?
 >
 > **The arrangement**
->
 > - How do you want to structure this — direct contractor, staffing agency
 >   temp, or vendor/SOW (company-to-company)?
 > - If staffing agency: who pays the worker — the agency or you? Who controls
@@ -164,14 +160,12 @@ understand what the question is testing.
 > - Will they work alongside your employees doing similar work?
 >
 > **Purpose(s) of the classification**
->
 > - What legal purposes does the classification need to serve — federal
 >   payroll tax, FLSA wage/hour, state wage/hour, unemployment insurance,
 >   workers' compensation, benefits eligibility? Different purposes are often
 >   governed by different tests, and the answers can diverge.
 >
 > **Jurisdiction**
->
 > - Where will this person physically perform the work?
 
 Wait for responses before proceeding. If the attorney can't answer certain
@@ -207,7 +201,7 @@ For each test identified in Step 2, apply it to the intake facts. Score each
 factor or prong explicitly — do not summarize. The attorney needs to see which
 factors are clean and which are problems.
 
-Use a structure like the one below, but populate the _factors_ from the
+Use a structure like the one below, but populate the *factors* from the
 researched test, not from this file:
 
 ```
@@ -285,7 +279,6 @@ Gaps — where the arrangement doesn't match the intended structure:
 
 Escalate per `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` if any of the following, or any team-specific
 triggers recorded in that config:
-
 - The jurisdiction uses a strict test and the proposed work is core to the
   company's business — do not proceed without counsel review.
 - Prior misclassification settlement or audit noted in the config — heightened
@@ -304,7 +297,6 @@ triggers recorded in that config:
 [WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]
 
 ## Worker Classification Analysis
-
 **Proposed arrangement:** [what they described]
 **Jurisdiction:** [state/country]
 **Purpose(s):** [federal tax / state wage-hour / UI / WC / benefits]
@@ -330,7 +322,6 @@ cited sources.]
 ### Test results
 
 #### [Test name — per research]
-
 Purpose: [...] | Source: [...] | Currency: [...]
 [Scored table from Step 3]
 **Result:** [Employee-leaning / IC-leaning / Fails prong X / Mixed]
@@ -405,3 +396,4 @@ Do not produce a final "IC viable" / "use this classification" output past this 
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
+

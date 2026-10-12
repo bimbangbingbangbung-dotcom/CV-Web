@@ -4,7 +4,7 @@ description: >
   Socratic drilling — it asks, you answer, it pushes back. Does NOT give you
   the answer until you've earned it. Use when the user says "drill me on",
   "quiz me", "socratic", "test me on [subject]", or wants to study actively.
-argument-hint: '[subject or topic]'
+argument-hint: "[subject or topic]"
 ---
 
 # /socratic-drill
@@ -74,7 +74,7 @@ Do not volunteer the correction from your own knowledge. Do not cite the caseboo
 
 ### Step 4: Only after they get there
 
-When the student has the right answer _and_ the right reasoning — then confirm. Briefly. Then next question.
+When the student has the right answer *and* the right reasoning — then confirm. Briefly. Then next question.
 
 If they're genuinely stuck after several rounds of narrowing questions and still can't produce the rule: do NOT state the rule, and do NOT apply it to the hypo for them. Say: "You're stuck on a foundational rule. Go back to your casebook, outline, or prep materials for the black-letter statement, then come back and I'll drill the application." End the drill on that topic. Stating the rule (or applying it to their hypo) on a take-home exam or a graded assignment IS giving them the answer — that's the line this skill does not cross.
 

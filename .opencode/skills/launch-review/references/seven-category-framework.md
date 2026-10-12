@@ -5,7 +5,7 @@ product-legal practice. Each category has a key question and an auto-skip
 condition.
 
 The categories are stable framing concepts. What counts as "Needs work" vs.
-"Blocker" _within_ a category depends on the applicable jurisdictions, sector
+"Blocker" *within* a category depends on the applicable jurisdictions, sector
 regimes, and the company's own calibration in `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md`. Research the
 regulatory regimes applicable to the product's sector, audience, and
 jurisdictions before concluding that a specific fact pattern is or isn't a
@@ -23,7 +23,6 @@ documentation.
 invisible to users.
 
 **Common findings:**
-
 - New feature contradicts a ToS restriction
 - SLA implications of a new dependency
 - Feature marketed as "included" moving to a paid tier
@@ -66,7 +65,6 @@ uploads displayed publicly).
 **Auto-skip if:** No new dependencies, no content generation, no user uploads.
 
 **Common findings:**
-
 - Copyleft license in a new dependency
 - Training data provenance unclear
 - User-generated content without a notice-and-takedown process — research the
@@ -82,7 +80,6 @@ flows, is the third party's failure our problem (uptime, security).
 **Auto-skip if:** No new external parties.
 
 **Common findings:**
-
 - New vendor without a DPA
 - Integration partner with different data practices
 - API dependency without SLA
@@ -103,7 +100,6 @@ jurisdictions change frequently.
 product — nothing new in regulatory scope.
 
 **Common findings:**
-
 - Expansion into a regulated sector without the supporting infrastructure
   (contracts, controls, disclosures) the regime requires
 - Feature that could be used by a regulated audience (e.g., children) without
@@ -133,7 +129,6 @@ rules are evolving and vary substantially by region and sector.
 **Auto-skip if:** No AI component detected.
 
 **Common findings:**
-
 - Use case not in the AI registry
 - Vendor AI terms permit training on inputs
 - Automated decision-making without a human-in-the-loop design where one may

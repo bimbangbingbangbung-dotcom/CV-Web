@@ -6,14 +6,14 @@ description: >
   with the fair-use and perjury gates, when an incoming takedown needs triage
   into comply / counter / engage / ignore options, or when drafting a
   §512(g)(3) counter-notice with the consent-to-federal-jurisdiction gate.
-argument-hint: '<--send | --respond | --counter> [context or path to incoming notice]'
+argument-hint: "<--send | --respond | --counter> [context or path to incoming notice]"
 ---
 
 # /takedown
 
 Three modes. Pick one:
 
-- `/ip-legal:takedown --send` — draft a §512(c)(3) takedown notice. Fair-use gate (_Lenz_) + loud perjury / §512(f) gate before delivery.
+- `/ip-legal:takedown --send` — draft a §512(c)(3) takedown notice. Fair-use gate (*Lenz*) + loud perjury / §512(f) gate before delivery.
 - `/ip-legal:takedown --respond` — triage a takedown someone sent you. Options: comply / counter / engage / ignore.
 - `/ip-legal:takedown --counter` — draft a §512(g)(3) counter-notice. Loud gate for the federal-jurisdiction admission and the perjury statement.
 
@@ -24,7 +24,7 @@ Three modes. Pick one:
 2. **Check matter workspaces.** Per `## Matter workspaces`: if `Enabled` is `✗`, skip. If enabled and there is no active matter, ask: "Which matter is this for? Run `/ip-legal:matter-workspace switch <slug>` or say `practice-level`."
 
 3. **Dispatch on `$ARGUMENTS`:**
-   - `--send` → run send mode (below). Walk identify-the-work, identify-the-infringing-material, fair-use gate (_Lenz_), good-faith belief, accuracy/authority, draft the §512(c)(3) notice, run the loud gate, write output.
+   - `--send` → run send mode (below). Walk identify-the-work, identify-the-infringing-material, fair-use gate (*Lenz*), good-faith belief, accuracy/authority, draft the §512(c)(3) notice, run the loud gate, write output.
    - `--respond` → run respond mode (below). Read the incoming notice, assess (license, fair use, defects, host §512(g) compliance, sender credibility), present the four options, recommend, write the triage memo.
    - `--counter` → run counter mode (below). Confirm the predicate (taken down in response to a §512 notice, good-faith belief of mistake/misidentification, ready for federal-jurisdiction admission, attorney in the loop), draft the §512(g)(3) counter-notice, run the loud gate, write output.
    - No flag → ask once: "Are we sending a DMCA takedown, triaging one we received, or drafting a counter-notice?"
@@ -102,11 +102,11 @@ Ownership and authority are the first things §512(f) cases look at. Get them cl
 
 ### Step 3: Fair-use gate
 
-Under _Lenz v. Universal Music Corp._, 801 F.3d 1126 (9th Cir. 2015), a copyright holder must consider fair use before sending a takedown. This is not a judgment about fair use — it is a consideration step that the sender must take and can prove they took.
+Under *Lenz v. Universal Music Corp.*, 801 F.3d 1126 (9th Cir. 2015), a copyright holder must consider fair use before sending a takedown. This is not a judgment about fair use — it is a consideration step that the sender must take and can prove they took.
 
 Ask:
 
-> Before we draft the notice, walk through fair use. Under _Lenz_, you have to consider it before sending — even if the conclusion is "not fair use." The four factors:
+> Before we draft the notice, walk through fair use. Under *Lenz*, you have to consider it before sending — even if the conclusion is "not fair use." The four factors:
 >
 > 1. **Purpose and character** — commercial? transformative? criticism, comment, news reporting, teaching, scholarship, research?
 > 2. **Nature of the copyrighted work** — factual or creative? published or not?
@@ -247,7 +247,7 @@ Extract:
 ### Step 2: Assess
 
 - **Do we have a license?** Negotiated, implied, Creative Commons, prior settlement, assignment — anything that authorizes the use.
-- **Is it fair use?** Walk the _Lenz_ four factors. Be honest; this is for us, not the response.
+- **Is it fair use?** Walk the *Lenz* four factors. Be honest; this is for us, not the response.
 - **Is the notice defective?** Missing any of the §512(c)(3)(A) elements, lacking the perjury statement, signed by someone without apparent authority? Defective notices are not properly compliant; the host may still act on them but the sender's §512(f) exposure rises and our leverage rises.
 - **Did the host comply properly with §512(g)?** Were we given notice and an opportunity to counter? If the host acted without giving us the chance, that is a separate issue with the host (not the sender).
 - **Is the sender a troll?** Repeat pattern of overbroad takedowns on this platform?
@@ -257,25 +257,21 @@ Extract:
 Present 4 options with tradeoffs:
 
 **A — Comply (let the takedown stand)**
-
 - When: they're right, or the fight isn't worth it
 - Tradeoff: content stays down; may affect SEO, accounts with strikes policies, livelihood for creators
 - Next step: log the event, confirm no counter-notice deadline issues, move on
 
 **B — Send a counter-notice** (§512(g)(3))
-
 - When: we have a good-faith belief the material was misidentified or removed by mistake — often applies where the use is licensed, fair use, or the sender doesn't own the work
 - Tradeoff: sworn under penalty of perjury, consents to federal court jurisdiction in the sender's district (or our own if outside the US and we designate), puts the decision in the sender's hands for 10–14 business days — if they sue, content stays down; if they don't, content is restored
 - Next step: `/ip-legal:takedown --counter`
 
 **C — Engage the sender directly**
-
 - When: there's room for a business resolution (license, credit, takedown of a narrower portion)
 - Tradeoff: the content stays down during the conversation; settlement-communication hygiene matters (FRE 408 or equivalent; protection from substance and context, not labeling)
 - Next step: outreach letter to the sender; do not send the counter-notice while discussions are live
 
 **D — Ignore and let it stand; raise it elsewhere**
-
 - When: the harm is small, we don't want the federal-jurisdiction admission, and we'd rather deal with the sender separately
 - Tradeoff: content stays down; if the takedown itself was bad-faith, we may have §512(f) to assert on our own schedule — but that's its own fight
 
@@ -318,11 +314,8 @@ Output: `<matter-folder>/takedown/inbound/<slug>/triage.md`.
 ## Options
 
 ### A. Comply
-
 ### B. Counter-notice (§512(g)(3))
-
 ### C. Engage sender
-
 ### D. Ignore
 
 **Recommendation:** [A/B/C/D] — [two sentences why] — `[SME VERIFY: counsel to confirm before executing]`

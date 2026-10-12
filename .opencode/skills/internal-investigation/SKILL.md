@@ -77,7 +77,6 @@ Ask the following in a single block:
 > To open the investigation log I need a few things:
 >
 > **The matter**
->
 > - What is the allegation or concern in plain terms?
 > - Who is the complainant (or what triggered this — complaint, tip, audit,
 >   manager observation)?
@@ -87,7 +86,6 @@ Ask the following in a single block:
 >   If no: flag privilege risk before proceeding.)
 >
 > **Investigation type** (helps me suggest the right sources checklist)
->
 > - HR: harassment / discrimination / retaliation
 > - Financial misconduct: expense fraud / procurement irregularities / embezzlement
 > - Executive misconduct: COI / undisclosed relationships / governance failures
@@ -96,7 +94,6 @@ Ask the following in a single block:
 >
 > **Representation and employer status** (surfaces parallel legal frameworks
 > that change interview procedure)
->
 > - Is the respondent, the complainant, or any anticipated witness represented
 >   by a union or covered by a collective bargaining agreement? (If yes, flag
 >   for Weingarten research — representational rights at investigatory
@@ -121,21 +118,21 @@ Create the following files:
 
 ```yaml
 # [WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]
-matter: '[matter name]'
-matter_slug: '[slug]'
-opened: '[ISO date]'
+matter: "[matter name]"
+matter_slug: "[slug]"
+opened: "[ISO date]"
 attorney_directed: [true/false]
-allegation: '[plain-language summary]'
-complainant: '[name/role or anonymous]'
-respondent: '[name/role]'
-conduct_timeframe: '[approximate dates]'
-investigation_type: '[HR/financial/executive/whistleblower/other]'
+allegation: "[plain-language summary]"
+complainant: "[name/role or anonymous]"
+respondent: "[name/role]"
+conduct_timeframe: "[approximate dates]"
+investigation_type: "[HR/financial/executive/whistleblower/other]"
 status: open
-last_updated: '[ISO date]'
+last_updated: "[ISO date]"
 
 issues:
   - "[Issue 1 — derived from allegation, e.g. 'alleged hostile work environment']"
-  - '[Issue 2 if applicable]'
+  - "[Issue 2 if applicable]"
 
 entries: []
 
@@ -150,10 +147,10 @@ Generated from the investigation type. See sources checklist templates below.
 
 ```yaml
 # [WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]
-matter: '[matter name]'
+matter: "[matter name]"
 total_reviewed: 0
 total_surfaced: 0
-last_updated: '[ISO date]'
+last_updated: "[ISO date]"
 documents: []
 ```
 
@@ -165,208 +162,204 @@ are not applicable (I'll mark them N/A) or if there are additional sources
 specific to this situation."
 
 **HR investigation sources (harassment/discrimination/retaliation):**
-
 ```yaml
 sources:
   - id: 1
-    source: 'Complainant interview'
+    source: "Complainant interview"
     status: open
-    notes: ''
+    notes: ""
   - id: 2
-    source: 'Respondent interview'
+    source: "Respondent interview"
     status: open
-    notes: ''
+    notes: ""
   - id: 3
-    source: 'Witness interviews — identify from complainant and respondent accounts'
+    source: "Witness interviews — identify from complainant and respondent accounts"
     status: open
-    notes: ''
+    notes: ""
   - id: 4
-    source: 'Email/messaging review — parties, relevant date range'
+    source: "Email/messaging review — parties, relevant date range"
     status: open
-    notes: ''
+    notes: ""
   - id: 5
     source: "HR records — respondent's performance history, prior complaints,
-      prior discipline"
+             prior discipline"
     status: open
-    notes: ''
+    notes: ""
   - id: 6
-    source: 'Prior complaints — any prior complaints against respondent in
-      HR system'
+    source: "Prior complaints — any prior complaints against respondent in
+             HR system"
     status: open
-    notes: ''
+    notes: ""
   - id: 7
-    source: 'Comparator data — how were similar situations handled'
+    source: "Comparator data — how were similar situations handled"
     status: open
-    notes: ''
+    notes: ""
   - id: 8
-    source: 'Relevant policies — harassment, code of conduct, reporting
-      procedures (version in effect at time of alleged conduct)'
+    source: "Relevant policies — harassment, code of conduct, reporting
+             procedures (version in effect at time of alleged conduct)"
     status: open
-    notes: ''
+    notes: ""
   - id: 9
-    source: 'Org chart and reporting relationships at time of alleged conduct'
+    source: "Org chart and reporting relationships at time of alleged conduct"
     status: open
-    notes: ''
+    notes: ""
   - id: 10
-    source: 'Calendar records — any meetings or events mentioned in accounts'
+    source: "Calendar records — any meetings or events mentioned in accounts"
     status: open
-    notes: ''
+    notes: ""
   - id: 11
-    source: 'Upjohn warning documentation — confirm interviews were preceded
-      by Upjohn warnings and documented'
+    source: "Upjohn warning documentation — confirm interviews were preceded
+             by Upjohn warnings and documented"
     status: open
-    notes: ''
+    notes: ""
 ```
 
 **Financial misconduct sources:**
-
 ```yaml
 sources:
   - id: 1
-    source: 'Expense reports — subject, relevant period'
+    source: "Expense reports — subject, relevant period"
     status: open
-    notes: ''
+    notes: ""
   - id: 2
-    source: 'Approval records — who approved the expenses or transactions'
+    source: "Approval records — who approved the expenses or transactions"
     status: open
-    notes: ''
+    notes: ""
   - id: 3
-    source: 'Vendor/contractor records — contracts, invoices, payment records'
+    source: "Vendor/contractor records — contracts, invoices, payment records"
     status: open
-    notes: ''
+    notes: ""
   - id: 4
-    source: 'Financial system records — AP, GL entries for relevant accounts'
+    source: "Financial system records — AP, GL entries for relevant accounts"
     status: open
-    notes: ''
+    notes: ""
   - id: 5
-    source: 'Email/messaging review — subject, approvers, counterparties'
+    source: "Email/messaging review — subject, approvers, counterparties"
     status: open
-    notes: ''
+    notes: ""
   - id: 6
-    source: 'Subject interview'
+    source: "Subject interview"
     status: open
-    notes: ''
+    notes: ""
   - id: 7
-    source: 'Approver interviews'
+    source: "Approver interviews"
     status: open
-    notes: ''
+    notes: ""
   - id: 8
-    source: 'Counterparty/vendor interviews (if accessible)'
+    source: "Counterparty/vendor interviews (if accessible)"
     status: open
-    notes: ''
+    notes: ""
   - id: 9
-    source: 'Audit logs — system access logs for relevant accounts/systems'
+    source: "Audit logs — system access logs for relevant accounts/systems"
     status: open
-    notes: ''
+    notes: ""
   - id: 10
-    source: 'Prior audits or reviews covering the relevant period'
+    source: "Prior audits or reviews covering the relevant period"
     status: open
-    notes: ''
+    notes: ""
   - id: 11
-    source: 'Upjohn warning documentation'
+    source: "Upjohn warning documentation"
     status: open
-    notes: ''
+    notes: ""
 ```
 
 **Executive misconduct sources:**
-
 ```yaml
 sources:
   - id: 1
-    source: 'Subject interview'
+    source: "Subject interview"
     status: open
-    notes: ''
+    notes: ""
   - id: 2
-    source: 'Board/compensation committee records — relevant resolutions,
-      minutes, approvals'
+    source: "Board/compensation committee records — relevant resolutions,
+             minutes, approvals"
     status: open
-    notes: ''
+    notes: ""
   - id: 3
-    source: 'Employment agreement and any amendments'
+    source: "Employment agreement and any amendments"
     status: open
-    notes: ''
+    notes: ""
   - id: 4
-    source: 'Equity records — grants, exercises, vesting'
+    source: "Equity records — grants, exercises, vesting"
     status: open
-    notes: ''
+    notes: ""
   - id: 5
-    source: 'Expense reports and approval records'
+    source: "Expense reports and approval records"
     status: open
-    notes: ''
+    notes: ""
   - id: 6
-    source: 'Email/messaging review — subject, relevant counterparties'
+    source: "Email/messaging review — subject, relevant counterparties"
     status: open
-    notes: ''
+    notes: ""
   - id: 7
-    source: 'Conflict of interest disclosures (or absence thereof)'
+    source: "Conflict of interest disclosures (or absence thereof)"
     status: open
-    notes: ''
+    notes: ""
   - id: 8
-    source: 'Outside business activity records'
+    source: "Outside business activity records"
     status: open
-    notes: ''
+    notes: ""
   - id: 9
-    source: 'Witness interviews — direct reports, peers, board members'
+    source: "Witness interviews — direct reports, peers, board members"
     status: open
-    notes: ''
+    notes: ""
   - id: 10
-    source: 'Prior complaints or concerns raised about subject'
+    source: "Prior complaints or concerns raised about subject"
     status: open
-    notes: ''
+    notes: ""
   - id: 11
-    source: 'Upjohn warning documentation'
+    source: "Upjohn warning documentation"
     status: open
-    notes: ''
+    notes: ""
 ```
 
 **Whistleblower sources:**
-
 ```yaml
 sources:
   - id: 1
-    source: 'Complainant interview'
+    source: "Complainant interview"
     status: open
-    notes: ''
+    notes: ""
   - id: 2
-    source: 'Original complaint or tip — written form if exists'
+    source: "Original complaint or tip — written form if exists"
     status: open
-    notes: ''
+    notes: ""
   - id: 3
-    source: 'Records related to the underlying allegation (the thing
-      complainant blew the whistle on)'
+    source: "Records related to the underlying allegation (the thing
+             complainant blew the whistle on)"
     status: open
-    notes: ''
+    notes: ""
   - id: 4
-    source: 'Records related to any adverse action taken against complainant
-      after the protected activity'
+    source: "Records related to any adverse action taken against complainant
+             after the protected activity"
     status: open
-    notes: ''
+    notes: ""
   - id: 5
-    source: 'Decision-maker interviews — who made the adverse action decision'
+    source: "Decision-maker interviews — who made the adverse action decision"
     status: open
-    notes: ''
+    notes: ""
   - id: 6
-    source: 'Comparator data — treatment of similarly situated employees
-      who did not engage in protected activity'
+    source: "Comparator data — treatment of similarly situated employees
+             who did not engage in protected activity"
     status: open
-    notes: ''
+    notes: ""
   - id: 7
-    source: 'Email/messaging review — decision-makers, relevant timeframe'
+    source: "Email/messaging review — decision-makers, relevant timeframe"
     status: open
-    notes: ''
+    notes: ""
   - id: 8
-    source: 'Timing analysis — proximity of protected activity to adverse
-      action'
+    source: "Timing analysis — proximity of protected activity to adverse
+             action"
     status: open
-    notes: ''
+    notes: ""
   - id: 9
-    source: 'Respondent/decision-maker interviews'
+    source: "Respondent/decision-maker interviews"
     status: open
-    notes: ''
+    notes: ""
   - id: 10
-    source: 'Upjohn warning documentation'
+    source: "Upjohn warning documentation"
     status: open
-    notes: ''
+    notes: ""
 ```
 
 After presenting the checklist, write it to
@@ -387,7 +380,6 @@ data belongs to. If only one, proceed.
 ### Step 2 — Identify the data type
 
 Ask (if not clear from context):
-
 - Interview notes (whose interview?)
 - Document batch (emails, records, files)
 - Attorney notes or observations
@@ -401,7 +393,6 @@ set to pull slightly aggressively — it is better to surface a false positive
 than to miss a significant item.
 
 **Pull criteria:**
-
 1. Contains the name of any party to the investigation (complainant,
    respondent, witnesses named in prior log entries)
 2. Was authored or received by a party during the key conduct timeframe
@@ -421,7 +412,6 @@ than to miss a significant item.
    evidentiary gap, not a surfaced document
 
 **Disposition for every document reviewed:**
-
 - `surfaced`: meets one or more pull criteria — added to log as a log entry
 - `reviewed-nothing-significant`: reviewed, does not meet pull criteria —
   logged in documents-reviewed.yaml with one-line description only
@@ -452,18 +442,18 @@ For each surfaced item, append to `log.yaml`:
 ```yaml
 - entry_id: [auto-increment]
   entry_type: [interview / document / attorney-note / gap]
-  date_of_event: '[date the event occurred — not when logged]'
-  date_logged: '[ISO datetime]'
-  source: '[witness name/role, or document filename/description]'
+  date_of_event: "[date the event occurred — not when logged]"
+  date_logged: "[ISO datetime]"
+  source: "[witness name/role, or document filename/description]"
   source_type: [complainant / respondent / witness / document / attorney-note]
-  issues: ['[which investigation issue(s) this entry relates to]']
+  issues: ["[which investigation issue(s) this entry relates to]"]
   significance: [high / medium / background]
-  summary: '[what this entry adds to the record — 2-5 sentences]'
-  quote: '[verbatim quote if significant — otherwise empty]'
+  summary: "[what this entry adds to the record — 2-5 sentences]"
+  quote: "[verbatim quote if significant — otherwise empty]"
   contradicts_entry: [entry_id or null]
   corroborates_entry: [entry_id or null]
-  credibility_note: ''
-  pull_criterion: '[which criterion triggered — for documents]'
+  credibility_note: ""
+  pull_criterion: "[which criterion triggered — for documents]"
   privilege: attorney-work-product
 ```
 
@@ -472,8 +462,8 @@ For evidentiary gaps:
 ```yaml
 - gap_id: [auto-increment]
   description: "[what document/source should exist but hasn't been found]"
-  identified_from: '[which log entry or account raised this]'
-  source_to_obtain: '[where to get it]'
+  identified_from: "[which log entry or account raised this]"
+  source_to_obtain: "[where to get it]"
   priority: [high / medium / low]
   status: open
 ```
@@ -508,7 +498,6 @@ evidence bears on the conflict.
 
 **Coverage query** ("what do we still need" / "what are our gaps"):
 Read sources-checklist.yaml and evidentiary_gaps in log.yaml. Report:
-
 - Checklist items still open
 - Evidentiary gaps logged
 - Any accounts that reference sources not yet gathered
@@ -533,7 +522,6 @@ or "update the memo".
 
 Read the full log. Do not draft until the following are complete (warn if
 not):
-
 - At least one entry for each open issue
 - Complainant and respondent entries present
 - Sources checklist reviewed (flag any high-priority open items)
@@ -582,10 +570,9 @@ appears first.]
 ## Methodology
 
 **Interviews conducted:**
-
-| Witness                                                   | Role | Date | Notes |
-| --------------------------------------------------------- | ---- | ---- | ----- |
-| [Populated from log entries with source_type = interview] |
+| Witness | Role | Date | Notes |
+|---|---|---|---|
+[Populated from log entries with source_type = interview]
 
 **Documents reviewed:**
 [Summary of document categories reviewed, volume, date range.
@@ -600,8 +587,8 @@ Full document log is maintained separately.]
 
 ## Factual Findings
 
-_[Organized by issue — one section per allegation. Not by witness,
-not purely chronological.]_
+*[Organized by issue — one section per allegation. Not by witness,
+not purely chronological.]*
 
 ### Issue 1: [Allegation]
 
@@ -620,9 +607,9 @@ significant.]
 
 ## Credibility Assessment
 
-_[Standalone section. Address only witnesses whose credibility is
+*[Standalone section. Address only witnesses whose credibility is
 determinative — i.e., where the finding on an issue depends on which
-account is credited.]_
+account is credited.]*
 
 ### [Witness name/role]
 
@@ -645,12 +632,12 @@ Cite the version. Do not cite policies that were adopted after the conduct.]
 
 ## Conclusions
 
-| Issue     | Finding                                  | Basis          |
-| --------- | ---------------------------------------- | -------------- |
+| Issue | Finding | Basis |
+|---|---|---|
 | [Issue 1] | Sustained / Not Sustained / Inconclusive | [One sentence] |
-| [Issue 2] | ...                                      | ...            |
+| [Issue 2] | ... | ... |
 
-_Findings are based on a preponderance of the evidence standard._
+*Findings are based on a preponderance of the evidence standard.*
 
 ---
 
@@ -716,7 +703,6 @@ Ask: who is the audience and what decision or action does this summary
 support?
 
 **HR summary** (for HR decision on disciplinary action):
-
 - What happened (factual summary, no legal analysis)
 - Finding on each allegation (Sustained/Not Sustained/Inconclusive)
 - Recommended action
@@ -726,7 +712,6 @@ support?
 - Do not include entry IDs or document citations — those stay in the memo
 
 **Leadership/Board summary** (for governance decision):
-
 - The allegation and scope in one paragraph
 - Key findings
 - Business impact / exposure (high level — no specific legal analysis)
@@ -734,7 +719,6 @@ support?
 - Header: "[WORK-PRODUCT HEADER — per plugin config ## Outputs — differs by role; see `## Who's using this`]"
 
 **Outside counsel briefing** (handing off for litigation or deeper review):
-
 - Full context including legal exposure analysis
 - Open evidentiary threads
 - Credibility issues that remain contested
@@ -778,3 +762,4 @@ Do not produce an external-response draft past this gate without an explicit yes
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
+

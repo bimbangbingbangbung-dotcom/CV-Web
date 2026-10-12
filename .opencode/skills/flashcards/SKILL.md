@@ -5,7 +5,7 @@ description: >
   buckets, per-subject markdown storage, drill mode with self-assessment. Use
   when the user says "drill flashcards", "make flashcards from", "quiz me on
   cards", or wants to memorize rules.
-argument-hint: '[subject] [--generate | --drill | --review | --stats | --session <n>]'
+argument-hint: "[subject] [--generate | --drill | --review | --stats | --session <n>]"
 ---
 
 # /flashcards
@@ -80,7 +80,6 @@ session_history:
 ### `--generate` — create cards
 
 **Inputs:**
-
 - Subject (class name or topic)
 - Source (outline path, notes, or "use my existing outline from ~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md")
 - Optional: card count target (default 10-20 per session)
@@ -89,7 +88,6 @@ session_history:
 
 ```markdown
 ### Card [N]
-
 **Q:** [question — one concept, one card]
 **A:** [answer — the rule, one or two sentences]
 **Source:** [outline section, casebook page, class note date]
@@ -100,7 +98,6 @@ session_history:
 ```
 
 **Card-writing rules:**
-
 1. **One concept per card.** "Elements of negligence" becomes 4 cards, not 1.
 2. **Front is a question, not a topic.** "Negligence duty" bad. "What are the four elements of negligence?" good.
 3. **Back is a rule, not a paragraph.** If the answer needs a paragraph, split into multiple cards.
@@ -111,25 +108,23 @@ session_history:
 ### `--drill` — study session
 
 **Prioritization:**
-
 1. Cards where `next_review <= today` AND bucket != mastered
 2. New cards not yet attempted
 3. If no cards due and no new cards: ask if user wants review of mastered cards (for decay prevention)
 
 **Drill flow per card:**
-
 1. Show Q. Wait for answer.
 2. User answers (or types "skip" / "don't know")
 3. Show A.
 4. User self-assesses: `right` / `partial` / `wrong` / `don't know`
 5. Update bucket + next review per the table below:
 
-| Self-assessment | Bucket change                                               | Next review                                      |
-| --------------- | ----------------------------------------------------------- | ------------------------------------------------ |
-| right           | up one (new → learning → review → mastered)                 | +1d new, +3d learning, +7d review, +21d mastered |
-| partial         | same bucket                                                 | +1d                                              |
-| wrong           | down one (review → learning; learning → new; new stays new) | today +4h                                        |
-| don't know      | down one                                                    | today +4h                                        |
+| Self-assessment | Bucket change | Next review |
+|---|---|---|
+| right | up one (new → learning → review → mastered) | +1d new, +3d learning, +7d review, +21d mastered |
+| partial | same bucket | +1d |
+| wrong | down one (review → learning; learning → new; new stays new) | today +4h |
+| don't know | down one | today +4h |
 
 ### `--review` — browse deck
 

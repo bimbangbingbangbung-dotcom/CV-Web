@@ -44,7 +44,9 @@ function isAdmin(account: User | Admin): account is Admin {
 ```typescript
 // Tagged union pattern
 type Result<T, E = Error> =
-  { status: 'success'; data: T } | { status: 'error'; error: E } | { status: 'loading' };
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: E }
+  | { status: 'loading' };
 
 function handleResult<T>(result: Result<T>) {
   switch (result.status) {
@@ -112,15 +114,11 @@ function printValue(value: string | number | boolean) {
 
 // instanceof narrowing
 class Dog {
-  bark() {
-    console.log('woof');
-  }
+  bark() { console.log('woof'); }
 }
 
 class Cat {
-  meow() {
-    console.log('meow');
-  }
+  meow() { console.log('meow'); }
 }
 
 function makeSound(animal: Dog | Cat) {
@@ -201,7 +199,12 @@ function processValue(value: string | null) {
 
 // Assert with type predicate
 function assertIsUser(value: unknown): asserts value is User {
-  if (typeof value !== 'object' || value === null || !('type' in value) || value.type !== 'user') {
+  if (
+    typeof value !== 'object' ||
+    value === null ||
+    !('type' in value) ||
+    value.type !== 'user'
+  ) {
     throw new Error('Not a user');
   }
 }
@@ -298,14 +301,19 @@ function processInput<T>(input: T | T[]): T[] {
 }
 
 // Object key narrowing
-function getProperty<T extends object, K extends keyof T>(obj: T, key: K): T[K] {
+function getProperty<T extends object, K extends keyof T>(
+  obj: T,
+  key: K
+): T[K] {
   return obj[key];
 }
 
 // Mapped type narrowing
 type Nullable<T> = { [K in keyof T]: T[K] | null };
 
-function isComplete<T extends object>(obj: Nullable<T>): obj is T {
+function isComplete<T extends object>(
+  obj: Nullable<T>
+): obj is T {
   return Object.values(obj).every((v) => v !== null);
 }
 
@@ -316,7 +324,10 @@ type TypeMap = {
   boolean: boolean;
 };
 
-function is<K extends keyof TypeMap>(type: K, value: unknown): value is TypeMap[K] {
+function is<K extends keyof TypeMap>(
+  type: K,
+  value: unknown
+): value is TypeMap[K] {
   return typeof value === type;
 }
 
@@ -327,15 +338,15 @@ if (is('string', someValue)) {
 
 ## Quick Reference
 
-| Pattern                 | Use Case                       |
-| ----------------------- | ------------------------------ |
-| `value is Type`         | Type predicate function        |
-| `asserts condition`     | Assertion function             |
-| `asserts value is Type` | Type assertion function        |
-| Discriminated union     | Tagged union with literal type |
-| `typeof` guard          | Primitive type checking        |
-| `instanceof` guard      | Class instance checking        |
-| `in` operator           | Property existence check       |
-| `assertNever`           | Exhaustive switch checking     |
-| Branded types           | Nominal typing simulation      |
-| `NonNullable<T>`        | Remove null/undefined          |
+| Pattern | Use Case |
+|---------|----------|
+| `value is Type` | Type predicate function |
+| `asserts condition` | Assertion function |
+| `asserts value is Type` | Type assertion function |
+| Discriminated union | Tagged union with literal type |
+| `typeof` guard | Primitive type checking |
+| `instanceof` guard | Class instance checking |
+| `in` operator | Property existence check |
+| `assertNever` | Exhaustive switch checking |
+| Branded types | Nominal typing simulation |
+| `NonNullable<T>` | Remove null/undefined |

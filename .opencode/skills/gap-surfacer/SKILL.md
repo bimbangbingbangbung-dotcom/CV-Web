@@ -44,32 +44,32 @@ Lives at `~/.claude/plugins/config/claude-for-legal/regulatory-legal/gap-tracker
 ```yaml
 gaps:
   - id: GAP-001
-    requirement: '[what the reg requires]'
-    regulation: '[name + cite]'
+    requirement: "[what the reg requires]"
+    regulation: "[name + cite]"
     policy_affected: "[name or 'new policy needed']"
-    gap_type: 'partial' # none | partial | full | new-policy | watch | comment-decision
-    owner: '[name from policy index]'
-    owner_slack: '[Slack user ID or handle, if known]'
+    gap_type: "partial"  # none | partial | full | new-policy | watch | comment-decision
+    owner: "[name from policy index]"
+    owner_slack: "[Slack user ID or handle, if known]"
     opened: 2026-03-01
-    due: 2026-06-01 # reg effective date, internal deadline, or comment deadline
-    status_verified: true # false if upstream policy-diff could not confirm the rule is in force; unverified items never hit 🔴 Overdue
-    status: 'open' # open | in-progress | closed | risk-accepted
-    notified: false # set to true after assignment notification sent
-    resolution: '' # filled on close
+    due: 2026-06-01  # reg effective date, internal deadline, or comment deadline
+    status_verified: true  # false if upstream policy-diff could not confirm the rule is in force; unverified items never hit 🔴 Overdue
+    status: "open"  # open | in-progress | closed | risk-accepted
+    notified: false  # set to true after assignment notification sent
+    resolution: ""  # filled on close
 ```
 
 **Never classify a gap as Overdue on an unverified rule.** The 🔴 Overdue classification means "we missed a binding deadline." If the rule's status is unverified (policy-diff set `status_verified: false`, or the rule is >12 months old / past its applicability date with no currency confirmation), the deadline may not be binding. Use 🟡 "Review needed" and note: "If this rule is in force as published, this would be overdue by [N] days. Verify rule status before escalating." Route unverified-rule items to `watch`, not to the active overdue/due-soon buckets; the `watch` revisit cadence forces a rule-status check before the item can re-surface as a compliance gap.
 
 **`gap_type` semantics:**
 
-| Value              | Meaning                                                                                                                                                                                                                                            | Typical reminder cadence                                                                      |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `none`             | Policy already covers the requirement. Logged for audit trail only. Should be rare — if most entries are `none`, the diff is probably running against the wrong policy.                                                                            | No auto-reminder.                                                                             |
-| `partial`          | Policy addresses the topic but doesn't fully cover the new requirement. Needs an amendment.                                                                                                                                                        | 30 days before due.                                                                           |
-| `full`             | Policy contradicts or silently omits the new requirement. Needs a rewrite or new section.                                                                                                                                                          | 30 days before due.                                                                           |
-| `new-policy`       | No existing policy covers this. Policy needs to be drafted.                                                                                                                                                                                        | 30 days before due.                                                                           |
-| `watch`            | Forward-looking item — ANPR, RFI, proposed rule not yet final. No compliance obligation today; policy work waits for the final rule. `due:` is a revisit date (typically the NPRM expected date or a one-year horizon), not a compliance deadline. | No auto-reminder; re-evaluate when an NPRM drops or at the revisit date.                      |
-| `comment-decision` | Pre-rulemaking comment decision pending — ANPR or NPRM where the team is deciding whether to file a comment. `due:` is the comment deadline.                                                                                                       | 21 days before due (tighter than compliance gaps because comment-drafting windows are short). |
+| Value | Meaning | Typical reminder cadence |
+|---|---|---|
+| `none` | Policy already covers the requirement. Logged for audit trail only. Should be rare — if most entries are `none`, the diff is probably running against the wrong policy. | No auto-reminder. |
+| `partial` | Policy addresses the topic but doesn't fully cover the new requirement. Needs an amendment. | 30 days before due. |
+| `full` | Policy contradicts or silently omits the new requirement. Needs a rewrite or new section. | 30 days before due. |
+| `new-policy` | No existing policy covers this. Policy needs to be drafted. | 30 days before due. |
+| `watch` | Forward-looking item — ANPR, RFI, proposed rule not yet final. No compliance obligation today; policy work waits for the final rule. `due:` is a revisit date (typically the NPRM expected date or a one-year horizon), not a compliance deadline. | No auto-reminder; re-evaluate when an NPRM drops or at the revisit date. |
+| `comment-decision` | Pre-rulemaking comment decision pending — ANPR or NPRM where the team is deciding whether to file a comment. `due:` is the comment deadline. | 21 days before due (tighter than compliance gaps because comment-drafting windows are short). |
 
 A `watch` or `comment-decision` entry is not a compliance gap — it's a tracking artifact for pre-rule items that the watch skill and comments skill produce. Surface them in the status report in their own bucket so counsel reading at 7am can tell at a glance which items are "fix this before a regulator notices" vs. "keep an eye on this."
 
@@ -115,8 +115,8 @@ was not sent and flag for manual follow-up.
 
 ### 🔴 Overdue
 
-| ID  | Requirement | Policy | Owner | Due | Days over |
-| --- | ----------- | ------ | ----- | --- | --------- |
+| ID | Requirement | Policy | Owner | Due | Days over |
+|---|---|---|---|---|---|
 
 ### 🟠 Due in <30 days
 
@@ -132,8 +132,8 @@ was not sent and flag for manual follow-up.
 compliance gaps. Surface separately so the overdue / due-soon bands contain
 only real compliance deadlines.]
 
-| ID  | Item | Type (ANPR/NPRM/RFI) | Comment deadline | Owner |
-| --- | ---- | -------------------- | ---------------- | ----- |
+| ID | Item | Type (ANPR/NPRM/RFI) | Comment deadline | Owner |
+|---|---|---|---|---|
 
 ### In progress
 
@@ -173,7 +173,6 @@ Say nothing about config when the values are populated.
 Reminder cadence is a function of `gap_type` — compliance gaps get a 30-day heads-up, comment-decision items get 21 days (tighter because the drafting window is shorter), watch items get no auto-reminder (re-evaluate when an NPRM drops).
 
 For each gap with status "open" or "in-progress":
-
 - `partial`, `full`, `new-policy`, `none`: if due date is within 30 days and a reminder has not been sent in the last 7 days, PREVIEW a Slack DM (subject "⏰ Reminder: compliance gap due in [N] days") and wait for per-send confirm before sending.
 - `comment-decision`: if comment deadline is within 21 days and a reminder has not been sent in the last 7 days, PREVIEW a Slack DM (subject "💬 Comment-decision deadline in [N] days") and wait for per-send confirm before sending.
 - `watch`: no auto-reminder. Revisit when the tracker is reviewed or an NPRM is logged for the same regulation.

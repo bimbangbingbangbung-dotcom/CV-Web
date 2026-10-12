@@ -1,9 +1,9 @@
 ---
 name: fullstack-dev-db-schema
-description: 'Database schema design and migrations. Use when creating tables, defining ORM models, adding indexes, or designing relationships. Covers zero-downtime migrations and multi-tenancy.'
+description: "Database schema design and migrations. Use when creating tables, defining ORM models, adding indexes, or designing relationships. Covers zero-downtime migrations and multi-tenancy."
 license: MIT
 metadata:
-  version: '1.0.0'
+  version: "1.0.0"
   sources:
     - PostgreSQL official documentation
     - Use The Index, Luke (use-the-index-luke.com)
@@ -18,7 +18,6 @@ ORM-agnostic guide for relational database schema design. Covers data modeling, 
 ## Scope
 
 **USE this skill when:**
-
 - Designing a schema for a new project or feature
 - Deciding between normalization and denormalization
 - Choosing which indexes to create
@@ -28,7 +27,6 @@ ORM-agnostic guide for relational database schema design. Covers data modeling, 
 - Diagnosing slow queries caused by schema problems
 
 **NOT for:**
-
 - Choosing which database technology to use (→ `technology-selection`)
 - PostgreSQL-specific query tuning (use PostgreSQL performance docs)
 - ORM-specific configuration (→ `django-best-practices` or your ORM's docs)
@@ -36,11 +34,11 @@ ORM-agnostic guide for relational database schema design. Covers data modeling, 
 
 ## Context Required
 
-| Required                             | Optional                                 |
-| ------------------------------------ | ---------------------------------------- |
+| Required | Optional |
+|----------|----------|
 | Database engine (PostgreSQL / MySQL) | Expected data volume (rows, growth rate) |
-| Domain entities and relationships    | Read/write ratio                         |
-| Key access patterns (queries)        | Multi-tenant requirements                |
+| Domain entities and relationships | Read/write ratio |
+| Key access patterns (queries) | Multi-tenant requirements |
 
 ---
 
@@ -61,16 +59,16 @@ Designing a new schema:
 
 ## Quick Navigation
 
-| Need to…                         | Jump to                                                          |
-| -------------------------------- | ---------------------------------------------------------------- |
-| Model entities and relationships | [1. Data Modeling](#1-data-modeling-critical)                    |
-| Decide normalize vs denormalize  | [2. Normalization](#2-normalization-vs-denormalization-critical) |
-| Choose the right index           | [3. Indexing](#3-indexing-strategy-critical)                     |
-| Run migrations safely on live DB | [4. Migrations](#4-zero-downtime-migrations-high)                |
-| Design multi-tenant schema       | [5. Multi-Tenancy](#5-multi-tenant-design-high)                  |
-| Add soft delete / audit trails   | [6. Common Patterns](#6-common-schema-patterns-medium)           |
-| Partition large tables           | [7. Partitioning](#7-table-partitioning-medium)                  |
-| See anti-patterns                | [Anti-Patterns](#anti-patterns)                                  |
+| Need to… | Jump to |
+|----------|---------|
+| Model entities and relationships | [1. Data Modeling](#1-data-modeling-critical) |
+| Decide normalize vs denormalize | [2. Normalization](#2-normalization-vs-denormalization-critical) |
+| Choose the right index | [3. Indexing](#3-indexing-strategy-critical) |
+| Run migrations safely on live DB | [4. Migrations](#4-zero-downtime-migrations-high) |
+| Design multi-tenant schema | [5. Multi-Tenancy](#5-multi-tenant-design-high) |
+| Add soft delete / audit trails | [6. Common Patterns](#6-common-schema-patterns-medium) |
+| Partition large tables | [7. Partitioning](#7-table-partitioning-medium) |
+| See anti-patterns | [Anti-Patterns](#anti-patterns) |
 
 ---
 
@@ -106,12 +104,12 @@ CREATE TABLE tbl_usr_prof (...);    -- cryptic abbreviation
 
 ### Primary Keys
 
-| Strategy                     | When                      | Pros                            | Cons                                       |
-| ---------------------------- | ------------------------- | ------------------------------- | ------------------------------------------ |
-| `bigserial` (auto-increment) | Internal tables, FK joins | Compact, fast joins             | Enumerable, not safe for public IDs        |
-| `uuid` (v4 random)           | Public-facing resources   | Non-guessable, globally unique  | Larger (16 bytes), random I/O on B-Tree    |
-| `uuid` v7 (time-sorted)      | Public + needs ordering   | Non-guessable + insert-friendly | Newer, less ecosystem support              |
-| `text` slug                  | URL-friendly resources    | Human-readable                  | Must enforce uniqueness, updates expensive |
+| Strategy | When | Pros | Cons |
+|----------|------|------|------|
+| `bigserial` (auto-increment) | Internal tables, FK joins | Compact, fast joins | Enumerable, not safe for public IDs |
+| `uuid` (v4 random) | Public-facing resources | Non-guessable, globally unique | Larger (16 bytes), random I/O on B-Tree |
+| `uuid` v7 (time-sorted) | Public + needs ordering | Non-guessable + insert-friendly | Newer, less ecosystem support |
+| `text` slug | URL-friendly resources | Human-readable | Must enforce uniqueness, updates expensive |
 
 **Recommended default:**
 
@@ -157,12 +155,12 @@ CREATE TABLE user_profiles (
 
 ### ON DELETE Behavior
 
-| Behavior      | When                             | Example                                 |
-| ------------- | -------------------------------- | --------------------------------------- |
-| `CASCADE`     | Child meaningless without parent | order_items when order deleted          |
-| `RESTRICT`    | Prevent accidental deletion      | products referenced by order_items      |
-| `SET NULL`    | Preserve child, clear reference  | orders.assigned_to when employee leaves |
-| `SET DEFAULT` | Fallback to default value        | Rare, for status columns                |
+| Behavior | When | Example |
+|----------|------|---------|
+| `CASCADE` | Child meaningless without parent | order_items when order deleted |
+| `RESTRICT` | Prevent accidental deletion | products referenced by order_items |
+| `SET NULL` | Preserve child, clear reference | orders.assigned_to when employee leaves |
+| `SET DEFAULT` | Fallback to default value | Rare, for status columns |
 
 ---
 
@@ -172,14 +170,13 @@ CREATE TABLE user_profiles (
 
 **Normal forms in practice:**
 
-| Form | Rule                                     | Example Violation                                               |
-| ---- | ---------------------------------------- | --------------------------------------------------------------- |
-| 1NF  | No repeating groups, atomic values       | `tags = "go,python,rust"` in one column                         |
-| 2NF  | No partial dependencies (composite keys) | `order_items.product_name` depends on `product_id` alone        |
-| 3NF  | No transitive dependencies               | `orders.customer_city` depends on `customer_id`, not `order_id` |
+| Form | Rule | Example Violation |
+|------|------|-------------------|
+| 1NF | No repeating groups, atomic values | `tags = "go,python,rust"` in one column |
+| 2NF | No partial dependencies (composite keys) | `order_items.product_name` depends on `product_id` alone |
+| 3NF | No transitive dependencies | `orders.customer_city` depends on `customer_id`, not `order_id` |
 
 **1NF violation fix:**
-
 ```sql
 -- ❌ Tags as comma-separated string
 CREATE TABLE posts (id serial, tags text);  -- tags = "go,python"
@@ -199,7 +196,6 @@ CREATE INDEX idx_posts_tags ON posts USING GIN(tags);
 ### When to Denormalize
 
 **Denormalize ONLY when:**
-
 1. You have **measured** a performance problem (EXPLAIN ANALYZE, not "I think it's slow")
 2. The denormalized data is **read-heavy** (read:write ratio > 100:1)
 3. You accept the **consistency maintenance cost** (triggers, application logic, or materialized views)
@@ -241,13 +237,13 @@ CREATE TABLE order_items (
 
 ### Index Types (PostgreSQL)
 
-| Type                 | When                                        | Example                                                      |
-| -------------------- | ------------------------------------------- | ------------------------------------------------------------ |
-| **B-Tree** (default) | Equality, range, ORDER BY                   | `WHERE status = 'active'`, `WHERE created_at > '2025-01-01'` |
-| **Hash**             | Equality only (rare, B-Tree usually better) | `WHERE id = 123` (large tables, Postgres 10+)                |
-| **GIN**              | Arrays, JSONB, full-text search             | `WHERE tags @> '{go}'`, `WHERE data->>'key' = 'val'`         |
-| **GiST**             | Geometry, ranges, nearest-neighbor          | PostGIS, tsrange, ltree                                      |
-| **BRIN**             | Very large tables with natural ordering     | Time-series data sorted by timestamp                         |
+| Type | When | Example |
+|------|------|---------|
+| **B-Tree** (default) | Equality, range, ORDER BY | `WHERE status = 'active'`, `WHERE created_at > '2025-01-01'` |
+| **Hash** | Equality only (rare, B-Tree usually better) | `WHERE id = 123` (large tables, Postgres 10+) |
+| **GIN** | Arrays, JSONB, full-text search | `WHERE tags @> '{go}'`, `WHERE data->>'key' = 'val'` |
+| **GiST** | Geometry, ranges, nearest-neighbor | PostGIS, tsrange, ltree |
+| **BRIN** | Very large tables with natural ordering | Time-series data sorted by timestamp |
 
 ### Index Decision Rules
 
@@ -406,11 +402,11 @@ END $$;
 
 ### Three Approaches
 
-| Approach                                    | Isolation | Complexity | When                                 |
-| ------------------------------------------- | --------- | ---------- | ------------------------------------ |
-| **Row-level** (shared tables + `tenant_id`) | Low       | Low        | SaaS MVP, < 1,000 tenants            |
-| **Schema-per-tenant**                       | Medium    | Medium     | Regulated industries, moderate scale |
-| **Database-per-tenant**                     | High      | High       | Enterprise, strict data isolation    |
+| Approach | Isolation | Complexity | When |
+|----------|-----------|------------|------|
+| **Row-level** (shared tables + `tenant_id`) | Low | Low | SaaS MVP, < 1,000 tenants |
+| **Schema-per-tenant** | Medium | Medium | Regulated industries, moderate scale |
+| **Database-per-tenant** | High | High | Enterprise, strict data isolation |
 
 ### Row-Level Tenancy (Most Common)
 
@@ -647,20 +643,20 @@ CREATE TABLE orders_tenant_2 PARTITION OF orders FOR VALUES IN (2);
 
 ## Anti-Patterns
 
-| #   | ❌ Don't                                             | ✅ Do Instead                                        |
-| --- | ---------------------------------------------------- | ---------------------------------------------------- |
-| 1   | Premature denormalization                            | Start 3NF, denormalize when measured                 |
-| 2   | Auto-increment IDs as public API identifiers         | UUID for public, serial for internal                 |
-| 3   | No foreign key constraints                           | FK enforced in database, always                      |
-| 4   | Nullable by default                                  | NOT NULL by default, nullable when required          |
-| 5   | No indexes on FK columns                             | Index every FK column                                |
-| 6   | Single-step destructive migration                    | ADD → MIGRATE → REMOVE in separate deploys           |
-| 7   | `CREATE INDEX` without `CONCURRENTLY`                | Always `CONCURRENTLY` on live tables                 |
-| 8   | Polymorphic FK (`commentable_type + commentable_id`) | Separate FK columns or separate tables               |
-| 9   | JSONB for everything                                 | JSONB for flexible data only, columns for structured |
-| 10  | No `created_at` / `updated_at`                       | Timestamp pair on every table                        |
-| 11  | Comma-separated values in one column                 | Separate table or PostgreSQL array                   |
-| 12  | `text` without length validation                     | CHECK constraint or application validation           |
+| # | ❌ Don't | ✅ Do Instead |
+|---|---------|--------------|
+| 1 | Premature denormalization | Start 3NF, denormalize when measured |
+| 2 | Auto-increment IDs as public API identifiers | UUID for public, serial for internal |
+| 3 | No foreign key constraints | FK enforced in database, always |
+| 4 | Nullable by default | NOT NULL by default, nullable when required |
+| 5 | No indexes on FK columns | Index every FK column |
+| 6 | Single-step destructive migration | ADD → MIGRATE → REMOVE in separate deploys |
+| 7 | `CREATE INDEX` without `CONCURRENTLY` | Always `CONCURRENTLY` on live tables |
+| 8 | Polymorphic FK (`commentable_type + commentable_id`) | Separate FK columns or separate tables |
+| 9 | JSONB for everything | JSONB for flexible data only, columns for structured |
+| 10 | No `created_at` / `updated_at` | Timestamp pair on every table |
+| 11 | Comma-separated values in one column | Separate table or PostgreSQL array |
+| 12 | `text` without length validation | CHECK constraint or application validation |
 
 ---
 
@@ -671,7 +667,6 @@ CREATE TABLE orders_tenant_2 PARTITION OF orders FOR VALUES IN (2);
 **Symptom:** `EXPLAIN ANALYZE` shows Sequential Scan despite existing index.
 
 **Causes:**
-
 1. **Wrong index column order** — composite index `(A, B)` won't help `WHERE B = ?`
 2. **Low selectivity** — index on boolean column (50% of rows match), planner prefers seq scan
 3. **Stale statistics** — run `ANALYZE table_name;`
@@ -686,7 +681,6 @@ CREATE TABLE orders_tenant_2 PARTITION OF orders FOR VALUES IN (2);
 **Cause:** Adding NOT NULL constraint, changing column type, or creating index without `CONCURRENTLY`.
 
 **Fix:**
-
 ```sql
 -- Add index without lock
 CREATE INDEX CONCURRENTLY idx_name ON table(col);
@@ -699,7 +693,6 @@ ALTER TABLE t VALIDATE CONSTRAINT t_col_nn;  -- non-blocking validation
 ### Issue 3: "How many indexes is too many?"
 
 **Rule of thumb:**
-
 - Read-heavy table (reports, product catalog): 5-10 indexes is fine
 - Write-heavy table (events, logs): 2-3 indexes max
 - Monitor with `pg_stat_user_indexes` — drop indexes with `idx_scan = 0`

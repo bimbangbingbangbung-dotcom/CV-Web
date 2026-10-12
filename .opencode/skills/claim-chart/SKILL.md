@@ -63,7 +63,6 @@ If `CLAUDE.md` has `[PLACEHOLDER]` markers, surface this bounce:
 > I notice you haven't configured your practice profile yet — that's how I tailor risk calibration, landscape, and house style to your practice.
 >
 > **Two choices:**
->
 > - Run `/litigation-legal:cold-start-interview` (2 minutes) to configure your profile, then I'll run this tailored to YOUR practice.
 > - Say **"provisional"** and I'll run this against generic defaults — US jurisdiction, middle risk appetite, lawyer role, no playbook — and tag every output `[PROVISIONAL — configure your profile for tailored output]` so you can see what I do before committing.
 
@@ -119,7 +118,7 @@ Plus intake (common to both):
 
 Parse asserted independent claims into numbered elements. Handle:
 
-- **Preamble.** Note whether it's limiting — a question of claim construction (_Catalina Marketing Int'l, Inc. v. Coolsavings.com, Inc._, 289 F.3d 801 (Fed. Cir. 2002)). Flag `preamble-limiting: unresolved` unless the construction order resolves it.
+- **Preamble.** Note whether it's limiting — a question of claim construction (*Catalina Marketing Int'l, Inc. v. Coolsavings.com, Inc.*, 289 F.3d 801 (Fed. Cir. 2002)). Flag `preamble-limiting: unresolved` unless the construction order resolves it.
 - **Transitional phrase.** "Comprising" (open) / "consisting of" (closed) / "consisting essentially of" (semi-open). Affects whether additional unrecited elements defeat infringement.
 - **Elements** separated by commas / semicolons, numbered `[1a]`, `[1b]`, `[1c]`. Keep numbering stable — it's the chart's spine.
 - **Means-plus-function (§112(f))** — every "means for [function]" or non-structural functional term. Scope is the structure disclosed in the spec plus equivalents. Cite corresponding structure by col./line. If the spec fails to disclose structure, flag `indefinite-112f`.
@@ -127,16 +126,16 @@ Parse asserted independent claims into numbered elements. Handle:
 - **Dependent claims** — reference parent; chart only the additional limitations. **Execute, don't gesture.** If asserted claims include dependents, produce the actual additional-limitation rows for each dependent in Step 4 — do not emit a note that dependents "should be charted."
 - **Structural-term cognates — default to `construction-dependent`.** For each element that recites a structural noun with a common cognate in the prior art of the field, default the row's state to `literal-construction-dependent` (not `literal`) unless the spec expressly defines the term or an existing Markman order forecloses the ambiguity. These are the terms most commonly disputed at Markman — presuming a clean literal read under-flags the risk. Common cognate families to flag proactively:
 
-  | Field                   | Cognate family (flag as `structural-term-cognate`) |
-  | ----------------------- | -------------------------------------------------- |
-  | Fasteners / anchors     | barb / thread / projection / ridge / fin / tooth   |
-  | Fluidics / catheters    | lumen / channel / bore / passage / conduit         |
-  | Mechanical housings     | hub / boss / flange / collar / shoulder            |
-  | Fasteners / joints      | socket / recess / pocket / cavity                  |
-  | Electrical / electronic | contact / terminal / pad / lead                    |
-  | Optical                 | lens / reflector / window / aperture               |
-  | Structural              | wall / member / support / strut / rib              |
-  | Surfaces                | surface / face / interface                         |
+  | Field | Cognate family (flag as `structural-term-cognate`) |
+  |---|---|
+  | Fasteners / anchors | barb / thread / projection / ridge / fin / tooth |
+  | Fluidics / catheters | lumen / channel / bore / passage / conduit |
+  | Mechanical housings | hub / boss / flange / collar / shoulder |
+  | Fasteners / joints | socket / recess / pocket / cavity |
+  | Electrical / electronic | contact / terminal / pad / lead |
+  | Optical | lens / reflector / window / aperture |
+  | Structural | wall / member / support / strut / rib |
+  | Surfaces | surface / face / interface |
 
   This list is not exhaustive — if the claim recites a structural noun that could reasonably be read narrowly (pointed barb vs. any projection) or broadly (channel vs. any passage), flag `structural-term-cognate` in `_constructions` and default the row to `construction-dependent`. The attorney can demote it to `literal` after a Markman order or a definition in the spec forecloses the ambiguity.
 
@@ -147,9 +146,9 @@ Show the parse to the user. Confirm before mapping. A wrong parse poisons every 
 Flag disputed terms:
 
 - Coined terms or terms defined in the spec
-- Terms with prosecution history (amendments, arguments, disavowals — _Phillips v. AWH Corp._, 415 F.3d 1303 (Fed. Cir. 2005); _Festo_ estoppel)
+- Terms with prosecution history (amendments, arguments, disavowals — *Phillips v. AWH Corp.*, 415 F.3d 1303 (Fed. Cir. 2005); *Festo* estoppel)
 - Functional language ("configured to", "adapted to", "operable to")
-- Relative terms ("substantially", "about") — definiteness risk under _Nautilus, Inc. v. Biosig Instruments, Inc._, 572 U.S. 898 (2014)
+- Relative terms ("substantially", "about") — definiteness risk under *Nautilus, Inc. v. Biosig Instruments, Inc.*, 572 U.S. 898 (2014)
 - Computer-implemented terms — Alice / §101 exposure for invalidity
 
 For each flagged term, state the construction(s) under which the mapping works and the construction(s) under which it fails. If a Markman order exists, apply it. If briefing is underway, chart under each side's proposed construction.
@@ -162,17 +161,17 @@ For each element, for each target:
 2. **Quote verbatim.** Character-for-character. No paraphrase. Cut at sentence boundaries and mark elision.
 3. **Characterize the mapping.**
 
-   | Mapping                          | Meaning                                                                                                                                      | Where             |
-   | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-   | `literal`                        | Claim language reads on the accused feature / prior-art disclosure                                                                           | Both              |
-   | `literal-construction-dependent` | Literal under X; fails under Y                                                                                                               | Both              |
-   | `doe`                            | Equivalent (function-way-result or insubstantial differences)                                                                                | Infringement only |
-   | `anticipation`                   | Every element in a single reference, arranged as claimed (_Net MoneyIN, Inc. v. VeriSign, Inc._, 545 F.3d 1359 (Fed. Cir. 2008))             | Invalidity only   |
-   | `obviousness-combination`        | Secondary reference supplies the missing element; motivation to combine required under _KSR Int'l Co. v. Teleflex Inc._, 550 U.S. 398 (2007) | Invalidity only   |
-   | `partial`                        | Some of the element is present                                                                                                               | Both              |
-   | `not-found`                      | Element not present                                                                                                                          | Both              |
-   | `needs-evidence`                 | Can't tell from available material                                                                                                           | Both              |
-   | `construction-dependent`         | Turns on how a disputed term is construed                                                                                                    | Both              |
+   | Mapping | Meaning | Where |
+   |---|---|---|
+   | `literal` | Claim language reads on the accused feature / prior-art disclosure | Both |
+   | `literal-construction-dependent` | Literal under X; fails under Y | Both |
+   | `doe` | Equivalent (function-way-result or insubstantial differences) | Infringement only |
+   | `anticipation` | Every element in a single reference, arranged as claimed (*Net MoneyIN, Inc. v. VeriSign, Inc.*, 545 F.3d 1359 (Fed. Cir. 2008)) | Invalidity only |
+   | `obviousness-combination` | Secondary reference supplies the missing element; motivation to combine required under *KSR Int'l Co. v. Teleflex Inc.*, 550 U.S. 398 (2007) | Invalidity only |
+   | `partial` | Some of the element is present | Both |
+   | `not-found` | Element not present | Both |
+   | `needs-evidence` | Can't tell from available material | Both |
+   | `construction-dependent` | Turns on how a disputed term is construed | Both |
 
 4. **State per cell.** `mapped` / `mapped-doe` / `partial` / `not-found` / `needs-evidence` / `construction-dependent` / `anticipation` / `obviousness-combination`.
 5. **Flag open questions.** "This maps if [X]. Need [teardown / source code / deposition / expert] to confirm."
@@ -188,9 +187,9 @@ If the user provided a list of asserted claims that includes dependents, the cha
 A dependent-claim row format:
 
 ```markdown
-| [#]       | Element (verbatim)                                                      | Accused feature (or prior-art disclosure)                        | Evidence (pin-cited)                      | Mapping                        | State  | Verified |
-| --------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------- | ------------------------------ | ------ | -------- |
-| 2 [add'l] | "wherein the barb extends at an angle of 15° to 30° from the body axis" | AnchorFast Mini barb angle 18° per [CM-AM-2026-03 Fig. 4 + §2.3] | [CM-AM-2026-03 §2.3] "barb angle 18° ±2°" | literal-construction-dependent | mapped | ☐        |
+| [#] | Element (verbatim) | Accused feature (or prior-art disclosure) | Evidence (pin-cited) | Mapping | State | Verified |
+|---|---|---|---|---|---|---|
+| 2 [add'l] | "wherein the barb extends at an angle of 15° to 30° from the body axis" | AnchorFast Mini barb angle 18° per [CM-AM-2026-03 Fig. 4 + §2.3] | [CM-AM-2026-03 §2.3] "barb angle 18° ±2°" | literal-construction-dependent | mapped | ☐ |
 ```
 
 ### Step 4.5: DOE supplements — execute, don't gesture
@@ -202,9 +201,9 @@ A DOE candidacy row adds a one-paragraph function-way-result sketch, flags prose
 Format:
 
 ```markdown
-| [#-DOE] | Element             | Accused feature                | Function-way-result                                                                                                             | PH estoppel?                          | Dedication risk?                                               | State                  |
-| ------- | ------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------------- | ---------------------- |
-| 1b-DOE  | "at least one barb" | three-barb opposing-face array | function: resist withdrawal; way: mechanical engagement with cancellous bone; result: anchor remains seated under tensile load. | [needs-evidence: prosecution history] | [needs-evidence: disclosed-but-unclaimed alternatives in spec] | construction-dependent |
+| [#-DOE] | Element | Accused feature | Function-way-result | PH estoppel? | Dedication risk? | State |
+|---|---|---|---|---|---|---|
+| 1b-DOE | "at least one barb" | three-barb opposing-face array | function: resist withdrawal; way: mechanical engagement with cancellous bone; result: anchor remains seated under tensile load. | [needs-evidence: prosecution history] | [needs-evidence: disclosed-but-unclaimed alternatives in spec] | construction-dependent |
 ```
 
 As with dependents: if the skill can't produce the DOE rows for a reason (no accused-product evidence to ground function-way-result, no prosecution history available), say so explicitly and route to `needs-evidence`. Do not skip DOE silently.
@@ -213,26 +212,25 @@ As with dependents: if the skill can't produce the DOE rows for a reason (no acc
 
 Flag, don't opine:
 
-- **Induced (§271(b))** — _Commil USA, LLC v. Cisco Systems, Inc._, 575 U.S. 632 (2015); _Global-Tech Appliances, Inc. v. SEB S.A._, 563 U.S. 754 (2011)
+- **Induced (§271(b))** — *Commil USA, LLC v. Cisco Systems, Inc.*, 575 U.S. 632 (2015); *Global-Tech Appliances, Inc. v. SEB S.A.*, 563 U.S. 754 (2011)
 - **Contributory (§271(c))** — component especially made for infringing use
-- **Divided / joint (§271(a))** — _Akamai Techs., Inc. v. Limelight Networks, Inc._, 797 F.3d 1020 (Fed. Cir. 2015) (en banc) directs/controls test
-- **Willfulness** — _Halo Elecs., Inc. v. Pulse Elecs., Inc._, 579 U.S. 93 (2016); treble damages under §284
+- **Divided / joint (§271(a))** — *Akamai Techs., Inc. v. Limelight Networks, Inc.*, 797 F.3d 1020 (Fed. Cir. 2015) (en banc) directs/controls test
+- **Willfulness** — *Halo Elecs., Inc. v. Pulse Elecs., Inc.*, 579 U.S. 93 (2016); treble damages under §284
 
 ### Step 6: Invalidity thresholds (invalidity only)
 
 For §102: every element in a single reference. Partial across references is §103.
 
-For §103: primary reference + secondary reference(s) + documented motivation under _KSR_. Flag explicit teaching/suggestion/motivation, market or design-need motivation, reasonable expectation of success, and **secondary considerations** (_Graham v. John Deere Co._, 383 U.S. 1 (1966)) — commercial success, long-felt need, failure of others, industry praise, copying.
+For §103: primary reference + secondary reference(s) + documented motivation under *KSR*. Flag explicit teaching/suggestion/motivation, market or design-need motivation, reasonable expectation of success, and **secondary considerations** (*Graham v. John Deere Co.*, 383 U.S. 1 (1966)) — commercial success, long-felt need, failure of others, industry praise, copying.
 
 Also flag:
-
-- **§101** — _Alice Corp. Pty. Ltd. v. CLS Bank Int'l_, 573 U.S. 208 (2014); _Mayo Collaborative Servs. v. Prometheus Labs., Inc._, 566 U.S. 66 (2012)
-- **§112 ¶ 1** — written description, enablement (_Amgen Inc. v. Sanofi_, 598 U.S. 594 (2023))
-- **§112 ¶ 2** — definiteness (_Nautilus_, supra)
+- **§101** — *Alice Corp. Pty. Ltd. v. CLS Bank Int'l*, 573 U.S. 208 (2014); *Mayo Collaborative Servs. v. Prometheus Labs., Inc.*, 566 U.S. 66 (2012)
+- **§112 ¶ 1** — written description, enablement (*Amgen Inc. v. Sanofi*, 598 U.S. 594 (2023))
+- **§112 ¶ 2** — definiteness (*Nautilus*, supra)
 - **§112 ¶ 6** — means-plus-function structure
 - **Unenforceability** — inequitable conduct, prosecution laches, assignor/licensee estoppel (attorney-only flags)
 
-Invalidity must be shown by clear and convincing evidence — _Microsoft Corp. v. i4i Ltd. P'ship_, 564 U.S. 91 (2011). Prima facie in a chart is not proof at trial.
+Invalidity must be shown by clear and convincing evidence — *Microsoft Corp. v. i4i Ltd. P'ship*, 564 U.S. 91 (2011). Prima facie in a chart is not proof at trial.
 
 ### Step 7 (review sub-mode): Audit
 
@@ -275,15 +273,15 @@ Three paths:
 
 Divergences to surface without being asked (non-exhaustive — add to this list as patterns recur):
 
-| Cause of action / defense                                   | Baseline (Restatement / pattern)                                                                                                       | Jurisdiction-specific formulation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Breach of contract                                          | 4 elements (contract, performance, breach, damages; CACI 303)                                                                          | **DE:** 3 elements — contractual obligation, breach, damages (causation folded into breach) per _VLIW Tech., LLC v. Hewlett-Packard Co._, 840 A.2d 606 (Del. 2003). **DE adds a 5th element** — no adequate remedy at law — when the claim seeks specific performance.                                                                                                                                                                                                                                                                                                                                                     |
-| Breach of contract — goods                                  | Common-law breach elements                                                                                                             | **If goods + U.C.C. Article 2 jurisdiction (all 50 states except LA):** load U.C.C. breach elements (conforming tender, acceptance / rejection / revocation, cure, cover, seller's remedies). Present both; let user pick.                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Breach of contract — multi-lot goods / installment contract | Common-law breach or U.C.C. § 2-711 (single-delivery breach framework)                                                                 | **Installment contracts under U.C.C. § 2-612** — "substantial impairment of the value of the installment" replaces the perfect-tender rule; aggregate breach requires "substantial impairment of the value of the whole contract." If the contract calls for goods to be delivered in separate lots (multiple shipments, deliveries), default to § 2-612 framing — it is the governing regime and the analysis is materially different from single-delivery breach. Flag for signer: "This is drafted as an installment contract under § 2-612 — confirm that characterization matches the contract's delivery structure." |
-| Negligence                                                  | 4 elements (duty, breach, causation, damages; Restatement (Second) Torts § 281)                                                        | **CA:** follow CACI No. 400 formulation (negligence per se per CACI 418 when applicable). **NY:** PJI 2:10 formulation — slightly different language on proximate cause.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Negligent misrepresentation                                 | Restatement (Second) Torts § 552 — justifiable reliance, pecuniary loss                                                                | **NY:** requires **contemporaneous privity** or a relationship "so close as to approach that of privity" per _Credit Alliance Corp. v. Arthur Andersen & Co._, 65 N.Y.2d 536 (1985).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Fraud                                                       | 9 elements (often condensed to 5 — representation, materiality, knowledge of falsity, intent to induce, justifiable reliance, damages) | **DE:** 5 elements per _Stephenson v. Capano Dev._, 462 A.2d 1069 (Del. 1983). **CA:** CACI 1900 formulation — 5 elements with reliance being "justifiable." **NY:** requires pleading with particularity under CPLR 3016(b), and scienter is a distinct element.                                                                                                                                                                                                                                                                                                                                                          |
-| Breach of fiduciary duty                                    | Restatement / common law — fiduciary duty, breach, damages                                                                             | **DE:** the most-developed body of fiduciary-duty law (_Aronson v. Lewis_, _Cede & Co. v. Technicolor_, _In re Trados_) — default to the Delaware formulation for any DE-entity matter regardless of forum.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Cause of action / defense | Baseline (Restatement / pattern) | Jurisdiction-specific formulation |
+|---|---|---|
+| Breach of contract | 4 elements (contract, performance, breach, damages; CACI 303) | **DE:** 3 elements — contractual obligation, breach, damages (causation folded into breach) per *VLIW Tech., LLC v. Hewlett-Packard Co.*, 840 A.2d 606 (Del. 2003). **DE adds a 5th element** — no adequate remedy at law — when the claim seeks specific performance. |
+| Breach of contract — goods | Common-law breach elements | **If goods + U.C.C. Article 2 jurisdiction (all 50 states except LA):** load U.C.C. breach elements (conforming tender, acceptance / rejection / revocation, cure, cover, seller's remedies). Present both; let user pick. |
+| Breach of contract — multi-lot goods / installment contract | Common-law breach or U.C.C. § 2-711 (single-delivery breach framework) | **Installment contracts under U.C.C. § 2-612** — "substantial impairment of the value of the installment" replaces the perfect-tender rule; aggregate breach requires "substantial impairment of the value of the whole contract." If the contract calls for goods to be delivered in separate lots (multiple shipments, deliveries), default to § 2-612 framing — it is the governing regime and the analysis is materially different from single-delivery breach. Flag for signer: "This is drafted as an installment contract under § 2-612 — confirm that characterization matches the contract's delivery structure." |
+| Negligence | 4 elements (duty, breach, causation, damages; Restatement (Second) Torts § 281) | **CA:** follow CACI No. 400 formulation (negligence per se per CACI 418 when applicable). **NY:** PJI 2:10 formulation — slightly different language on proximate cause. |
+| Negligent misrepresentation | Restatement (Second) Torts § 552 — justifiable reliance, pecuniary loss | **NY:** requires **contemporaneous privity** or a relationship "so close as to approach that of privity" per *Credit Alliance Corp. v. Arthur Andersen & Co.*, 65 N.Y.2d 536 (1985). |
+| Fraud | 9 elements (often condensed to 5 — representation, materiality, knowledge of falsity, intent to induce, justifiable reliance, damages) | **DE:** 5 elements per *Stephenson v. Capano Dev.*, 462 A.2d 1069 (Del. 1983). **CA:** CACI 1900 formulation — 5 elements with reliance being "justifiable." **NY:** requires pleading with particularity under CPLR 3016(b), and scienter is a distinct element. |
+| Breach of fiduciary duty | Restatement / common law — fiduciary duty, breach, damages | **DE:** the most-developed body of fiduciary-duty law (*Aronson v. Lewis*, *Cede & Co. v. Technicolor*, *In re Trados*) — default to the Delaware formulation for any DE-entity matter regardless of forum. |
 
 When a jurisdiction-specific formulation differs materially from the baseline, the chart opens with a one-line callout:
 
@@ -325,7 +323,7 @@ Gap detection is not a conclusion about the merits. It's a map of where the case
 
 Ask the phase. Same chart; different framing on the output:
 
-- **Pre-filing / pleadings.** Does the complaint allege each element with plausibility (_Ashcroft v. Iqbal_, 556 U.S. 662 (2009); _Bell Atl. Corp. v. Twombly_, 550 U.S. 544 (2007))? Any element pleaded on information and belief without factual support is a 12(b)(6) target.
+- **Pre-filing / pleadings.** Does the complaint allege each element with plausibility (*Ashcroft v. Iqbal*, 556 U.S. 662 (2009); *Bell Atl. Corp. v. Twombly*, 550 U.S. 544 (2007))? Any element pleaded on information and belief without factual support is a 12(b)(6) target.
 - **Discovery.** For each `gap` or `needs-discovery` element, what discovery is needed? Which witnesses, which document custodians, which interrogatories, which RFAs.
 - **MSJ.** For each element, is there a genuine dispute of material fact? A `supported` cell for the movant with no contradicting evidence is summary-judgment ammunition; a `disputed` cell is MSJ-defeating.
 - **Trial.** Order of proof. Which witness proves element 1, which exhibit proves element 2, who authenticates, what's the foundation. The chart becomes the trial outline.
@@ -356,36 +354,34 @@ One table per claim / defense / patent-claim per target.
 **Patent mode example:**
 
 ```markdown
-| [#] | Element (verbatim)               | Accused feature   | Evidence (pin-cited)       | Mapping                        | State          | Verified |
-| --- | -------------------------------- | ----------------- | -------------------------- | ------------------------------ | -------------- | -------- |
-| 1a  | "a processor configured to..."   | SoC per datasheet | [Datasheet p. 7] "..."     | literal-construction-dependent | mapped         | ☐        |
-| 1b  | "means for [function]" (§112(f)) | [alleged equiv.]  | [source, file.c:124] "..." | needs-evidence                 | needs-evidence | ☐        |
+| [#] | Element (verbatim) | Accused feature | Evidence (pin-cited) | Mapping | State | Verified |
+|---|---|---|---|---|---|---|
+| 1a | "a processor configured to..." | SoC per datasheet | [Datasheet p. 7] "..." | literal-construction-dependent | mapped | ☐ |
+| 1b | "means for [function]" (§112(f)) | [alleged equiv.] | [source, file.c:124] "..." | needs-evidence | needs-evidence | ☐ |
 ```
 
 **Civil mode example:**
 
 ```markdown
-| [#] | Element                 | Evidence supporting (pin-cited)          | Evidence contradicting                              | Strength | State           | Verified |
-| --- | ----------------------- | ---------------------------------------- | --------------------------------------------------- | -------- | --------------- | -------- |
-| 1   | Existence of a contract | [Ex. 3, MSA § 1; Smith Dep. 22:4–14]     | none                                                | strong   | supported       | ☐        |
-| 2   | Plaintiff's performance | [Jones Decl. ¶¶ 4–9]                     | [Doe Dep. 101:3–11: "they never delivered Phase 2"] | moderate | disputed        | ☐        |
-| 3   | Defendant's breach      | —                                        | [Doe Dep. 101:3–11]                                 | none     | gap             | ☐        |
-| 4   | Causation               | —                                        | —                                                   | none     | needs-discovery | ☐        |
-| 5   | Damages                 | [Expert Rep. at 18 — $2.4M lost profits] | [Def.'s Expert Rep. at 6 — critiques methodology]   | moderate | disputed        | ☐        |
+| [#] | Element | Evidence supporting (pin-cited) | Evidence contradicting | Strength | State | Verified |
+|---|---|---|---|---|---|---|
+| 1 | Existence of a contract | [Ex. 3, MSA § 1; Smith Dep. 22:4–14] | none | strong | supported | ☐ |
+| 2 | Plaintiff's performance | [Jones Decl. ¶¶ 4–9] | [Doe Dep. 101:3–11: "they never delivered Phase 2"] | moderate | disputed | ☐ |
+| 3 | Defendant's breach | — | [Doe Dep. 101:3–11] | none | gap | ☐ |
+| 4 | Causation | — | — | none | needs-discovery | ☐ |
+| 5 | Damages | [Expert Rep. at 18 — $2.4M lost profits] | [Def.'s Expert Rep. at 6 — critiques methodology] | moderate | disputed | ☐ |
 ```
 
 Follow with:
-
 - **Defenses / thresholds** (patent mode: invalidity / indirect / willfulness flags; civil mode: affirmative-defense flags, Iqbal/Twombly flags pre-pleading)
 - **Gap list** (civil mode) / **needs-evidence list** (patent mode) — **the priority output**
 - **What cuts which way — summary** — strongest elements, weakest elements
-- **Conclusion line** — _"This skill does not conclude."_ Elements mapped/supported: [list]. Elements needing evidence / in a gap state: [list]. Elements construction-dependent (patent) / disputed (civil): [list]. Attorney judgment required.
+- **Conclusion line** — *"This skill does not conclude."* Elements mapped/supported: [list]. Elements needing evidence / in a gap state: [list]. Elements construction-dependent (patent) / disputed (civil): [list]. Attorney judgment required.
 - **Citation verification** — every pin cite, case, column/line, deposition page:line must be verified against the source.
 
 ### CSV (always)
 
 Two files per chart:
-
 - `[chart-slug].csv` — values
 - `[chart-slug]_sources.csv` — verbatim quotes, pin cites, notes
 
@@ -398,8 +394,8 @@ Ask which the team works in. Use the pattern from `corporate-legal`'s `tabular-r
 - One row per element (or element × target if comparing multiple targets)
 - Each evidence column paired with a hidden source column containing the verbatim quote and pin cite; cell comments (Excel) or notes (Sheets) surface the quote on hover
 - Color coding by state:
-  - _Patent:_ white = `mapped`, yellow = `construction-dependent` / `partial` / DOE, orange = `needs-evidence`, red = `not-found`
-  - _Civil:_ white = `supported`, yellow = `partial` / `disputed`, orange = `needs-discovery`, red = `gap`
+  - *Patent:* white = `mapped`, yellow = `construction-dependent` / `partial` / DOE, orange = `needs-evidence`, red = `not-found`
+  - *Civil:* white = `supported`, yellow = `partial` / `disputed`, orange = `needs-discovery`, red = `gap`
 - `Verified` column per evidence column, blank by default — reviewer marks it
 - `_elements` sheet documenting the element source: pattern jury instruction (CACI No. X, NYPJI §Y, federal circuit pattern charge), statute (cite), Restatement section, or patent-claim parse. This is what makes the chart auditable — a reader can see where the elements came from.
 - `_gaps` sheet listing every `gap`, `needs-evidence`, or `needs-discovery` row with what's still needed

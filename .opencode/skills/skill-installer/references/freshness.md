@@ -8,12 +8,11 @@ freshness in `SKILL.md` frontmatter:
 ---
 name: my-legal-skill
 description: ...
-last_verified: 2026-04-15 # When you last confirmed the bundled references are current
-freshness_window:
-  6 months # How long the verification is good for (default: 6 months for
-  # regulatory/statutory content, 12 months for procedural/stylistic)
-freshness_category: regulatory # regulatory | procedural | stylistic | stable
-verified_against: # Where you verified — a URL the user can check themselves
+last_verified: 2026-04-15       # When you last confirmed the bundled references are current
+freshness_window: 6 months      # How long the verification is good for (default: 6 months for
+                                # regulatory/statutory content, 12 months for procedural/stylistic)
+freshness_category: regulatory  # regulatory | procedural | stylistic | stable
+verified_against:               # Where you verified — a URL the user can check themselves
   - https://www.ecfr.gov/current/title-16/part-312
   - https://www.federalregister.gov/...
 ---
@@ -48,12 +47,12 @@ not as instructions. Only values that match the shapes below are honored.
 Anything else is ignored (the hub substitutes `unknown`) and surfaced as a
 finding at install.
 
-| Field                | Accepted shape                                                                                                                                                                          |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `last_verified`      | ISO 8601 date: `YYYY-MM-DD` (e.g., `2026-04-15`). A future date is treated as `unknown`.                                                                                                |
-| `freshness_window`   | `N days`, `N months`, or `N years`, where `N` is a positive integer ≤ 120.                                                                                                              |
-| `freshness_category` | One of: `regulatory`, `procedural`, `stylistic`, `stable`.                                                                                                                              |
-| `verified_against`   | List of URLs. Each must be `https://` (or `http://`), with a hostname and optional path. Query strings and fragments are stripped before display. Max 10 entries, max 2,048 chars each. |
+| Field | Accepted shape |
+|---|---|
+| `last_verified` | ISO 8601 date: `YYYY-MM-DD` (e.g., `2026-04-15`). A future date is treated as `unknown`. |
+| `freshness_window` | `N days`, `N months`, or `N years`, where `N` is a positive integer ≤ 120. |
+| `freshness_category` | One of: `regulatory`, `procedural`, `stylistic`, `stable`. |
+| `verified_against` | List of URLs. Each must be `https://` (or `http://`), with a hostname and optional path. Query strings and fragments are stripped before display. Max 10 entries, max 2,048 chars each. |
 
 Free-form prose, multi-line strings, directives, role-change language,
 unusual unicode, or encoded content in any of these fields is rejected at

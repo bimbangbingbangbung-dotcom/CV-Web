@@ -15,16 +15,16 @@ Judge whether the product deserves to exist for its intended user and whether th
 
 ## Product-lead rubric
 
-| Dimension                         | Weight | What to judge                                                                                                                  |
-| --------------------------------- | -----: | ------------------------------------------------------------------------------------------------------------------------------ |
-| User and problem clarity          |     10 | A specific user, moment, pain, and current alternative                                                                         |
-| Promise and differentiation       |     15 | A legible outcome that is meaningfully better than the workaround                                                              |
-| Time to first value               |     20 | The shortest path from arrival to a result the user cares about                                                                |
-| Core journey, trust, and recovery |     15 | Comprehension, confidence, error recovery, and accessibility                                                                   |
-| Experience coherence              |     10 | One expression per state, status, or action across screens, components, and copy; no parallel variants of the same interaction |
-| Repeat value and lifecycle        |     15 | A credible reason to return plus complete ongoing states                                                                       |
-| Product evidence and learning     |     10 | Behavior or experiments that can falsify the assumptions                                                                       |
-| Engineering constraints on value  |      5 | Only technical limits that block trust, delivery, iteration, or release                                                        |
+| Dimension | Weight | What to judge |
+|---|---:|---|
+| User and problem clarity | 10 | A specific user, moment, pain, and current alternative |
+| Promise and differentiation | 15 | A legible outcome that is meaningfully better than the workaround |
+| Time to first value | 20 | The shortest path from arrival to a result the user cares about |
+| Core journey, trust, and recovery | 15 | Comprehension, confidence, error recovery, and accessibility |
+| Experience coherence | 10 | One expression per state, status, or action across screens, components, and copy; no parallel variants of the same interaction |
+| Repeat value and lifecycle | 15 | A credible reason to return plus complete ongoing states |
+| Product evidence and learning | 10 | Behavior or experiments that can falsify the assumptions |
+| Engineering constraints on value | 5 | Only technical limits that block trust, delivery, iteration, or release |
 
 Apply the target-scoped veto contract in `references/review-contract.md` even though engineering has only 5% of this rubric. A low rubric weight does not weaken a blocking product condition.
 

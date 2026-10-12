@@ -5,7 +5,7 @@ description: >
   (for the professor), or court-ready (formal caption format per local rules).
   Same facts, different framing and depth. Use when a student needs to update
   the client, brief the professor, or prepare a court status report.
-argument-hint: '[client | internal | court]'
+argument-hint: "[client | internal | court]"
 ---
 
 # /status
@@ -50,19 +50,17 @@ Case notes for facts.
 **Reader:** The client. Probably stressed. Possibly unfamiliar with legal process. Reading level per `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` plain-language standards (default 6th grade).
 
 **Include:**
-
 - What's happened since they last heard from the clinic
 - What's happening next and when
 - What (if anything) they need to do
 - How to reach the clinic
 
 **Don't include:**
-
 - Legal analysis (they don't need to know the IRAC)
 - Weaknesses in their case (unless it's time to have that conversation — and that's a call for the professor, not a status update)
 - Jargon
 
-_Review label for the student (not for the client — strip before sending):_
+*Review label for the student (not for the client — strip before sending):*
 `[AI-ASSISTED DRAFT — requires student review and supervision step per plugin config]`
 
 Check your jurisdiction's student practice rule for required law-student sign-off language; some jurisdictions require specific forms.
@@ -97,7 +95,6 @@ Under the supervision of [Supervising Attorney]
 **Reader:** The supervising professor. Knows the law. Wants to know where the case stands and what the student needs from them.
 
 **Include:**
-
 - Procedural status (where in the life of the case)
 - What's been done since last check-in
 - What's coming up (deadlines, hearings)
@@ -116,9 +113,9 @@ discovery / motion pending / etc.]
 
 ## Upcoming
 
-| Date   | What               | Action needed by |
-| ------ | ------------------ | ---------------- |
-| [date] | [deadline/hearing] | [date]           |
+| Date | What | Action needed by |
+|---|---|---|
+| [date] | [deadline/hearing] | [date] |
 
 ## Needs professor input
 
@@ -130,7 +127,6 @@ discovery / motion pending / etc.]
 student's thinking shows.]
 
 ---
-
 [AI-ASSISTED DRAFT — student should revise the assessment section especially;
 that's your thinking, not a summary of notes]
 ```
@@ -140,7 +136,6 @@ that's your thinking, not a summary of notes]
 **Reader:** A judge or clerk. Formal. Specific to what the court needs (often a status report ordered by the court, or a statement in advance of a status conference).
 
 **Include:**
-
 - Procedural history (briefly)
 - Current status of discovery/motions/settlement
 - What's outstanding
@@ -150,8 +145,8 @@ that's your thinking, not a summary of notes]
 
 ```markdown
 ═══════════════════════════════════════════════════════════════════════
-AI-ASSISTED DRAFT — requires student analysis and attorney review
-Court filings ALWAYS require professor review before filing
+  AI-ASSISTED DRAFT — requires student analysis and attorney review
+  Court filings ALWAYS require professor review before filing
 ═══════════════════════════════════════════════════════════════════════
 
 [Caption per jurisdiction — VERIFY against current local rules]
@@ -183,7 +178,6 @@ requirements — per current [Court] rules]
 ## Supervision routing
 
 Per `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md`:
-
 - Client-facing → usually a flag trigger (client communication)
 - Internal → no flag (it's going to the professor anyway)
 - Court-ready → always flagged if formal queue enabled (court filings)
@@ -197,3 +191,4 @@ Per `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md`:
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
+

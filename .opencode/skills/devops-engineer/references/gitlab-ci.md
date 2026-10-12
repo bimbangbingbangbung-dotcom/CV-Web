@@ -30,7 +30,7 @@ include:
 # .gitlab/ci/test.yml
 unit-test:
   stage: test
-  needs: [] # fails fast, doesn't wait on validate
+  needs: []                     # fails fast, doesn't wait on validate
   image: node:20
   cache:
     key:
@@ -55,7 +55,7 @@ build-image:
   needs: [unit-test]
   image:
     name: moby/buildkit:rootless
-    entrypoint: ['']
+    entrypoint: [""]
   variables:
     BUILDKITD_FLAGS: --oci-worker-no-process-sandbox
   before_script:
@@ -85,7 +85,7 @@ deploy-production:
     name: production
     url: https://app.example.com
     deployment_tier: production
-  resource_group: production # serializes concurrent deploys
+  resource_group: production        # serializes concurrent deploys
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
@@ -109,7 +109,6 @@ deploy-production:
 ## Common Patterns
 
 ### Merge request pipelines only (no duplicate branch pipelines)
-
 ```yaml
 workflow:
   rules:
@@ -118,19 +117,17 @@ workflow:
 ```
 
 ### Matrix builds
-
 ```yaml
 test:
   stage: test
   parallel:
     matrix:
-      - NODE_VERSION: ['18', '20', '22']
+      - NODE_VERSION: ["18", "20", "22"]
         OS: [ubuntu, alpine]
   image: node:${NODE_VERSION}-${OS}
 ```
 
 ### Reusable CI/CD component (pinned, not ~latest)
-
 ```yaml
 include:
   - component: gitlab.com/my-org/ci-components/deploy@1.4.2
@@ -140,18 +137,16 @@ include:
 ```
 
 ### Parent/child (monorepo) pipeline
-
 ```yaml
 trigger-backend:
   trigger:
     include: backend/.gitlab-ci.yml
-    strategy: mirror # parent status mirrors child's real status
+    strategy: mirror        # parent status mirrors child's real status
   rules:
     - changes: [backend/**/*]
 ```
 
 ### OIDC to a cloud provider (no static keys)
-
 ```yaml
 deploy:
   id_tokens:
@@ -162,7 +157,6 @@ deploy:
 ```
 
 ### Dependency Proxy for base images (avoid Docker Hub rate limits)
-
 ```yaml
 build:
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:20-alpine
@@ -170,21 +164,21 @@ build:
 
 ## Quick Reference
 
-| Feature                                | Purpose                                                               |
-| -------------------------------------- | --------------------------------------------------------------------- |
-| `workflow:rules`                       | Decide whether a pipeline is created at all; dedupe push/MR pipelines |
-| `needs:`                               | DAG dependencies between jobs, decoupled from stage order             |
-| `needs: []`                            | Job starts immediately, no upstream wait                              |
-| `resource_group`                       | Serialize deploys to the same environment                             |
-| `environment:deployment_tier`          | Classifies env as production/staging/testing/development/other        |
-| `parallel:matrix`                      | Fan out a job across variable combinations                            |
-| `extends`                              | Share config between jobs without `include` overhead                  |
-| CI/CD components (`include:component`) | Typed, versioned, reusable pipeline building blocks                   |
-| `trigger:include` + `strategy: mirror` | Parent/child pipelines for monorepos with real status propagation     |
-| `id_tokens` (OIDC)                     | Short-lived cloud credentials instead of static secrets               |
-| `artifacts:reports:junit`              | Test results surfaced in MR widget                                    |
-| `artifacts:reports:coverage_report`    | Per-line diff coverage annotations in MR                              |
-| `CI_JOB_TOKEN` scope allow-list        | Limits which projects a job token can access                          |
+| Feature | Purpose |
+|---|---|
+| `workflow:rules` | Decide whether a pipeline is created at all; dedupe push/MR pipelines |
+| `needs:` | DAG dependencies between jobs, decoupled from stage order |
+| `needs: []` | Job starts immediately, no upstream wait |
+| `resource_group` | Serialize deploys to the same environment |
+| `environment:deployment_tier` | Classifies env as production/staging/testing/development/other |
+| `parallel:matrix` | Fan out a job across variable combinations |
+| `extends` | Share config between jobs without `include` overhead |
+| CI/CD components (`include:component`) | Typed, versioned, reusable pipeline building blocks |
+| `trigger:include` + `strategy: mirror` | Parent/child pipelines for monorepos with real status propagation |
+| `id_tokens` (OIDC) | Short-lived cloud credentials instead of static secrets |
+| `artifacts:reports:junit` | Test results surfaced in MR widget |
+| `artifacts:reports:coverage_report` | Per-line diff coverage annotations in MR |
+| `CI_JOB_TOKEN` scope allow-list | Limits which projects a job token can access |
 
 ## Anti-Patterns to Avoid
 

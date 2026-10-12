@@ -121,7 +121,6 @@ If the config has `[PLACEHOLDER]`, surface this bounce:
 > I notice you haven't configured your practice profile yet — that's how I tailor posture, jurisdictions, and approval chain to your practice.
 >
 > **Two choices:**
->
 > - Run `/ip-legal:cold-start-interview` (2 minutes) to configure your profile, then I'll run this tailored to YOUR practice.
 > - Say **"provisional"** and I'll run this against generic defaults — US jurisdiction, middle risk appetite, lawyer role, no playbook — and tag every output `[PROVISIONAL — configure your profile for tailored output]` so you can see what I do before committing.
 
@@ -199,8 +198,8 @@ citations and pick logic). Walk each factor and flag what cuts each way.
 Apply the federal TDRA (15 U.S.C. § 1125(c)) and any applicable state statute.
 
 - **Fame threshold.** The senior mark must be famous to the general consuming
-  public — a niche-famous mark is not enough. _Starbucks Corp. v. Wolfe's
-  Borough Coffee, Inc._, 588 F.3d 97 (2d Cir. 2009) is representative.
+  public — a niche-famous mark is not enough. *Starbucks Corp. v. Wolfe's
+  Borough Coffee, Inc.*, 588 F.3d 97 (2d Cir. 2009) is representative.
 - **Blurring vs. tarnishment.** Blurring = distinctiveness harm; tarnishment
   = reputation harm.
 - **Defenses** — comparative advertising, news reporting, fair use,
@@ -237,8 +236,8 @@ issues; joint authorship; assignments; and termination rights all flag.
 ### Registration
 
 17 U.S.C. § 411 requires registration (or preregistration) as a precondition
-to filing an infringement action in US federal court. _Fourth Estate Public
-Benefit Corp. v. Wall-Street.com, LLC_, 586 U.S. 296 (2019) — registration
+to filing an infringement action in US federal court. *Fourth Estate Public
+Benefit Corp. v. Wall-Street.com, LLC*, 586 U.S. 296 (2019) — registration
 means actually issued, not just applied for. Flag registration status; if
 not registered, flag the practical bar on filing.
 
@@ -252,8 +251,8 @@ Two paths to proving copying:
   striking that independent creation is unlikely.
 
 For substantial similarity, apply the circuit's test (Second Circuit's
-ordinary-observer; Ninth Circuit's extrinsic / intrinsic under _Krofft_ and
-_Swirsky_; Fourth / Seventh / Eleventh circuits' variations). Flag which
+ordinary-observer; Ninth Circuit's extrinsic / intrinsic under *Krofft* and
+*Swirsky*; Fourth / Seventh / Eleventh circuits' variations). Flag which
 test applies.
 
 ### Fair use
@@ -266,9 +265,9 @@ test applies.
 3. Amount and substantiality of the portion used.
 4. Effect on the market for the original.
 
-Recent touchstones: _Google LLC v. Oracle America, Inc._, 593 U.S. 1 (2021);
-_Andy Warhol Found. for the Visual Arts, Inc. v. Goldsmith_, 598 U.S. 508
-(2023). Flag the transformativeness analysis carefully — _Warhol_ narrowed
+Recent touchstones: *Google LLC v. Oracle America, Inc.*, 593 U.S. 1 (2021);
+*Andy Warhol Found. for the Visual Arts, Inc. v. Goldsmith*, 598 U.S. 508
+(2023). Flag the transformativeness analysis carefully — *Warhol* narrowed
 the scope of transformative use and is still being applied by lower courts.
 
 ### DMCA safe harbor
@@ -312,8 +311,8 @@ workflow below does NOT apply. Branch per prefix:
   reproduced plant varieties. Route to plant-patent counsel; this skill does
   not analyze plant patents.
 
-**Design patent infringement test — ordinary observer.** _Egyptian Goddess,
-Inc. v. Swisa, Inc._, 543 F.3d 665 (Fed. Cir. 2008) (en banc). The question
+**Design patent infringement test — ordinary observer.** *Egyptian Goddess,
+Inc. v. Swisa, Inc.*, 543 F.3d 665 (Fed. Cir. 2008) (en banc). The question
 is whether an ordinary observer, **familiar with the prior art designs**,
 would be deceived into thinking the accused design is the same as the
 patented design. Compare **overall ornamental appearance**, not individual
@@ -329,16 +328,16 @@ fall outside the patented scope.
 
 **§289 total-profit damages flag.** Design patent damages under 35 U.S.C.
 §289 are the infringer's **total profits on the "article of manufacture,"**
-which can be the whole product or a component. _Samsung Electronics Co. v.
-Apple Inc._, 580 U.S. 53 (2016). This is a separate analysis from utility
+which can be the whole product or a component. *Samsung Electronics Co. v.
+Apple Inc.*, 580 U.S. 53 (2016). This is a separate analysis from utility
 patent reasonable-royalty / lost-profits and is specialist work — do not
 compute.
 
 **Trade dress cross-flag.** The same ornamental-shape facts are usually also
 a **trade dress** question under Lanham Act §43(a) (15 U.S.C. §1125(a)).
-Product configuration trade dress requires **secondary meaning** (_Wal-Mart
-Stores, Inc. v. Samara Bros., Inc._, 529 U.S. 205 (2000)) and must be
-**non-functional** (_TrafFix Devices, Inc. v. Marketing Displays, Inc._,
+Product configuration trade dress requires **secondary meaning** (*Wal-Mart
+Stores, Inc. v. Samara Bros., Inc.*, 529 U.S. 205 (2000)) and must be
+**non-functional** (*TrafFix Devices, Inc. v. Marketing Displays, Inc.*,
 532 U.S. 23 (2001)). Flag trade dress as a parallel track; the tests are
 different but the evidence overlaps.
 
@@ -353,7 +352,7 @@ for the analysis:
   the patent drawings (all figures, including any broken-line disclaimers),
   (b) photos of the accused product from comparable angles, (c) any prior
   art designs you're aware of."
-- **Prior-art landscape.** Ordinary observer is a _comparison_ test — the
+- **Prior-art landscape.** Ordinary observer is a *comparison* test — the
   observer is "familiar with the prior art," so the scope of the patented
   design narrows as the prior-art field crowds. Flag what prior art is
   known and what's missing.
@@ -378,7 +377,6 @@ The rest of this mode assumes the asserted patent is a **utility patent**
 (no `D`/`RE`/`PP` prefix). If the D-number branch above applies, stop here.
 
 > **Patent systems differ by jurisdiction.** The US claim chart (all-elements rule, doctrine of equivalents, prosecution history estoppel, §284/§289 damages) does not transfer to other systems:
->
 > - **Germany:** Utility models (Gebrauchsmuster), the Schneidmesser/Kunststoffrohrteil questions for DOE, bifurcated validity/infringement proceedings.
 > - **China:** Utility models (shiyong xinxing), CNIPA examination, different claim construction.
 > - **Japan:** Utility models, JPO examination, a narrower DOE.
@@ -396,7 +394,7 @@ The rest of this mode assumes the asserted patent is a **utility patent**
 - Indirect (induced, contributory) and divided infringement as flags.
 - **Invalidity defenses to consider** — anticipation (§ 102), obviousness
   (§ 103), § 112 written-description / enablement / definiteness, § 101
-  subject-matter eligibility (_Alice_ / _Mayo_). Known IPR or PGR outcomes,
+  subject-matter eligibility (*Alice* / *Mayo*). Known IPR or PGR outcomes,
   known prior art, known prosecution history. Flag each; do not opine.
 - **Unenforceability defenses** — inequitable conduct flag, prosecution
   laches flag, assignor / licensee estoppel flag. Each is attorney-only.
@@ -435,7 +433,7 @@ other non-UTSA jurisdictions, the state's common-law test). Flag:
 - **Economic value from secrecy** — independent economic value actual or
   potential, derived from not being generally known.
 - **Combinations and compilations** — a combination of public elements can
-  be a trade secret (_Altavion v. Konica Minolta_, and the Restatement view).
+  be a trade secret (*Altavion v. Konica Minolta*, and the Restatement view).
 
 ### Reasonable measures
 
@@ -446,7 +444,7 @@ other non-UTSA jurisdictions, the state's common-law test). Flag:
 - Exit interviews / return of materials on termination.
 - Trade-secret policy / training.
 
-Flag what's in place and what's missing. _Reasonable_ is fact-specific; the
+Flag what's in place and what's missing. *Reasonable* is fact-specific; the
 triage does not decide whether the measures were reasonable — it lists them.
 
 ### Misappropriation
@@ -519,11 +517,11 @@ Flag each.]
 
 ## What cuts which way — summary
 
-| Factor     | Flag   | Direction (senior / accused / mixed) |
-| ---------- | ------ | ------------------------------------ |
-| [factor 1] | [note] | [direction]                          |
+| Factor | Flag | Direction (senior / accused / mixed) |
+|---|---|---|
+| [factor 1] | [note] | [direction] |
 
-**Conclusion:** _This skill does not conclude._ Attorney judgment required
+**Conclusion:** *This skill does not conclude.* Attorney judgment required
 before acting. The factors cutting [direction] are [brief summary]; the
 factors cutting [direction] are [brief summary].
 

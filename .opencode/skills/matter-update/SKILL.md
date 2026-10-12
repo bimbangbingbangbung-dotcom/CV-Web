@@ -1,7 +1,7 @@
 ---
 name: matter-update
 description: Append a dated event to a matter's history file and refresh the log row — captures new developments, status changes, risk re-assessments, deadline shifts, and settlement authority changes. Use when the user wants to log an update on a matter, note a development, or record a status change against the portfolio.
-argument-hint: '[slug] [brief event description]'
+argument-hint: "[slug] [brief event description]"
 ---
 
 # /matter-update
@@ -92,12 +92,12 @@ Do not log the acceptance or flip materiality on acceptance basis without an exp
 
 Certain event types force a materiality re-check. When the event type is in this list, **always prompt** — don't let the user move on without an explicit answer:
 
-| Event type                                                  | Materiality trigger prompt                                                                                                                                                                                   |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Substantive (new facts, key document, merits ruling)        | "This event is substantive. Does it push `materiality`? Current: `[current]`. Options: `reserved / disclosed / monitored / none`. Change?"                                                                   |
+| Event type | Materiality trigger prompt |
+|---|---|
+| Substantive (new facts, key document, merits ruling) | "This event is substantive. Does it push `materiality`? Current: `[current]`. Options: `reserved / disclosed / monitored / none`. Change?" |
 | Strategy (posture shift, settlement offer made or received) | "Settlement activity often triggers materiality reclassification. Current: `[current]`. If the offer, counter, or acceptance moves exposure or shifts from contested to probable-and-estimable, reclassify." |
-| Risk re-assessment (severity or likelihood changed)         | "Risk moved. Materiality should track. Current: `[current]`. Reclassify?"                                                                                                                                    |
-| Regulatory / enforcement development                        | "Regulator action (subpoena, CID, enforcement notice) usually triggers disclosure analysis. Current: `[current]`. Change?"                                                                                   |
+| Risk re-assessment (severity or likelihood changed) | "Risk moved. Materiality should track. Current: `[current]`. Reclassify?" |
+| Regulatory / enforcement development | "Regulator action (subpoena, CID, enforcement notice) usually triggers disclosure analysis. Current: `[current]`. Change?" |
 
 Acceptable answers include `no change` — but `no change` must be explicit, not implied by silence. Capture in the history entry:
 
@@ -124,7 +124,6 @@ Most recent at top, directly under the `---` that follows the header.
 [Paragraph summary.]
 
 **Fields changed:**
-
 - [field]: [old → new]
 - [field]: [old → new]
 

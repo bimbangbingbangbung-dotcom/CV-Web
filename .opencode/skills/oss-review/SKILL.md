@@ -5,7 +5,7 @@ description: >
   library, or outbound code. Use when reviewing a manifest, SBOM, or repo for
   copyleft obligations and license compatibility, when asked whether a library
   can ship, or when preparing code to be open-sourced.
-argument-hint: '[file path to manifest / SBOM | package name | repo path | paste text]'
+argument-hint: "[file path to manifest / SBOM | package name | repo path | paste text]"
 ---
 
 # /oss-review
@@ -105,12 +105,12 @@ This is the single most important input after the license list — the same libr
 > 3. **Internal only** — used only inside the company, not distributed outside
 > 4. **Embedded / firmware** — shipped in hardware or as closed-system firmware
 
-| Deployment          | Licenses that materially matter                                                                                                                                          |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| SaaS                | AGPL (network-trigger), permissive attribution in any UI, SSPL/BUSL/Elastic if repurposing as competing service                                                          |
-| Distributed binary  | GPL, LGPL, MPL, EPL (all trigger on distribution), permissive attribution                                                                                                |
-| Internal only       | Most copyleft does not trigger — no distribution. Permissive attribution still good hygiene. AGPL still triggers if users outside the company interact over the network. |
-| Embedded / firmware | GPL is especially hard to comply with here (source disclosure + reproducible build + installation information in some cases). Plan for this before shipping, not after.  |
+| Deployment | Licenses that materially matter |
+|---|---|
+| SaaS | AGPL (network-trigger), permissive attribution in any UI, SSPL/BUSL/Elastic if repurposing as competing service |
+| Distributed binary | GPL, LGPL, MPL, EPL (all trigger on distribution), permissive attribution |
+| Internal only | Most copyleft does not trigger — no distribution. Permissive attribution still good hygiene. AGPL still triggers if users outside the company interact over the network. |
+| Embedded / firmware | GPL is especially hard to comply with here (source disclosure + reproducible build + installation information in some cases). Plan for this before shipping, not after. |
 
 Flag the deployment model in the output memo — the same dependency list reviewed against "SaaS" vs. "distributed binary" yields different obligations.
 
@@ -120,14 +120,14 @@ For every package, determine the license. Read the actual license text, not just
 
 Classify into:
 
-| Bucket                         | Examples                                                                                      | Key obligations                                                                                                    |
-| ------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Permissive**                 | MIT, BSD-2-Clause, BSD-3-Clause, Apache-2.0, ISC, Zlib, Unlicense                             | Attribution, preserve license text, Apache-2.0 adds patent grant + NOTICE requirement                              |
-| **Weak copyleft**              | LGPL-2.1, LGPL-3.0, MPL-2.0, EPL-1.0, EPL-2.0, CDDL                                           | File-level or library-level source disclosure; linking rules vary                                                  |
-| **Strong copyleft**            | GPL-2.0, GPL-3.0, AGPL-3.0, OSL, EUPL (depending on version)                                  | Broad source disclosure; AGPL extends to network use                                                               |
-| **Public domain / dedication** | CC0, Unlicense, WTFPL                                                                         | Typically no obligations, but some are contested in jurisdictions that don't recognize dedication to public domain |
-| **Non-OSI source-available**   | SSPL, BUSL, Commons Clause, Elastic License, Confluent Community, fair-source family          | Not open source — restrict commercial use, competing-service use, or both. Read the specific license.              |
-| **Other / custom / unknown**   | vendor-specific, proprietary, missing license file, license conflict between file and headers | Stop — do not treat as permissive by default                                                                       |
+| Bucket | Examples | Key obligations |
+|---|---|---|
+| **Permissive** | MIT, BSD-2-Clause, BSD-3-Clause, Apache-2.0, ISC, Zlib, Unlicense | Attribution, preserve license text, Apache-2.0 adds patent grant + NOTICE requirement |
+| **Weak copyleft** | LGPL-2.1, LGPL-3.0, MPL-2.0, EPL-1.0, EPL-2.0, CDDL | File-level or library-level source disclosure; linking rules vary |
+| **Strong copyleft** | GPL-2.0, GPL-3.0, AGPL-3.0, OSL, EUPL (depending on version) | Broad source disclosure; AGPL extends to network use |
+| **Public domain / dedication** | CC0, Unlicense, WTFPL | Typically no obligations, but some are contested in jurisdictions that don't recognize dedication to public domain |
+| **Non-OSI source-available** | SSPL, BUSL, Commons Clause, Elastic License, Confluent Community, fair-source family | Not open source — restrict commercial use, competing-service use, or both. Read the specific license. |
+| **Other / custom / unknown** | vendor-specific, proprietary, missing license file, license conflict between file and headers | Stop — do not treat as permissive by default |
 
 Flag:
 
@@ -157,7 +157,6 @@ For each classified dependency, state what the deployment model triggers:
 ```
 
 > **How is the copyleft dependency consumed?** The linking relationship determines whether copyleft actually triggers. Ask or determine:
->
 > - **Static linking / compilation together:** The works are combined into one binary. Strong signal that copyleft triggers (LGPL "work based on the Library," GPL derivative work).
 > - **Dynamic linking / shared library:** The works remain separable at runtime. LGPL explicitly permits this ("work that uses the Library"). GPL's position is contested (FSF says derivative, others disagree).
 > - **Header inclusion / inline functions:** Can create a derivative work depending on how much is included.
@@ -169,12 +168,12 @@ For each classified dependency, state what the deployment model triggers:
 
 **Severity calibration:**
 
-| Level       | Means                                                                                                                                                                                                                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Level | Means |
+|---|---|
 | 🔴 Critical | Strong copyleft in a deployment that triggers it (e.g., GPL in a distributed binary, AGPL in a SaaS). Non-OSI license that the business model actually conflicts with (e.g., SSPL while we're building a managed service). License cannot be determined and the package is load-bearing. |
-| 🟠 High     | Weak copyleft with obligations the team hasn't set up for (file-level disclosure, NOTICE requirements). Dual-licensed where the chosen license is ambiguous. License file says one thing, headers say another.                                                                           |
-| 🟡 Medium   | Permissive with attribution requirements that haven't been wired into the build (missing NOTICES file, missing LICENSE in distribution). Transitive copyleft in a position that may or may not trigger, depending on how the library is consumed.                                        |
-| 🟢 Low      | Permissive with obligations already satisfied. Copyleft in a deployment model that doesn't trigger it (e.g., GPL library used internally only, with no redistribution).                                                                                                                  |
+| 🟠 High | Weak copyleft with obligations the team hasn't set up for (file-level disclosure, NOTICE requirements). Dual-licensed where the chosen license is ambiguous. License file says one thing, headers say another. |
+| 🟡 Medium | Permissive with attribution requirements that haven't been wired into the build (missing NOTICES file, missing LICENSE in distribution). Transitive copyleft in a position that may or may not trigger, depending on how the library is consumed. |
+| 🟢 Low | Permissive with obligations already satisfied. Copyleft in a deployment model that doesn't trigger it (e.g., GPL library used internally only, with no redistribution). |
 
 ### Step 5: Flag failure modes
 
@@ -281,3 +280,4 @@ Likewise, when the copyleft-trigger analysis turns on a contested question (AGPL
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
 
 If the scan surfaced more than ~10 packages, or any time the user asks: offer the dashboard (see CLAUDE.md `## Outputs → Dashboard offer for data-heavy outputs`). Shape the offer to what's useful here — counts by license family (permissive / weak copyleft / strong copyleft / AGPL / proprietary / unknown), risk distribution, and a table of findings with severity and package version.
+

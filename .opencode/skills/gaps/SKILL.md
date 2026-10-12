@@ -1,7 +1,7 @@
 ---
 name: gaps
 description: Open gaps tracker — what's flagged and not yet closed. Use when the user asks "what gaps are open", "gap tracker", "remediation status", or wants to close (--close GAP-ID) or risk-accept (--accept GAP-ID) a tracked gap.
-argument-hint: '[optional: --close GAP-ID | --accept GAP-ID]'
+argument-hint: "[optional: --close GAP-ID | --accept GAP-ID]"
 ---
 
 # /gaps

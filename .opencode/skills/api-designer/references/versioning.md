@@ -7,7 +7,6 @@ API versioning allows you to evolve your API while maintaining backward compatib
 ### Breaking Changes
 
 Changes that require a new version:
-
 - Removing or renaming fields
 - Changing field types (string to integer)
 - Adding required fields to requests
@@ -19,7 +18,6 @@ Changes that require a new version:
 ### Non-Breaking Changes
 
 Safe changes that don't require a new version:
-
 - Adding new endpoints
 - Adding optional request fields
 - Adding new fields to responses (clients should ignore unknown fields)
@@ -39,20 +37,17 @@ GET /v2/users/123
 ```
 
 **Advantages:**
-
 - Clear and visible in URLs
 - Easy to understand and implement
 - Simple routing and caching
 - Can run multiple versions simultaneously
 
 **Disadvantages:**
-
 - Violates REST principle (same resource, different URIs)
 - Requires updating client code to change version
 - Can lead to URI proliferation
 
 **Implementation:**
-
 ```
 /v1/users
 /v1/products
@@ -65,7 +60,6 @@ GET /v2/users/123
 Version specified in HTTP headers (Accept header or custom header).
 
 **Accept Header:**
-
 ```http
 GET /users/123
 Accept: application/vnd.myapi.v1+json
@@ -75,7 +69,6 @@ Accept: application/vnd.myapi.v2+json
 ```
 
 **Custom Header:**
-
 ```http
 GET /users/123
 API-Version: 1
@@ -85,13 +78,11 @@ API-Version: 2
 ```
 
 **Advantages:**
-
 - URIs remain stable
 - More RESTful (same resource, same URI)
 - Separates versioning from resource identification
 
 **Disadvantages:**
-
 - Less visible (harder to debug)
 - More complex routing
 - Difficult to test in browser
@@ -111,13 +102,11 @@ GET /users/123?api-version=2
 ```
 
 **Advantages:**
-
 - Simple to implement
 - Easy to test
 - Visible in URLs
 
 **Disadvantages:**
-
 - Pollutes query string
 - Not semantic (version not a filter)
 - Can interfere with other query params
@@ -135,13 +124,11 @@ Accept: application/vnd.myapi+json; version=2
 ```
 
 **Advantages:**
-
 - Very RESTful
 - Flexible content type negotiation
 - Stable URIs
 
 **Disadvantages:**
-
 - Complex implementation
 - Less intuitive for developers
 - Harder to test
@@ -149,7 +136,6 @@ Accept: application/vnd.myapi+json; version=2
 ## Recommended Approach
 
 **URI versioning is recommended for most APIs** because:
-
 - It's the most explicit and discoverable
 - Easy to understand and debug
 - Simple to implement and maintain
@@ -166,14 +152,12 @@ Accept: application/vnd.myapi+json; version=2
 ### Major Versions Only
 
 Use simple major versions (v1, v2, v3) for public APIs:
-
 ```
 /v1/users
 /v2/users
 ```
 
 **Advantages:**
-
 - Simple and clear
 - Easy to communicate
 - Forces thoughtful breaking changes
@@ -181,7 +165,6 @@ Use simple major versions (v1, v2, v3) for public APIs:
 ### Date-Based Versions
 
 Some APIs use dates for versions:
-
 ```
 /2024-01-01/users
 /2024-06-15/users
@@ -190,13 +173,11 @@ Some APIs use dates for versions:
 **Used by:** Stripe, GitHub API
 
 **Advantages:**
-
 - Clear when version was released
 - Easy to understand timeline
 - No confusion about major/minor
 
 **Disadvantages:**
-
 - Less intuitive for clients
 - Harder to understand what changed
 
@@ -205,14 +186,12 @@ Some APIs use dates for versions:
 ### 1. Introduction Phase
 
 New version is released alongside existing version:
-
 ```
 /v1/users  # Still supported
 /v2/users  # New version available
 ```
 
 Announce new version:
-
 - Blog post explaining changes
 - Migration guide
 - Breaking changes list
@@ -237,7 +216,6 @@ Link: </v2/users/123>; rel="successor-version"
 ```
 
 **Deprecation Headers:**
-
 - `Deprecation: true` - Indicates version is deprecated
 - `Sunset: <date>` - When version will be removed (RFC 8594)
 - `Link: <url>; rel="successor-version"` - Points to new version
@@ -247,7 +225,6 @@ Link: </v2/users/123>; rel="successor-version"
 Old version is shut down on announced date.
 
 Return 410 Gone for deprecated endpoints:
-
 ```http
 GET /v1/users/123
 
@@ -283,7 +260,7 @@ Response: 410 Gone
 
 ### Provide Migration Guide
 
-````markdown
+```markdown
 # Migrating from v1 to v2
 
 ## Breaking Changes
@@ -291,7 +268,6 @@ Response: 410 Gone
 ### User Resource Changes
 
 **v1:**
-
 ```json
 {
   "id": 123,
@@ -299,10 +275,8 @@ Response: 410 Gone
   "email": "john@example.com"
 }
 ```
-````
 
 **v2:**
-
 ```json
 {
   "id": 123,
@@ -313,11 +287,9 @@ Response: 410 Gone
 ```
 
 **Migration:**
-
 - Split `name` field into `first_name` and `last_name`
 - Update client code to use new fields
-
-````
+```
 
 ### Offer Tools
 
@@ -351,7 +323,7 @@ Response:
     }
   }
 }
-````
+```
 
 ### Version Info Endpoint
 

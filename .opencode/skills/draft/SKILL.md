@@ -61,13 +61,13 @@ Whatever the posture, the output always includes: "**Pedagogy mode: [assist/guid
 
 Match the request to the clinic's template set (from `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md`). Common set by practice area:
 
-| Practice area          | Documents                                                                                                                                    |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Immigration**        | I-589 asylum application narrative, client declaration, motion to change venue, motion to continue, FOIA request, country conditions summary |
-| **Housing**            | Eviction answer, demand letter (repairs/deposit), motion to stay execution, discovery requests                                               |
-| **Family**             | Protective order petition, custody declaration, motion to modify, financial affidavit                                                        |
-| **Consumer**           | Debt validation letter, FDCPA demand letter, answer to collection complaint, motion to vacate default                                        |
-| **General litigation** | Motion template, notice of appearance, certificate of service                                                                                |
+| Practice area | Documents |
+|---|---|
+| **Immigration** | I-589 asylum application narrative, client declaration, motion to change venue, motion to continue, FOIA request, country conditions summary |
+| **Housing** | Eviction answer, demand letter (repairs/deposit), motion to stay execution, discovery requests |
+| **Family** | Protective order petition, custody declaration, motion to modify, financial affidavit |
+| **Consumer** | Debt validation letter, FDCPA demand letter, answer to collection complaint, motion to vacate default |
+| **General litigation** | Motion template, notice of appearance, certificate of service |
 
 If the requested document isn't in the template set: "The clinic's templates don't include [X]. I can attempt a draft from general principles, but flag this heavily — it hasn't been tuned for your practice area or jurisdiction. Better to ask [Professor] if there's an existing template."
 
@@ -75,9 +75,9 @@ If the requested document isn't in the template set: "The clinic's templates don
 
 Read the intake summary or case notes. For each fact the document needs: do we have it?
 
-| Document needs | Have? | Source                              |
-| -------------- | ----- | ----------------------------------- |
-| [fact]         | ✓ / ✗ | [intake / client doc / need to get] |
+| Document needs | Have? | Source |
+|---|---|---|
+| [fact] | ✓ / ✗ | [intake / client doc / need to get] |
 
 Missing required facts → don't guess. Mark them: `[FACT NEEDED: client's entry date — get from I-94 or ask client]`.
 
@@ -108,7 +108,6 @@ Three kinds of flags, in-line:
 Filing a document with a court or agency is a consequential action. The gate is the supervision workflow in `## Supervision style` in `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md`, reinforced by the Part 0 role check that confirms a licensed supervising attorney owns the clinic setup. Court filings always route through supervision before filing, regardless of the supervision-style choice.
 
 Per `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` supervision style:
-
 - **Formal queue:** draft goes to queue, student sees "queued for [Professor]"
 - **Configurable flags:** if this document type is a flag trigger (court filings usually are), output includes "CHECK WITH [PROFESSOR] BEFORE FILING"
 - **Lighter-touch:** standard safeguard label, no additional gate — but court filings still go to the professor before filing per the clinic's existing supervision structure
@@ -117,9 +116,9 @@ Per `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` supervisi
 
 ```markdown
 ═══════════════════════════════════════════════════════════════════════
-AI-ASSISTED DRAFT — REQUIRES STUDENT ANALYSIS AND ATTORNEY REVIEW
-This is a starting point, not final work product.
-Every [VERIFY] and [FACT NEEDED] flag must be resolved before filing.
+  AI-ASSISTED DRAFT — REQUIRES STUDENT ANALYSIS AND ATTORNEY REVIEW
+  This is a starting point, not final work product.
+  Every [VERIFY] and [FACT NEEDED] flag must be resolved before filing.
 ═══════════════════════════════════════════════════════════════════════
 
 [The document — in the practice-area template format, jurisdiction-aware,
@@ -151,9 +150,9 @@ Before showing this to [Professor]:
 
 **Before this leaves the clinic.** This is a student draft for supervising-attorney review, not a final letter, filing, or form. Filing it with a court or agency, or sending it to a client or opposing party, has legal consequences for the client. A licensed supervising attorney reviews, edits, and signs off before it leaves the clinic. Strip the AI-assisted draft header only after that sign-off. Do not send or file this draft without supervisor approval.
 
-_ABA Formal Opinion 512 (2024): generative AI use requires competence,
+*ABA Formal Opinion 512 (2024): generative AI use requires competence,
 supervision, and verification. This draft is designed to be supervised and
-verified — it is not designed to be trusted without that._
+verified — it is not designed to be trusted without that.*
 ```
 
 ## What this skill does NOT do

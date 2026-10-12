@@ -1,28 +1,28 @@
 ---
 name: rate-my-code
-description: 'Rate, red-team, or issue a ship/no-ship verdict on a vibe-coded, AI-built, or MVP app, repository, or deployment. 为 vibe coding 应用做有证据的上线审查:实测真实流程,拦下致命风险,给出修复和复测路径。Routes cover Staff-level product, systems, and frontend audits, hostile-user testing, evidence-grounded VC review, oral defense, authorized fixes, audit ledgers, and re-reviews, with checks for security, payment safety, accessibility, hardcoded or mock data, and missing loading, empty, or error states. Trigger on wording such as rate my code, would you ship this, try to break it, roast my app, is this data real, 挑刺, 前端审查, 答辩, 能上线吗, 写死的数据, 假数据, 接口没接上, or 占位没做完, even before a product is attached. Resolve an actual artifact or concrete evidence before settings or audit. Do not use for isolated snippets, routine fixes, generic code review or startup advice, copy editing, interview prep, or fundamentals teaching unless evaluating the product itself.'
+description: "Rate, red-team, or issue a ship/no-ship verdict on a vibe-coded, AI-built, or MVP app, repository, or deployment. 为 vibe coding 应用做有证据的上线审查:实测真实流程,拦下致命风险,给出修复和复测路径。Routes cover Staff-level product, systems, and frontend audits, hostile-user testing, evidence-grounded VC review, oral defense, authorized fixes, audit ledgers, and re-reviews, with checks for security, payment safety, accessibility, hardcoded or mock data, and missing loading, empty, or error states. Trigger on wording such as rate my code, would you ship this, try to break it, roast my app, is this data real, 挑刺, 前端审查, 答辩, 能上线吗, 写死的数据, 假数据, 接口没接上, or 占位没做完, even before a product is attached. Resolve an actual artifact or concrete evidence before settings or audit. Do not use for isolated snippets, routine fixes, generic code review or startup advice, copy editing, interview prep, or fundamentals teaching unless evaluating the product itself."
 ---
 
 # RateMyCode
 
 Read `references/review-contract.md` for every route. It is the single source of truth for evidence lanes, findings, vetoes, decisions, the opening issue list, and re-review identity.
 
-| Reviewer role                                                                          | Route reference                              |
-| -------------------------------------------------------------------------------------- | -------------------------------------------- |
-| Product lead, product judge, or 产品负责人                                             | Read `references/product-lead.md`            |
-| Staff engineer focused on systems/backend, or deep systems review                      | Read `references/staff-engineer.md`          |
+| Reviewer role | Route reference |
+|---|---|
+| Product lead, product judge, or 产品负责人 | Read `references/product-lead.md` |
+| Staff engineer focused on systems/backend, or deep systems review | Read `references/staff-engineer.md` |
 | Staff Frontend engineer, frontend product assurance, or professional browser/UI review | Read `references/staff-frontend-engineer.md` |
-| Hostile, picky, careless, or adversarial user testing                                  | Read `references/hostile-user.md`            |
-| Skeptical VC, product evidence, traction, or investment judgment                       | Read `references/skeptical-vc.md`            |
-| Defense professor, quiz, interview, or one question at a time                          | Read `references/oral-defense.md`            |
+| Hostile, picky, careless, or adversarial user testing | Read `references/hostile-user.md` |
+| Skeptical VC, product evidence, traction, or investment judgment | Read `references/skeptical-vc.md` |
+| Defense professor, quiz, interview, or one question at a time | Read `references/oral-defense.md` |
 
-| Review degree                                                            | Decision bar                                                                                                                                    | Additional reference           |
-| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **Quick check — start here**                                             | `internal-demo`; only the highest-leverage checks. The cheapest run by a wide margin: it narrows what is investigated, never what is disclosed. | Read `references/ship-fast.md` |
-| Strict review — private-beta standard                                    | `private-beta`; complete the selected role rubric                                                                                               | None                           |
-| Launch gate — public-release standard                                    | `public-launch`; require runtime release evidence                                                                                               | None                           |
-| Real stakes — money or sensitive-data standard                           | `real-money`; verify payment, privacy, recovery, and operations                                                                                 | None                           |
-| Life-or-death — regulated, high-stakes, or investment-committee standard | `high-stakes`, or `venture-case` for VC                                                                                                         | None                           |
+| Review degree | Decision bar | Additional reference |
+|---|---|---|
+| **Quick check — start here** | `internal-demo`; only the highest-leverage checks. The cheapest run by a wide margin: it narrows what is investigated, never what is disclosed. | Read `references/ship-fast.md` |
+| Strict review — private-beta standard | `private-beta`; complete the selected role rubric | None |
+| Launch gate — public-release standard | `public-launch`; require runtime release evidence | None |
+| Real stakes — money or sensitive-data standard | `real-money`; verify payment, privacy, recovery, and operations | None |
+| Life-or-death — regulated, high-stakes, or investment-committee standard | `high-stakes`, or `venture-case` for VC | None |
 
 ## Invariants
 

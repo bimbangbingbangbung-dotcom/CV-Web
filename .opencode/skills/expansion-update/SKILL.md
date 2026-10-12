@@ -5,7 +5,7 @@ description: >
   recalculates what is now unblocked, flags anything overdue, and surfaces
   the next priorities. Use when work has happened since the last session and
   the expansion tracker needs to reflect the current state.
-argument-hint: '[country name]'
+argument-hint: "[country name]"
 ---
 
 # /expansion-update

@@ -7,7 +7,7 @@ description: >
   jurisdiction, and surfaces what's due in the next 30/60/90 days. Use when
   user says "entity compliance", "filing deadlines", "annual reports due",
   "entity tracker", "what filings are due", "entity health", or "good standing".
-argument-hint: '[--init | --report [--days N] | --update [--from-report] | --sweep | --audit | --export [--format csv|table]]'
+argument-hint: "[--init | --report [--days N] | --update [--from-report] | --sweep | --audit | --export [--format csv|table]]"
 ---
 
 # /entity-compliance
@@ -76,42 +76,41 @@ Lives at `~/.claude/plugins/config/claude-for-legal/corporate-legal/entities/com
 # Disclaimer: deadlines are reference only — confirm with registered agent or Secretary of State
 
 metadata:
-  company: '[Company Name]'
-  generated: '[date]'
-  last_updated: '[date]'
-  last_audit: '[date or null]'
+  company: "[Company Name]"
+  generated: "[date]"
+  last_updated: "[date]"
+  last_audit: "[date or null]"
 
-custom_jurisdictions: # manually added — US states or countries not in built-in reference table
-  [] # populated when a new jurisdiction is encountered
+custom_jurisdictions:   # manually added — US states or countries not in built-in reference table
+  []                    # populated when a new jurisdiction is encountered
 
 entities:
-  - name: '[Entity Name]'
-    type: '[Corporation / LLC / LP / other]'
-    state_of_formation: '[state]'
-    formation_date: '[date or null]'
-    status: '[active / dormant / dissolving]'
-    registered_agent: '[CT Corp / National / in-house / other]'
-    notes: ''
+  - name: "[Entity Name]"
+    type: "[Corporation / LLC / LP / other]"
+    state_of_formation: "[state]"
+    formation_date: "[date or null]"
+    status: "[active / dormant / dissolving]"
+    registered_agent: "[CT Corp / National / in-house / other]"
+    notes: ""
 
     jurisdictions:
-      - state: '[state]'
-        qualification: '[domestic / foreign]'
-        qualified_date: '[date or null]'
-        agent_managed: false # set true for international entities where a local agent handles compliance
-        local_agent: '[name or null]'
+      - state: "[state]"
+        qualification: "[domestic / foreign]"
+        qualified_date: "[date or null]"
+        agent_managed: false   # set true for international entities where a local agent handles compliance
+        local_agent: "[name or null]"
         filings:
-          - type: '[Annual Report / Franchise Tax / Statement of Information / Biennial Statement / other]'
-            due_date: '[YYYY-MM-DD]'
-            due_basis: '[fixed date / anniversary month / other]'
-            last_filed: '[date or null]'
-            last_fee: '[amount or null]'
-            status: '[current / due_soon / overdue / unknown]'
-            confirmed_good_standing: '[date or null]'
-            notes: ''
+          - type: "[Annual Report / Franchise Tax / Statement of Information / Biennial Statement / other]"
+            due_date: "[YYYY-MM-DD]"
+            due_basis: "[fixed date / anniversary month / other]"
+            last_filed: "[date or null]"
+            last_fee: "[amount or null]"
+            status: "[current / due_soon / overdue / unknown]"
+            confirmed_good_standing: "[date or null]"
+            notes: ""
 ```
 
 Status values:
-
 - `current` — filed for current period, nothing due within 90 days
 - `due_soon` — due within 90 days
 - `overdue` — past due date with no filed date recorded
@@ -145,7 +144,6 @@ For each jurisdiction where the entity is registered (domestic or foreign):
 > Let me capture them so we can track this going forward.
 >
 > For [Entity] in [Jurisdiction]:
->
 > 1. What type of filing is required? (Annual report, franchise tax, confirmation
 >    statement, annual return, or something else?)
 > 2. When is it due? (Fixed date like May 1, anniversary month, or other?)
@@ -156,15 +154,15 @@ Store the answer in a `custom_jurisdictions` block in the tracker:
 
 ```yaml
 custom_jurisdictions:
-  - jurisdiction: '[State / Country]'
-    jurisdiction_type: '[US state / Canada province / EU member state / other]'
+  - jurisdiction: "[State / Country]"
+    jurisdiction_type: "[US state / Canada province / EU member state / other]"
     filings:
-      - type: '[filing type]'
-        due_basis: '[fixed: MM-DD / anniversary month / other description]'
-        typical_fee: '[amount or unknown]'
-        notes: '[any other relevant information — e.g., local agent required, filing in local language]'
-    added_by: 'manual'
-    added_date: '[date]'
+      - type: "[filing type]"
+        due_basis: "[fixed: MM-DD / anniversary month / other description]"
+        typical_fee: "[amount or unknown]"
+        notes: "[any other relevant information — e.g., local agent required, filing in local language]"
+    added_by: "manual"
+    added_date: "[date]"
 ```
 
 This custom definition is then applied to all entities in that jurisdiction.
@@ -177,7 +175,6 @@ custom definition flow above — confirm the filing type, cadence, and fee with
 the local filing agent or registered office agent before populating the tracker.
 
 For international entities, also ask:
-
 - Is there a local filing agent or registered office agent handling compliance?
   If yes, note the agent name — the tracker can flag when to follow up with them
   rather than calculating due dates independently.
@@ -196,7 +193,6 @@ If formation_date is null: set status to `unknown` and flag for confirmation.
 
 Generate `~/.claude/plugins/config/claude-for-legal/corporate-legal/entities/compliance-tracker.yaml` with all entities and their
 calculated filing requirements. Set initial status:
-
 - `current` if last_filed is within the current filing period
 - `due_soon` if due within 90 days and no last_filed for current period
 - `overdue` if due date has passed and no last_filed for current period
@@ -290,11 +286,9 @@ Do not record a new `last_filed` date past this gate without an explicit yes. Tr
 ```
 
 Attorney tells Claude what was filed:
-
 > "We filed the Delaware annual report for [Entity] on March 1. Fee was $450."
 
 Claude updates:
-
 - `last_filed` → March 1 date
 - `last_fee` → $450
 - `status` → `current`
@@ -310,7 +304,6 @@ User uploads a CT Corp, National Registered Agents, or similar compliance
 report (PDF, CSV, or Excel). Claude reads it and updates matching entities:
 
 From the report, extract for each entity:
-
 - Filing type and due date
 - Last filed date (if present)
 - Good standing status and date confirmed
@@ -321,7 +314,6 @@ confirmation — "Acme Holdings LLC" vs. "Acme Holdings, LLC" are probably
 the same entity).
 
 After processing:
-
 ```
 Updated [N] entities from report.
 
@@ -355,12 +347,10 @@ Updates tracker after each confirmation. Produces a completion summary.
 Broader review beyond just filing status. Surfaces:
 
 **Filing compliance:**
-
 - Overdue items (from report mode)
 - Unknown status items
 
 **Entity health:**
-
 - Entities marked as `dormant` — flag for review: should these be dissolved?
   Carrying dormant entities costs money (annual fees, registered agent fees)
   and creates ongoing compliance obligations.
@@ -369,21 +359,18 @@ Broader review beyond just filing status. Surfaces:
 - Entities missing formation_date — flag as data gap.
 
 **Good standing gaps:**
-
 - Entities with no `confirmed_good_standing` date — unknown whether in good
   standing; risk if a transaction requires a certificate on short notice.
 - Entities with `confirmed_good_standing` older than 12 months — stale; worth
   refreshing, especially if M&A or financing is anticipated.
 
 **Foreign qualification gaps:**
-
 - Based on `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` entity table: are there states in the company's
   operational footprint (offices, employees) where entities are not foreign
   qualified? This requires the attorney to confirm operational presence —
   Claude can flag the question but cannot determine presence independently.
 
 **Intercompany agreement gaps:**
-
 - From `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`: if intercompany agreements are marked as partial or no,
   flag which entity relationships likely need agreements (parent-subsidiary
   services, IP licenses, loans).
@@ -458,6 +445,7 @@ a report or Slack message, showing only the next 90 days of filings.
   have support.
 - The filing deadline reference table is not legal advice and may not reflect
   current requirements. Confirm all deadlines before relying on them.
+
 
 ## Formula injection defense
 

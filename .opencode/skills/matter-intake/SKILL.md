@@ -1,7 +1,7 @@
 ---
 name: matter-intake
 description: Intake a new matter — uniform questions covering identification, conflicts, source, risk triage, materiality, outside counsel, owners, legal hold, and key dates; writes matter.md and history.md and appends a structured row to _log.yaml. Use when the user says "new matter", "intake this matter", or wants to bring a new matter into the portfolio.
-argument-hint: '[optional matter name]'
+argument-hint: "[optional matter name]"
 ---
 
 # /matter-intake
@@ -66,7 +66,7 @@ Behavior by status:
 
   ```yaml
   conflicts:
-    status: not-run # preserved as-is
+    status: not-run               # preserved as-is
     override:
       by: [user name]
       date: [YYYY-MM-DD]
@@ -82,9 +82,8 @@ This step is not about the skill deciding whether a conflict exists — that's t
 ### 3. Source
 
 How did this arrive?
-
 - `demand-letter | complaint-served | subpoena | regulator-inquiry | internal-report | pre-suit-threat`
-- _Seed doc opportunity:_ "If you have the initiating document (complaint, demand, subpoena), attach or share the path. It sharpens the intake."
+- *Seed doc opportunity:* "If you have the initiating document (complaint, demand, subpoena), attach or share the path. It sharpens the intake."
 
 ### 4. Risk triage — against house calibration
 
@@ -99,7 +98,6 @@ If the risk calibration in `~/.claude/plugins/config/claude-for-legal/litigation
 ### 5. Materiality
 
 Against the house thresholds in `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`:
-
 - `reserved | disclosed | monitored | none`
 - If `reserved`: reserve amount and whether finance has been notified
 - If `disclosed`: filing and footnote location
@@ -111,14 +109,13 @@ Against the house thresholds in `~/.claude/plugins/config/claude-for-legal/litig
 - **Lead partner email** (used by `/oc-status` to draft status requests)
 - Engagement letter status: `signed | pending | none`
 - Budget authorization: amount and approver
-- _Seed doc opportunity:_ "Engagement letter path, if signed."
+- *Seed doc opportunity:* "Engagement letter path, if signed."
 
 If risk is medium or higher and no outside counsel is assigned — flag it.
 
 ### 7. Internal owners
 
 From `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` landscape — which internal stakeholders are involved?
-
 - Business lead
 - HR partner (if employment)
 - Comms contact (if reputational risk)
@@ -130,7 +127,7 @@ From `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` land
 - Issued? If yes: date, scope, custodians (list of names).
 - Next refresh date (default: six months from issuance; adjust per matter).
 - If no and this is active litigation or reasonably anticipated: flag urgently; offer to run `/litigation-legal:legal-hold [slug] --issue` after intake completes.
-- _Seed doc opportunity:_ "Hold notice, if issued."
+- *Seed doc opportunity:* "Hold notice, if issued."
 
 ### 9. Key dates
 
@@ -142,7 +139,6 @@ From `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` land
 ### 10. Initial posture
 
 One-paragraph theory:
-
 - What's our story?
 - What's theirs?
 - What's the pivot fact?
@@ -222,8 +218,8 @@ Confirm slug is unique in `_log.yaml` before writing.
 
 ## Seed documents
 
-| Doc               | Path / pointer             |
-| ----------------- | -------------------------- |
+| Doc | Path / pointer |
+|---|---|
 | [e.g., complaint] | [path or "not yet shared"] |
 ```
 
@@ -249,11 +245,11 @@ Add a row per the schema. Example:
 
 ```yaml
 - id: acme-v-us-2026
-  name: 'Acme Corp v. Company'
+  name: "Acme Corp v. Company"
   type: contract
   role: defendant
-  counterparty: 'Acme Corp'
-  jurisdiction: 'N.D. Cal.'
+  counterparty: "Acme Corp"
+  jurisdiction: "N.D. Cal."
   # status is derived from source:
   #   source: pre-suit-threat | demand-letter           → status: threatened
   #   source: complaint-served | subpoena | regulator-inquiry → status: active
@@ -262,31 +258,31 @@ Add a row per the schema. Example:
   stage: pleadings
   source: complaint-served
   outside_counsel:
-    firm: 'Wilson Sonsini'
-    lead: 'J. Reyes'
-    email: 'jreyes@wsgr.example.com'
+    firm: "Wilson Sonsini"
+    lead: "J. Reyes"
+    email: "jreyes@wsgr.example.com"
     engagement: signed
   conflicts:
     status: cleared
     method: corporate-legal
-    cleared_by: 'K. Patel'
+    cleared_by: "K. Patel"
     cleared_date: 2026-04-20
-    override: # populated only on Path 3 bypass
+    override:                   # populated only on Path 3 bypass
       by: null
       date: null
       rationale: null
   risk: high
   materiality: reserved
-  exposure_range: '$2M–$5M'
+  exposure_range: "$2M–$5M"
   internal_owners:
-    business_lead: 'Jane Smith'
+    business_lead: "Jane Smith"
     hr_partner: null
     comms_contact: null
   legal_hold:
     issued: true
     issued_date: 2026-02-15
-    scope: 'Sales org 2023–2026'
-    custodians: ['Jane Smith', 'R. Chen', 'T. Patel']
+    scope: "Sales org 2023–2026"
+    custodians: ["Jane Smith", "R. Chen", "T. Patel"]
     last_refresh: 2026-02-15
     next_refresh: 2026-08-15
     released: null

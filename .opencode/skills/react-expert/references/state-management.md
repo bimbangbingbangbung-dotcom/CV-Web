@@ -7,7 +7,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   // Functional update for derived state
-  const increment = () => setCount((prev) => prev + 1);
+  const increment = () => setCount(prev => prev + 1);
 
   return <button onClick={increment}>{count}</button>;
 }
@@ -27,10 +27,14 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   const toggle = useCallback(() => {
-    setTheme((t) => (t === 'light' ? 'dark' : 'light'));
+    setTheme(t => t === 'light' ? 'dark' : 'light');
   }, []);
 
-  return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ theme, toggle }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 
 function useTheme() {
@@ -58,19 +62,17 @@ const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
-      addItem: (item) =>
-        set((state) => ({
-          items: [...state.items, item],
-        })),
-      removeItem: (id) =>
-        set((state) => ({
-          items: state.items.filter((i) => i.id !== id),
-        })),
+      addItem: (item) => set((state) => ({
+        items: [...state.items, item]
+      })),
+      removeItem: (id) => set((state) => ({
+        items: state.items.filter(i => i.id !== id)
+      })),
       clear: () => set({ items: [] }),
       total: () => get().items.reduce((sum, i) => sum + i.price, 0),
     }),
-    { name: 'cart-storage' },
-  ),
+    { name: 'cart-storage' }
+  )
 );
 
 // Component usage
@@ -81,9 +83,7 @@ function Cart() {
 
   return (
     <div>
-      {items.map((item) => (
-        <CartItem key={item.id} item={item} />
-      ))}
+      {items.map(item => <CartItem key={item.id} item={item} />)}
       <p>Total: ${total}</p>
       <button onClick={clear}>Clear Cart</button>
     </div>
@@ -101,12 +101,8 @@ const counterSlice = createSlice({
   name: 'counter',
   initialState: { value: 0 },
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
+    increment: (state) => { state.value += 1 },
+    decrement: (state) => { state.value -= 1 },
     incrementBy: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
@@ -128,7 +124,11 @@ function Counter() {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
 
-  return <button onClick={() => dispatch(counterSlice.actions.increment())}>{count}</button>;
+  return (
+    <button onClick={() => dispatch(counterSlice.actions.increment())}>
+      {count}
+    </button>
+  );
 }
 ```
 
@@ -162,10 +162,10 @@ function UserProfile({ userId }: { userId: string }) {
 
 ## Quick Reference
 
-| Solution       | Best For                               |
-| -------------- | -------------------------------------- |
-| useState       | Local component state                  |
-| Context        | Theme, auth, simple globals            |
-| Zustand        | Medium complexity, minimal boilerplate |
-| Redux Toolkit  | Complex state, middleware, devtools    |
-| TanStack Query | Server state, caching                  |
+| Solution | Best For |
+|----------|----------|
+| useState | Local component state |
+| Context | Theme, auth, simple globals |
+| Zustand | Medium complexity, minimal boilerplate |
+| Redux Toolkit | Complex state, middleware, devtools |
+| TanStack Query | Server state, caching |

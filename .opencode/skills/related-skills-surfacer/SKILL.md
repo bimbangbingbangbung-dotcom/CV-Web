@@ -26,7 +26,6 @@ The community might have built the thing you're about to build. This skill notic
 This skill surfaces related community skills after a task. It can be invoked directly by the user ("what else is out there for X?") or wired into other plugins via a Stop hook — the hook-based pattern requires each sibling plugin to declare a Stop hook that calls this skill, which is not wired by default. Without the hook wiring, invoke it directly.
 
 Other plugins can include a light check at the end of a task:
-
 > "The legal-builder-hub found a community skill that might help with this kind of thing: [name] — [one-line]. Want to take a look?"
 
 ## Load context
@@ -47,7 +46,6 @@ Given a task description (what the user was just doing), find registry skills th
 ## Output
 
 If strong match:
-
 > 💡 The community has a skill for this: **[name]** from [registry] — "[description]". `/legal-builder-hub:skill-installer [name]` to try it.
 
 If no strong match: silent. No output. Don't announce "I found nothing."
@@ -59,7 +57,6 @@ Don't surface the same skill twice. If the user didn't install it the first time
 ## User control
 
 Per `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md` → new skill notifications:
-
 - **All:** Surface any match
 - **Matching practice profile:** Filter by profile (default)
 - **None:** This skill is off
@@ -71,5 +68,5 @@ End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the 
 ## What this skill does not do
 
 - Install anything.
-- Interrupt a task in progress. Surfacing happens at the _end_ of a task, not in the middle.
+- Interrupt a task in progress. Surfacing happens at the *end* of a task, not in the middle.
 - Nag. One mention per skill, ever.

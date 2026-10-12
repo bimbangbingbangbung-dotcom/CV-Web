@@ -83,7 +83,6 @@ jobs:
 ## Common Workflow Patterns
 
 ### Matrix Builds (Multi-version testing)
-
 ```yaml
 jobs:
   test:
@@ -99,7 +98,6 @@ jobs:
 ```
 
 ### Reusable Workflows
-
 ```yaml
 # .github/workflows/deploy.yml
 on:
@@ -121,7 +119,6 @@ jobs:
 ```
 
 ### Caching Dependencies
-
 ```yaml
 - uses: actions/cache@v4
   with:
@@ -133,10 +130,10 @@ jobs:
 
 ## Quick Reference
 
-| Action                        | Purpose                     |
-| ----------------------------- | --------------------------- |
-| `actions/checkout@v4`         | Clone repository            |
-| `actions/setup-node@v4`       | Install Node.js             |
+| Action | Purpose |
+|--------|---------|
+| `actions/checkout@v4` | Clone repository |
+| `actions/setup-node@v4` | Install Node.js |
 | `docker/build-push-action@v5` | Build and push Docker image |
-| `docker/metadata-action@v5`   | Generate Docker tags        |
-| `actions/cache@v4`            | Cache dependencies          |
+| `docker/metadata-action@v5` | Generate Docker tags |
+| `actions/cache@v4` | Cache dependencies |

@@ -12,7 +12,7 @@ description: |
 license: MIT
 metadata:
   category: full-stack
-  version: '1.0.0'
+  version: "1.0.0"
   sources:
     - The Twelve-Factor App (12factor.net)
     - Clean Architecture (Robert C. Martin)
@@ -46,13 +46,13 @@ If the user has already specified these in their request, skip asking and procee
 
 Based on requirements, make and state these decisions before coding:
 
-| Decision            | Options                                            | Reference                                            |
-| ------------------- | -------------------------------------------------- | ---------------------------------------------------- |
-| Project structure   | Feature-first (recommended) vs layer-first         | [Section 1](#1-project-structure--layering-critical) |
-| API client approach | Typed fetch / React Query / tRPC / OpenAPI codegen | [Section 5](#5-api-client-patterns-medium)           |
-| Auth strategy       | JWT + refresh / session / third-party              | [Section 6](#6-authentication--middleware-high)      |
-| Real-time method    | Polling / SSE / WebSocket                          | [Section 11](#11-real-time-patterns-medium)          |
-| Error handling      | Typed error hierarchy + global handler             | [Section 3](#3-error-handling--resilience-high)      |
+| Decision | Options | Reference |
+|----------|---------|-----------|
+| Project structure | Feature-first (recommended) vs layer-first | [Section 1](#1-project-structure--layering-critical) |
+| API client approach | Typed fetch / React Query / tRPC / OpenAPI codegen | [Section 5](#5-api-client-patterns-medium) |
+| Auth strategy | JWT + refresh / session / third-party | [Section 6](#6-authentication--middleware-high) |
+| Real-time method | Polling / SSE / WebSocket | [Section 11](#11-real-time-patterns-medium) |
+| Error handling | Typed error hierarchy + global handler | [Section 3](#3-error-handling--resilience-high) |
 
 Briefly explain each choice (1 sentence per decision).
 
@@ -100,7 +100,6 @@ Provide a brief summary to the user:
 ## Scope
 
 **USE this skill when:**
-
 - Building a full-stack application (backend + frontend)
 - Scaffolding a new backend service or API
 - Designing service layers and module boundaries
@@ -111,7 +110,6 @@ Provide a brief summary to the user:
 - Setting up API clients, auth flows, file uploads, or real-time features
 
 **NOT for:**
-
 - Pure frontend/UI concerns (use your frontend framework's docs)
 - Pure database schema design without backend context
 
@@ -148,25 +146,25 @@ Provide a brief summary to the user:
 
 ## Quick Navigation
 
-| Need to…                                    | Jump to                                                                       |
-| ------------------------------------------- | ----------------------------------------------------------------------------- |
-| Organize project folders                    | [1. Project Structure](#1-project-structure--layering-critical)               |
-| Manage config + secrets                     | [2. Configuration](#2-configuration--environment-critical)                    |
-| Handle errors properly                      | [3. Error Handling](#3-error-handling--resilience-high)                       |
-| Write database code                         | [4. Database Access Patterns](#4-database-access-patterns-high)               |
-| Set up API client from frontend             | [5. API Client Patterns](#5-api-client-patterns-medium)                       |
-| Add auth middleware                         | [6. Auth & Middleware](#6-authentication--middleware-high)                    |
-| Set up logging                              | [7. Logging & Observability](#7-logging--observability-medium-high)           |
-| Add background jobs                         | [8. Background Jobs](#8-background-jobs--async-medium)                        |
-| Implement caching                           | [9. Caching](#9-caching-patterns-medium)                                      |
-| Upload files (presigned URL, multipart)     | [10. File Upload Patterns](#10-file-upload-patterns-medium)                   |
-| Add real-time features (SSE, WebSocket)     | [11. Real-Time Patterns](#11-real-time-patterns-medium)                       |
-| Handle API errors in frontend UI            | [12. Cross-Boundary Error Handling](#12-cross-boundary-error-handling-medium) |
-| Harden for production                       | [13. Production Hardening](#13-production-hardening-medium)                   |
-| Design API endpoints                        | [API Design](references/api-design.md)                                        |
-| Design database schema                      | [Database Schema](references/db-schema.md)                                    |
-| Auth flow (JWT, refresh, Next.js SSR, RBAC) | [references/auth-flow.md](references/auth-flow.md)                            |
-| CORS, env vars, environment management      | [references/environment-management.md](references/environment-management.md)  |
+| Need to… | Jump to |
+|----------|---------|
+| Organize project folders | [1. Project Structure](#1-project-structure--layering-critical) |
+| Manage config + secrets | [2. Configuration](#2-configuration--environment-critical) |
+| Handle errors properly | [3. Error Handling](#3-error-handling--resilience-high) |
+| Write database code | [4. Database Access Patterns](#4-database-access-patterns-high) |
+| Set up API client from frontend | [5. API Client Patterns](#5-api-client-patterns-medium) |
+| Add auth middleware | [6. Auth & Middleware](#6-authentication--middleware-high) |
+| Set up logging | [7. Logging & Observability](#7-logging--observability-medium-high) |
+| Add background jobs | [8. Background Jobs](#8-background-jobs--async-medium) |
+| Implement caching | [9. Caching](#9-caching-patterns-medium) |
+| Upload files (presigned URL, multipart) | [10. File Upload Patterns](#10-file-upload-patterns-medium) |
+| Add real-time features (SSE, WebSocket) | [11. Real-Time Patterns](#11-real-time-patterns-medium) |
+| Handle API errors in frontend UI | [12. Cross-Boundary Error Handling](#12-cross-boundary-error-handling-medium) |
+| Harden for production | [13. Production Hardening](#13-production-hardening-medium) |
+| Design API endpoints | [API Design](references/api-design.md) |
+| Design database schema | [Database Schema](references/db-schema.md) |
+| Auth flow (JWT, refresh, Next.js SSR, RBAC) | [references/auth-flow.md](references/auth-flow.md) |
+| CORS, env vars, environment management | [references/environment-management.md](references/environment-management.md) |
 
 ---
 
@@ -211,27 +209,25 @@ src/                                src/
 Controller (HTTP) → Service (Business Logic) → Repository (Data Access)
 ```
 
-| Layer      | Responsibility                                         | ❌ Never                        |
-| ---------- | ------------------------------------------------------ | ------------------------------- |
-| Controller | Parse request, validate, call service, format response | Business logic, DB queries      |
-| Service    | Business rules, orchestration, transaction mgmt        | HTTP types (req/res), direct DB |
-| Repository | Database queries, external API calls                   | Business logic, HTTP types      |
+| Layer | Responsibility | ❌ Never |
+|-------|---------------|---------|
+| Controller | Parse request, validate, call service, format response | Business logic, DB queries |
+| Service | Business rules, orchestration, transaction mgmt | HTTP types (req/res), direct DB |
+| Repository | Database queries, external API calls | Business logic, HTTP types |
 
 ### Dependency Injection (All Languages)
 
 **TypeScript:**
-
 ```typescript
 class OrderService {
   constructor(
-    private readonly orderRepo: OrderRepository, // ✅ injected interface
+    private readonly orderRepo: OrderRepository,    // ✅ injected interface
     private readonly emailService: EmailService,
   ) {}
 }
 ```
 
 **Python:**
-
 ```python
 class OrderService:
     def __init__(self, order_repo: OrderRepository, email_service: EmailService):
@@ -240,7 +236,6 @@ class OrderService:
 ```
 
 **Go:**
-
 ```go
 type OrderService struct {
     orderRepo    OrderRepository                      // ✅ interface
@@ -259,7 +254,6 @@ func NewOrderService(repo OrderRepository, email EmailService) *OrderService {
 ### Centralized, Typed, Fail-Fast
 
 **TypeScript:**
-
 ```typescript
 const config = {
   port: parseInt(process.env.PORT || '3000', 10),
@@ -269,13 +263,12 @@ const config = {
 
 function requiredEnv(name: string): string {
   const value = process.env[name];
-  if (!value) throw new Error(`Missing required env var: ${name}`); // fail fast
+  if (!value) throw new Error(`Missing required env var: ${name}`);  // fail fast
   return value;
 }
 ```
 
 **Python:**
-
 ```python
 from pydantic_settings import BaseSettings
 
@@ -317,9 +310,7 @@ class AppError extends Error {
     public readonly code: string,
     public readonly statusCode: number,
     public readonly isOperational: boolean = true,
-  ) {
-    super(message);
-  }
+  ) { super(message); }
 }
 class NotFoundError extends AppError {
   constructor(resource: string, id: string) {
@@ -351,10 +342,8 @@ class NotFoundError(AppError):
 app.use((err, req, res, next) => {
   if (err instanceof AppError && err.isOperational) {
     return res.status(err.statusCode).json({
-      title: err.code,
-      status: err.statusCode,
-      detail: err.message,
-      request_id: req.id,
+      title: err.code, status: err.statusCode,
+      detail: err.message, request_id: req.id,
     });
   }
   logger.error('Unexpected error', { error: err.message, stack: err.stack, request_id: req.id });
@@ -400,9 +389,7 @@ npx prisma migrate deploy       alembic upgrade head             migrate -databa
 ```typescript
 // ❌ N+1: 1 query + N queries
 const orders = await db.order.findMany();
-for (const o of orders) {
-  o.items = await db.item.findMany({ where: { orderId: o.id } });
-}
+for (const o of orders) { o.items = await db.item.findMany({ where: { orderId: o.id } }); }
 
 // ✅ Single JOIN query
 const orders = await db.order.findMany({ include: { items: true } });
@@ -435,16 +422,13 @@ The "glue layer" between frontend and backend. Choose the approach that fits you
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 class ApiError extends Error {
-  constructor(
-    public status: number,
-    public body: any,
-  ) {
+  constructor(public status: number, public body: any) {
     super(body?.detail || body?.message || `API error ${status}`);
   }
 }
 
 async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const token = getAuthToken(); // from cookie / memory / context
+  const token = getAuthToken();  // from cookie / memory / context
 
   const res = await fetch(`${BASE_URL}${path}`, {
     ...options,
@@ -466,12 +450,9 @@ async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
 
 export const apiClient = {
   get: <T>(path: string) => api<T>(path),
-  post: <T>(path: string, data: unknown) =>
-    api<T>(path, { method: 'POST', body: JSON.stringify(data) }),
-  put: <T>(path: string, data: unknown) =>
-    api<T>(path, { method: 'PUT', body: JSON.stringify(data) }),
-  patch: <T>(path: string, data: unknown) =>
-    api<T>(path, { method: 'PATCH', body: JSON.stringify(data) }),
+  post: <T>(path: string, data: unknown) => api<T>(path, { method: 'POST', body: JSON.stringify(data) }),
+  put: <T>(path: string, data: unknown) => api<T>(path, { method: 'PUT', body: JSON.stringify(data) }),
+  patch: <T>(path: string, data: unknown) => api<T>(path, { method: 'PATCH', body: JSON.stringify(data) }),
   delete: <T>(path: string) => api<T>(path, { method: 'DELETE' }),
 };
 ```
@@ -549,13 +530,13 @@ npx openapi-typescript-codegen \
 
 ### Decision: Which API Client?
 
-| Approach            | When                             | Type Safety  | Effort |
-| ------------------- | -------------------------------- | ------------ | ------ |
-| Typed fetch wrapper | Simple apps, small teams         | Manual types | Low    |
-| React Query + fetch | React apps, server state         | Manual types | Medium |
-| tRPC                | Same team, TypeScript both sides | Automatic    | Low    |
-| OpenAPI generated   | Public API, multi-consumer       | Automatic    | Medium |
-| GraphQL codegen     | GraphQL APIs                     | Automatic    | Medium |
+| Approach | When | Type Safety | Effort |
+|----------|------|-------------|--------|
+| Typed fetch wrapper | Simple apps, small teams | Manual types | Low |
+| React Query + fetch | React apps, server state | Manual types | Medium |
+| tRPC | Same team, TypeScript both sides | Automatic | Low |
+| OpenAPI generated | Public API, multi-consumer | Automatic | Medium |
+| GraphQL codegen | GraphQL APIs | Automatic | Medium |
 
 ---
 
@@ -587,7 +568,7 @@ Request → 1.RequestID → 2.Logging → 3.CORS → 4.RateLimit → 5.BodyParse
 function authorize(...roles: Role[]) {
   return (req, res, next) => {
     if (!req.user) throw new UnauthorizedError();
-    if (!roles.some((r) => req.user.roles.includes(r))) throw new ForbiddenError();
+    if (!roles.some(r => req.user.roles.includes(r))) throw new ForbiddenError();
     next();
   };
 }
@@ -605,10 +586,10 @@ async function apiWithRefresh<T>(path: string, options: RequestInit = {}): Promi
     if (err instanceof ApiError && err.status === 401) {
       const refreshed = await api<{ accessToken: string }>('/api/auth/refresh', {
         method: 'POST',
-        credentials: 'include', // send httpOnly cookie
+        credentials: 'include',  // send httpOnly cookie
       });
       setAuthToken(refreshed.accessToken);
-      return api<T>(path, options); // retry
+      return api<T>(path, options);  // retry
     }
     throw err;
   }
@@ -624,11 +605,8 @@ async function apiWithRefresh<T>(path: string, options: RequestInit = {}): Promi
 ```typescript
 // ✅ Structured — parseable, filterable, alertable
 logger.info('Order created', {
-  orderId: order.id,
-  userId: user.id,
-  total: order.total,
-  items: order.items.length,
-  duration_ms: Date.now() - startTime,
+  orderId: order.id, userId: user.id, total: order.total,
+  items: order.items.length, duration_ms: Date.now() - startTime,
 });
 // Output: {"level":"info","msg":"Order created","orderId":"ord_123",...}
 
@@ -638,12 +616,12 @@ console.log(`Order created for user ${user.id} with total ${order.total}`);
 
 ### Log Levels
 
-| Level | When                           | Production? |
-| ----- | ------------------------------ | ----------- |
-| error | Requires immediate attention   | ✅ Always   |
-| warn  | Unexpected but handled         | ✅ Always   |
-| info  | Normal operations, audit trail | ✅ Always   |
-| debug | Dev troubleshooting            | ❌ Dev only |
+| Level | When | Production? |
+|-------|------|------------|
+| error | Requires immediate attention | ✅ Always |
+| warn | Unexpected but handled | ✅ Always |
+| info | Normal operations, audit trail | ✅ Always |
+| debug | Dev troubleshooting | ❌ Dev only |
 
 ### Rules
 
@@ -674,7 +652,7 @@ console.log(`Order created for user ${user.id} with total ${order.total}`);
 ```typescript
 async function processPayment(data: { orderId: string }) {
   const order = await orderRepo.findById(data.orderId);
-  if (order.paymentStatus === 'completed') return; // already processed
+  if (order.paymentStatus === 'completed') return;  // already processed
   await paymentGateway.charge(order);
   await orderRepo.updatePaymentStatus(order.id, 'completed');
 }
@@ -694,7 +672,7 @@ async function getUser(id: string): Promise<User> {
   const user = await userRepo.findById(id);
   if (!user) throw new NotFoundError('User', id);
 
-  await redis.set(`user:${id}`, JSON.stringify(user), 'EX', 900); // 15min TTL
+  await redis.set(`user:${id}`, JSON.stringify(user), 'EX', 900);  // 15min TTL
   return user;
 }
 ```
@@ -709,12 +687,12 @@ async function getUser(id: string): Promise<User> {
 ❌ Never cache without TTL (stale data is worse than slow data)
 ```
 
-| Data Type              | Suggested TTL          |
-| ---------------------- | ---------------------- |
-| User profile           | 5-15 min               |
-| Product catalog        | 1-5 min                |
-| Config / feature flags | 30-60 sec              |
-| Session                | Match session duration |
+| Data Type | Suggested TTL |
+|-----------|---------------|
+| User profile | 5-15 min |
+| Product catalog | 1-5 min |
+| Config / feature flags | 30-60 sec |
+| Session | Match session duration |
 
 ---
 
@@ -730,27 +708,23 @@ Client → POST /api/photos { fileKey: "uploads/abc123.jpg" }  (save reference)
 ```
 
 **Backend:**
-
 ```typescript
 app.get('/api/uploads/presign', authenticate, async (req, res) => {
   const { filename, type } = req.query;
   const key = `uploads/${crypto.randomUUID()}-${filename}`;
   const url = await s3.getSignedUrl('putObject', {
-    Bucket: process.env.S3_BUCKET,
-    Key: key,
-    ContentType: type,
-    Expires: 300, // 5 min
+    Bucket: process.env.S3_BUCKET, Key: key,
+    ContentType: type, Expires: 300,  // 5 min
   });
   res.json({ uploadUrl: url, fileKey: key });
 });
 ```
 
 **Frontend:**
-
 ```typescript
 async function uploadFile(file: File) {
   const { uploadUrl, fileKey } = await apiClient.get<PresignResponse>(
-    `/api/uploads/presign?filename=${file.name}&type=${file.type}`,
+    `/api/uploads/presign?filename=${file.name}&type=${file.type}`
   );
   await fetch(uploadUrl, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } });
   return apiClient.post('/api/photos', { fileKey });
@@ -770,11 +744,11 @@ const res = await fetch('/api/upload', { method: 'POST', body: formData });
 
 ### Decision
 
-| Method              | File Size               | Server Load                   | Complexity |
-| ------------------- | ----------------------- | ----------------------------- | ---------- |
-| Presigned URL       | Any (recommended > 5MB) | None (direct to storage)      | Medium     |
-| Multipart           | < 10MB                  | High (streams through server) | Low        |
-| Chunked / Resumable | > 100MB                 | Medium                        | High       |
+| Method | File Size | Server Load | Complexity |
+|--------|-----------|-------------|------------|
+| Presigned URL | Any (recommended > 5MB) | None (direct to storage) | Medium |
+| Multipart | < 10MB | High (streams through server) | Low |
+| Chunked / Resumable | > 100MB | Medium | High |
 
 ---
 
@@ -785,7 +759,6 @@ const res = await fetch('/api/upload', { method: 'POST', body: formData });
 Best for: notifications, live feeds, streaming AI responses.
 
 **Backend (Express):**
-
 ```typescript
 app.get('/api/events', authenticate, (req, res) => {
   res.writeHead(200, {
@@ -804,7 +777,6 @@ app.get('/api/events', authenticate, (req, res) => {
 ```
 
 **Frontend:**
-
 ```typescript
 function useServerEvents(userId: string) {
   useEffect(() => {
@@ -823,28 +795,21 @@ function useServerEvents(userId: string) {
 Best for: chat, collaborative editing, gaming.
 
 **Backend (ws library):**
-
 ```typescript
 import { WebSocketServer } from 'ws';
 const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
 wss.on('connection', (ws, req) => {
   const userId = authenticateWs(req);
-  if (!userId) {
-    ws.close(4001, 'Unauthorized');
-    return;
-  }
+  if (!userId) { ws.close(4001, 'Unauthorized'); return; }
   ws.on('message', (raw) => handleMessage(userId, JSON.parse(raw.toString())));
   ws.on('close', () => cleanupUser(userId));
   const interval = setInterval(() => ws.ping(), 30000);
-  ws.on('pong', () => {
-    /* alive */
-  });
+  ws.on('pong', () => { /* alive */ });
   ws.on('close', () => clearInterval(interval));
 });
 ```
 
 **Frontend:**
-
 ```typescript
 function useWebSocket(url: string) {
   const [ws, setWs] = useState<WebSocket | null>(null);
@@ -876,11 +841,11 @@ function useOrderStatus(orderId: string) {
 
 ### Decision
 
-| Method    | Direction       | Complexity | When                               |
-| --------- | --------------- | ---------- | ---------------------------------- |
-| Polling   | Client → Server | Low        | Simple status checks, < 10 clients |
-| SSE       | Server → Client | Medium     | Notifications, feeds, AI streaming |
-| WebSocket | Bidirectional   | High       | Chat, collaboration, gaming        |
+| Method | Direction | Complexity | When |
+|--------|-----------|------------|------|
+| Polling | Client → Server | Low | Simple status checks, < 10 clients |
+| SSE | Server → Client | Medium | Notifications, feeds, AI streaming |
+| WebSocket | Bidirectional | High | Chat, collaboration, gaming |
 
 ---
 
@@ -893,22 +858,16 @@ function useOrderStatus(orderId: string) {
 export function getErrorMessage(error: unknown): string {
   if (error instanceof ApiError) {
     switch (error.status) {
-      case 401:
-        return 'Please log in to continue.';
-      case 403:
-        return "You don't have permission to do this.";
-      case 404:
-        return "The item you're looking for doesn't exist.";
-      case 409:
-        return 'This conflicts with an existing item.';
+      case 401: return 'Please log in to continue.';
+      case 403: return 'You don\'t have permission to do this.';
+      case 404: return 'The item you\'re looking for doesn\'t exist.';
+      case 409: return 'This conflicts with an existing item.';
       case 422:
         const fields = error.body?.errors;
         if (fields?.length) return fields.map((f: any) => f.message).join('. ');
         return 'Please check your input.';
-      case 429:
-        return 'Too many requests. Please wait a moment.';
-      default:
-        return 'Something went wrong. Please try again.';
+      case 429: return 'Too many requests. Please wait a moment.';
+      default: return 'Something went wrong. Please try again.';
     }
   }
   if (error instanceof TypeError && error.message === 'Failed to fetch') {
@@ -984,14 +943,12 @@ Real-time needed?
 ### Health Checks
 
 ```typescript
-app.get('/health', (req, res) => res.json({ status: 'ok' })); // liveness
-app.get('/ready', async (req, res) => {
-  // readiness
+app.get('/health', (req, res) => res.json({ status: 'ok' }));           // liveness
+app.get('/ready', async (req, res) => {                                   // readiness
   const checks = {
-    database: await checkDb(),
-    redis: await checkRedis(),
+    database: await checkDb(), redis: await checkRedis(), 
   };
-  const ok = Object.values(checks).every((c) => c.status === 'ok');
+  const ok = Object.values(checks).every(c => c.status === 'ok');
   res.status(ok ? 200 : 503).json({ status: ok ? 'ok' : 'degraded', checks });
 });
 ```
@@ -1001,8 +958,8 @@ app.get('/ready', async (req, res) => {
 ```typescript
 process.on('SIGTERM', async () => {
   logger.info('SIGTERM received');
-  server.close(); // stop new connections
-  await drainConnections(); // finish in-flight
+  server.close();              // stop new connections
+  await drainConnections();    // finish in-flight
   await closeDatabase();
   process.exit(0);
 });
@@ -1023,26 +980,26 @@ process.on('SIGTERM', async () => {
 
 ## Anti-Patterns
 
-| #   | ❌ Don't                              | ✅ Do Instead                                |
-| --- | ------------------------------------- | -------------------------------------------- |
-| 1   | Business logic in routes/controllers  | Move to service layer                        |
-| 2   | `process.env` scattered everywhere    | Centralized typed config                     |
-| 3   | `console.log` for logging             | Structured JSON logger                       |
-| 4   | Generic `Error('oops')`               | Typed error hierarchy                        |
-| 5   | Direct DB calls in controllers        | Repository pattern                           |
-| 6   | No input validation                   | Validate at boundary (Zod/Pydantic)          |
-| 7   | Catching errors silently              | Log + rethrow or return error                |
-| 8   | No health check endpoints             | `/health` + `/ready`                         |
-| 9   | Hardcoded config/secrets              | Environment variables                        |
-| 10  | No graceful shutdown                  | Handle SIGTERM properly                      |
-| 11  | Hardcode API URL in frontend          | Environment variable (`NEXT_PUBLIC_API_URL`) |
-| 12  | Store JWT in localStorage             | Memory + httpOnly refresh cookie             |
-| 13  | Show raw API errors to users          | Map to human-readable messages               |
-| 14  | Retry 4xx errors                      | Only retry 5xx (server failures)             |
-| 15  | Skip loading states                   | Skeleton/spinner while fetching              |
-| 16  | Upload large files through API server | Presigned URL → direct to S3                 |
-| 17  | Poll for real-time data               | SSE or WebSocket                             |
-| 18  | Duplicate types frontend + backend    | Shared types, tRPC, or OpenAPI codegen       |
+| # | ❌ Don't | ✅ Do Instead |
+|---|---------|--------------|
+| 1 | Business logic in routes/controllers | Move to service layer |
+| 2 | `process.env` scattered everywhere | Centralized typed config |
+| 3 | `console.log` for logging | Structured JSON logger |
+| 4 | Generic `Error('oops')` | Typed error hierarchy |
+| 5 | Direct DB calls in controllers | Repository pattern |
+| 6 | No input validation | Validate at boundary (Zod/Pydantic) |
+| 7 | Catching errors silently | Log + rethrow or return error |
+| 8 | No health check endpoints | `/health` + `/ready` |
+| 9 | Hardcoded config/secrets | Environment variables |
+| 10 | No graceful shutdown | Handle SIGTERM properly |
+| 11 | Hardcode API URL in frontend | Environment variable (`NEXT_PUBLIC_API_URL`) |
+| 12 | Store JWT in localStorage | Memory + httpOnly refresh cookie |
+| 13 | Show raw API errors to users | Map to human-readable messages |
+| 14 | Retry 4xx errors | Only retry 5xx (server failures) |
+| 15 | Skip loading states | Skeleton/spinner while fetching |
+| 16 | Upload large files through API server | Presigned URL → direct to S3 |
+| 17 | Poll for real-time data | SSE or WebSocket |
+| 18 | Duplicate types frontend + backend | Shared types, tRPC, or OpenAPI codegen |
 
 ---
 
@@ -1068,13 +1025,13 @@ process.on('SIGTERM', async () => {
 
 This skill includes deep-dive references for specialized topics. Read the relevant reference when you need detailed guidance.
 
-| Need to…                                                                   | Reference                                                                    |
-| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Write backend tests (unit, integration, e2e, contract, performance)        | [references/testing-strategy.md](references/testing-strategy.md)             |
-| Validate a release before deployment (6-gate checklist)                    | [references/release-checklist.md](references/release-checklist.md)           |
-| Choose a tech stack (language, framework, database, infra)                 | [references/technology-selection.md](references/technology-selection.md)     |
-| Build with Django / DRF (models, views, serializers, admin)                | [references/django-best-practices.md](references/django-best-practices.md)   |
-| Design REST/GraphQL/gRPC endpoints (URLs, status codes, pagination)        | [references/api-design.md](references/api-design.md)                         |
-| Design database schema, indexes, migrations, multi-tenancy                 | [references/db-schema.md](references/db-schema.md)                           |
-| Auth flow (JWT bearer, token refresh, Next.js SSR, RBAC, middleware order) | [references/auth-flow.md](references/auth-flow.md)                           |
-| CORS config, env vars per environment, common CORS issues                  | [references/environment-management.md](references/environment-management.md) |
+| Need to… | Reference |
+|----------|-----------|
+| Write backend tests (unit, integration, e2e, contract, performance) | [references/testing-strategy.md](references/testing-strategy.md) |
+| Validate a release before deployment (6-gate checklist) | [references/release-checklist.md](references/release-checklist.md) |
+| Choose a tech stack (language, framework, database, infra) | [references/technology-selection.md](references/technology-selection.md) |
+| Build with Django / DRF (models, views, serializers, admin) | [references/django-best-practices.md](references/django-best-practices.md) |
+| Design REST/GraphQL/gRPC endpoints (URLs, status codes, pagination) | [references/api-design.md](references/api-design.md) |
+| Design database schema, indexes, migrations, multi-tenancy | [references/db-schema.md](references/db-schema.md) |
+| Auth flow (JWT bearer, token refresh, Next.js SSR, RBAC, middleware order) | [references/auth-flow.md](references/auth-flow.md) |
+| CORS config, env vars per environment, common CORS issues | [references/environment-management.md](references/environment-management.md) |

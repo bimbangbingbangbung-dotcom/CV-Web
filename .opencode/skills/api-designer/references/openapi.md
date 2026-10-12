@@ -3,7 +3,6 @@
 ## What is OpenAPI?
 
 OpenAPI (formerly Swagger) is a standard for describing REST APIs. It enables:
-
 - Interactive documentation
 - Code generation (SDKs, clients, servers)
 - API testing tools
@@ -352,7 +351,7 @@ components:
           type: string
           format: date-time
           readOnly: true
-          example: '2024-01-15T10:30:00Z'
+          example: "2024-01-15T10:30:00Z"
         metadata:
           type: object
           additionalProperties:
@@ -467,7 +466,7 @@ paths:
     get:
       security:
         - bearerAuth: []
-        - apiKey: [] # Alternative auth method
+        - apiKey: []  # Alternative auth method
 ```
 
 ### Responses
@@ -554,12 +553,12 @@ components:
             email: john@example.com
             name: John Doe
             status: active
-            created_at: '2024-01-15T10:30:00Z'
+            created_at: "2024-01-15T10:30:00Z"
           - id: 2
             email: jane@example.com
             name: Jane Smith
             status: active
-            created_at: '2024-01-16T14:20:00Z'
+            created_at: "2024-01-16T14:20:00Z"
         pagination:
           offset: 0
           limit: 20
@@ -580,12 +579,12 @@ components:
 ```yaml
 # String
 type: string
-example: 'Hello World'
+example: "Hello World"
 
 # String with format
 type: string
 format: email
-example: 'user@example.com'
+example: "user@example.com"
 
 # Integer
 type: integer
@@ -604,22 +603,22 @@ example: true
 # Date-time
 type: string
 format: date-time
-example: '2024-01-15T10:30:00Z'
+example: "2024-01-15T10:30:00Z"
 
 # Date
 type: string
 format: date
-example: '2024-01-15'
+example: "2024-01-15"
 
 # UUID
 type: string
 format: uuid
-example: '550e8400-e29b-41d4-a716-446655440000'
+example: "550e8400-e29b-41d4-a716-446655440000"
 
 # URI
 type: string
 format: uri
-example: 'https://example.com/users/123'
+example: "https://example.com/users/123"
 ```
 
 ### Arrays
@@ -631,7 +630,7 @@ items:
 minItems: 1
 maxItems: 10
 uniqueItems: true
-example: ['tag1', 'tag2', 'tag3']
+example: ["tag1", "tag2", "tag3"]
 
 # Array of objects
 type: array
@@ -658,9 +657,9 @@ properties:
     maximum: 120
 
 # Additional properties
-additionalProperties: false # Strict - no extra properties
-additionalProperties: true # Allow any extra properties
-additionalProperties: # Extra properties must be strings
+additionalProperties: false  # Strict - no extra properties
+additionalProperties: true   # Allow any extra properties
+additionalProperties:        # Extra properties must be strings
   type: string
 ```
 
@@ -705,7 +704,7 @@ allOf:
 type: string
 minLength: 1
 maxLength: 100
-pattern: '^[a-zA-Z0-9_-]+$'
+pattern: "^[a-zA-Z0-9_-]+$"
 format: email
 ```
 
@@ -715,7 +714,7 @@ format: email
 type: integer
 minimum: 0
 maximum: 100
-exclusiveMinimum: true # > 0 instead of >= 0
+exclusiveMinimum: true  # > 0 instead of >= 0
 multipleOf: 5
 ```
 
@@ -752,7 +751,7 @@ paths:
 
 ### Markdown Support
 
-````yaml
+```yaml
 description: |
   # User Management
 
@@ -772,9 +771,8 @@ description: |
     "name": "John Doe",
     "email": "john@example.com"
   }
-````
-
-````
+  ```
+```
 
 ## Code Generation
 
@@ -798,7 +796,7 @@ openapi-generator-cli generate \
   -i openapi.yaml \
   -g nodejs-express-server \
   -o ./server
-````
+```
 
 ## Validation Tools
 

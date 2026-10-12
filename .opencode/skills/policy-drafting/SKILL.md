@@ -45,15 +45,15 @@ For each state/country in the footprint, check: does this jurisdiction have a sp
 
 **Common topics with jurisdictional variance:**
 
-| Topic                 | Variance                                                                            |
-| --------------------- | ----------------------------------------------------------------------------------- |
-| Paid leave            | State mandates (CA, NY, CO, WA, etc.) with different accrual rates, uses, carryover |
-| Parental leave        | State programs layer on top of FMLA (CA PFL, NY PFL, etc.)                          |
-| Meal and rest breaks  | CA is the outlier (penalty pay); most states minimal                                |
-| Expense reimbursement | CA requires; most states don't                                                      |
-| Pay transparency      | Growing list of states requiring ranges in postings                                 |
-| Non-competes          | See hiring-review skill — unenforceable in some states                              |
-| Final pay             | Timing varies widely                                                                |
+| Topic | Variance |
+|---|---|
+| Paid leave | State mandates (CA, NY, CO, WA, etc.) with different accrual rates, uses, carryover |
+| Parental leave | State programs layer on top of FMLA (CA PFL, NY PFL, etc.) |
+| Meal and rest breaks | CA is the outlier (penalty pay); most states minimal |
+| Expense reimbursement | CA requires; most states don't |
+| Pay transparency | Growing list of states requiring ranges in postings |
+| Non-competes | See hiring-review skill — unenforceable in some states |
+| Final pay | Timing varies widely |
 
 If the topic has no jurisdictional variance (dress code, say), skip this step.
 
@@ -62,7 +62,6 @@ If the topic has no jurisdictional variance (dress code, say), skip this step.
 One policy. Applies everywhere. Clear and readable — employees should understand it without a lawyer.
 
 Structure:
-
 - Purpose (one sentence — why this policy exists)
 - Scope (who it applies to)
 - The rule (what's required/permitted/prohibited)
@@ -104,11 +103,9 @@ Keep supplements tight. Only what's different — don't repeat the core.
 ## State Supplements
 
 ### [State 1]
-
 [Supplement]
 
 ### [State 2]
-
 [Supplement]
 
 ---

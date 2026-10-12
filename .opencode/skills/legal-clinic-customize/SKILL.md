@@ -7,7 +7,7 @@ description: >
   configuration, or output safeguards. Use when the user says "change my
   [thing]", "new semester", "add a practice area", "update my config", or
   "customize".
-argument-hint: '[section name, or describe what you want to change]'
+argument-hint: "[section name, or describe what you want to change]"
 ---
 
 # /customize
@@ -62,14 +62,14 @@ re-running the whole cold-start interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - _Adding a new practice area:_ "`/client-intake` will route matters of this
+   - *Adding a new practice area:* "`/client-intake` will route matters of this
      type through the new template. `/draft`, `/memo`, and `/client-letter`
      will use the practice-area prompts. `/research-start` will add the
      corresponding Westlaw search terms."
-   - _Supervision style informal → formal review queue:_ "`/supervisor-review-queue` becomes
+   - *Supervision style informal → formal review queue:* "`/supervisor-review-queue` becomes
      active — student output will land there for supervisor sign-off before
      it goes to the client."
-   - _New semester rollover:_ "I'll archive the prior semester's active
+   - *New semester rollover:* "I'll archive the prior semester's active
      cases, carry forward matters you flag as continuing, and prompt the
      incoming students through `/ramp`."
 

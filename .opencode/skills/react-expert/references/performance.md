@@ -9,9 +9,7 @@ import { memo } from 'react';
 const ExpensiveList = memo(function ExpensiveList({ items }: { items: Item[] }) {
   return (
     <ul>
-      {items.map((item) => (
-        <li key={item.id}>{item.name}</li>
-      ))}
+      {items.map(item => <li key={item.id}>{item.name}</li>)}
     </ul>
   );
 });
@@ -21,7 +19,7 @@ const UserCard = memo(
   function UserCard({ user }: { user: User }) {
     return <div>{user.name}</div>;
   },
-  (prevProps, nextProps) => prevProps.user.id === nextProps.user.id,
+  (prevProps, nextProps) => prevProps.user.id === nextProps.user.id
 );
 ```
 
@@ -53,7 +51,11 @@ const HeavyChart = lazy(() => import('./HeavyChart'));
 const AdminPanel = lazy(() => import('./AdminPanel'));
 
 function App() {
-  return <Suspense fallback={<Loading />}>{showChart && <HeavyChart data={data} />}</Suspense>;
+  return (
+    <Suspense fallback={<Loading />}>
+      {showChart && <HeavyChart data={data} />}
+    </Suspense>
+  );
 }
 
 // Route-based splitting (React Router)
@@ -109,14 +111,11 @@ function VirtualList({ items }: { items: Item[] }) {
 ```tsx
 function Analytics({ data }: { data: DataPoint[] }) {
   // Only recalculate when data changes
-  const stats = useMemo(
-    () => ({
-      total: data.reduce((sum, d) => sum + d.value, 0),
-      average: data.reduce((sum, d) => sum + d.value, 0) / data.length,
-      max: Math.max(...data.map((d) => d.value)),
-    }),
-    [data],
-  );
+  const stats = useMemo(() => ({
+    total: data.reduce((sum, d) => sum + d.value, 0),
+    average: data.reduce((sum, d) => sum + d.value, 0) / data.length,
+    max: Math.max(...data.map(d => d.value)),
+  }), [data]);
 
   return <StatsDisplay stats={stats} />;
 }
@@ -152,18 +151,18 @@ function Search() {
 
 ## Quick Reference
 
-| Technique         | When to Use                             |
-| ----------------- | --------------------------------------- |
-| `memo()`          | Prevent re-renders from unchanged props |
-| `useMemo()`       | Cache expensive calculations            |
-| `useCallback()`   | Stable function references              |
-| `lazy()`          | Code split heavy components             |
-| `useTransition()` | Keep UI responsive during updates       |
-| Virtualization    | Large lists (1000+ items)               |
+| Technique | When to Use |
+|-----------|-------------|
+| `memo()` | Prevent re-renders from unchanged props |
+| `useMemo()` | Cache expensive calculations |
+| `useCallback()` | Stable function references |
+| `lazy()` | Code split heavy components |
+| `useTransition()` | Keep UI responsive during updates |
+| Virtualization | Large lists (1000+ items) |
 
-| Anti-pattern     | Fix                 |
-| ---------------- | ------------------- |
-| Inline objects   | Lift out or useMemo |
-| Inline functions | useCallback         |
-| Large bundle     | lazy() + Suspense   |
-| Long lists       | Virtualization      |
+| Anti-pattern | Fix |
+|--------------|-----|
+| Inline objects | Lift out or useMemo |
+| Inline functions | useCallback |
+| Large bundle | lazy() + Suspense |
+| Long lists | Virtualization |

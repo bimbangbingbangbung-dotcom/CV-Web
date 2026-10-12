@@ -6,7 +6,7 @@ description: >
   learning style, outline preferences, bar prep subjects, seed materials,
   or study session cadence. Use when the user says "change my [thing]",
   "add a class", "update my profile", "new semester", or "customize".
-argument-hint: '[section name, or describe what you want to change]'
+argument-hint: "[section name, or describe what you want to change]"
 ---
 
 # /customize
@@ -58,13 +58,13 @@ hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - _Adding a new class:_ "`/outline-builder` will scaffold a new outline for this
+   - *Adding a new class:* "`/outline-builder` will scaffold a new outline for this
      class. `/flashcards` will add a new subject bucket. `/cold-call-prep`
      will ask for a seat and a topic when you invoke it for this class."
-   - _Learning style Socratic → summary-first:_ "`/socratic-drill` won't ask you to
+   - *Learning style Socratic → summary-first:* "`/socratic-drill` won't ask you to
      answer first — it'll present the rule and example, then quiz you on
      application."
-   - _Adding a bar subject:_ "`/bar-prep-questions` will include this subject in
+   - *Adding a bar subject:* "`/bar-prep-questions` will include this subject in
      rotation and weight it higher if you mark it weak."
 
 5. **Close.**

@@ -1,7 +1,7 @@
 ---
 name: comments
 description: Review open NPRM comment periods, log decisions, track deadlines. Use when an NPRM has a comment window open and you need to surface deadlines, decide whether to file, or record a filing / not-filing / waived decision (--decide CMT-ID).
-argument-hint: '[optional: --decide CMT-ID]'
+argument-hint: "[optional: --decide CMT-ID]"
 ---
 
 # /comments
@@ -24,9 +24,9 @@ This skill surfaces open comment periods and records decisions.
 
 ### ⏰ Deadline in <14 days
 
-| ID      | Regulation | Deadline | Days left | Decision  | Owner   |
-| ------- | ---------- | -------- | --------- | --------- | ------- |
-| CMT-001 | [name]     | [date]   | [N]       | Undecided | [owner] |
+| ID | Regulation | Deadline | Days left | Decision | Owner |
+|---|---|---|---|---|---|
+| CMT-001 | [name] | [date] | [N] | Undecided | [owner] |
 
 ### 🟡 Open (>14 days)
 
@@ -34,13 +34,13 @@ This skill surfaces open comment periods and records decisions.
 
 ### Recently decided
 
-| ID      | Regulation | Decision   | Rationale |
-| ------- | ---------- | ---------- | --------- |
-| CMT-002 | [name]     | Not filing | [reason]  |
+| ID | Regulation | Decision | Rationale |
+|---|---|---|---|
+| CMT-002 | [name] | Not filing | [reason] |
 
 ---
 
-**Total open:** [N] **Undecided with deadline <30 days:** [N]
+**Total open:** [N]  **Undecided with deadline <30 days:** [N]
 ```
 
 ## Log a decision

@@ -9,7 +9,7 @@ description: >
   skill to your team, or whenever the user asks "should I trust this?" or
   "is this skill well-designed?". Runs automatically as part of
   /legal-builder-hub:skill-installer.
-argument-hint: '[skill path | SKILL.md path | paste content]'
+argument-hint: "[skill path | SKILL.md path | paste content]"
 ---
 
 # /skills-qa
@@ -181,20 +181,17 @@ Before evaluating quality, map what the skill connects to. This is structural �
 understanding the connections changes the severity of design gaps.
 
 **Upstream (what this skill needs to function):**
-
 - Does it read a `CLAUDE.md` (template or user config)? Which fields specifically?
 - Does it depend on output from another skill or agent?
 - Does it require external data sources (CLM, HRIS, contract repository)?
 - Does it require specific MCP tools or integrations?
 
 **Downstream (what this skill writes or changes):**
-
 - Does it write to files? Which ones? Are those files read by other skills?
 - Does it update a log, tracker, or registry that downstream skills depend on?
 - Does it send notifications or trigger external actions?
 
 **Automatic triggers (what fires this skill without explicit invocation):**
-
 - What does hooks.json fire on? Is the trigger condition appropriately narrow
   for the scope of what the skill does?
 - Is an agent scheduled to invoke this skill? How often, under what conditions,
@@ -418,7 +415,7 @@ skill actually handles.
 
 ### 10. Trust Surface
 
-What can this skill actually _do_ to the environment it runs in?
+What can this skill actually *do* to the environment it runs in?
 
 This parameter checks the skill's execution surface — the set of things it is
 permitted to touch, call, or run. A skill for reviewing NDAs should not need
@@ -583,7 +580,6 @@ Usable with awareness of the gaps — address before team-wide deployment.
 
 **MATERIAL CONCERNS**
 Any of the following applies:
-
 - One or more legal-specific failure modes unaddressed
 - Scope boundaries absent on non-trivial work
 - Escalation logic absent on accretive judgment or bounded transactional work
@@ -700,3 +696,4 @@ you would deploy it with confidence.]
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
+

@@ -7,7 +7,7 @@ description: >
   AI policy commitments, impact-assessment house style, or matter workspace
   paths. Use when the user says "change my [thing]", "update my profile",
   "edit my config", "tune my playbook", or "customize".
-argument-hint: '[section name, or describe what you want to change]'
+argument-hint: "[section name, or describe what you want to change]"
 ---
 
 # /customize
@@ -34,8 +34,8 @@ cold-start interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting _(shared across all 12 plugins — changes flow through
-     `company-profile.md`)_
+     setting *(shared across all 12 plugins — changes flow through
+     `company-profile.md`)*
    - **Regulatory footprint** — EU AI Act, state AI laws, sector regulators in
      scope
    - **Risk posture** — conservative / middle / aggressive, what each means for
@@ -66,13 +66,13 @@ cold-start interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples of downstream explanation:
-   - _Risk posture middle → conservative:_ "I'll flag more use cases as
+   - *Risk posture middle → conservative:* "I'll flag more use cases as
      conditional rather than approved, surface more AIA follow-ups, and
      recommend more conservative vendor AI redlines."
-   - _Adding an escalation contact:_ "Every skill that routes escalations
+   - *Adding an escalation contact:* "Every skill that routes escalations
      (`/use-case-triage`, `/vendor-ai-review`, `/reg-gap-analysis`) will now include this
      contact on the relevant risk bands."
-   - _New use case registry entry:_ "`/use-case-triage` will match against this entry
+   - *New use case registry entry:* "`/use-case-triage` will match against this entry
      on its next run. Existing AIAs aren't rewritten — re-run them if you want
      the new posture reflected."
 

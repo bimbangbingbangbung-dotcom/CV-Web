@@ -1,7 +1,7 @@
 ---
 name: portfolio-status
 description: Roll up the portfolio from _log.yaml — risk distribution, upcoming deadlines, stale matters, materiality totals, stage distribution, and flagged anomalies. Use when the user asks "where do we stand", "how many open matters", or wants a portfolio rollup or status across all active matters.
-argument-hint: '[--all | --risk=high | --stale]'
+argument-hint: "[--all | --risk=high | --stale]"
 ---
 
 # /portfolio-status
@@ -30,7 +30,6 @@ One read that answers: what do I own right now, what needs attention, and what's
 Default: active matters only (exclude `status: closed`).
 
 Flags:
-
 - `--all` — include closed
 - `--risk=high` (or `critical` / `medium` / `low`) — filter by risk band
 - `--stale` — only matters with `last_updated` > 30 days
@@ -45,37 +44,37 @@ Flags:
 # Portfolio Status — [today]
 
 **Active matters:** [N]
-**Closed (ytd):** [N] _(shown only with --all)_
+**Closed (ytd):** [N] *(shown only with --all)*
 
 ---
 
 ## By risk
 
-| Risk     | Count | Matters                                    |
-| -------- | ----- | ------------------------------------------ |
-| Critical | [N]   | [slugs]                                    |
-| High     | [N]   | [slugs]                                    |
-| Medium   | [N]   | [count only — expand with `--risk=medium`] |
-| Low      | [N]   | [count only]                               |
+| Risk | Count | Matters |
+|---|---|---|
+| Critical | [N] | [slugs] |
+| High | [N] | [slugs] |
+| Medium | [N] | [count only — expand with `--risk=medium`] |
+| Low | [N] | [count only] |
 
 ## Upcoming deadlines
 
-| Within     | Matters                   |
-| ---------- | ------------------------- |
-| 14 days    | [slug — deadline — brief] |
-| 15–30 days | [...]                     |
-| 31–60 days | [...]                     |
+| Within | Matters |
+|---|---|
+| 14 days | [slug — deadline — brief] |
+| 15–30 days | [...] |
+| 31–60 days | [...] |
 
-_Overdue `next_deadline` flagged separately below._
+*Overdue `next_deadline` flagged separately below.*
 
 ## Materiality
 
-| Category  | Count | Total exposure (midpoint) |
-| --------- | ----- | ------------------------- |
-| Reserved  | [N]   | [$X]                      |
-| Disclosed | [N]   | [$X]                      |
-| Monitored | [N]   | —                         |
-| None      | [N]   | —                         |
+| Category | Count | Total exposure (midpoint) |
+|---|---|---|
+| Reserved | [N] | [$X] |
+| Disclosed | [N] | [$X] |
+| Monitored | [N] | — |
+| None | [N] | — |
 
 ## By stage
 
@@ -108,7 +107,7 @@ These are the checks that make the skill useful rather than decorative:
 1. **Overdue deadline:** `next_deadline < today` and `status != closed`
 2. **Stale:** `last_updated < today - 30d` and `status != closed`
 3. **Conflicts unresolved:** `conflicts.status in [pending, not-run]` and `status != closed`
-   3b. **Conflicts override active:** `conflicts.override.by != null` (never auto-clears)
+3b. **Conflicts override active:** `conflicts.override.by != null` (never auto-clears)
 4. **High-risk uncovered:** `risk in [high, critical]` and `outside_counsel.firm == null`
 5. **Stale reserve:** `materiality == reserved` and `last_updated < today - 60d`
 6. **Hold gap:** `status in [threatened, active, discovery, trial, appeal]` and `legal_hold.issued == false` — preservation duty attaches at reasonable anticipation, so `threatened` matters are in scope.

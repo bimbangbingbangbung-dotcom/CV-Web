@@ -5,7 +5,7 @@ description: >
   files. Use when the user wants to temporarily quiet a community skill
   ("disable [skill]"), stop its hooks from firing while keeping its config,
   or re-enable a previously disabled skill.
-argument-hint: '[skill name]'
+argument-hint: "[skill name]"
 ---
 
 # /disable

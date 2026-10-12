@@ -7,7 +7,7 @@ description: >
   Use when a DSAR comes in, the user pastes an access/deletion/portability/correction
   request, or says "DSAR came in", "access request", "right to be forgotten", or
   "someone wants their data".
-argument-hint: '[paste the request, or describe it]'
+argument-hint: "[paste the request, or describe it]"
 ---
 
 # /dsar-response
@@ -47,7 +47,6 @@ This analysis assumes the jurisdictional scope specified in your configuration. 
 ## Load the process
 
 Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## DSAR process`. That section has:
-
 - The systems list (every place user data lives)
 - Identity verification method
 - Response SLA
@@ -107,18 +106,18 @@ This pauses the clock (arguably) but don't sit on it — respond to say you need
 
 Walk the systems list from `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`. For each system:
 
-| System                                | Queried? | Data found? | What                                             |
-| ------------------------------------- | -------- | ----------- | ------------------------------------------------ |
-| Production database                   |          |             |                                                  |
-| Analytics (e.g., Mixpanel, Amplitude) |          |             |                                                  |
-| Support tickets (e.g., Zendesk)       |          |             |                                                  |
-| CRM (e.g., Salesforce, HubSpot)       |          |             |                                                  |
-| Email marketing (e.g., Marketo)       |          |             |                                                  |
-| Logs                                  |          |             |                                                  |
-| Backups                               |          |             | (note: usually exempt from deletion — see below) |
-| Third-party processors                |          |             | (they may need to be notified for deletion)      |
+| System | Queried? | Data found? | What |
+|---|---|---|---|
+| Production database | | | |
+| Analytics (e.g., Mixpanel, Amplitude) | | | |
+| Support tickets (e.g., Zendesk) | | | |
+| CRM (e.g., Salesforce, HubSpot) | | | |
+| Email marketing (e.g., Marketo) | | | |
+| Logs | | | |
+| Backups | | | (note: usually exempt from deletion — see below) |
+| Third-party processors | | | (they may need to be notified for deletion) |
 
-For a B2B processor: the "data subject" is usually _your customer's_ end user. Check whether this is actually your customer's DSAR to handle, not yours. Many processor DPAs say "forward DSARs to the controller."
+For a B2B processor: the "data subject" is usually *your customer's* end user. Check whether this is actually your customer's DSAR to handle, not yours. Many processor DPAs say "forward DSARs to the controller."
 
 ### Step 4: Exemption analysis
 
@@ -130,7 +129,7 @@ Every proposed exemption carries an explicit note: **"proposed — requires atto
 
 Common recurring questions to work through:
 
-- Does the record contain data about _other_ people that needs to be redacted before production?
+- Does the record contain data about *other* people that needs to be redacted before production?
 - Is there a specific legal retention obligation that blocks deletion? Cite it.
 - Is there an active litigation hold covering this individual's data?
 - Are there backup rotation or technical-feasibility accommodations that need to be documented (not used as a general excuse)?
@@ -172,7 +171,6 @@ We received your [access / deletion / portability / correction] request on [date
 **Your request, as we understand it:** [one-sentence restatement — e.g., "a copy of all personal data we hold associated with your account, along with the categories of third parties with whom we share it, and deletion of your account after we provide the copy."]
 
 **What happens next:**
-
 - Our target date for the substantive response is [date — no later than the regime's statutory deadline; use internal SLA if tighter]. [If identity verification is outstanding: "We need [specific verification step] before we can proceed — see below."]
 - If we need more time because the request is complex or we receive other requests from you at the same time, we will tell you before the initial deadline and explain why. [If the regime allows an extension, cite the controlling provision.]
 - No fee applies to this request. [Or: the fee applies only if the regime permits it and the request is manifestly unfounded or excessive — cite the provision.]
@@ -200,11 +198,11 @@ We received your request on [date] for a copy of the personal data we hold about
 
 We hold the following categories of personal data associated with [identifier]:
 
-| Category                    | Source         | Purpose                        | Retained until   |
-| --------------------------- | -------------- | ------------------------------ | ---------------- |
-| [Account info: name, email] | You, at signup | Account management             | Account deletion |
-| [Usage data]                | Our service    | Analytics, product improvement | [period]         |
-| [Support correspondence]    | You            | Customer support               | [period]         |
+| Category | Source | Purpose | Retained until |
+|---|---|---|---|
+| [Account info: name, email] | You, at signup | Account management | Account deletion |
+| [Usage data] | Our service | Analytics, product improvement | [period] |
+| [Support correspondence] | You | Customer support | [period] |
 
 **Your data is attached** in [format]. [Secure delivery note — password-protected
 archive, secure link with expiry, etc.]
@@ -216,7 +214,6 @@ subprocessor page].
 To do so, [method].
 
 **Data we did not include:**
-
 - [Category] — [exemption and reason, e.g., "internal security logs — disclosure
   would compromise security measures"]
 - [Data about other individuals has been redacted from support correspondence]
@@ -233,18 +230,18 @@ We received your request on [date] to delete the personal data we hold about you
 
 **What we deleted:**
 
-| Category              | System           | Deleted on |
-| --------------------- | ---------------- | ---------- |
-| [Account and profile] | Production       | [date]     |
-| [Analytics events]    | [Amplitude/etc.] | [date]     |
-| [etc.]                |                  |            |
+| Category | System | Deleted on |
+|---|---|---|
+| [Account and profile] | Production | [date] |
+| [Analytics events] | [Amplitude/etc.] | [date] |
+| [etc.] | | |
 
 **What we retained and why:**
 
-| Category              | Reason                                              | Retained until |
-| --------------------- | --------------------------------------------------- | -------------- |
-| [Transaction records] | Legal obligation (tax record retention, [cite law]) | [date]         |
-| [Backup snapshots]    | Will be deleted on next rotation                    | [date]         |
+| Category | Reason | Retained until |
+|---|---|---|
+| [Transaction records] | Legal obligation (tax record retention, [cite law]) | [date] |
+| [Backup snapshots] | Will be deleted on next rotation | [date] |
 
 **Third-party processors:** We have instructed [list] to delete your data from
 their systems.
@@ -255,7 +252,6 @@ Your account is now closed. If you have questions, contact [privacy contact].
 ### Step 6: Log it
 
 DSARs get audited. Record:
-
 - Date received
 - Date identity verified
 - Date responded

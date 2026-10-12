@@ -5,7 +5,7 @@ description: >
   essay) — organization, analysis depth, clarity, citation form. NEVER
   rewrites the draft. Use when the user says "feedback on my memo", "read my
   draft", or "critique my brief".
-argument-hint: '[paste draft OR path to file]'
+argument-hint: "[paste draft OR path to file]"
 ---
 
 # /legal-writing
@@ -22,7 +22,7 @@ argument-hint: '[paste draft OR path to file]'
 
 ## Purpose
 
-Writing is how lawyers think on paper. You don't get better at it by having someone else write it for you. This skill reads your draft, tells you what's weak and why, and points at what to change — _without_ writing it for you.
+Writing is how lawyers think on paper. You don't get better at it by having someone else write it for you. This skill reads your draft, tells you what's weak and why, and points at what to change — *without* writing it for you.
 
 **Hard rule: no rewriting. Ever.** Structural feedback is the product. Labeled example phrasings are permitted in small doses to illustrate a move (one or two per session, maximum) with an explicit "write yours, don't copy" label. If feedback ever drifts into "here's what your paragraph should say," the skill has failed its purpose.
 
@@ -110,7 +110,7 @@ Feedback organized top-down — structure first, then paragraph-level, then sent
 
 ## One example to illustrate — do not copy
 
-_Use sparingly. Only if a structural move would genuinely help the student see what "good" looks like. Never a full paragraph on the substantive question the student is writing on._
+*Use sparingly. Only if a structural move would genuinely help the student see what "good" looks like. Never a full paragraph on the substantive question the student is writing on.*
 
 > Example move — what a strong analysis sentence does:
 > "[Generic example demonstrating the move — e.g., rule-application mapping.] Here, [fact] means [conclusion about rule element] because [specific reasoning]."
@@ -129,7 +129,6 @@ Refuse. Gracefully, not preachy:
 > "I don't rewrite. The point of writing practice is that you do the writing. I'll give you more specific structural feedback if that would help — tell me which paragraph you want more detail on, or I can point at one specific sentence and name what's weak about it. But I won't write your version."
 
 Then offer one of:
-
 - More specific structural feedback on a targeted section
 - A labeled example of the structural move at issue
 - A socratic drill on the rule or issue they're trying to write about (routes to `/law-student:socratic-drill`)
@@ -140,7 +139,6 @@ Append session summary to `~/.claude/plugins/config/claude-for-legal/law-student
 
 ```markdown
 ## [date] — [assignment type / subject]
-
 - Structural strength:
 - Structural weakness:
 - Analysis depth:

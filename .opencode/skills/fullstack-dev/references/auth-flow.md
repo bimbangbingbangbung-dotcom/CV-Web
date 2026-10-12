@@ -39,7 +39,7 @@ async function apiWithRefresh<T>(path: string, options: RequestInit = {}): Promi
       // Try refresh
       const refreshed = await api<{ accessToken: string }>('/api/auth/refresh', {
         method: 'POST',
-        credentials: 'include', // send httpOnly cookie
+        credentials: 'include',  // send httpOnly cookie
       });
       setAuthToken(refreshed.accessToken);
       // Retry original request
@@ -110,7 +110,7 @@ Request → 1.RequestID → 2.Logging → 3.CORS → 4.RateLimit → 5.BodyParse
 function authorize(...roles: Role[]) {
   return (req, res, next) => {
     if (!req.user) throw new UnauthorizedError();
-    if (!roles.some((r) => req.user.roles.includes(r))) throw new ForbiddenError();
+    if (!roles.some(r => req.user.roles.includes(r))) throw new ForbiddenError();
     next();
   };
 }
@@ -121,11 +121,11 @@ router.delete('/users/:id', authenticate, authorize('admin'), deleteUser);
 
 ## Auth Decision Table
 
-| Method  | When                               | Frontend                |
-| ------- | ---------------------------------- | ----------------------- |
+| Method | When | Frontend |
+|--------|------|----------|
 | Session | Same-domain, SSR, Django templates | Django templates / htmx |
-| JWT     | Different domain, SPA, mobile      | React, Vue, mobile apps |
-| OAuth2  | Third-party login, API consumers   | Any                     |
+| JWT | Different domain, SPA, mobile | React, Vue, mobile apps |
+| OAuth2 | Third-party login, API consumers | Any |
 
 ---
 
@@ -151,7 +151,6 @@ router.delete('/users/:id', authenticate, authorize('admin'), deleteUser);
 **Cause:** Token stored in component state (lost on unmount).
 
 **Fix:** Store access token in a persistent location:
-
 - React Context (survives navigation, lost on refresh)
 - Cookie (survives refresh)
 - React Query cache with `staleTime: Infinity` for session
@@ -161,7 +160,6 @@ router.delete('/users/:id', authenticate, authorize('admin'), deleteUser);
 **Cause:** Missing `credentials: 'include'` on frontend or `credentials: true` on backend CORS config.
 
 **Fix:**
-
 1. Frontend: `fetch(url, { credentials: 'include' })`
 2. Backend: `cors({ origin: 'https://your-frontend.com', credentials: true })`
 3. Backend: explicit origin (not `*`) when using credentials

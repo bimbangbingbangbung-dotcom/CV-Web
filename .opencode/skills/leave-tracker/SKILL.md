@@ -5,7 +5,7 @@ description: >
   the leaves that require an action and explains why — not a status board.
   Use weekly, or whenever the attorney needs to know which leaves have
   upcoming designation, certification, or exhaustion deadlines.
-argument-hint: '[no arguments — works from HRIS or leave-register.yaml]'
+argument-hint: "[no arguments — works from HRIS or leave-register.yaml]"
 ---
 
 # /leave-tracker

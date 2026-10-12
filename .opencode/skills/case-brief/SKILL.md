@@ -4,7 +4,7 @@ description: >
   Brief a case in your preferred format. In drill-me mode, makes the student
   state the holding first. Use when the user says "brief [case]", "what's the
   holding in", "case brief", or pastes a case.
-argument-hint: '[case name or citation, or paste the case]'
+argument-hint: "[case name or citation, or paste the case]"
 ---
 
 # /case-brief
@@ -38,7 +38,6 @@ A brief built on my guess and your good faith is worse than no brief. Better to 
 A brief you didn't write is a brief you won't remember. Every mode of this skill defaults to scaffolding the student's brief-writing, not to writing the brief.
 
 **What this skill will do in every mode:**
-
 - Ask the student what they already got from reading: the facts, the issue, the holding as they understand it.
 - Provide the blank template in their preferred format (headings for Facts, Issue, Holding, Reasoning, Rule, Notes).
 - Ask pointed follow-ups on whichever section is thin: "What were the key facts the court actually relied on?", "What's the narrow issue vs. the broader question?", "Why did the court reject the dissent's framing?"
@@ -46,7 +45,6 @@ A brief you didn't write is a brief you won't remember. Every mode of this skill
 - Flag confused or wrong understandings: "You said the holding is X. The court's actual language is closer to Y. Which one is the rule you'll carry into your outline?"
 
 **What this skill will not do, even if asked:**
-
 - Write a full case brief from a case name alone. That is the exact thing the student is learning not to need.
 - "Summarize this case for me" — refused. The brief is for remembering, which requires writing.
 
@@ -55,7 +53,6 @@ A brief you didn't write is a brief you won't remember. Every mode of this skill
 ## Mode fork
 
 **Drill-me mode:** Ask the student to state the holding before anything else:
-
 > "You've read this case. What's the holding? One sentence."
 
 If they can't state it, make them read it again. The brief is a memory aid, not a substitute for reading. Then proceed to the scaffold — ask them to state facts, issue, reasoning, and rule in turn. Push back on thin or wrong statements.

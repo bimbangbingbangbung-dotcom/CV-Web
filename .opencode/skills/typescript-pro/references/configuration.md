@@ -177,7 +177,7 @@ import type { User } from '@types';
 }
 ```
 
-````typescript
+```typescript
 // Using JSDoc for .d.ts generation
 /**
  * Creates a user
@@ -192,7 +192,7 @@ import type { User } from '@types';
 export function createUser(name: string, email: string): User {
   return { id: generateId(), name, email };
 }
-````
+```
 
 ## Build Optimization
 
@@ -363,18 +363,27 @@ function compile(fileNames: string[], options: ts.CompilerOptions): void {
   const program = ts.createProgram(fileNames, options);
   const emitResult = program.emit();
 
-  const allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
+  const allDiagnostics = ts
+    .getPreEmitDiagnostics(program)
+    .concat(emitResult.diagnostics);
 
-  allDiagnostics.forEach((diagnostic) => {
+  allDiagnostics.forEach(diagnostic => {
     if (diagnostic.file) {
       const { line, character } = ts.getLineAndCharacterOfPosition(
         diagnostic.file,
-        diagnostic.start!,
+        diagnostic.start!
       );
-      const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
-      console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
+      const message = ts.flattenDiagnosticMessageText(
+        diagnostic.messageText,
+        '\n'
+      );
+      console.log(
+        `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
+      );
     } else {
-      console.log(ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'));
+      console.log(
+        ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
+      );
     }
   });
 
@@ -387,7 +396,7 @@ compile(['src/index.ts'], {
   noEmitOnError: true,
   target: ts.ScriptTarget.ES2022,
   module: ts.ModuleKind.ES2022,
-  strict: true,
+  strict: true
 });
 ```
 
@@ -420,17 +429,17 @@ npx @typescript/analyze-trace trace
 
 ## Quick Reference
 
-| Option                       | Purpose                                |
-| ---------------------------- | -------------------------------------- |
-| `strict`                     | Enable all strict checks               |
-| `composite`                  | Enable project references              |
-| `incremental`                | Enable incremental compilation         |
-| `skipLibCheck`               | Skip .d.ts checking for faster builds  |
-| `esModuleInterop`            | Better CommonJS interop                |
-| `moduleResolution`           | How modules are resolved               |
-| `paths`                      | Path mapping for imports               |
-| `declaration`                | Generate .d.ts files                   |
-| `sourceMap`                  | Generate source maps                   |
-| `noEmit`                     | Don't emit output (type check only)    |
-| `isolatedModules`            | Each file can be transpiled separately |
-| `allowImportingTsExtensions` | Import .ts files directly              |
+| Option | Purpose |
+|--------|---------|
+| `strict` | Enable all strict checks |
+| `composite` | Enable project references |
+| `incremental` | Enable incremental compilation |
+| `skipLibCheck` | Skip .d.ts checking for faster builds |
+| `esModuleInterop` | Better CommonJS interop |
+| `moduleResolution` | How modules are resolved |
+| `paths` | Path mapping for imports |
+| `declaration` | Generate .d.ts files |
+| `sourceMap` | Generate source maps |
+| `noEmit` | Don't emit output (type check only) |
+| `isolatedModules` | Each file can be transpiled separately |
+| `allowImportingTsExtensions` | Import .ts files directly |

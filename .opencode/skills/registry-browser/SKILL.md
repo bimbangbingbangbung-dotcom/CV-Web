@@ -5,7 +5,7 @@ description: >
   descriptions and offering to show the full SKILL.md before install. Use when
   the user says "browse", "search skills", "find a skill for", "what's out
   there for", or wants to add a new registry to the watchlist.
-argument-hint: '[search query]'
+argument-hint: "[search query]"
 ---
 
 # /registry-browser
@@ -50,13 +50,11 @@ Also: browse by category if the registry organizes skills that way.
 **Found [N] skills across [M] registries:**
 
 ### [skill-name]
-
 **From:** [registry name]
 **Description:** [from frontmatter]
 [View full SKILL.md] [Install]
 
 ### [skill-name]
-
 [...]
 ```
 

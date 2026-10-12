@@ -6,7 +6,7 @@ description: >
   CLAUDE.md is missing or has placeholders, or when the user says "set up the
   privacy plugin", "onboard me", "configure privacy", or wants to re-run the
   interview or re-check integrations.
-argument-hint: '[--redo to re-run] [--check-integrations to re-probe integrations only]'
+argument-hint: "[--redo to re-run] [--check-integrations to re-probe integrations only]"
 ---
 
 # /cold-start-interview
@@ -38,14 +38,13 @@ When probing: only report ✓ if an MCP tool call actually succeeded. Configured
 
 ## Purpose
 
-Learn how _this_ privacy team works — what regulations actually apply to them, what they will and won't agree to in a DPA, what a good PIA looks like here versus anywhere else. Write it into `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` so every other skill reads from the same understanding.
+Learn how *this* privacy team works — what regulations actually apply to them, what they will and won't agree to in a DPA, what a good PIA looks like here versus anywhere else. Write it into `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` so every other skill reads from the same understanding.
 
 Privacy practices vary wildly by company. A B2B SaaS processor has almost nothing in common with a consumer app controller. The interview figures out which one this is before anything else.
 
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`:
-
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -70,7 +69,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -108,7 +107,7 @@ Populate the practice profile only from the user's typed answers and the three s
 ## Interview pacing
 
 - **Assume the answer exists somewhere.** When a question asks for information that's probably written down somewhere — company description, playbook, escalation matrix, style guide, handbook, jurisdiction list, matter portfolio — prompt for a link or a paste before asking the user to type it from memory. "Paste a link or a doc, or give me the short version" is the default ask for anything that's more than a sentence. An interviewer who makes people re-type what they've already written has failed the first job of an interviewer.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 
 **Pause for real answers.** Some questions have quick tap-through answers (controller vs. processor, regulatory footprint). Others need the user to type something, describe something, or upload a document (privacy policy, DPA template, reference PIA, DPA negotiating positions, systems-list for DSARs). When a question needs more than a quick tap:
 
@@ -178,7 +177,7 @@ Record the answer in the practice profile's `## Who we are` section (as `**Pract
 
 > This plugin can work with: document storage (Google Drive, SharePoint), Slack, and scheduled-tasks. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -209,19 +208,17 @@ Write `## Who's using this` and `## Available integrations` sections immediately
 - B2B, B2C, or both? Enterprise or SMB customers?
 
 **Regulatory footprint:**
-
 - Which regulations actually apply? GDPR? CCPA/CPRA? HIPAA? FERPA? Sector-specific? (This feeds `/reg-gap-analysis` — every new reg gets diffed against this list to see if it reaches you, and `/use-case-triage` uses it to spot which regimes apply to a new processing activity.)
 - Any regulators who know you by name yet? Open inquiries, consent decrees, anything?
 - Where does the data physically live? US only? EU? Multi-region?
 
 **The team:**
-
 - How many privacy people? Is there a DPO? In-house or outside?
 - "When a review finds something that needs someone more senior to sign off — a DPA position above your approval threshold, a DSAR with legal exemptions in play, a novel processing activity that doesn't fit the PIA template, a regulator inquiry, or a decision that's above your authority — who does that go to? Give me a name or a role (the GC, the CPO, your boss), or say 'I decide myself.' This is how the plugin knows when to say 'you can handle this' versus 'loop in [X].'"
 
 ### Part 2: DPA negotiating positions (3-4 min)
 
-_(These positions feed `/dpa-review` — every inbound DPA is redlined against your standards, fallbacks, and never-accepts. Wrong positions here = wrong redlines every time.)_
+*(These positions feed `/dpa-review` — every inbound DPA is redlined against your standards, fallbacks, and never-accepts. Wrong positions here = wrong redlines every time.)*
 
 Before the structured questions: "Do you have an existing DPA template, a DPA negotiation playbook, or a fallback-positions memo I can read? Paste the contents or share a file path, and I'll extract the positions rather than making you re-type them. If not, say 'no' and I'll ask the questions one at a time."
 
@@ -229,10 +226,10 @@ If the user uploads: read it, extract the positions, confirm what you found, and
 
 **If the user didn't upload a DPA playbook:** at the end of this section, offer: "Want me to write this up as a standalone DPA playbook you can share and maintain? Same content I just captured for your practice profile, formatted as a team-facing doc you can circulate or hand to a new privacy hire."
 
+
 This is where the skill earns its keep — most privacy teams have DPA positions but rarely write them down.
 
 **When you're the processor (customers send you a DPA):**
-
 - Do you have a standard DPA you push, or do you take customer paper?
 - Audit rights: SOC 2 report is the offer, right? Or do you accept on-site?
 - Breach notification: what's the shortest window you've agreed to?
@@ -241,23 +238,19 @@ This is where the skill earns its keep — most privacy teams have DPA positions
 - Deletion on termination: how many days, and do you certify?
 
 **When you're the controller (you send a DPA to vendors):**
-
-- Same questions, opposite polarity. What do you _require_ from vendors?
+- Same questions, opposite polarity. What do you *require* from vendors?
 
 **The one thing in a DPA that makes you say no:**
-
 - What's the term that's an automatic reject?
 
 ### Part 3: House style (1-2 min)
 
-**PIAs:** _(This feeds `/pia-generation` — the skill uses your trigger, format, depth, and sign-off as the default template for every PIA it drafts.)_
-
+**PIAs:** *(This feeds `/pia-generation` — the skill uses your trigger, format, depth, and sign-off as the default template for every PIA it drafts.)*
 - What triggers a PIA at your company? Every new feature? Only certain categories?
 - How long is a good PIA — two pages or twenty?
 - Who signs off — just you, or is there a review committee?
 
-**DSARs:** _(This feeds `/dsar-response` — the systems list drives the locate step, the handler drives who gets the runbook, the SLA drives deadline calculations.)_
-
+**DSARs:** *(This feeds `/dsar-response` — the systems list drives the locate step, the handler drives who gets the runbook, the SLA drives deadline calculations.)*
 - Volume — one a month or a hundred?
 - Who handles them — you, or a support team with a runbook?
 - What systems does a DSAR touch — how many places does user data live?
@@ -270,7 +263,7 @@ This is where the skill earns its keep — most privacy teams have DPA positions
 >
 > 2. **Your standard DPA template.** The one you push on customers (or vendors). This is your stated playbook — I'll compare it to what you told me.
 >
-> 3. **One PIA you're happy with.** Not a perfect one — a _representative_ one. I'll learn your structure, your tone, how deep you go, what you skip.
+> 3. **One PIA you're happy with.** Not a perfect one — a *representative* one. I'll learn your structure, your tone, how deep you go, what you skip.
 
 **How to read the seed docs:**
 
@@ -293,7 +286,6 @@ This is where the skill earns its keep — most privacy teams have DPA positions
   or is it ad hoc?
 
 If outputs aren't saved anywhere yet:
-
 > "That's fine — the policy-monitor skill will still work in direct-query mode
 > ('we want to start doing X, does our policy cover it?'). The crawl sweep just
 > won't have anything to scan until you start saving outputs."
@@ -303,7 +295,7 @@ If outputs aren't saved anywhere yet:
 ```markdown
 # Privacy & Data Protection Practice Profile
 
-_Written by the cold-start interview on [DATE]. Edit this file directly._
+*Written by the cold-start interview on [DATE]. Edit this file directly.*
 
 ---
 
@@ -329,13 +321,13 @@ goes to [GC / CPO / name].
 
 ## Available integrations
 
-| Integration                           | Status  | Fallback if unavailable                                                    |
-| ------------------------------------- | ------- | -------------------------------------------------------------------------- |
+| Integration | Status | Fallback if unavailable |
+|---|---|---|
 | Document storage (Drive / SharePoint) | [✓ / ✗] | Outputs saved locally; policy-monitor sweep runs in direct-query mode only |
-| Slack                                 | [✓ / ✗] | Breach / triage notifications delivered inline instead of posted           |
-| Scheduled tasks                       | [✓ / ✗] | Policy-monitor sweep runs on demand only                                   |
+| Slack | [✓ / ✗] | Breach / triage notifications delivered inline instead of posted |
+| Scheduled tasks | [✓ / ✗] | Policy-monitor sweep runs on demand only |
 
-_Re-check: `/privacy-legal:cold-start-interview --check-integrations`_
+*Re-check: `/privacy-legal:cold-start-interview --check-integrations`*
 
 ---
 
@@ -343,21 +335,21 @@ _Re-check: `/privacy-legal:cold-start-interview --check-integrations`_
 
 ### When we are the processor (customer DPAs)
 
-| Term                    | Our standard                                                     | Fallback                                 | Never                                    |
-| ----------------------- | ---------------------------------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| Audit rights            | [e.g., SOC 2 Type II annual]                                     | [e.g., virtual audit on 60 days' notice] | [on-site without notice]                 |
-| Breach notification     | [e.g., team's standard window from discovery]                    | [e.g., team's acceptable fallback]       | [windows tighter than the team can meet] |
-| Subprocessor changes    | [e.g., advance notice, customer may object]                      | [notice only]                            | [approval required per subprocessor]     |
-| Data location           | [e.g., US + EU selectable]                                       | [follows customer region]                | [hard commitment to single DC]           |
-| Deletion on termination | [e.g., standard days post-termination, certification on request] | [longer window]                          | [immediate]                              |
-| Liability for data      | [e.g., within the MSA cap]                                       | [separate capped carveout]               | [uncapped]                               |
+| Term | Our standard | Fallback | Never |
+|---|---|---|---|
+| Audit rights | [e.g., SOC 2 Type II annual] | [e.g., virtual audit on 60 days' notice] | [on-site without notice] |
+| Breach notification | [e.g., team's standard window from discovery] | [e.g., team's acceptable fallback] | [windows tighter than the team can meet] |
+| Subprocessor changes | [e.g., advance notice, customer may object] | [notice only] | [approval required per subprocessor] |
+| Data location | [e.g., US + EU selectable] | [follows customer region] | [hard commitment to single DC] |
+| Deletion on termination | [e.g., standard days post-termination, certification on request] | [longer window] | [immediate] |
+| Liability for data | [e.g., within the MSA cap] | [separate capped carveout] | [uncapped] |
 
-> _From the DPA template:_ [any deltas between template and stated positions]
+> *From the DPA template:* [any deltas between template and stated positions]
 
 ### When we are the controller (vendor DPAs)
 
-| Term   | We require        | Acceptable          | Never accept           |
-| ------ | ----------------- | ------------------- | ---------------------- |
+| Term | We require | Acceptable | Never accept |
+|---|---|---|---|
 | [Term] | [what we require] | [what we'll accept] | [what we won't accept] |
 
 ### The one thing
@@ -368,8 +360,8 @@ _Re-check: `/privacy-legal:cold-start-interview --check-integrations`_
 
 ## Privacy policy commitments
 
-_Extracted from [URL / filename] on [date]. If the policy changes, re-run setup
-or edit this section._
+*Extracted from [URL / filename] on [date]. If the policy changes, re-run setup
+or edit this section.*
 
 **Data categories we say we collect:** [list]
 **Purposes we state:** [list]
@@ -403,23 +395,23 @@ or edit this section._
 
 ## Escalation
 
-| Issue type                   | Handle at                 | Escalate to                       | When                                              |
-| ---------------------------- | ------------------------- | --------------------------------- | ------------------------------------------------- |
-| Routine DSAR                 | [handler]                 | [you]                             | Unusual scope, litigation hold, potential dispute |
-| Customer DPA negotiation     | [you]                     | [GC]                              | Outside fallbacks above                           |
-| PIA for high-risk processing | [you + review committee?] | [GC / DPO]                        | Biometric, children, automated decisions          |
-| Regulator contact            | —                         | [GC + you immediately]            | Always                                            |
-| Suspected breach             | —                         | [Security + you + GC immediately] | Always                                            |
+| Issue type | Handle at | Escalate to | When |
+|---|---|---|---|
+| Routine DSAR | [handler] | [you] | Unusual scope, litigation hold, potential dispute |
+| Customer DPA negotiation | [you] | [GC] | Outside fallbacks above |
+| PIA for high-risk processing | [you + review committee?] | [GC / DPO] | Biometric, children, automated decisions |
+| Regulator contact | — | [GC + you immediately] | Always |
+| Suspected breach | — | [Security + you + GC immediately] | Always |
 
 ---
 
 ## Seed documents
 
-| Doc            | Location    | Date reviewed | Notes                                  |
-| -------------- | ----------- | ------------- | -------------------------------------- |
-| Privacy policy | [URL]       | [date]        | [version]                              |
-| DPA template   | [path/link] | [date]        |                                        |
-| Reference PIA  | [path/link] | [date]        | "[name of product/feature it was for]" |
+| Doc | Location | Date reviewed | Notes |
+|---|---|---|---|
+| Privacy policy | [URL] | [date] | [version] |
+| DPA template | [path/link] | [date] | |
+| Reference PIA | [path/link] | [date] | "[name of product/feature it was for]" |
 
 ---
 
@@ -440,7 +432,7 @@ For externally-facing deliverables (DSAR response letters, regulator responses, 
 
 ---
 
-_Re-run: `/privacy-legal:cold-start-interview --redo`_
+*Re-run: `/privacy-legal:cold-start-interview --redo`*
 ```
 
 ## After writing
@@ -463,6 +455,7 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Run `/use-case-triage` on one real processing activity — it's the fastest way to see whether your playbook is capturing the right cuts. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
+
 
 1. **Show the summary.** "Here's what I heard. The DPA playbook is the part to check hardest — did I get your positions right?"
 

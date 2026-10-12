@@ -56,7 +56,6 @@ Ask all of the following in a single block:
 > useful data:
 >
 > **The expansion**
->
 > - Which country?
 > - What roles are you hiring? (Job function matters — a sales rep closing
 >   deals creates different legal exposure than an engineer writing code)
@@ -64,14 +63,12 @@ Ask all of the following in a single block:
 > - When do you need the first person to start?
 >
 > **Current state**
->
 > - Do you already have a legal entity in this country?
 > - Have you used an EOR provider before? Are you already considering one?
 > - Has tax or finance been looped in yet?
 > - Do you have outside employment counsel in this country?
 >
 > **Strategic context**
->
 > - Is this a long-term strategic commitment (building a real team) or
 >   testing the market (one or two hires, see how it goes)?
 > - Who is the executive sponsor making the structure decision?
@@ -88,14 +85,14 @@ structured framing document:
 
 **The core trade-off:**
 
-| Factor                 | Points toward EOR                   | Points toward Entity                     |
-| ---------------------- | ----------------------------------- | ---------------------------------------- |
-| Headcount in 12 months | Fewer hires                         | More hires                               |
-| Timeline to first hire | Short runway                        | Longer runway available                  |
-| Strategic commitment   | Testing the market                  | Long-term presence                       |
-| Cost sensitivity       | EOR markup acceptable               | Scale makes entity more efficient        |
-| Control needs          | Low — EOR employer handles local HR | High — want direct employer relationship |
-| IP sensitivity         | Lower                               | Higher — entity ownership cleaner        |
+| Factor | Points toward EOR | Points toward Entity |
+|---|---|---|
+| Headcount in 12 months | Fewer hires | More hires |
+| Timeline to first hire | Short runway | Longer runway available |
+| Strategic commitment | Testing the market | Long-term presence |
+| Cost sensitivity | EOR markup acceptable | Scale makes entity more efficient |
+| Control needs | Low — EOR employer handles local HR | High — want direct employer relationship |
+| IP sensitivity | Lower | Higher — entity ownership cleaner |
 
 Specific headcount break-even points, EOR markup ranges, setup costs, and
 timelines vary by country and provider — do not hardcode them. Route those
@@ -113,7 +110,6 @@ flag this explicitly:
 **Produce the question for the CFO/tax:**
 
 > Questions for your CFO and tax counsel:
->
 > - At [N] hires over 12 months, at what headcount does entity setup become
 >   more cost-effective than EOR (accounting for EOR markup, setup costs,
 >   and ongoing compliance burden)?
@@ -136,7 +132,6 @@ What they need to do: PE risk analysis, determine whether entity is required
 for tax purposes, advise on equity tax treatment in this jurisdiction.
 
 Questions legal should ask:
-
 - Does hiring a [role type] in [country] create a permanent establishment or
   taxable nexus before we have an entity?
 - What is our exposure window if we start hiring before the PE question is
@@ -152,7 +147,6 @@ What they need to do: identify local payroll provider (or confirm EOR handles
 it), budget mandatory employer contributions, set up local banking if entity.
 
 Questions legal should ask:
-
 - Have we identified a local payroll provider? (If EOR: confirm EOR handles
   payroll including local social contributions)
 - What are the mandatory employer contributions in [country] — pension,
@@ -166,7 +160,6 @@ What they need to do: benefits benchmarking, comp benchmarking against local
 market, confirm mandatory vs. supplemental benefits.
 
 Questions legal should ask:
-
 - What benefits are legally mandatory in [country] vs. market-standard? (Do
   not want to accidentally promise more than required or less than market)
 - Is our standard equity package competitive in this market, or does local
@@ -191,7 +184,7 @@ outside-counsel briefing request. Substantive local law (entity requirements,
 statutory benefits and contributions, termination protections, notice periods,
 employee-representation / works-council / collective-bargaining obligations,
 mandatory leave, restrictive covenants, data protection, work authorization)
-varies by country _and_ by role and headcount _and_ by industry, and changes
+varies by country *and* by role and headcount *and* by industry, and changes
 frequently. Treat every country as a country that requires verification — do
 not rely on the skill's own knowledge.
 
@@ -257,7 +250,7 @@ Draft the briefing request below, tailored to the intake answers:
 >
 > 13. **Top 2-3 things that surprise US companies hiring here for the first
 >     time** — what do you wish clients had asked you earlier? What has
->     _changed recently_ that a US team might not have caught?
+>     *changed recently* that a US team might not have caught?
 
 Add this briefing request to the expansion tracker as a single open item:
 owner = Outside Counsel, status = open, with the full briefing agenda in
@@ -345,10 +338,10 @@ attributable to a single owner.
 
 ### Open items ([N] total)
 
-| #      | Item   | Owner   | Status |
-| ------ | ------ | ------- | ------ |
-| 1      | [item] | [owner] | Open   |
-| [etc.] |
+| # | Item | Owner | Status |
+|---|---|---|---|
+| 1 | [item] | [owner] | Open |
+[etc.]
 
 ---
 

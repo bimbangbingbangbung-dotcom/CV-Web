@@ -70,23 +70,19 @@ Once the meeting is identified, confirm or fill in:
 Ask for the attendee list, or offer to pull from the calendar invite if the connector is authorized.
 
 **Directors present:**
-
 - Pull from board composition in `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` as the starting point
 - Ask who was actually present, who was absent, and whether any absent directors had advance notice
 
 **Management present:**
-
 - Who from management attended? (CFO, CAO, CTO, etc.)
 - Note: management attendees are typically listed separately from directors
 
 **Guests:**
-
 - Outside counsel present? (Name and firm)
 - Investment bankers, auditors, or other advisors?
 - Any guests who attended for specific agenda items only (note their attendance as limited to that item)
 
 **Chair:**
-
 - Who chaired the meeting?
 - Who acted as secretary?
 
@@ -106,7 +102,6 @@ Ask for the meeting materials. These are the source for the agenda items and any
 > If materials weren't distributed in advance, tell me the agenda items and I'll draft placeholders for each.
 
 **From the agenda and slides, extract:**
-
 - Agenda items in order
 - Any resolutions proposed (look for board approval language: "approve," "authorize," "ratify," "adopt," "elect")
 - Any exhibits referenced (management presentations, financial reports, legal memos, valuations)
@@ -123,7 +118,6 @@ Use the house format from `~/.claude/plugins/config/claude-for-legal/corporate-l
 ### Standard structure (adapt to house format)
 
 **Header block:**
-
 ```
 MINUTES OF [MEETING TYPE] OF THE BOARD OF DIRECTORS
 [OR: MINUTES OF THE [COMMITTEE NAME] OF THE BOARD OF DIRECTORS]
@@ -134,14 +128,12 @@ OF [COMPANY NAME]
 ```
 
 **Opening:**
-
 - Meeting called to order by [Chair name] at [time]
 - Notice: [proper notice given / notice waived — attach waiver as exhibit if applicable]
 - Quorum confirmed: [N of M directors present]
 - Secretary: [name]
 
 **Attendees:**
-
 - Directors present: [list]
 - Directors absent: [list, if any]
 - Also present: [management, outside counsel, guests — with roles]
@@ -176,9 +168,9 @@ Secretary signature line. Some formats include a chair countersignature.
 
 **Discussion summaries:** The hardest part of minutes is deciding how much discussion to capture. Follow the house format from seed documents exactly:
 
-- _Long-form narrative:_ Summarise the substance of the discussion — what questions were raised, what information was presented, what factors the board considered. Do not quote individuals unless the specific attribution matters legally.
-- _Action minutes:_ Note only what was presented and what action was taken. No discussion content beyond "the board discussed the matter."
-- _Hybrid:_ Full narrative for major items (acquisitions, financials, significant approvals), action-only for routine items.
+- *Long-form narrative:* Summarise the substance of the discussion — what questions were raised, what information was presented, what factors the board considered. Do not quote individuals unless the specific attribution matters legally.
+- *Action minutes:* Note only what was presented and what action was taken. No discussion content beyond "the board discussed the matter."
+- *Hybrid:* Full narrative for major items (acquisitions, financials, significant approvals), action-only for routine items.
 
 When materials were provided: pull summary content from the slides and management presentation. The board "received and reviewed" a presentation — summarize what the presentation covered.
 

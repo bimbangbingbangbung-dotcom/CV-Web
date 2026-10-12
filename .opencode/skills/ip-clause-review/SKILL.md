@@ -6,7 +6,7 @@ description: >
   consulting, SOW, vendor, or licensing agreements, when asked to check the
   assignment language or license scope, or when an agreement with IP
   provisions is pasted or attached.
-argument-hint: '[file path | Drive link | paste text]'
+argument-hint: "[file path | Drive link | paste text]"
 ---
 
 # /ip-clause-review
@@ -66,13 +66,13 @@ Read the IP clauses in an agreement and tell the lawyer what each one does, how 
 
 Read the whole agreement once, fast. Answer:
 
-| Question                                                | Answer                                                                                                                                             |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| What kind of agreement is this?                         | Employment / consulting or SOW / vendor MSA / in-license / out-license / collaboration or JDA / settlement / acquisition or asset purchase / other |
-| Which side are we on for IP?                            | Granting rights or receiving them / assigning IP or acquiring it / licensor or licensee                                                            |
-| Who is the counterparty?                                | Name, and sophistication — individual, startup, BigCo                                                                                              |
-| Is there consideration flowing for the IP specifically? | Salary, fee, royalty, upfront payment, equity, none                                                                                                |
-| Governing law and venue                                 | What does it say — and does our practice profile flag that jurisdiction as escalate/never?                                                         |
+| Question | Answer |
+|---|---|
+| What kind of agreement is this? | Employment / consulting or SOW / vendor MSA / in-license / out-license / collaboration or JDA / settlement / acquisition or asset purchase / other |
+| Which side are we on for IP? | Granting rights or receiving them / assigning IP or acquiring it / licensor or licensee |
+| Who is the counterparty? | Name, and sophistication — individual, startup, BigCo |
+| Is there consideration flowing for the IP specifically? | Salary, fee, royalty, upfront payment, equity, none |
+| Governing law and venue | What does it say — and does our practice profile flag that jurisdiction as escalate/never? |
 
 The side question is per-document, not a one-time setup answer. An in-house counsel reviewing an employment agreement is on the "receiving" side; reviewing an out-license the same day, on the "granting" side. The posture inverts.
 
@@ -107,13 +107,12 @@ The counterparty (or a successor) may have residual rights in work product we
 thought we owned.
 
 **Proposed redline:**
-
 > "[specific replacement language]"
 
 **Escalation:** Per `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`, assignment-scope gaps escalate to [approver].
 ```
 
-> **Can the assignment convey AI-generated content?** _Thaler v. Perlmutter_ and the Copyright Office's 2023 AI registration guidance suggest that AI-generated works without any human authorship may not be copyrightable, though the boundaries remain unclear and this area is evolving. If the contractor uses AI for substantial portions of the deliverables, the copyright status of those portions is uncertain — and an assignment clause can only convey rights that exist.
+> **Can the assignment convey AI-generated content?** *Thaler v. Perlmutter* and the Copyright Office's 2023 AI registration guidance suggest that AI-generated works without any human authorship may not be copyrightable, though the boundaries remain unclear and this area is evolving. If the contractor uses AI for substantial portions of the deliverables, the copyright status of those portions is uncertain — and an assignment clause can only convey rights that exist.
 >
 > Check: does the agreement have an AI-use disclosure obligation? A representation about the role of AI in the deliverables? A mechanism to identify which portions are AI-assisted vs. human-authored?
 >
@@ -157,7 +156,6 @@ For each clause present, produce:
 if this stays as-is]
 
 **Proposed redline (if needed):**
-
 > "[specific replacement language]"
 
 **Decision call:** [If uncertain whether the clause achieves the intended IP
@@ -167,12 +165,12 @@ ways. Do not silently decide a subjective allocation question.]
 
 **Severity calibration:**
 
-| Level       | Means                                                                                                                                                                              |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Level | Means |
+|---|---|
 | 🔴 Critical | Don't sign without fixing. Assignment gap in a document that should have one. Unlimited license where a narrow one was intended. Exclusive grant where non-exclusive was intended. |
-| 🟠 High     | Strongly push; escalate if they won't move. Ambiguous scope, missing moral rights waiver in a moral rights jurisdiction, missing further assurances, narrow indemnity.             |
-| 🟡 Medium   | Push in first round; accept if it's the last open item. Cosmetic but imprecise language, survival periods shorter than standard.                                                   |
-| 🟢 Low      | Note it, don't spend capital. A stylistic deviation that doesn't change the allocation.                                                                                            |
+| 🟠 High | Strongly push; escalate if they won't move. Ambiguous scope, missing moral rights waiver in a moral rights jurisdiction, missing further assurances, narrow indemnity. |
+| 🟡 Medium | Push in first round; accept if it's the last open item. Cosmetic but imprecise language, survival periods shorter than standard. |
+| 🟢 Low | Note it, don't spend capital. A stylistic deviation that doesn't change the allocation. |
 
 ### Step 4: Cross-clause consistency
 
@@ -200,7 +198,6 @@ State what jurisdiction the agreement is governed by, and whether the practice p
 **Edit at the smallest possible granularity.** A redline is a negotiation artifact, not a rewrite. Wholesale clause replacement signals "we threw out your drafting" — it's aggressive, it forces the counterparty to re-read the whole clause, and it discards the parts of their drafting that were fine. Surgical redlines — strike a word, insert a phrase, restructure a subclause — signal "we have specific asks" and are faster to read, understand, and accept.
 
 Default to the smallest edit that achieves the playbook position:
-
 - Replace a **word** before a phrase. ("twelve (12)" → "twenty-four (24)")
 - Replace a **phrase** before a sentence. ("paid by the Buyer" → "paid and payable by the Buyer")
 - Restructure a **subclause** before replacing the sentence. (Add "(a)" and "(b)" to split a compound condition.)
@@ -286,3 +283,4 @@ When a clause could be read to allocate IP either way, or when it is unclear whe
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
+

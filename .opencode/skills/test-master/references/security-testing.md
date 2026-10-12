@@ -29,7 +29,9 @@ describe('Authentication Security', () => {
 
   it('enforces rate limiting on login', async () => {
     for (let i = 0; i < 6; i++) {
-      await request(app).post('/api/login').send({ email: 'user@test.com', password: 'wrong' });
+      await request(app)
+        .post('/api/login')
+        .send({ email: 'user@test.com', password: 'wrong' });
     }
 
     await request(app)
@@ -65,7 +67,10 @@ describe('Authorization', () => {
 ```typescript
 describe('Input Validation', () => {
   it('rejects SQL injection attempts', async () => {
-    await request(app).get('/api/users').query({ search: "'; DROP TABLE users; --" }).expect(400);
+    await request(app)
+      .get('/api/users')
+      .query({ search: "'; DROP TABLE users; --" })
+      .expect(400);
   });
 
   it('rejects XSS in input fields', async () => {
@@ -78,7 +83,10 @@ describe('Input Validation', () => {
   });
 
   it('validates file upload types', async () => {
-    await request(app).post('/api/upload').attach('file', 'malicious.exe').expect(400);
+    await request(app)
+      .post('/api/upload')
+      .attach('file', 'malicious.exe')
+      .expect(400);
   });
 });
 ```
@@ -99,21 +107,21 @@ describe('Security Headers', () => {
 
 ## Security Test Checklist
 
-| Category       | Tests                                  |
-| -------------- | -------------------------------------- |
-| **Auth**       | Invalid creds, token expiry, tampering |
-| **Input**      | SQL injection, XSS, command injection  |
-| **Access**     | IDOR, privilege escalation             |
-| **Rate Limit** | Brute force, API abuse                 |
-| **Headers**    | CSP, HSTS, X-Frame-Options             |
-| **Data**       | PII exposure, error messages           |
+| Category | Tests |
+|----------|-------|
+| **Auth** | Invalid creds, token expiry, tampering |
+| **Input** | SQL injection, XSS, command injection |
+| **Access** | IDOR, privilege escalation |
+| **Rate Limit** | Brute force, API abuse |
+| **Headers** | CSP, HSTS, X-Frame-Options |
+| **Data** | PII exposure, error messages |
 
 ## Quick Reference
 
-| Vulnerability | Test Approach                 |
-| ------------- | ----------------------------- |
-| SQL Injection | `'; DROP TABLE--` in inputs   |
-| XSS           | `<script>alert(1)</script>`   |
-| IDOR          | Access other user's resources |
-| CSRF          | Missing/invalid tokens        |
-| Auth Bypass   | Missing auth, expired tokens  |
+| Vulnerability | Test Approach |
+|---------------|---------------|
+| SQL Injection | `'; DROP TABLE--` in inputs |
+| XSS | `<script>alert(1)</script>` |
+| IDOR | Access other user's resources |
+| CSRF | Missing/invalid tokens |
+| Auth Bypass | Missing auth, expired tokens |

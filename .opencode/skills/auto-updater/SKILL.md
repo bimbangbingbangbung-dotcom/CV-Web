@@ -5,7 +5,7 @@ description: >
   explicit approval before applying. Use when the user says "check for
   updates", "update my skills", "anything new for my installed skills", or
   when invoked from the registry-sync agent.
-argument-hint: '[--apply to update all, otherwise notify only]'
+argument-hint: "[--apply to update all, otherwise notify only]"
 ---
 
 # /auto-updater
@@ -60,7 +60,6 @@ For each update, show the full diff:
 ```
 
 Then run the trust check:
-
 - **Did `hooks/hooks.json` change?** Hooks can execute arbitrary shell commands. Show the diff prominently and ask the user to confirm they understand what the new hooks do.
 - **Did `.mcp.json` change?** New or changed MCP servers can access your environment. Same treatment.
 - **Did `allowed-tools` or `tools` frontmatter expand?** New tool access is a permission escalation.
@@ -121,7 +120,7 @@ as `min(freshness_window, user's threshold for freshness_category)` from
 > was last verified [date] — past the [N month] window. The author may not
 > have re-verified. Options:
 > (a) check [verified_against URLs from the install log] yourself and note
-> if the bundled references still match current sources,
+>     if the bundled references still match current sources,
 > (b) flag to the registry maintainer,
 > (c) disable the skill until re-verified."
 

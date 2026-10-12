@@ -7,7 +7,7 @@ description: >
   claims posture, or matter workspace paths. Use when the user says
   "change my [thing]", "update my profile", "edit my framework", "retune
   my calibration", or "customize".
-argument-hint: '[section name, or describe what you want to change]'
+argument-hint: "[section name, or describe what you want to change]"
 ---
 
 # /customize
@@ -34,8 +34,8 @@ cold-start interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting, product surface area _(shared across all 12 plugins — changes
-     flow through `company-profile.md`)_
+     setting, product surface area *(shared across all 12 plugins — changes
+     flow through `company-profile.md`)*
    - **Launch review process** — intake (Jira / Linear / Asana / doc),
      review SLA, launch tiering, PRD location
    - **Review framework** — the categories you review launches against
@@ -61,13 +61,13 @@ cold-start interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - _Risk calibration tightening "fine" → "needs a real look" for a
-     pattern:_ "`/is-this-a-problem` and `/launch-review` will start flagging this
+   - *Risk calibration tightening "fine" → "needs a real look" for a
+     pattern:* "`/is-this-a-problem` and `/launch-review` will start flagging this
      pattern. Existing reviews stay as written; re-run if you want the new
      posture applied."
-   - _New launch-review category:_ "`/launch-review` will add a section for
+   - *New launch-review category:* "`/launch-review` will add a section for
      this category. `/is-this-a-problem` will pattern-match it in triage."
-   - _Marketing claims posture tightening:_ "`/marketing-claims-review` will flag more
+   - *Marketing claims posture tightening:* "`/marketing-claims-review` will flag more
      language as needing substantiation or reframing."
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,

@@ -56,7 +56,7 @@ For each state supplement in `~/.claude/plugins/config/claude-for-legal/employme
 
 - Does this supplement modify the section being changed?
 - Does the change make the supplement obsolete, wrong, or incomplete?
-- Does the change create a need for a _new_ supplement in a state that didn't need one before?
+- Does the change create a need for a *new* supplement in a state that didn't need one before?
 
 ### Step 5: Promise check
 
@@ -78,14 +78,14 @@ Flag this. Don't block it — but flag it.
 ### Cross-reference impact
 
 | Section | References changed section | Still accurate? | Fix needed |
-| ------- | -------------------------- | --------------- | ---------- |
-| [name]  | [how]                      | ✅/⚠️           | [what]     |
+|---|---|---|---|
+| [name] | [how] | ✅/⚠️ | [what] |
 
 ### State supplement impact
 
-| State   | Current supplement | After change                            | Action                                  |
-| ------- | ------------------ | --------------------------------------- | --------------------------------------- |
-| [state] | [what it says]     | [still valid / obsolete / needs update] | [none / update / new supplement needed] |
+| State | Current supplement | After change | Action |
+|---|---|---|---|
+| [state] | [what it says] | [still valid / obsolete / needs update] | [none / update / new supplement needed] |
 
 ### Promise check
 

@@ -13,12 +13,12 @@ function useApi<T>(url: string) {
     const controller = new AbortController();
 
     fetch(url, { signal: controller.signal })
-      .then((res) => {
+      .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
       .then(setData)
-      .catch((err) => {
+      .catch(err => {
         if (err.name !== 'AbortError') setError(err);
       })
       .finally(() => setLoading(false));
@@ -77,8 +77,8 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
 ```tsx
 function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia(query).matches,
+  const [matches, setMatches] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia(query).matches
   );
 
   useEffect(() => {
@@ -108,7 +108,10 @@ const handleClick = useCallback((id: string) => {
 }, []); // Empty deps = stable reference
 
 // useMemo: Memoize expensive calculations
-const sortedItems = useMemo(() => [...items].sort((a, b) => a.name.localeCompare(b.name)), [items]);
+const sortedItems = useMemo(() =>
+  [...items].sort((a, b) => a.name.localeCompare(b.name)),
+  [items]
+);
 
 // When to use:
 // - useCallback: When passing to memoized children
@@ -135,27 +138,25 @@ useEffect(() => {
   }
 
   fetchData();
-  return () => {
-    cancelled = true;
-  };
+  return () => { cancelled = true };
 }, []);
 ```
 
 ## Quick Reference
 
-| Hook        | Purpose                     |
-| ----------- | --------------------------- |
-| useState    | Component state             |
-| useEffect   | Side effects, subscriptions |
-| useCallback | Memoize functions           |
-| useMemo     | Memoize values              |
-| useRef      | Mutable ref, DOM access     |
-| useContext  | Read context                |
-| useReducer  | Complex state logic         |
+| Hook | Purpose |
+|------|---------|
+| useState | Component state |
+| useEffect | Side effects, subscriptions |
+| useCallback | Memoize functions |
+| useMemo | Memoize values |
+| useRef | Mutable ref, DOM access |
+| useContext | Read context |
+| useReducer | Complex state logic |
 
-| Custom Hook     | Use Case         |
-| --------------- | ---------------- |
-| useDebounce     | Input delay      |
+| Custom Hook | Use Case |
+|-------------|----------|
+| useDebounce | Input delay |
 | useLocalStorage | Persistent state |
-| useMediaQuery   | Responsive logic |
-| useApi          | Data fetching    |
+| useMediaQuery | Responsive logic |
+| useApi | Data fetching |

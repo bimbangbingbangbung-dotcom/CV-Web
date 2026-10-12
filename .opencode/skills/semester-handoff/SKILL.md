@@ -6,7 +6,7 @@ description: >
   the incoming cohort cleanly. Reads deadlines, client-comms, and case history.
   Use when the professor or departing students need to wrap up the semester,
   build transition memos, or offboard a graduating/withdrawing student.
-argument-hint: '[--semester=YYYY-term (default: current)] [--case=[case_id] (for a single case)]'
+argument-hint: "[--semester=YYYY-term (default: current)] [--case=[case_id] (for a single case)]"
 ---
 
 # /semester-handoff
@@ -73,11 +73,11 @@ For each case:
 
 ## Pending deadlines
 
-_Pulled from `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml`. Incoming student's first job is to confirm these are accurate and owned._
+*Pulled from `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml`. Incoming student's first job is to confirm these are accurate and owned.*
 
-| Due    | Type   | Description | Notes                                                        |
-| ------ | ------ | ----------- | ------------------------------------------------------------ |
-| [date] | [type] | [one-line]  | [if tight: "URGENT — due within [N] days of semester start"] |
+| Due | Type | Description | Notes |
+|---|---|---|---|
+| [date] | [type] | [one-line] | [if tight: "URGENT — due within [N] days of semester start"] |
 
 ## What's been done
 
@@ -98,19 +98,19 @@ _Pulled from `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.y
 
 ## Documents drafted / filed
 
-_Pointers, not content._
+*Pointers, not content.*
 
 - [Date] [Document type] — [path or file reference] — [status: filed / drafted / in review queue]
 
 ## Communications history summary
 
-_From `~/.claude/plugins/config/claude-for-legal/legal-clinic/client-comms/[case-id]/log.md`. Three-line summary here; incoming student reads the full log._
+*From `~/.claude/plugins/config/claude-for-legal/legal-clinic/client-comms/[case-id]/log.md`. Three-line summary here; incoming student reads the full log.*
 
 [Short summary of recent contact patterns — e.g., "3 phone calls since intake, all in Spanish, client prefers evenings. Last contact: 2026-04-15, confirmed address for hearing notice."]
 
 ## Professor's flags for incoming student
 
-_Added by professor review before the handoff memo goes to the incoming student. Could include: "this case has a sensitive family dynamic — read the intake carefully before calling client"; "client has requested all mail go to PO box not home address"; "there's a scope question here we haven't resolved — check with me in week 1."_
+*Added by professor review before the handoff memo goes to the incoming student. Could include: "this case has a sensitive family dynamic — read the intake carefully before calling client"; "client has requested all mail go to PO box not home address"; "there's a scope question here we haven't resolved — check with me in week 1."*
 
 [flags, or "none"]
 
@@ -143,9 +143,9 @@ After all per-case memos, produce `~/.claude/plugins/config/claude-for-legal/leg
 
 ## Transitions
 
-| Case      | Outgoing | Incoming      | Practice area | Urgency                                       |
-| --------- | -------- | ------------- | ------------- | --------------------------------------------- |
-| [case_id] | [name]   | [name or TBD] | [area]        | [standard / deadline within 2 weeks / urgent] |
+| Case | Outgoing | Incoming | Practice area | Urgency |
+|---|---|---|---|---|
+| [case_id] | [name] | [name or TBD] | [area] | [standard / deadline within 2 weeks / urgent] |
 
 ## Unassigned
 

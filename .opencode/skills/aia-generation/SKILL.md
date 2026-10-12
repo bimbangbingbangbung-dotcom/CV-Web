@@ -8,7 +8,7 @@ description: >
   Use when user says "impact assessment for", "assess this AI use case", "run an
   AIA", "generate an AIA", "we need to document this AI system", "AI risk
   assessment for X", or follows a conditional triage result.
-argument-hint: '[describe the use case or system, or pass a triage result]'
+argument-hint: "[describe the use case or system, or pass a triage result]"
 ---
 
 # /aia-generation
@@ -48,7 +48,6 @@ responsibly. They often need to happen in parallel; they're not substitutes.
 ## Load house style
 
 Read `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → `## Impact assessment house style`. That has:
-
 - What triggers an impact assessment at this company
 - The structure template extracted from the seed assessment
 - Typical depth
@@ -66,7 +65,6 @@ looks like the other assessments this team produces.
 Check the trigger criteria in `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`.
 
 **Also check these regardless:**
-
 - Does this AI make or materially influence a decision affecting a person (employment,
   credit, access, pricing, content moderation)?
 - Does this AI process personal data about individuals?
@@ -75,7 +73,6 @@ Check the trigger criteria in `~/.claude/plugins/config/claude-for-legal/ai-gove
 - Is the use case in the elevated or high governance tier per `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`?
 
 If none of the above and the house trigger isn't met:
-
 > "Doesn't look like this needs a full impact assessment. Here's a one-paragraph
 > record for the file explaining why — in case anyone asks later."
 
@@ -160,7 +157,6 @@ is not a form to send them.
 ### Deployment stage and scale
 
 Ask:
-
 - **Stage:** "Is this system (a) proposed and not yet built, (b) in pilot, (c) live in production, or (d) live and scaled?"
 - **Scale:** "Roughly how many individuals are affected per [month/year]? How long has it been running?"
 - **History:** "Has it been assessed before? Has it produced decisions that were challenged, appealed, or reversed?"
@@ -184,7 +180,6 @@ A second failure mode: the footprint was set before a regime that now matters ex
 For each regime in `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → `## Regulatory footprint` that applies to this system — **plus any regime surfaced by the re-derivation above** — research the currently operative risk classification framework and determine where the system lands.
 
 Research tasks:
-
 - What is the regime's own tier taxonomy (e.g., prohibited / high-risk / limited / minimal, or the regime's equivalent)?
 - What are the criteria for each tier? Cite primary sources with pinpoint references.
 - Which tier does this system fall into given its function, affected parties, and decision consequentiality?
@@ -197,8 +192,8 @@ Don't assume internal-only systems are out of scope — most regimes treat emplo
 
 **Provider-vs-deployer split (when `AI role: Both`).** If `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → `## Company profile` → `AI role` is `Both` (the company is both a provider/builder and a deployer), Section 6 MUST include a provider-vs-deployer mapping table per regime. Most regimes impose materially different obligations on providers (or builders) versus deployers (or users) — collapsing them into one undifferentiated list misses obligations and conflates risks. Do not combine provider and deployer obligations into a single section. Produce, per regime:
 
-| Obligation                           | As provider                                            | As deployer                                            |
-| ------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| Obligation | As provider | As deployer |
+|---|---|---|
 | [specific obligation, pinpoint cite] | [what applies / does not apply / with what carve-outs] | [what applies / does not apply / with what carve-outs] |
 
 **If a high-risk or equivalent classification applies:**
@@ -282,7 +277,7 @@ three conditions required before production deployment."]
 
 ## 6. Regulatory classification
 
-_[One subsection per regime in the regulatory footprint that applies to this system.]_
+*[One subsection per regime in the regulatory footprint that applies to this system.]*
 
 **Regime:** [name]
 **Classification under this regime:** [tier, with pinpoint citation to the controlling provision]
@@ -294,17 +289,17 @@ _[One subsection per regime in the regulatory footprint that applies to this sys
 
 **Provider-vs-deployer obligation split (required if `AI role: Both`):**
 
-| Obligation                            | As provider                     | As deployer                     |
-| ------------------------------------- | ------------------------------- | ------------------------------- |
+| Obligation | As provider | As deployer |
+|---|---|---|
 | [specific obligation + pinpoint cite] | [what applies / does not apply] | [what applies / does not apply] |
 
 ---
 
 ## 7. AI policy consistency
 
-| Policy commitment                                                                                             | Consistent?       | Notes |
-| ------------------------------------------------------------------------------------------------------------- | ----------------- | ----- |
-| [commitment from `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` AI policy section] | 🟢 / 🟡 / 🟠 / 🔴 |       |
+| Policy commitment | Consistent? | Notes |
+|---|---|---|
+| [commitment from `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` AI policy section] | 🟢 / 🟡 / 🟠 / 🔴 | |
 
 [If any item is 🟡 or worse: policy update needed before deployment, or design needs to change.
 One of them has to change — not both flagged and left open.]
@@ -313,9 +308,9 @@ One of them has to change — not both flagged and left open.]
 
 ## 8. Risks and mitigations
 
-| #   | Risk                                                                     | Likelihood | Impact | Mitigation         | Status               | Owner  |
-| --- | ------------------------------------------------------------------------ | ---------- | ------ | ------------------ | -------------------- | ------ |
-| 1   | [specific risk tied to this design — not "AI hallucination" generically] | L/M/H      | L/M/H  | [specific control] | Done / Planned / Gap | [name] |
+| # | Risk | Likelihood | Impact | Mitigation | Status | Owner |
+|---|---|---|---|---|---|---|
+| 1 | [specific risk tied to this design — not "AI hallucination" generically] | L/M/H | L/M/H | [specific control] | Done / Planned / Gap | [name] |
 
 **Residual risk after mitigations:** [assessment]
 
@@ -326,7 +321,6 @@ One of them has to change — not both flagged and left open.]
 **[APPROVED / APPROVED WITH CONDITIONS / CHANGES REQUIRED / NOT APPROVED]**
 
 **Conditions (if any):**
-
 - [ ] [specific action before deployment — owner, deadline]
 
 **Privacy review required?** [Yes — run `/privacy-legal:pia-generation`, if the plugin is installed /
@@ -357,11 +351,11 @@ Do not proceed past this gate without an explicit yes. DRAFT assessments for att
 
 Same standard as the PIA skill — risks must be **specific and tied to the design**.
 
-| Bad risk           | Why bad                            | Better                                                                                                                                                                   |
-| ------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| "AI hallucination" | Applies to every LLM; says nothing | "Model may generate plausible but incorrect legal citations — support agents have no current verification step before sending to customers"                              |
-| "Bias"             | Too vague                          | "Résumé scoring model trained on historical hires; if historical cohort was demographically homogeneous, underrepresented candidates may be systematically scored lower" |
-| "Vendor risk"      | Circular                           | "OpenAI's terms permit training on API inputs by default; unless the opt-out is confirmed in the agreement, customer support messages may be used to train the model"    |
+| Bad risk | Why bad | Better |
+|---|---|---|
+| "AI hallucination" | Applies to every LLM; says nothing | "Model may generate plausible but incorrect legal citations — support agents have no current verification step before sending to customers" |
+| "Bias" | Too vague | "Résumé scoring model trained on historical hires; if historical cohort was demographically homogeneous, underrepresented candidates may be systematically scored lower" |
+| "Vendor risk" | Circular | "OpenAI's terms permit training on API inputs by default; unless the opt-out is confirmed in the agreement, customer support messages may be used to train the model" |
 
 Aim for 2-5 real risks, not 12 padded ones.
 

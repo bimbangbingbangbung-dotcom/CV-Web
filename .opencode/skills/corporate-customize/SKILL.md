@@ -7,7 +7,7 @@ description: >
   Management), materiality thresholds, disclosure schedule format, consent
   precedents, or matter workspace paths. Use when the user says "change my
   [thing]", "update my profile", "edit my config", or "customize".
-argument-hint: '[section name, or describe what you want to change]'
+argument-hint: "[section name, or describe what you want to change]"
 ---
 
 # /customize
@@ -34,8 +34,8 @@ and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, public
-     vs. private, practice setting _(shared across all 12 plugins — changes
-     flow through `company-profile.md`)_
+     vs. private, practice setting *(shared across all 12 plugins — changes
+     flow through `company-profile.md`)*
    - **Active modules** — which of M&A, Board & Secretary, Public Company,
      Entity Management are on. Turning a module on/off changes which skills
      prompt for setup.
@@ -66,15 +66,15 @@ and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - _Materiality threshold $250K → $500K:_ "`/diligence-issue-extraction`
+   - *Materiality threshold $250K → $500K:* "`/diligence-issue-extraction`
      and `/material-contract-schedule` will now treat $500K as the cutoff.
      Existing findings stay as logged; re-run if you want the new threshold
      applied retroactively."
-   - _Turning on the Public Company module:_ "I'll prompt you for reporting
+   - *Turning on the Public Company module:* "I'll prompt you for reporting
      calendar and disclosure controls next time you run anything in that
      area."
-   - _AI bulk-review trust "check every row" → "spot-check 10%":_ "`/ai-tool-
-handoff` will QA a 10% sample rather than every extraction."
+   - *AI bulk-review trust "check every row" → "spot-check 10%":* "`/ai-tool-
+     handoff` will QA a 10% sample rather than every extraction."
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,
    practice setting, stage): write to

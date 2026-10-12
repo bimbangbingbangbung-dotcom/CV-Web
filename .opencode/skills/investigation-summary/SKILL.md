@@ -5,7 +5,7 @@ description: >
   HR, leadership, or outside counsel versions. Use when an investigation memo
   needs to be communicated to an audience that should not see the full
   privileged work product.
-argument-hint: '[matter name] [audience: hr / leadership / outside-counsel]'
+argument-hint: "[matter name] [audience: hr / leadership / outside-counsel]"
 ---
 
 # /investigation-summary

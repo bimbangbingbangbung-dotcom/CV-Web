@@ -31,11 +31,17 @@ class UserBuilder {
 }
 
 // Fluent API with type safety
-const user = new UserBuilder().setName('John').setEmail('john@example.com').setAge(30).build();
+const user = new UserBuilder()
+  .setName('John')
+  .setEmail('john@example.com')
+  .setAge(30)
+  .build();
 
 // Advanced builder with compile-time validation
 type Builder<T, K extends keyof T = never> = {
-  [P in keyof T as `set${Capitalize<string & P>}`]: (value: T[P]) => Builder<T, K | P>;
+  [P in keyof T as `set${Capitalize<string & P>}`]: (
+    value: T[P]
+  ) => Builder<T, K | P>;
 } & {
   build: K extends keyof T ? () => T : never;
 };
@@ -55,7 +61,7 @@ function createBuilder<T>(): Builder<T> {
           return this;
         };
       }
-    },
+    }
   });
 }
 ```
@@ -169,16 +175,20 @@ class QueryBuilder<T> {
   private conditions: Array<(item: T) => boolean> = [];
 
   where<K extends keyof T>(key: K, value: T[K]): this {
-    this.conditions.push((item) => item[key] === value);
+    this.conditions.push(item => item[key] === value);
     return this;
   }
 
   execute(items: T[]): T[] {
-    return items.filter((item) => this.conditions.every((condition) => condition(item)));
+    return items.filter(item =>
+      this.conditions.every(condition => condition(item))
+    );
   }
 }
 
-const query = new QueryBuilder<User>().where('email', 'john@example.com').where('age', 30);
+const query = new QueryBuilder<User>()
+  .where('email', 'john@example.com')
+  .where('age', 30);
 ```
 
 ## Type-Safe API Client
@@ -203,24 +213,30 @@ type ApiEndpoints = {
   };
 };
 
-type ExtractParams<T extends string> = T extends `${infer _Start}/:${infer Param}/${infer Rest}`
-  ? { [K in Param]: string } & ExtractParams<`/${Rest}`>
-  : T extends `${infer _Start}/:${infer Param}`
+type ExtractParams<T extends string> =
+  T extends `${infer _Start}/:${infer Param}/${infer Rest}`
+    ? { [K in Param]: string } & ExtractParams<`/${Rest}`>
+    : T extends `${infer _Start}/:${infer Param}`
     ? { [K in Param]: string }
     : {};
 
 class ApiClient {
-  async request<Path extends keyof ApiEndpoints, Method extends keyof ApiEndpoints[Path]>(
+  async request<
+    Path extends keyof ApiEndpoints,
+    Method extends keyof ApiEndpoints[Path]
+  >(
     method: Method,
     path: Path,
     options?: ApiEndpoints[Path][Method] extends { body: infer B }
       ? { body: B }
       : ApiEndpoints[Path][Method] extends { params: infer P }
-        ? { params: P }
-        : ApiEndpoints[Path][Method] extends { query: infer Q }
-          ? { query: Q }
-          : never,
-  ): Promise<ApiEndpoints[Path][Method] extends { response: infer R } ? R : never> {
+      ? { params: P }
+      : ApiEndpoints[Path][Method] extends { query: infer Q }
+      ? { query: Q }
+      : never
+  ): Promise<
+    ApiEndpoints[Path][Method] extends { response: infer R } ? R : never
+  > {
     // Make HTTP request
     return null as any;
   }
@@ -232,7 +248,7 @@ const client = new ApiClient();
 const users = await client.request('GET', '/users');
 const user = await client.request('GET', '/users/:id', { params: { id: '1' } });
 const newUser = await client.request('POST', '/users', {
-  body: { name: 'John', email: 'john@example.com' },
+  body: { name: 'John', email: 'john@example.com' }
 });
 ```
 
@@ -258,13 +274,13 @@ const machine: StateMachine = {
   idle: { FETCH: 'loading' },
   loading: { SUCCESS: 'success', ERROR: 'error' },
   success: { FETCH: 'loading' },
-  error: { RETRY: 'loading' },
+  error: { RETRY: 'loading' }
 };
 
 class StateManager<S extends string, E extends { type: string }> {
   constructor(
     private state: S,
-    private transitions: Record<S, Partial<Record<E['type'], S>>>,
+    private transitions: Record<S, Partial<Record<E['type'], S>>>
   ) {}
 
   getState(): S {
@@ -290,7 +306,11 @@ manager.dispatch({ type: 'SUCCESS', data: {} }); // 'success'
 
 ```typescript
 // Method decorators with type safety
-function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+function Log(
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
   const originalMethod = descriptor.value;
 
   descriptor.value = function (...args: any[]) {
@@ -303,7 +323,11 @@ function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
   return descriptor;
 }
 
-function Memoize(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+function Memoize(
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
   const originalMethod = descriptor.value;
   const cache = new Map<string, any>();
 
@@ -334,7 +358,9 @@ class Calculator {
 
 ```typescript
 // Type-safe error handling
-type Result<T, E = Error> = { success: true; value: T } | { success: false; error: E };
+type Result<T, E = Error> =
+  | { success: true; value: T }
+  | { success: false; error: E };
 
 function ok<T>(value: T): Result<T, never> {
   return { success: true, value };
@@ -369,7 +395,7 @@ if (result.success) {
 class Either<L, R> {
   private constructor(
     private readonly value: L | R,
-    private readonly isRight: boolean,
+    private readonly isRight: boolean
   ) {}
 
   static left<L, R>(value: L): Either<L, R> {
@@ -438,21 +464,21 @@ function singleton<T>(factory: () => T): () => T {
 
 const getConfig = singleton(() => ({
   apiUrl: process.env.API_URL,
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.API_KEY
 }));
 ```
 
 ## Quick Reference
 
-| Pattern       | Use Case                                      |
-| ------------- | --------------------------------------------- |
-| Builder       | Construct complex objects step by step        |
-| Factory       | Create objects without specifying exact class |
-| Repository    | Abstract data access layer                    |
-| API Client    | Type-safe HTTP requests                       |
-| State Machine | Manage state transitions                      |
-| Decorator     | Add behavior to methods                       |
-| Result/Either | Type-safe error handling                      |
-| Singleton     | Ensure single instance                        |
-| Query Builder | Type-safe database queries                    |
-| Container     | Dependency injection                          |
+| Pattern | Use Case |
+|---------|----------|
+| Builder | Construct complex objects step by step |
+| Factory | Create objects without specifying exact class |
+| Repository | Abstract data access layer |
+| API Client | Type-safe HTTP requests |
+| State Machine | Manage state transitions |
+| Decorator | Add behavior to methods |
+| Result/Either | Type-safe error handling |
+| Singleton | Ensure single instance |
+| Query Builder | Type-safe database queries |
+| Container | Dependency injection |

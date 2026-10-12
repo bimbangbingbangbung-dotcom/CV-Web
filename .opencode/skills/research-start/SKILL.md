@@ -6,7 +6,7 @@ description: >
   frameworks, NOT authoritative citations; students verify and develop
   everything. Use when a student asks where to start researching, wants a
   research roadmap for an issue, or needs gaps identified in existing research.
-argument-hint: '[legal issue]'
+argument-hint: "[legal issue]"
 ---
 
 # /research-start
@@ -27,7 +27,7 @@ argument-hint: '[legal issue]'
 
 ## Purpose
 
-Legal research is essential to clinical education. But the initial phase — figuring out _what_ to research, finding the right statute, understanding the framework — is often the most time-consuming and least educational part. Students spend hours finding the starting point before they can do the actual research.
+Legal research is essential to clinical education. But the initial phase — figuring out *what* to research, finding the right statute, understanding the framework — is often the most time-consuming and least educational part. Students spend hours finding the starting point before they can do the actual research.
 
 This skill produces the starting point: statutes to check, case law areas to investigate, search terms for Westlaw and CourtListener. **None of it is verified. None of it is authoritative. All of it is a lead for the student to run down.**
 
@@ -59,19 +59,17 @@ If the question is too broad, narrow it with the student: "That's three research
 ### Step 2: Build the roadmap
 
 **Statutory starting points:**
-List statutes _likely_ relevant. State explicitly these are likely, not confirmed.
+List statutes *likely* relevant. State explicitly these are likely, not confirmed.
 
 > **Likely relevant statutes** (UNVERIFIED — confirm currency and applicability):
->
 > - [State] Landlord-Tenant Act, likely at [State Code Title X] — look for "warranty of habitability" or "repair and deduct"
 > - Local housing code for [City/County] — may define specific conditions (heat, water) as required
 > - `[VERIFY each citation is current and correct — codes get renumbered]`
 
 **Case law areas to investigate:**
-Not cases — _areas_. The student finds the cases.
+Not cases — *areas*. The student finds the cases.
 
 > **Case law areas:**
->
 > - [State] Supreme Court or appellate decisions on implied warranty of habitability — look for the leading case establishing the doctrine
 > - Cases on what conditions qualify — heat specifically, if any
 > - Cases on procedural prerequisites — did tenant have to give notice? withhold rent? escrow?
@@ -81,7 +79,6 @@ Not cases — _areas_. The student finds the cases.
 If applicable (immigration especially).
 
 > **Administrative sources:**
->
 > - [Agency] regulations at [CFR cite area]
 > - Agency guidance or policy manuals — often more current than regs
 > - For immigration: USCIS Policy Manual, BIA precedent decisions
@@ -90,7 +87,6 @@ If applicable (immigration especially).
 Where to get the framework before diving into primary.
 
 > **Secondary sources (for framework, not to cite):**
->
 > - [State] practice guide on landlord-tenant (check clinic library)
 > - Relevant CLE materials
 > - Law review notes on the specific issue if it's contested
@@ -99,7 +95,6 @@ Where to get the framework before diving into primary.
 For Westlaw, or whatever the clinic uses.
 
 > **Search terms to try:**
->
 > - Westlaw: `"warranty of habitability" /s heat! & [State]`
 > - CourtListener: `implied warranty of habitability AND (heat OR heater) AND [State]`
 > - Refine based on what comes back — these are starting queries
@@ -109,7 +104,7 @@ For Westlaw, or whatever the clinic uses.
 If the skill is unsure whether a source is relevant or current:
 
 > `[UNCERTAIN: whether [State] has a specific statute on this vs. common-law
-doctrine only — the search will tell you]`
+> doctrine only — the search will tell you]`
 
 Uncertainty is stated, not hidden.
 
@@ -122,7 +117,6 @@ Uncertainty is stated, not hidden.
 If the student has already done some research and uploads it: read it, identify what's covered and what's missing.
 
 > **From your research so far:**
->
 > - You have: [summary of what's covered]
 > - Gap: [what the roadmap above suggests that you haven't found yet]
 > - `[VERIFY: the case you cited — [name] — run through a citator (verify it is good law) it, it may have been distinguished or limited]`
@@ -131,12 +125,12 @@ If the student has already done some research and uploads it: read it, identify 
 
 ```markdown
 ═══════════════════════════════════════════════════════════════════════
-RESEARCH ROADMAP — LEADS, NOT AUTHORITIES
-Nothing below is a verified citation. Every statute, every case area,
-every search term is a starting point for YOUR research. You verify
-currency, applicability, and accuracy. You find the actual cases.
-If something below turns out to be wrong or outdated, that's expected —
-this is a map of where to look, not a substitute for looking.
+  RESEARCH ROADMAP — LEADS, NOT AUTHORITIES
+  Nothing below is a verified citation. Every statute, every case area,
+  every search term is a starting point for YOUR research. You verify
+  currency, applicability, and accuracy. You find the actual cases.
+  If something below turns out to be wrong or outdated, that's expected —
+  this is a map of where to look, not a substitute for looking.
 ═══════════════════════════════════════════════════════════════════════
 
 # Research Roadmap: [Issue]
@@ -206,3 +200,4 @@ match this issue — proceeding to primary sources."]
 ## Close with the next-steps decision tree
 
 End with the next-steps decision tree per CLAUDE.md `## Outputs`. Customize the options to what this skill just produced — the five default branches (draft the X, escalate, get more facts, watch and wait, something else) are a starting point, not a lock-in. The tree is the output; the lawyer picks.
+

@@ -1,7 +1,7 @@
 ---
 name: reg-feed-watcher
 description: Check regulatory feeds now and report what's new since the last check, filtered by your materiality threshold. Use when the user says "check the feeds", "what's new", "regulatory update", when running from the scheduled agent, or when manually pasting a regulatory development for classification and diff.
-argument-hint: '[optional: --since DATE]'
+argument-hint: "[optional: --since DATE]"
 ---
 
 # /reg-feed-watcher
@@ -56,16 +56,15 @@ For each regulator in the watchlist:
   configuration (SEC, FTC, CFPB, state agencies, EU DPAs, etc.).
 
 Agency slug reference for common watchlist regulators:
-
-| Regulator | API slug                             |
-| --------- | ------------------------------------ |
-| FTC       | federal-trade-commission             |
-| SEC       | securities-and-exchange-commission   |
-| CFPB      | consumer-financial-protection-bureau |
-| CPPA (CA) | RSS only — cppa.ca.gov/feed          |
-| DOL       | labor-department                     |
-| HHS       | health-and-human-services-department |
-| FCC       | federal-communications-commission    |
+| Regulator | API slug |
+|---|---|
+| FTC | federal-trade-commission |
+| SEC | securities-and-exchange-commission |
+| CFPB | consumer-financial-protection-bureau |
+| CPPA (CA) | RSS only — cppa.ca.gov/feed |
+| DOL | labor-department |
+| HHS | health-and-human-services-department |
+| FCC | federal-communications-commission |
 
 For any regulator not in this list: check federalregister.gov/agencies for the
 correct slug, or fall back to direct RSS.
@@ -99,16 +98,16 @@ forward.
 
 Each item gets a materiality tier per `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md`:
 
-| Item type                                    | Match against threshold                                                                                                                                                                                                                                                    |
-| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Final rule                                   | Usually "always material"                                                                                                                                                                                                                                                  |
-| Proposed rule / NPRM                         | Usually "review-worthy" — and always log comment deadline                                                                                                                                                                                                                  |
+| Item type | Match against threshold |
+|---|---|
+| Final rule | Usually "always material" |
+| Proposed rule / NPRM | Usually "review-worthy" — and always log comment deadline |
 | ANPR (Advance Notice of Proposed Rulemaking) | Review-worthy for **strategy**, not compliance — no imposed requirements yet, but signals direction and carries a real comment deadline. Log the comment deadline. Route to `/regulatory-legal:policy-diff` only as a pre-positioning analysis, not as a gap-closure diff. |
-| RFI (Request for Information)                | Same as ANPR — pre-rule, no compliance obligation, but comment deadline is real and direction-signaling is the value.                                                                                                                                                      |
-| Enforcement action                           | Sector match → material; related-practice match → review-worthy; neither → FYI or skip                                                                                                                                                                                     |
-| Guidance                                     | Review-worthy                                                                                                                                                                                                                                                              |
-| Speech / blog / statement                    | FYI or skip per threshold                                                                                                                                                                                                                                                  |
-| Settlement                                   | Depends — novel theory or big number → review-worthy; routine → skip                                                                                                                                                                                                       |
+| RFI (Request for Information) | Same as ANPR — pre-rule, no compliance obligation, but comment deadline is real and direction-signaling is the value. |
+| Enforcement action | Sector match → material; related-practice match → review-worthy; neither → FYI or skip |
+| Guidance | Review-worthy |
+| Speech / blog / statement | FYI or skip per threshold |
+| Settlement | Depends — novel theory or big number → review-worthy; routine → skip |
 
 **ANPR / RFI handling — specific.** Pre-rule items are distinct from NPRMs in one important way: they don't change the law, but they do carry comment deadlines and they signal the regulator's direction. Treat them as a separate branch:
 
@@ -121,7 +120,6 @@ Each item gets a materiality tier per `~/.claude/plugins/config/claude-for-legal
 **NPRM comment deadline handling:**
 
 For every NPRM classified at any tier above "skip":
-
 - Extract comment deadline (Federal Register API returns this as structured data)
 - If comment tracking is enabled in ~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md: append to `~/.claude/plugins/config/claude-for-legal/regulatory-legal/comment-tracker.yaml`
   with status "undecided" and the default comment decision owner from ~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md

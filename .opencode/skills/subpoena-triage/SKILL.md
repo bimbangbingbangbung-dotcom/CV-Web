@@ -1,7 +1,7 @@
 ---
 name: subpoena-triage
 description: Triage a subpoena served on the company — classify it, analyze scope/burden/privilege, cross-check the portfolio, and produce an objections framework, compliance plan, and deadline calendar. Use when the user says "we got a subpoena", "served with a subpoena", or shares a subpoena, CID, or third-party document request to evaluate.
-argument-hint: '[path-to-subpoena] [--slug=custom-slug]'
+argument-hint: "[path-to-subpoena] [--slug=custom-slug]"
 ---
 
 # /subpoena-triage
@@ -78,25 +78,21 @@ Subpoenas come in flavors with different rules; confirm the specifics against th
 ### Step 4: Analyze scope, burden, privilege
 
 **Scope / relevance**
-
 - Do the categories map to actual documents we plausibly have?
 - Is any category a fishing expedition (overbroad, untethered to claims/defenses of the underlying case)?
 - Place of compliance / geographic reach — apply the researched rule; limits differ by subpoena type (trial vs. document vs. deposition).
 
 **Burden**
-
 - Custodians implicated, systems searched, time period
 - Estimated volume (rough: small / medium / large / extreme)
 - Cost — third-party responders may have cost-shifting available; check the researched rule.
 
 **Privilege**
-
 - Attorney-client or work product likely implicated? (Almost always yes for anything legal-related; often yes for communications involving in-house or outside counsel.)
 - Other privileges — trade secret, HIPAA (if applicable), state privilege, common interest
 - Privilege log will be required — flag the format per `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`
 
 **Other objection grounds**
-
 - Confidentiality — protective order needed?
 - Duplicative — do they already have this from another party?
 - Not possessed — we don't have what they're asking for (document with specificity)
@@ -107,7 +103,6 @@ Subpoenas come in flavors with different rules; confirm the specifics against th
 Draft a structured objections outline — not the final objections letter, but the outline of what objections apply and why. The user (often with outside counsel) finalizes.
 
 Each objection:
-
 - Legal basis — cite the pinpoint from the rule researched in Step 0
 - Specific application to this subpoena (which categories, which custodians)
 - Strength (strong / reasonable / weak)
@@ -188,7 +183,7 @@ Output: `~/.claude/plugins/config/claude-for-legal/litigation-legal/inbound/[slu
 
 ## Privilege analysis
 
-_Privilege scoping is a first-pass read; final call is counsel's, not this skill's._
+*Privilege scoping is a first-pass read; final call is counsel's, not this skill's.*
 
 **Attorney-client / work product likely implicated:** [yes/no + which categories] `[SME VERIFY]`
 **Other privileges:** [trade secret, HIPAA, state, common interest] `[SME VERIFY]`
@@ -198,15 +193,15 @@ _Privilege scoping is a first-pass read; final call is counsel's, not this skill
 
 ## Objections framework
 
-_Every row below requires `[SME VERIFY]` before asserting in writing — jurisdiction, rule currency, waiver risk._
+*Every row below requires `[SME VERIFY]` before asserting in writing — jurisdiction, rule currency, waiver risk.*
 
-| Objection   | Legal basis     | Applies to           | Strength                 | SME verified? |
-| ----------- | --------------- | -------------------- | ------------------------ | ------------- |
-| Relevance   | [rule]          | [categories]         | [strong/reasonable/weak] | [ ]           |
-| Burden      | [rule]          | [categories]         |                          | [ ]           |
-| Privilege   | A/C, WP         | [all producing docs] | strong (always)          | [ ]           |
-| Duplicative | [rule/doctrine] | [if applicable]      |                          | [ ]           |
-| [other]     |                 |                      |                          | [ ]           |
+| Objection | Legal basis | Applies to | Strength | SME verified? |
+|---|---|---|---|---|
+| Relevance | [rule] | [categories] | [strong/reasonable/weak] | [ ] |
+| Burden | [rule] | [categories] | | [ ] |
+| Privilege | A/C, WP | [all producing docs] | strong (always) | [ ] |
+| Duplicative | [rule/doctrine] | [if applicable] | | [ ] |
+| [other] | | | | [ ] |
 
 ---
 
@@ -223,7 +218,7 @@ _Every row below requires `[SME VERIFY]` before asserting in writing — jurisdi
 
 ## Deadlines (calendar these)
 
-_All deadlines below come from the Step 0 rule research. `[SME VERIFY]` confirms the rule, variant, and computation for this forum and this subpoena type — state variants and local rules differ._
+*All deadlines below come from the Step 0 rule research. `[SME VERIFY]` confirms the rule, variant, and computation for this forum and this subpoena type — state variants and local rules differ.*
 
 - **Response deadline:** [date] `[SME VERIFY]`
 - **Objection deadline:** [date] — cite: [rule + pinpoint] `[SME VERIFY]`

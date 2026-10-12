@@ -1,7 +1,7 @@
 ---
 name: regulatory-cold-start-interview
 description: Cold-start interview — builds your watchlist, indexes the policy library, and learns your materiality threshold so the monitor surfaces signal instead of noise. Use on fresh install, when reconfiguring (--redo), or when re-checking what connectors are actually responding (--check-integrations).
-argument-hint: '[--redo | --check-integrations]'
+argument-hint: "[--redo | --check-integrations]"
 ---
 
 # /cold-start-interview
@@ -22,7 +22,6 @@ Every regulator publishes constantly. Most of it doesn't matter to you. This int
 ## Cold-start check
 
 Read `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md`:
-
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -47,7 +46,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -74,7 +73,7 @@ Once the user has picked, orient them. Cover, in your own voice:
 ## Interview pacing
 
 - **Assume the answer exists somewhere.** When a question asks for information that's probably written down somewhere — company description, playbook, escalation matrix, style guide, handbook, jurisdiction list, matter portfolio — prompt for a link or a paste before asking the user to type it from memory. "Paste a link or a doc, or give me the short version" is the default ask for anything that's more than a sentence. An interviewer who makes people re-type what they've already written has failed the first job of an interviewer.
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 
 **Pause for real answers.** Some questions have quick tap-through answers. Others need the user to type a list (which regulators), describe calibration judgments, or point you at a policy folder. When a question needs more than a quick tap:
 
@@ -129,7 +128,7 @@ If the answer is 3, add:
 
 > This plugin can work with: regulatory feed subscriptions, document storage (Google Drive, SharePoint, Box), and Slack. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -167,7 +166,7 @@ Write `## Who's using this`, `## Available integrations`, and `## Outputs` secti
 
 Use this to shape the gap-response process and the escalation entries in the practice profile:
 
-- **Solo / small firm (no hierarchy):** Skip escalation-chain questions. Reframe: instead of "who approves a material gap response," ask "when do you pull in outside counsel or a colleague for a second opinion." The practice profile's escalation field maps to _consult_ not _route for approval_.
+- **Solo / small firm (no hierarchy):** Skip escalation-chain questions. Reframe: instead of "who approves a material gap response," ask "when do you pull in outside counsel or a colleague for a second opinion." The practice profile's escalation field maps to *consult* not *route for approval*.
 - **Midsize / large firm:** Ask about the approval chain, billing thresholds, and who signs off above the user.
 - **In-house:** Ask about the escalation matrix, who the GC/CLO is, and when something goes to the business.
 - **Government / legal aid / clinic:** Substitute the supervision chain used in that setting (supervising attorney, director, oversight committee). Keep the structure, relabel the roles.
@@ -180,7 +179,7 @@ Record the practice setting in the practice profile under `## Who's using this`.
 
 ### Part 1: The watchlist (2-3 min)
 
-_(This feeds `/regulatory-legal:reg-feed-watcher` and the `reg-change-monitor` agent — the feed only pulls from regulators on this list. Anything not on the list is invisible to the plugin until you paste it in via `/regulatory-legal:policy-diff`.)_
+*(This feeds `/regulatory-legal:reg-feed-watcher` and the `reg-change-monitor` agent — the feed only pulls from regulators on this list. Anything not on the list is invisible to the plugin until you paste it in via `/regulatory-legal:policy-diff`.)*
 
 **What does [your company] do?** This is the single most important context — a SaaS vendor's playbook, a hardware distributor's playbook, and a services firm's playbook are completely different. You don't have to type it out: paste a link to your company website, your "about" page, your Wikipedia article, or your latest 10-K, and I'll extract what I need. Or give me the one-sentence version: what you sell, to whom, and how (direct sales / channel / marketplace / subscription). This also tells me which regulators are even plausibly in your watchlist.
 
@@ -189,22 +188,22 @@ _(This feeds `/regulatory-legal:reg-feed-watcher` and the `reg-change-monitor` a
 If not:
 
 - Which regulators? Name them. (FTC, SEC, CFPB, state AGs, CPPA, EU DPAs, sector-specific?)
-  _Coverage note: this plugin has structured feed support for US federal agencies (Federal Register API), SEC, FTC, and CFPB. State regulators and EU DPAs are supported via user-provided RSS URLs or manual entry — there is no automatic feed for those. Non-US regulators outside the EU DPA table require manual entry or user-provided feeds._
+  *Coverage note: this plugin has structured feed support for US federal agencies (Federal Register API), SEC, FTC, and CFPB. State regulators and EU DPAs are supported via user-provided RSS URLs or manual entry — there is no automatic feed for those. Non-US regulators outside the EU DPA table require manual entry or user-provided feeds.*
 - Why each one? ("We're a fintech, CFPB is obvious" vs. "FTC because of the consent decree")
-- Any you're _not_ watching that maybe you should be?
+- Any you're *not* watching that maybe you should be?
 
 **If the user didn't upload a watchlist or prior gap analysis:** at the end of this section, offer: "Want me to write this up as a standalone watchlist memo you can share and maintain? Same content I just captured — your regulators, why you watch each, and the feeds behind them — in a format you can circulate or hand to a new hire."
 
 ### Part 2: Materiality (the key question) (3-4 min)
 
-_(This feeds `/regulatory-legal:reg-feed-watcher` and the `reg-change-monitor` agent — your materiality threshold is the filter that decides whether a new development shows up immediately, in the weekly digest, or not at all. Wrong calibration here = noisy digests you stop reading.)_
+*(This feeds `/regulatory-legal:reg-feed-watcher` and the `reg-change-monitor` agent — your materiality threshold is the filter that decides whether a new development shows up immediately, in the weekly digest, or not at all. Wrong calibration here = noisy digests you stop reading.)*
 
 Walk through examples. For each, would you want to know immediately, in a weekly digest, or not at all?
 
 - A final rule from one of your regulators
 - A proposed rule (NPRM) — comment period open
 - An enforcement action against a company in your sector
-- An enforcement action against a company _not_ in your sector but for something you do
+- An enforcement action against a company *not* in your sector but for something you do
 - A speech by a commissioner signaling priorities
 - A blog post from the agency
 - A settlement with no admission of wrongdoing
@@ -216,7 +215,7 @@ This builds the materiality threshold. Different companies calibrate very differ
 
 ### Part 3: The policy library (2-3 min)
 
-_(This feeds `/regulatory-legal:policy-diff` and `/regulatory-legal:gaps` — every incoming regulatory change is diffed against this library to find which policies it touches and who owns them.)_
+*(This feeds `/regulatory-legal:policy-diff` and `/regulatory-legal:gaps` — every incoming regulatory change is diffed against this library to find which policies it touches and who owns them.)*
 
 > Before I ask: do you have an existing policy library index — a spreadsheet, a table of contents, a wiki page — mapping each policy to its owner? Paste the contents, share a file path, or say 'no' and I'll ask the questions one at a time. If you share one, I'll import it rather than making you rebuild it from memory.
 
@@ -256,7 +255,7 @@ If yes: configure as enrichment layer on top of free feeds. If no: free feeds ar
 
 Record in the config that manual entry is enabled.
 
-**Step 4: Comment period tracking** _(This feeds `/regulatory-legal:comments` — the comment-period calendar logs deadlines and surfaces decisions when a comment window opens.)_
+**Step 4: Comment period tracking** *(This feeds `/regulatory-legal:comments` — the comment-period calendar logs deadlines and surfaces decisions when a comment window opens.)*
 
 > When I see a proposed rule (NPRM) from your watchlist, I'll automatically log the comment deadline. Do you want me to flag these so you can decide whether to file a comment?
 
@@ -270,19 +269,16 @@ Per the template. Key: the materiality threshold table.
 ## Materiality threshold
 
 **Always material (alert immediately):**
-
 - Final rule from [specific regulators]
 - Enforcement action in our sector
 - Anything mentioning [company name]
 
 **Review-worthy (weekly digest):**
-
 - Proposed rules from watched regulators
 - Enforcement action outside sector but related to our practices
 - New guidance documents
 
 **FYI (monthly roundup or not at all):**
-
 - Speeches, blog posts, academic commentary
 - Settlements with no novel theory
 ```
@@ -293,17 +289,15 @@ Per the template. Key: the materiality threshold table.
 ## Feed configuration
 
 **Free feeds (always active):**
-
-| Regulator | Source                              | URL/method                   |
-| --------- | ----------------------------------- | ---------------------------- |
-| [name]    | Federal Register API / RSS / manual | [endpoint or "manual entry"] |
+| Regulator | Source | URL/method |
+|---|---|---|
+| [name] | Federal Register API / RSS / manual | [endpoint or "manual entry"] |
 
 **Paid feeds (if configured):**
-
-| Service              | Subscription | Alerts          |
-| -------------------- | ------------ | --------------- |
-| [Paid feed provider] | [yes/no]     | [alert names]   |
-| CourtListener        | [yes/no]     | [tracker names] |
+| Service | Subscription | Alerts |
+|---|---|---|
+| [Paid feed provider] | [yes/no] | [alert names] |
+| CourtListener | [yes/no] | [tracker names] |
 
 **Manual entry:** Enabled — paste any regulatory development to trigger diff + gap tracking.
 
@@ -330,6 +324,7 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Run `/regulatory-legal:reg-feed-watcher` — it tells you immediately whether the feeds are calibrated to your materiality threshold. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
+
 
 - "Here's the watchlist and the threshold. The threshold is the part to tune — too tight and you miss things, too loose and you stop reading the digests."
 - Offer to index the policy library now.

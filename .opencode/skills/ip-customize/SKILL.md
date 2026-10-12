@@ -7,7 +7,7 @@ description: >
   clearance thresholds, OSS review rules, or matter workspace paths. Use when
   the user says "change my [thing]", "update my profile", "edit my config",
   or "customize".
-argument-hint: '[section name, or describe what you want to change]'
+argument-hint: "[section name, or describe what you want to change]"
 ---
 
 # /customize
@@ -34,8 +34,8 @@ interview and without hand-editing YAML.
    one-line summary of the current value:
 
    - **Company / who you are** — name, industry, jurisdictions, stage, practice
-     setting _(shared across all 12 plugins — changes flow through
-     `company-profile.md`)_
+     setting *(shared across all 12 plugins — changes flow through
+     `company-profile.md`)*
    - **IP practice profile** — which IP types are in scope (patent,
      trademark, copyright, trade secret, design), practice orientation
      (prosecution / transactions / enforcement / in-house portfolio)
@@ -67,13 +67,13 @@ interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - _Adding a new trademark watch class:_ "`/portfolio` will include class
+   - *Adding a new trademark watch class:* "`/portfolio` will include class
      XX in watch reports and `/infringement-triage` will route class-XX
      findings accordingly."
-   - _Enforcement posture aggressive → middle:_ "`/cease-desist` will offer
+   - *Enforcement posture aggressive → middle:* "`/cease-desist` will offer
      cure-letter drafts as a first option for ambiguous cases instead of
      going straight to C&D."
-   - _New ship-blocker OSS license:_ "`/oss-review` will fail reviews that
+   - *New ship-blocker OSS license:* "`/oss-review` will fail reviews that
      include this license rather than warning."
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,

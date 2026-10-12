@@ -1,7 +1,7 @@
 ---
 name: deposition-prep
 description: Build a deposition outline for a witness — pull their documents from the eDiscovery platform, organize topics around the case theory, and surface impeachment material. Use when the user says "depo prep for [witness]", "build a depo outline", or "prepare for [name]'s deposition".
-argument-hint: '[witness name]'
+argument-hint: "[witness name]"
 ---
 
 # /deposition-prep
@@ -106,28 +106,23 @@ Organize by date. Flag the hot docs — the ones that matter most for the theory
 Each topic is a thing you want to establish or explore. Organize around the theory:
 
 **Background (always first — lock in uncontroversial facts before the witness is defensive):**
-
 - Role, tenure, responsibilities
 - Reporting structure
 - How they interacted with the key players
 
 **Good facts (lock them in before confronting):**
-
 - Facts from `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → key facts for us, that this witness can establish
 - Documents that support our theory, authored or received by this witness
 
 **Bad facts (confront with documents):**
-
 - Facts against us that this witness will be asked about anyway — get your version first
 - Documents that hurt — know how the witness will explain them
 
 **Impeachment (if hostile or if they contradict):**
-
 - Prior inconsistent statements (from docs, prior testimony, declarations)
 - Documents that contradict what you expect them to say
 
 **The pivot fact:**
-
 - The sequence of questions that establishes (or undermines) the fact the case turns on
 - This is the most carefully constructed section. Question form follows witness posture from Step 1a: tight closed leading on adverse, controlled open on friendly, mixed on neutral. Don't default to one pattern.
 
@@ -156,7 +151,6 @@ Each topic is a thing you want to establish or explore. Organize around the theo
 **Goal:** Establish [fact] for use at summary judgment / trial.
 
 **Documents:**
-
 - [Bates] — [description] — [why it matters]
 
 **Questions:**
@@ -182,13 +176,12 @@ Each topic is a thing you want to establish or explore. Organize around the theo
 
 ## Exhibit list
 
-| #   | Bates | Description | Used in section |
-| --- | ----- | ----------- | --------------- |
+| # | Bates | Description | Used in section |
+|---|---|---|---|
 
 ## Marker discipline
 
 Use inline while building and reviewing:
-
 - `[VERIFY: factual assertion]` — any fact not confirmed against the record
 - `[UNCERTAIN: legal proposition]` — any legal point (rule, deadline, scope-of-questioning limit) not confirmed against current authority
 - `[CITE NEEDED: specific cite]` — record or authority cite pending

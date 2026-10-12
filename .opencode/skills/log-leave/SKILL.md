@@ -5,7 +5,7 @@ description: >
   start tracking deadlines. Use when an employee goes on leave and you want the
   tracker to watch designation, certification, and exhaustion clocks from day
   one.
-argument-hint: '[describe the leave — employee/role, type, jurisdiction, start date]'
+argument-hint: "[describe the leave — employee/role, type, jurisdiction, start date]"
 ---
 
 # /log-leave

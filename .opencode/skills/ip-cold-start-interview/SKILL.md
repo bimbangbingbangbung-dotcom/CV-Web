@@ -7,7 +7,7 @@ description: >
   re-probing integrations with --check-integrations after connecting or
   disconnecting an MCP. This is the ONLY skill that should run on a fresh
   install.
-argument-hint: '[--redo to re-run on an already-configured plugin] [--check-integrations to re-probe integrations only]'
+argument-hint: "[--redo to re-run on an already-configured plugin] [--check-integrations to re-probe integrations only]"
 ---
 
 # /cold-start-interview
@@ -59,14 +59,13 @@ When probing: only report ✓ if an MCP tool call actually succeeded. Configured
 
 ## Purpose
 
-You are meeting this IP practice for the first time. Your job is to learn how _they_ do IP work — not how IP is done in the abstract — and write what you learn into a living practice profile (the plugin config) that every other skill in this plugin reads before it does anything.
+You are meeting this IP practice for the first time. Your job is to learn how *they* do IP work — not how IP is done in the abstract — and write what you learn into a living practice profile (the plugin config) that every other skill in this plugin reads before it does anything.
 
 The lawyer should leave this conversation feeling like they just onboarded a sharp new paralegal who asked exactly the right questions. They should never see a YAML config file. They should see a document about their practice that they can edit in plain English.
 
 ## What "cold start" means
 
 Read `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`:
-
 - **Does not exist** → start the interview.
 - **Contains `<!-- SETUP PAUSED AT: -->`** → greet the user and offer to resume from that section.
 - **Contains `[PLACEHOLDER]` or `[Your Company Name]` markers but no pause comment** → the template was never completed; offer to start fresh or resume from wherever the placeholders begin.
@@ -93,7 +92,7 @@ Before the orientation, if you notice the working directory is inside a project 
 
 > **Heads up — it looks like this plugin may be project-scoped, which means I can only read files in [current directory]. If you'll want me to read documents from elsewhere (Downloads, Documents, Dropbox), install user-scoped instead — see QUICKSTART.md. You can continue with project scope, but you'll need to move files into this folder.**
 
-Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory _is_ the user's home directory, skip this check silently.
+Ask the user to confirm before proceeding: continue with project scope, or pause to reinstall user-scoped. If the working directory *is* the user's home directory, skip this check silently.
 
 ## Before the interview starts
 
@@ -129,7 +128,7 @@ Corollary: the interview's inputs are the user's typed answers and documents the
 
 **Pause for real answers.** Some questions are quick (pick A/B/C, a jurisdiction, yes/no). Others need the user to type, describe, or share a document (portfolio, enforcement playbook, OSS policy). When a question needs more than a quick tap:
 
-- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 _answerable prompts_, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
+- **Batch size — count subparts.** "Never ask more than 2-3 questions in one turn" means 2-3 *answerable prompts*, counting subparts. One question with 5 subparts is 5 questions. The test: can the user answer without scrolling? If the questions don't fit on one screen, it's too many. Prefer structured tap-through questions where possible — they don't require scrolling or typing.
 - **Ask and wait.** Say explicitly: "This one needs a typed answer — I'll wait." Do not move to the next question until the user responds.
 - **For uploads and seed docs:** "Paste the contents, share a file path, or say 'skip for now.' If you skip, I'll flag the gap in your practice profile so you can fill it later." Then actually wait.
 - **Before writing the practice profile:** review the interview and list any questions that were skipped or answered with placeholders — especially the enforcement posture, the approval matrix, and the portfolio list. Say: "Before I write your practice profile, here's what's still open: [list]. Want to fill any of these now, or leave them as placeholders?" Then wait.
@@ -142,7 +141,7 @@ Corollary: the interview's inputs are the user's typed answers and documents the
 
 ### Opening
 
-> I'm going to be your IP assistant. Before I draft anything, run a clearance, or touch your portfolio, I want to learn how your practice actually works — not generic best practices, but _your_ practice-area mix, _your_ enforcement posture, _your_ approval chain, _your_ deal-breakers.
+> I'm going to be your IP assistant. Before I draft anything, run a clearance, or touch your portfolio, I want to learn how your practice actually works — not generic best practices, but *your* practice-area mix, *your* enforcement posture, *your* approval chain, *your* deal-breakers.
 >
 > This takes about ten to fifteen minutes. I'll ask a few questions in batches, then I'll ask you to point me at the practice documents you already have — portfolio list, brand guidelines, C&D template, OSS policy — so I can extract instead of making you re-type.
 >
@@ -157,7 +156,7 @@ Two quick questions before we get into IP specifics. These shape how the plugin 
 > Who'll be using this plugin day to day? (This feeds the work-product header on every clearance memo, C&D draft, and portfolio memo — and for registered patent agents, drives the narrower privilege header on USPTO matters only.)
 >
 > 1. **Lawyer or legal professional** — attorney, paralegal, legal ops, IP specialist working under attorney oversight.
-> 2. **Registered patent agent** — you're registered to practice before the USPTO but are not a licensed attorney. Your client communications on patent prosecution matters are privileged under _In re Queen's University at Kingston_; on anything outside USPTO practice (trademark, copyright, OSS, contracts), they are not.
+> 2. **Registered patent agent** — you're registered to practice before the USPTO but are not a licensed attorney. Your client communications on patent prosecution matters are privileged under *In re Queen's University at Kingston*; on anything outside USPTO practice (trademark, copyright, OSS, contracts), they are not.
 > 3. **Non-lawyer with attorney access** — founder, brand protection manager, engineering lead, OSS officer; you have an in-house or outside attorney you can consult.
 > 4. **Non-lawyer without regular attorney access** — you're handling this yourself.
 
@@ -176,7 +175,7 @@ If the answer is 4, add:
 
 If the answer is 2 (registered patent agent), say this in addition to the Role-2/3 framing above:
 
-> A note on how I'll handle privilege for your work. On matters "reasonably necessary and incident" to the prosecution of patents before the USPTO, your client communications carry the federal patent agent-client privilege recognized in _In re Queen's University at Kingston_ — I'll mark those outputs as privileged. On anything outside USPTO practice (trademark, copyright, OSS, trade secret, contracts, general advice), that privilege doesn't reach, so I'll mark those outputs as `CONFIDENTIAL — NOT PRIVILEGED` and flag them to bring to a supervising attorney before relying on them. This isn't a cautious default; it's the actual scope of the privilege. If you're doing substantive non-patent IP work, you're also running a UPL risk — keep that work tightly scoped to research notes for an attorney, not client advice.
+> A note on how I'll handle privilege for your work. On matters "reasonably necessary and incident" to the prosecution of patents before the USPTO, your client communications carry the federal patent agent-client privilege recognized in *In re Queen's University at Kingston* — I'll mark those outputs as privileged. On anything outside USPTO practice (trademark, copyright, OSS, trade secret, contracts, general advice), that privilege doesn't reach, so I'll mark those outputs as `CONFIDENTIAL — NOT PRIVILEGED` and flag them to bring to a supervising attorney before relying on them. This isn't a cautious default; it's the actual scope of the privilege. If you're doing substantive non-patent IP work, you're also running a UPL risk — keep that work tightly scoped to research notes for an attorney, not client advice.
 
 #### Practice mix
 
@@ -237,7 +236,7 @@ skipped because they don't apply.
 
 > This plugin can work with: IP management systems (Anaqua, CPA Global, PatSnap, Clarivate), patent research (Solve Intelligence), legal research (CourtListener, Descrybe), document storage (Google Drive, SharePoint, Box), and Slack. Let me check which connectors you have configured — features that need them will work, and features that don't have them will fall back to manual gracefully instead of failing silently.
 
-**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is _available_. A connector that's actually responding is _connected_. These are different, and confusing them destroys trust. For each connector this plugin uses:
+**Check what's actually connected, not what's configured.** A connector listed in `.mcp.json` is *available*. A connector that's actually responding is *connected*. These are different, and confusing them destroys trust. For each connector this plugin uses:
 
 - If you can test the connection (call a simple MCP tool like a list or search), report ✓ only on a successful response.
 - If you can't test (no way to probe from here), report ⚪ "configured but not verified — open your MCP settings to confirm" with a one-line how-to.
@@ -287,7 +286,7 @@ Write `## Who's using this` and `## Available integrations` sections immediately
 > Which IP areas do you actually work in? I'll skip questions in the ones you don't. (This determines which skills light up — /clearance and /cd for trademark, /fto and /infringe for patent, /takedown for copyright, /oss for open source. Picking only trademark skips the patent, copyright, and OSS interviews entirely.)
 >
 > - **Trademark** — clearance, prosecution, enforcement, brand watch
-> - **Patent** — FTO, infringement triage, portfolio maintenance. _(Not claim drafting — this plugin doesn't go there.)_
+> - **Patent** — FTO, infringement triage, portfolio maintenance. *(Not claim drafting — this plugin doesn't go there.)*
 > - **Copyright** — registration, DMCA, licensing, fair use triage
 > - **Trade secret** — classification, misappropriation response, policy
 > - **Open source** — license compliance, copyleft obligations, outbound OSS
@@ -329,7 +328,6 @@ Before asking enforcement or approval questions, check what they already have.
 > Share whatever you have. Skip what you don't.
 
 When the user shares documents:
-
 1. Read each one.
 2. Extract the positions — approval thresholds, enforcement triggers, OSS acceptable-use, clause defaults.
 3. For each question in Parts 4 and 5 below, check whether the document already answered it. Don't re-ask answered questions; confirm ambiguous ones.
@@ -396,7 +394,7 @@ Record in `## Brand protection`.
 
 ## Writing the practice profile
 
-Write the plugin config following the structure in `${CLAUDE_PLUGIN_ROOT}/CLAUDE.md` (the template). Use their words where you can. This is a document _about their practice_ that they will read and edit — it is not a config file.
+Write the plugin config following the structure in `${CLAUDE_PLUGIN_ROOT}/CLAUDE.md` (the template). Use their words where you can. This is a document *about their practice* that they will read and edit — it is not a config file.
 
 Before writing, re-read any documents shared during Part 3 — portfolio, templates, playbook, OSS policy. Do not rely on memory from earlier in the conversation.
 
@@ -426,6 +424,7 @@ If yes, show this tailored list (not a generic template — these are the concre
 > **My suggestion for your first one:** Run `/portfolio` — it's the fastest read on whether the plugin's portfolio register matches the real one. Or tell me what's on your plate and I'll pick.
 
 This solves the cold-start problem (the supervisor doesn't know what to do first) and the value-prop problem (they don't know what the plugin can do) in one offer. Make the list specific. Skip this step if the supervisor already named a concrete first task during the interview.
+
 
 1. **Show it to them.** Not the whole thing — a summary. "Here's what I heard. Take a look at the plugin config and tell me what I got wrong."
 

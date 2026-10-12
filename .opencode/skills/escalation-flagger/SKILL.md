@@ -6,7 +6,7 @@ description: >
   says "who needs to approve this", "escalate this", "does this need GC sign-off",
   "route this for approval", or when another skill finds an issue that exceeds the
   reviewer's authority.
-argument-hint: '[describe the issue, or reference a review memo]'
+argument-hint: "[describe the issue, or reference a review memo]"
 ---
 
 # /escalation-flagger
@@ -58,11 +58,11 @@ Read `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` → 
 
 Expected structure:
 
-| Can approve | Threshold                                 | Escalates to | Via            |
-| ----------- | ----------------------------------------- | ------------ | -------------- |
-| Paralegal   | Standard terms, <$50K                     | Counsel      | Slack          |
-| Counsel     | Non-standard but within fallbacks, <$500K | GC           | Slack or email |
-| GC          | Everything else                           | CFO/Board    | Meeting        |
+| Can approve | Threshold | Escalates to | Via |
+|---|---|---|---|
+| Paralegal | Standard terms, <$50K | Counsel | Slack |
+| Counsel | Non-standard but within fallbacks, <$500K | GC | Slack or email |
+| GC | Everything else | CFO/Board | Meeting |
 
 Plus **automatic escalation triggers** — things that escalate regardless of dollar value. Typically: unlimited liability, IP assignment, anything on the "never accept" lists.
 
@@ -118,13 +118,11 @@ Need your call on the [Counterparty] [agreement type]. [One sentence on deal con
 our standard, what the risk actually is.]
 
 **What the contract says:**
-
 > "[exact quote]"
 
 **What our playbook says:** [quote from `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`]
 
 **Options:**
-
 1. **Accept** — [one line on why this might be okay]
 2. **Push back with:** "[proposed counter-language]" — [one line on likely counterparty reaction]
 3. **Walk** — [one line on whether that's realistic given the business context]

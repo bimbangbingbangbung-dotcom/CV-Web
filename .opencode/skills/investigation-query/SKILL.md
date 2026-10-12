@@ -5,7 +5,7 @@ description: >
   accounts conflict, what gaps exist, what the strongest evidence is on each
   issue. Use when the attorney needs to query the investigation record without
   re-reading every entry.
-argument-hint: '[matter name] [question]'
+argument-hint: "[matter name] [question]"
 ---
 
 # /investigation-query

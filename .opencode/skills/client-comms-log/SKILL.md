@@ -6,7 +6,7 @@ description: >
   action items. Works alongside /client-letter and /status client. Use when
   logging a call or client email, reviewing a communication log, or asking
   "what did we tell [client] last time".
-argument-hint: '[case-id] [--add (default) | --read | --summary | --patterns]'
+argument-hint: "[case-id] [--add (default) | --read | --summary | --patterns]"
 ---
 
 # /client-comms-log
@@ -47,7 +47,6 @@ Flag: `--add | --read | --summary | --patterns` (default: add)
 ### `--add` (default) — log a new entry
 
 **Inputs:**
-
 - Case ID (required — which case)
 - Date + time (default: now)
 - Direction: `in` (client → clinic) | `out` (clinic → client)
