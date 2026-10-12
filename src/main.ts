@@ -127,7 +127,7 @@ async function routeAdmin(): Promise<void> {
   if (location.hash !== '#admin') return;
   try {
     const { initAdmin } = await import('./admin/index');
-    initAdmin(content, { onPublished: boot });
+    initAdmin(currentContent, { onPublished: boot });
   } catch (cause) {
     console.error('Edit mode failed to load:', cause);
     location.hash = '';
