@@ -381,7 +381,7 @@ export function openPanel(options: PanelOptions): () => void {
         text: `Schema version ${draft.meta.schemaVersion} (managed by the site).`,
       }),
     );
-    return h('div', {}, ...groups.filter((g): g is HTMLElement => g !== null), metaGroup);
+    return h('div', {}, ...groups.filter((g): g is HTMLFieldSetElement => g !== null), metaGroup);
   }
 
   function renderAppearanceTab(): HTMLElement {
@@ -454,9 +454,10 @@ export function openPanel(options: PanelOptions): () => void {
     const move = (index: number, delta: number): void => {
       const copy = [...sections];
       const [moved] = copy.splice(index, 1);
+      if (!moved) return;
       copy.splice(index + delta, 0, moved);
       ctx.onCommit(['sections'], copy); // array → re-renders + live-previews
-      announce(`Moved ${moved?.label ?? 'section'} to position ${index + delta + 1}`);
+      announce(`Moved ${moved.label} to position ${index + delta + 1}`);
     };
 
     const rows = sections.map((section: SectionEntry, index: number) => {

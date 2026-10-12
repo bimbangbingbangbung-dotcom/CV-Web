@@ -30,6 +30,6 @@ describe('migrate', () => {
   it('rejects non-object input', () => {
     const result = migrate(null);
     expect(result.ok).toBe(false);
-    if (!result.ok) expect(result.reason).toBe('unrecognized');
+    if (!result.ok) expect(result.reason).toBe('unreadable');
   });
 });

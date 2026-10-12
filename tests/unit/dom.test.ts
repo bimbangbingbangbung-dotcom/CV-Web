@@ -36,7 +36,8 @@ describe('h()', () => {
 
   it('appends nested children and skips empty placeholders', () => {
     const el = h('ul', {}, h('li', { text: 'a' }), null, false, undefined, 0);
-    expect(el.children.length).toBe(2); // 'a' and the number 0
+    expect(el.children.length).toBe(1); // only the <li> is an element child
+    expect(el.childNodes.length).toBe(2); // li + the "0" text node
     expect(el.textContent).toBe('a0');
   });
 
