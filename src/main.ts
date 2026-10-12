@@ -10,8 +10,8 @@
  * editor when the URL hash is #admin.
  */
 
-import '../styles/tokens.css';
-import '../styles/base.css';
+import './styles/tokens.css';
+import './styles/base.css';
 import { initTheme } from './utils/theme';
 
 initTheme();
