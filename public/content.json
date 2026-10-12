@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "lastUpdated": "2026-10-12"
+  },
+  "site": {
+    "title": "Juan Miguel Reyes — Computer Engineering Student",
+    "description": "TODO: one-sentence summary of who you are and what you build — used for search results and link previews.",
+    "canonicalUrl": "https://bimbangbingbangbung-dotcom.github.io/CV-Web/",
+    "ogImage": "./assets/og-image.png",
+    "lang": "en",
+    "themeColor": "#fbfbfa",
+    "analytics": {
+      "provider": "none",
+      "domain": null
+    }
+  },
+  "appearance": {
+    "accent": "#0f6d66",
+    "accentDark": "#5cc5ba"
+  },
+  "header": {
+    "mode": "autohide",
+    "hoverZoneHeight": 56,
+    "hideDelayMs": 500,
+    "showOnLoadHint": true,
+    "discoverabilityHint": true,
+    "showEditLink": true
+  },
+  "theme": {
+    "default": "system",
+    "toggleShortcut": "T"
+  },
+  "cv": {
+    "path": "/assets/cv.pdf",
+    "label": "Download CV"
+  },
+  "owner": {
+    "fullName": "Juan Miguel Reyes",
+    "headline": "Computer Engineering Student",
+    "tagline": "I build things that connect hardware and software.",
+    "shortBio": "TODO: 2–3 sentences about who you are, what you enjoy building, and what you are looking for. Example shape: I am a computer engineering student who enjoys making embedded systems talk to the real world — from sensor firmware to the dashboards that visualize it. Currently looking for an internship where I can work close to the metal.",
+    "longBio": "TODO: optional 1–2 paragraph version of your story — your path into computer engineering, the problems you enjoy solving, and where you want to go next. Leave as null to hide this block.",
+    "location": "Cebu City, Philippines",
+    "availability": {
+      "label": "Open to internships — Summer 2027",
+      "show": true
+    },
+    "photo": null,
+    "initials": "JR",
+    "languages": ["Filipino (native)", "English (fluent)"],
+    "interests": ["embedded systems", "robotics", "IoT", "PCB design", "edge AI"],
+    "now": [
+      { "text": "Learning Rust for embedded targets (STM32)" },
+      { "text": "Building a soil-sensor mesh network for our community farm" },
+      { "text": "TODO: add what you are currently learning or building" }
+    ]
+  },
+  "sections": [
+    { "id": "about", "label": "About", "enabled": true },
+    { "id": "education", "label": "Education", "enabled": true },
+    { "id": "skills", "label": "Skills", "enabled": true },
+    { "id": "projects", "label": "Projects", "enabled": true },
+    { "id": "experience", "label": "Experience", "enabled": true },
+    { "id": "achievements", "label": "Achievements", "enabled": true },
+    { "id": "publications", "label": "Publications", "enabled": true },
+    { "id": "references", "label": "References", "enabled": true },
+    { "id": "contact", "label": "Contact", "enabled": true }
+  ],
+  "education": [
+    {
+      "institution": "TODO: University name (e.g. University of San Carlos)",
+      "degree": "BS Computer Engineering",
+      "location": "Cebu City, Philippines",
+      "start": "2023",
+      "end": "2027",
+      "gpa": "3.4 / 4.0",
+      "coursework": [
+        "Microprocessors & Embedded Systems",
+        "Digital Logic Design",
+        "Signals, Systems & Transforms",
+        "Data Structures & Algorithms",
+        "Computer Networks"
+      ],
+      "honors": ["TODO: Dean's Lister, AY 2025–2026"]
+    }
+  ],
+  "skills": [
+    {
+      "group": "Programming Languages",
+      "items": [
+        { "name": "C", "level": "advanced", "note": null },
+        { "name": "C++", "level": "intermediate", "note": null },
+        { "name": "Python", "level": "advanced", "note": "automation, data, ML glue code" },
+        { "name": "TypeScript / JavaScript", "level": "intermediate", "note": null },
+        { "name": "Verilog HDL", "level": "beginner", "note": null }
+      ]
+    },
+    {
+      "group": "Hardware / Embedded",
+      "items": [
+        { "name": "Arduino & ESP32", "level": "advanced", "note": null },
+        { "name": "STM32 (HAL)", "level": "intermediate", "note": null },
+        { "name": "Raspberry Pi", "level": "intermediate", "note": null },
+        { "name": "KiCad (PCB design)", "level": "beginner", "note": null },
+        { "name": "Oscilloscope & logic analyzer", "level": "intermediate", "note": null }
+      ]
+    },
+    {
+      "group": "Tools & Platforms",
+      "items": [
+        { "name": "Git & GitHub", "level": "advanced", "note": null },
+        { "name": "Linux (Debian/Arch)", "level": "intermediate", "note": null },
+        { "name": "Docker", "level": "beginner", "note": null },
+        { "name": "PlatformIO", "level": "advanced", "note": null }
+      ]
+    },
+    {
+      "group": "Soft Skills",
+      "items": [
+        { "name": "Technical writing", "level": "advanced", "note": null },
+        { "name": "Team leadership", "level": "intermediate", "note": null },
+        { "name": "Debugging under pressure", "level": "expert", "note": "3 a.m. hardware bugs" }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Smart Irrigation IoT System",
+      "description": "TODO: one or two sentences describing the project — what it does and why it matters. Example: Solar-powered soil sensors that water a garden automatically and log moisture data to a local dashboard.",
+      "role": "Firmware + backend",
+      "year": "2026",
+      "tech": ["ESP32", "MQTT", "Python", "InfluxDB", "Grafana"],
+      "links": [
+        { "label": "Repository", "url": "https://github.com/todo-jmreyes/smart-irrigation", "kind": "repo" },
+        { "label": "Live demo", "url": "https://todo-example.vercel.app", "kind": "demo" }
+      ],
+      "image": null,
+      "featured": true,
+      "detail": {
+        "problem": "TODO: what problem did this solve? (e.g. Our community garden was over-watering plants during dry season with no data to guide decisions.)",
+        "solution": "TODO: how did you solve it? (e.g. Battery-powered capacitive soil sensors publish readings over MQTT every 15 minutes; a small Python service waters when thresholds are crossed.)",
+        "result": "TODO: measurable outcome. (e.g. Cut water use by ~40% over one dry season; dashboard used by 3 barangay gardens.)"
+      }
+    },
+    {
+      "title": "Single-Cycle RISC-V Processor",
+      "description": "TODO: short description. Example: A educational single-cycle RISC-V core synthesized and tested on an FPGA board, running a blink and UART demo.",
+      "role": "Solo project (coursework)",
+      "year": "2025",
+      "tech": ["Verilog", "Vivado", "RISC-V", "FPGA"],
+      "links": [
+        { "label": "Repository", "url": "https://github.com/todo-jmreyes/riscv-single-cycle", "kind": "repo" }
+      ],
+      "image": null,
+      "featured": false,
+      "detail": null
+    },
+    {
+      "title": "Barangay Document Request Tracker",
+      "description": "TODO: short description. Example: A small web app a local barangay uses to track document requests end-to-end, replacing a paper logbook.",
+      "role": "Full-stack developer",
+      "year": "2025",
+      "tech": ["TypeScript", "SQLite", "Node.js"],
+      "links": [
+        { "label": "Case study", "url": "https://github.com/todo-jmreyes/request-tracker#readme", "kind": "case-study" }
+      ],
+      "image": null,
+      "featured": false,
+      "detail": null
+    }
+  ],
+  "experience": [
+    {
+      "org": "TODO: Organization (e.g. Cebu Doctors' University ICT Center)",
+      "role": "IT Help Desk Assistant (Part-time)",
+      "location": "Cebu City, Philippines",
+      "start": "2025-08",
+      "end": "Present",
+      "type": "part-time",
+      "description": "TODO: 1–2 sentences about the role and who you served.",
+      "highlights": [
+        "TODO: quantified achievement (e.g. Resolved 20+ staff tickets weekly, avg. response under 2 hours)",
+        "TODO: achievement (e.g. Automated new-hardware imaging, cutting setup time from 40 to 12 minutes)"
+      ]
+    },
+    {
+      "org": "TODO: Organization (e.g. USC Robotics & IoT Society)",
+      "role": "Vice President",
+      "location": "Cebu City, Philippines",
+      "start": "2025",
+      "end": "2026",
+      "type": "leadership",
+      "description": "TODO: what the organization does and your mandate.",
+      "highlights": [
+        "TODO: achievement (e.g. Led a 12-member team to 2nd place at the Regional Robotics Challenge)",
+        "TODO: achievement (e.g. Ran 4 hands-on workshops attended by 80+ students)"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "title": "2nd Place — Regional Robotics Challenge",
+      "issuer": "TODO: Organizer name",
+      "date": "2026-03",
+      "category": "competition",
+      "url": null
+    },
+    {
+      "title": "CCNA: Introduction to Networks",
+      "issuer": "Cisco Networking Academy",
+      "date": "2025-11",
+      "category": "certification",
+      "url": "https://www.credly.com/badges/todo-credential"
+    },
+    {
+      "title": "Dean's Lister — AY 2025–2026",
+      "issuer": "TODO: University name",
+      "date": "2026",
+      "category": "honor",
+      "url": null
+    }
+  ],
+  "publications": [],
+  "references": {
+    "show": true,
+    "note": "Available on request."
+  },
+  "contact": {
+    "email": "todo.juanmiguel@example.com",
+    "form": {
+      "endpoint": null,
+      "honeypot": "company"
+    },
+    "socials": [
+      { "platform": "github", "label": "GitHub", "url": "https://github.com/todo-jmreyes" },
+      { "platform": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/in/todo-jmreyes" },
+      { "platform": "email", "label": "Email", "url": "mailto:todo.juanmiguel@example.com" },
+      { "platform": "x", "label": "X", "url": "https://x.com/todo-jmreyes" }
+    ]
+  },
+  "admin": {
+    "passcodeSha256": null,
+    "imageMaxKB": 512
+  },
+  "footer": {
+    "note": "Built with vanilla TypeScript — no frameworks, no trackers."
+  }
+}
