@@ -32,7 +32,7 @@
     "toggleShortcut": "T"
   },
   "cv": {
-    "path": "/assets/cv.pdf",
+    "path": "./assets/cv.pdf",
     "label": "Download CV"
   },
   "owner": {
