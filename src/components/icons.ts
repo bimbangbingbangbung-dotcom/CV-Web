@@ -49,6 +49,7 @@ const ICON_PATHS: Record<string, string[]> = {
   menu: ['M4 7h16', 'M4 12h16', 'M4 17h16'],
   close: ['M6 6l12 12', 'M18 6 6 18'],
   mail: ['M3 5h18v14H3z', 'm3 7 9 6 9-6'],
+  plus: ['M12 5v14', 'M5 12h14'],
   copy: ['M9 9h11v11H9z', 'M5 15H4V4h11v1'],
   check: ['M5 13l4 4L19 7'],
   alert: ['M12 3 2 20h20L12 3Z', 'M12 10v4', 'M12 17.5h.01'],

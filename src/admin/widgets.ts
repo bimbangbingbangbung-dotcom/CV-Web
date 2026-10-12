@@ -333,27 +333,14 @@ function stringList(
     input.focus();
   });
 
-  const chips = value.map((entry, index) =>
-    h(
-      'li',
-      { class: 'chip chip-editable' },
-      entry,
-      h(
-        'button',
-        { class: 'chip-remove', attrs: { type: 'button', 'aria-label': `Remove ${entry}` } },
-        icon('close'),
-      ),
-      (() => {
-        (chips_placeholder => chips_placeholder)(undefined); // no-op guard
-        return undefined;
-      })(),
-    ),
-  );
-  // Wire remove handlers after construction (keeps the map above readable).
-  chips.forEach((chip, index) => {
-    chip.querySelector('.chip-remove')?.addEventListener('click', () => {
-      commit(value.filter((_, i) => i !== index));
-    });
+  const chips = value.map((entry, index) => {
+    const remove = h(
+      'button',
+      { class: 'chip-remove', attrs: { type: 'button', 'aria-label': `Remove ${entry}` } },
+      icon('close'),
+    );
+    remove.addEventListener('click', () => commit(value.filter((_, i) => i !== index)));
+    return h('li', { class: 'chip chip-editable' }, entry, remove);
   });
 
   return h('div', { class: 'string-list' }, h('ul', { class: 'chip-row' }, ...chips), input);
