@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap URL is written at build time from public/content.json
+# (see scripts/seo-plugin.ts).

@@ -32,7 +32,7 @@ export default tseslint.config(
     // Node-side tooling: build scripts, configs, e2e tests. These talk to the
     // terminal, so console output is the point. Must come AFTER the generic
     // block above — in flat config, later entries win for the same file.
-    files: ['scripts/**/*.mjs', '*.config.ts', 'eslint.config.js', 'tests/e2e/**/*.ts'],
+    files: ['scripts/**/*.mjs', 'scripts/**/*.ts', '*.config.ts', 'eslint.config.js', 'tests/**/*.ts'],
     languageOptions: {
       globals: { ...globals.node },
     },

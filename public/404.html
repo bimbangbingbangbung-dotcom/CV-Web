@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family:
+          ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        background: #fbfbfa;
+        color: #1b1d1c;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 2rem;
+        text-align: center;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0e100f;
+          color: #e9eae7;
+        }
+        a {
+          color: #5cc5ba;
+        }
+      }
+      h1 {
+        font-size: 1.75rem;
+        margin: 0 0 0.5rem;
+      }
+      p {
+        color: #5b5f5d;
+        margin: 0 0 1.5rem;
+      }
+      a {
+        color: #0f6d66;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Page not found</h1>
+      <p>This URL does not exist on this site.</p>
+      <p><a id="home" href="./">← Back to the homepage</a></p>
+    </main>
+    <script>
+      // GitHub Pages serves this file for ANY unknown path. Relative links
+      // would resolve against the deep path, so rewrite the homepage link to
+      // the site's real base (first path segment, e.g. /CV-Web/).
+      (function () {
+        var parts = location.pathname.split('/').filter(Boolean);
+        var base = parts.length > 1 ? '/' + parts[0] + '/' : '/';
+        document.getElementById('home').setAttribute('href', base);
+      })();
+    </script>
+  </body>
+</html>
