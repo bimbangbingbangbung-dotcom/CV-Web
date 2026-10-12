@@ -350,6 +350,7 @@
     },
 
     "projectDetail": {
+      "type": "object",
       "additionalProperties": false,
       "required": ["problem", "solution", "result"],
       "properties": {
