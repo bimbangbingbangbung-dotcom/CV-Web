@@ -121,14 +121,38 @@ function showErrorBanner(errors: FieldError[], source: ContentSource): void {
 
 /** Hash router for the built-in editor (#admin) — edit mode is code-split. */
 let currentContent: Content = DEFAULT_CONTENT;
+let adminOpen = false;
+let adminDispose: (() => void) | null = null;
 
 async function routeAdmin(): Promise<void> {
+  if (adminOpen) {
+    // Hash moved away externally (browser Back): close the editor shell.
+    if (location.hash !== '#admin') {
+      adminDispose?.();
+      adminDispose = null;
+      adminOpen = false;
+    }
+    return;
+  }
   if (location.hash !== '#admin') return;
   try {
     const { initAdmin } = await import('./admin/index');
-    initAdmin(currentContent, { onPublished: boot });
+    adminOpen = true;
+    adminDispose = initAdmin(currentContent, {
+      // The public page live-previews the draft from inside the editor.
+      onPreview: (draft) => {
+        currentContent = draft;
+        boot(draft);
+      },
+      onClose: () => {
+        adminDispose = null;
+        adminOpen = false;
+        if (location.hash === '#admin') location.hash = '';
+      },
+    });
   } catch (cause) {
     console.error('Edit mode failed to load:', cause);
+    adminOpen = false;
     location.hash = '';
   }
 }
