@@ -142,7 +142,7 @@ async function routeAdmin(): Promise<void> {
       // The public page live-previews the draft from inside the editor.
       onPreview: (draft) => {
         currentContent = draft;
-        boot(draft);
+        boot(draft, { instant: true });
       },
       onClose: () => {
         adminDispose = null;
@@ -165,7 +165,7 @@ function applyAppearance(content: Content): void {
 }
 
 /** Render the public page and wire up the header. Reused when publishing. */
-function boot(content: Content): void {
+function boot(content: Content, options: { instant?: boolean } = {}): void {
   applyAppearance(content);
   updateDocumentMeta(content);
 
@@ -174,7 +174,7 @@ function boot(content: Content): void {
 
   const main = renderPage(content);
   initHeader(content);
-  initReveal(main);
+  initReveal(main, { instant: options.instant === true });
   currentContent = content;
   void routeAdmin();
 }

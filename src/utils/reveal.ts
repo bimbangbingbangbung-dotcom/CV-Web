@@ -13,12 +13,13 @@ const REVEAL_SELECTOR = '[data-reveal]';
 let previousObserver: IntersectionObserver | null = null;
 
 /** Add data-reveal to any block that should animate in. */
-export function initReveal(root: HTMLElement): void {
+export function initReveal(root: HTMLElement, options: { instant?: boolean } = {}): void {
   previousObserver?.disconnect(); // stop observing the previous page's nodes
   previousObserver = null;
 
   const blocks = root.querySelectorAll<HTMLElement>(REVEAL_SELECTOR);
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced =
+    options.instant === true || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (reduced || !('IntersectionObserver' in window)) {
     // Show everything instantly — no animation, no hidden content.
