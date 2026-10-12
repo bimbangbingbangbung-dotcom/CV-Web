@@ -20,6 +20,8 @@ import { openPanel } from './panel';
 const UNLOCK_KEY = 'cvweb:admin-unlocked';
 
 export interface AdminOptions {
+  /** In-progress draft from a previous editor session in this page load. */
+  initialDraft?: Content;
   /** Re-render the public page underneath with the current draft. */
   onPreview: (content: Content) => void;
   /** The editor finished closing (clear the #admin hash). */
