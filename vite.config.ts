@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitest/config';
-import { seoPlugin } from './scripts/seo-plugin';
+import { seoPlugin } from './scripts/seo-plugin.ts';
 
 /**
  * Vite config.
