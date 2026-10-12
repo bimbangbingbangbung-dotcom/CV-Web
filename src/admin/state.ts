@@ -74,8 +74,13 @@ export class DraftStore {
   private listeners: DraftListener[] = [];
   private persistTimer: number | null = null;
 
-  constructor(published: Content) {
-    this.draftValue = published;
+  /**
+   * @param published the last known published content (dirty baseline)
+   * @param initial an in-progress draft to open with (e.g. when the editor
+   *   is reopened in the same session); defaults to the published content
+   */
+  constructor(published: Content, initial?: Content) {
+    this.draftValue = initial ?? published;
     this.publishedJson = JSON.stringify(published);
   }
 
