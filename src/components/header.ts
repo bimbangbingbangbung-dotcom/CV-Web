@@ -14,6 +14,10 @@
  *   (default T) is handled here too since the toggle lives in the header.
  * - No layout shift: everything is position:fixed and animated with
  *   transform/opacity only.
+ *
+ * initHeader() is re-entrant: the edit mode re-renders the public page
+ * underneath itself, and each call first tears down the previous header
+ * (elements, window listeners, observers) so nothing doubles up.
  */
 import type { Content, SectionEntry } from '../schema/types';
 import { h, clear, initialsFrom } from '../utils/dom';
@@ -29,6 +33,17 @@ interface HeaderHandles {
   overlay: HTMLElement;
 }
 
+/** Cleanup callbacks from the previous header instance (re-entrancy). */
+let previousCleanup: (() => void)[] = [];
+
+function teardownHeader(): void {
+  for (const selector of ['#site-header', '.hover-zone', '.touch-handle', '#site-menu', '.edge-hint']) {
+    document.querySelectorAll(selector).forEach((el) => el.remove());
+  }
+  for (const fn of previousCleanup) fn();
+  previousCleanup = [];
+}
+
 /** True when the event target is a text-entry surface (shortcuts must not fire). */
 function isTypingTarget(target: EventTarget | null): boolean {
   if (!(target instanceof HTMLElement)) return false;
@@ -37,6 +52,9 @@ function isTypingTarget(target: EventTarget | null): boolean {
 }
 
 export function initHeader(content: Content): HeaderHandles {
+  teardownHeader();
+  const cleanup = previousCleanup;
+
   const cfg = content.header;
   const root = document.documentElement;
   root.dataset['headerMode'] = cfg.mode;
@@ -66,6 +84,7 @@ export function initHeader(content: Content): HeaderHandles {
     return btn;
   };
   window.addEventListener('cvweb:themechange', syncThemeButtons);
+  cleanup.push(() => window.removeEventListener('cvweb:themechange', syncThemeButtons));
 
   // --- CV button + edit link (shared markup for header and overlay) ---
   const cvHref = safeAssetPath(content.cv.path) ?? '#';
@@ -77,9 +96,7 @@ export function initHeader(content: Content): HeaderHandles {
   const makeNavLink = (section: SectionEntry): HTMLAnchorElement =>
     h('a', { text: section.label, attrs: { href: `#${section.id}` } });
   const makeEditLink = (): HTMLAnchorElement | null =>
-    cfg.showEditLink
-      ? h('a', { class: 'header-edit', text: 'Edit', attrs: { href: '#admin' } })
-      : null;
+    cfg.showEditLink ? h('a', { class: 'header-edit', text: 'Edit', attrs: { href: '#admin' } }) : null;
 
   // --- Build the header ---
   const navLinks = navSections.map(makeNavLink);
@@ -91,10 +108,7 @@ export function initHeader(content: Content): HeaderHandles {
     { class: 'site-header', id: 'site-header', attrs: { tabindex: '-1' } },
     h(
       'a',
-      {
-        class: 'header-brand',
-        attrs: { href: '#top', 'aria-label': `${content.owner.fullName} — back to top` },
-      },
+      { class: 'header-brand', attrs: { href: '#top', 'aria-label': `${content.owner.fullName} — back to top` } },
       h('span', { class: 'header-initials', text: initials, attrs: { 'aria-hidden': 'true' } }),
       h('span', { class: 'header-name', text: content.owner.fullName }),
     ),
@@ -206,10 +220,7 @@ export function initHeader(content: Content): HeaderHandles {
   if (hoverBound) {
     for (const zone of [hoverZone, header]) {
       zone.addEventListener('pointerenter', show);
-      zone.addEventListener('pointerleave', () => {
-        // On touch devices a tap on the handle shouldn't race the timer.
-        scheduleHide();
-      });
+      zone.addEventListener('pointerleave', () => scheduleHide());
     }
     // Keyboard: focus inside reveals; focus leaving hides after the delay.
     header.addEventListener('focusin', show);
@@ -229,7 +240,7 @@ export function initHeader(content: Content): HeaderHandles {
     overlay.hidden = false;
     requestAnimationFrame(() => overlay.classList.add('is-open'));
     handle.setAttribute('aria-expanded', 'true');
-    show(); // keep the underlying header state consistent
+    show();
     overlayFocusables()[0]?.focus();
   };
   const closeOverlay = (): void => {
@@ -269,16 +280,13 @@ export function initHeader(content: Content): HeaderHandles {
     if (!id) return;
     if (!overlay.hidden) closeOverlay();
     const target = document.getElementById(id);
-    if (target) {
-      // Move keyboard focus with the click, without a double-scroll jump.
-      target.focus({ preventScroll: true });
-    }
+    target?.focus({ preventScroll: true });
   };
   for (const link of [...navLinks, ...overlayLinks]) link.addEventListener('click', onNavClick);
   header.querySelector('.header-brand')?.addEventListener('click', onNavClick);
 
   // --- Keyboard shortcuts: Escape hides, M toggles ---
-  window.addEventListener('keydown', (event) => {
+  const onWindowKeydown = (event: KeyboardEvent): void => {
     if (isTypingTarget(event.target)) return;
     if (event.key === 'Escape') {
       if (!overlay.hidden) {
@@ -298,30 +306,29 @@ export function initHeader(content: Content): HeaderHandles {
         navLinks[0]?.focus(); // keyboard users land in the nav, ready to Tab
       }
     }
-  });
+  };
+  window.addEventListener('keydown', onWindowKeydown);
+  cleanup.push(() => window.removeEventListener('keydown', onWindowKeydown));
 
-  // --- Scroll-up mode: reveal when scrolling up near/away from the top ---
+  // --- Scroll-up mode: reveal when scrolling up, clean at the top ---
   if (mode === 'hidden-until-scroll-up') {
     let lastY = window.scrollY;
     let ticking = false;
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const y = window.scrollY;
-          const delta = y - lastY;
-          lastY = y;
-          if (y < 64)
-            setVisible(false); // top of the page stays clean
-          else if (delta < -4) show();
-          else if (delta > 4) scheduleHide(200);
-          ticking = false;
-        });
-      },
-      { passive: true },
-    );
+    const onScroll = (): void => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const delta = y - lastY;
+        lastY = y;
+        if (y < 64) setVisible(false); // top of the page stays clean
+        else if (delta < -4) show();
+        else if (delta > 4) scheduleHide(200);
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    cleanup.push(() => window.removeEventListener('scroll', onScroll));
   }
 
   // --- First-visit hint: reveal briefly so visitors discover the header ---
@@ -330,7 +337,7 @@ export function initHeader(content: Content): HeaderHandles {
     try {
       hinted = sessionStorage.getItem(HINT_SESSION_KEY) === '1';
     } catch {
-      /* private mode — hint every visit is fine */
+      /* private mode — hinting every visit is fine */
     }
     if (!hinted) {
       try {
@@ -360,18 +367,21 @@ export function initHeader(content: Content): HeaderHandles {
     window.addEventListener('pointermove', dismiss, { once: true });
     window.addEventListener('scroll', dismiss, { once: true });
     window.addEventListener('keydown', dismiss, { once: true });
+    cleanup.push(() => window.removeEventListener('pointermove', dismiss));
   }
 
   // --- Scroll-spy: mark the current section in both navs ---
   const sections = navSections
     .map((s) => document.getElementById(s.id))
     .filter((el): el is HTMLElement => el !== null);
-  initScrollSpy(sections, (activeId) => {
+  const disconnectSpy = initScrollSpy(sections, (activeId) => {
     for (const link of [...navLinks, ...overlayLinks]) {
       if (link.getAttribute('href') === `#${activeId}`) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
     }
   });
+  cleanup.push(disconnectSpy);
+  cleanup.push(cancelHide);
 
   syncThemeButtons();
   return { header, overlay };

@@ -9,8 +9,14 @@
 
 const REVEAL_SELECTOR = '[data-reveal]';
 
+/** Observer from the previous page render (re-entrancy for edit mode). */
+let previousObserver: IntersectionObserver | null = null;
+
 /** Add data-reveal to any block that should animate in. */
 export function initReveal(root: HTMLElement): void {
+  previousObserver?.disconnect(); // stop observing the previous page's nodes
+  previousObserver = null;
+
   const blocks = root.querySelectorAll<HTMLElement>(REVEAL_SELECTOR);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -32,6 +38,7 @@ export function initReveal(root: HTMLElement): void {
     { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
   );
   blocks.forEach((block) => observer.observe(block));
+  previousObserver = observer;
 }
 
 /**
