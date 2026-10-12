@@ -24,6 +24,15 @@ export function getStoredMode(): ThemeMode {
   return 'system';
 }
 
+/** Whether the visitor has explicitly chosen a theme before. */
+export function hasStoredMode(): boolean {
+  try {
+    return localStorage.getItem(STORAGE_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
 /** Resolve a mode to an actual theme using the OS preference. */
 export function resolveMode(mode: ThemeMode): ResolvedTheme {
   if (mode === 'light' || mode === 'dark') return mode;
