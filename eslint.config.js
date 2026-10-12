@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import globals from 'globals';
 
 export default tseslint.config(
   {
@@ -12,12 +13,25 @@ export default tseslint.config(
       '.lighthouseci/',
       'public/',
       'admin/',
+      // OpenCode plugin + vendored community skills — not site code.
+      '.opencode/',
       // Generated file: schema-compiled validator (see scripts/generate-validator.mjs)
       'src/utils/content-validator.generated.ts',
     ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    // Node-side tooling: build scripts, configs, e2e tests. These talk to the
+    // terminal, so console output is the point — no-console off here.
+    files: ['scripts/**/*.mjs', '*.config.ts', 'eslint.config.js', 'tests/e2e/**/*.ts'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+    rules: {
+      'no-console': 'off',
+    },
+  },
   {
     rules: {
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
