@@ -121,7 +121,9 @@ function showErrorBanner(errors: FieldError[], source: ContentSource): void {
 }
 
 /** Hash router for the built-in editor (#admin) — edit mode is code-split. */
-async function routeAdmin(content: Content): void {
+let currentContent: Content = DEFAULT_CONTENT;
+
+async function routeAdmin(): Promise<void> {
   if (location.hash !== '#admin') return;
   try {
     const { initAdmin } = await import('./admin/index');
@@ -142,7 +144,8 @@ function boot(content: Content): void {
   const main = renderPage(content);
   initHeader(content, main);
   initReveal(main);
-  void routeAdmin(content);
+  currentContent = content;
+  void routeAdmin();
 }
 
 async function start(): Promise<void> {
@@ -158,5 +161,5 @@ async function start(): Promise<void> {
   }
 }
 
-window.addEventListener('hashchange', () => void routeAdmin(DEFAULT_CONTENT));
+window.addEventListener('hashchange', () => void routeAdmin());
 void start();
