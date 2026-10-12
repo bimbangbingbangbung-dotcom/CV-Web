@@ -23,11 +23,13 @@ const { default: addFormats } = await import('ajv-formats');
 const { default: standaloneCode } = await import('ajv/dist/standalone/index.js');
 
 const schema = JSON.parse(await readFile(schemaPath, 'utf8'));
-const ajv = new Ajv2020({ strict: true, allErrors: true, allowUnionTypes: true });
-addFormats(ajv);
-
-const validate = ajv.compile(schema);
-let code = standaloneCode(ajv, validate);
+// `code: { source: true }` is required by Ajv's standalone codegen.
+const ajv = new Ajv2020({
+  strict: true,
+  allErrors: true,
+  allowUnionTypes: true,
+  code: { source: true },
+});
 
 // Ajv standalone emits CommonJS; the browser bundle needs ESM. Transform the
 // export lines rather than bundling a CJS shim. Fail loudly if Ajv's output
