@@ -306,7 +306,11 @@ function objectList(
     return row;
   });
 
-  const add = h('button', { class: 'btn btn-ghost btn-sm', text: `Add ${humanize(String(path[path.length - 1]))}` , attrs: { type: 'button' }});
+  const add = h('button', {
+    class: 'btn btn-ghost btn-sm',
+    text: `Add ${humanize(String(path[path.length - 1]))}`,
+    attrs: { type: 'button', id: `add-${path.join('-')}` },
+  });
   add.prepend(icon('plus'));
   add.addEventListener('click', () => {
     ctx.onCommit(path, [...value, {}]);
