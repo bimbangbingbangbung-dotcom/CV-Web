@@ -231,8 +231,7 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
     unsubscribe = store.subscribe((draft, meta) => {
       dirtyAtClose = store.dirty;
       pill.setDirty(store.dirty);
-      if (store.dirty) window.addEventListener('beforeunload', guard);
-      else window.removeEventListener('beforeunload', guard);
+      setGuard(store.dirty);
       if (meta.external) options.onPreview(draft);
     });
     dirtyAtClose = store.dirty;
