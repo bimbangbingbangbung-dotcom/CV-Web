@@ -1,0 +1,494 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bimbangbingbangbung-dotcom.github.io/CV-Web/content.schema.json",
+  "title": "CV Web content",
+  "description": "Single source of truth for every visible string, link, color and section order on the site. public/content.json must validate against this schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "site",
+    "appearance",
+    "header",
+    "theme",
+    "cv",
+    "owner",
+    "sections",
+    "education",
+    "skills",
+    "projects",
+    "experience",
+    "achievements",
+    "contact",
+    "admin",
+    "footer"
+  ],
+  "properties": {
+    "meta": { "$ref": "#/$defs/meta" },
+    "site": { "$ref": "#/$defs/site" },
+    "appearance": { "$ref": "#/$defs/appearance" },
+    "header": { "$ref": "#/$defs/header" },
+    "theme": { "$ref": "#/$defs/theme" },
+    "cv": { "$ref": "#/$defs/cv" },
+    "owner": { "$ref": "#/$defs/owner" },
+    "sections": { "$ref": "#/$defs/sections" },
+    "education": { "$ref": "#/$defs/educationList" },
+    "skills": { "$ref": "#/$defs/skillGroups" },
+    "projects": { "$ref": "#/$defs/projectList" },
+    "experience": { "$ref": "#/$defs/experienceList" },
+    "achievements": { "$ref": "#/$defs/achievementList" },
+    "publications": { "$ref": "#/$defs/publicationList" },
+    "references": { "$ref": "#/$defs/references" },
+    "contact": { "$ref": "#/$defs/contact" },
+    "admin": { "$ref": "#/$defs/admin" },
+    "footer": { "$ref": "#/$defs/footer" }
+  },
+  "$defs": {
+    "dateOrPresent": {
+      "type": "string",
+      "description": "Year (2026), year-month (2026-08), or the literal 'Present'.",
+      "pattern": "^(\\d{4}(-\\d{2})?|Present)$"
+    },
+    "url": {
+      "type": "string",
+      "description": "Absolute http(s) URL.",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "localPath": {
+      "type": "string",
+      "description": "Site-absolute path (/…), relative path (./…) or absolute http(s) URL.",
+      "pattern": "^(https?://|/|\\./)"
+    },
+    "colorHex": {
+      "type": "string",
+      "description": "6-digit hex color, e.g. #0f6d66.",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "lastUpdated"],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Content schema version. Migration runs on load when an older export is imported."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date",
+          "description": "ISO date the owner last edited content (shown in the footer)."
+        }
+      }
+    },
+
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description", "canonicalUrl", "ogImage", "lang", "analytics"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 70 },
+        "description": { "type": "string", "minLength": 1, "maxLength": 165 },
+        "canonicalUrl": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://",
+          "description": "Production URL of the site (used for canonical, OG and JSON-LD)."
+        },
+        "ogImage": { "$ref": "#/$defs/localPath" },
+        "lang": { "type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$" },
+        "themeColor": { "$ref": "#/$defs/colorHex" },
+        "analytics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provider", "domain"],
+          "description": "Privacy-friendly analytics. OFF (none) by default — no cookies, no banner.",
+          "properties": {
+            "provider": { "type": "string", "enum": ["none", "plausible", "umami"] },
+            "domain": { "type": ["string", "null"], "minLength": 1 }
+          }
+        }
+      }
+    },
+
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accent", "accentDark"],
+      "description": "The one accent color, per theme. The editor's contrast checker warns on WCAG AA failures.",
+      "properties": {
+        "accent": { "$ref": "#/$defs/colorHex" },
+        "accentDark": { "$ref": "#/$defs/colorHex" }
+      }
+    },
+
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "hoverZoneHeight",
+        "hideDelayMs",
+        "showOnLoadHint",
+        "discoverabilityHint",
+        "showEditLink"
+      ],
+      "description": "Auto-hide header behavior. The header is hidden with transforms only — never display:none.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["autohide", "always-visible", "hidden-until-scroll-up"]
+        },
+        "hoverZoneHeight": { "type": "integer", "minimum": 32, "maximum": 128 },
+        "hideDelayMs": { "type": "integer", "minimum": 0, "maximum": 3000 },
+        "showOnLoadHint": {
+          "type": "boolean",
+          "description": "Reveal the header for ~2s on first visit (once per session) so visitors discover it."
+        },
+        "discoverabilityHint": {
+          "type": "boolean",
+          "description": "Show a thin accent line at the top edge until first interaction."
+        },
+        "showEditLink": { "type": "boolean", "description": "Show the subtle Edit link in the footer." }
+      }
+    },
+
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default"],
+      "properties": {
+        "default": { "type": "string", "enum": ["system", "light", "dark"] },
+        "toggleShortcut": {
+          "type": ["string", "null"],
+          "description": "Single-key shortcut for the theme toggle (default 'T'). null disables it."
+        }
+      }
+    },
+
+    "cv": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "label"],
+      "properties": {
+        "path": { "$ref": "#/$defs/localPath" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    },
+
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fullName",
+        "headline",
+        "tagline",
+        "shortBio",
+        "location",
+        "availability",
+        "languages",
+        "interests"
+      ],
+      "properties": {
+        "fullName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "headline": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "tagline": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "shortBio": { "type": "string", "minLength": 1, "maxLength": 420 },
+        "longBio": { "type": ["string", "null"], "maxLength": 2400 },
+        "location": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "availability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "show"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1, "maxLength": 60 },
+            "show": { "type": "boolean" }
+          }
+        },
+        "photo": {
+          "type": ["string", "null"],
+          "description": "Path/URL to a photo, or null to use an initials avatar."
+        },
+        "initials": {
+          "type": "string",
+          "pattern": "^[A-Z]{1,3}$",
+          "description": "1–3 capitals for the avatar fallback; derived from fullName when omitted."
+        },
+        "languages": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } },
+        "interests": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } },
+        "now": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text"],
+            "properties": { "text": { "type": "string", "minLength": 1, "maxLength": 160 } }
+          }
+        }
+      }
+    },
+
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Order = nav order = render order. enabled:false hides a section entirely.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "enabled"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "about",
+              "education",
+              "skills",
+              "projects",
+              "experience",
+              "achievements",
+              "publications",
+              "references",
+              "contact"
+            ]
+          },
+          "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+          "enabled": { "type": "boolean" }
+        }
+      }
+    },
+
+    "educationList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["institution", "degree", "location", "start", "end"],
+        "properties": {
+          "institution": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "degree": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "location": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "start": { "$ref": "#/$defs/dateOrPresent" },
+          "end": { "$ref": "#/$defs/dateOrPresent" },
+          "gpa": { "type": ["string", "null"], "maxLength": 20 },
+          "coursework": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } },
+          "honors": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 60 } }
+        }
+      }
+    },
+
+    "skillGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["group", "items"],
+        "properties": {
+          "group": { "type": "string", "minLength": 1, "maxLength": 50 },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name"],
+              "properties": {
+                "name": { "type": "string", "minLength": 1, "maxLength": 60 },
+                "level": {
+                  "type": ["string", "null"],
+                  "enum": ["beginner", "intermediate", "advanced", "expert", null],
+                  "description": "Text label rendered as words — never color alone."
+                },
+                "note": { "type": ["string", "null"], "maxLength": 80 }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "projectList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "description", "role", "year", "tech", "links", "featured"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1, "maxLength": 90 },
+          "description": { "type": "string", "minLength": 1, "maxLength": 360 },
+          "role": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "year": { "type": "string", "pattern": "^\\d{4}$" },
+          "tech": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "url"],
+              "properties": {
+                "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+                "url": { "$ref": "#/$defs/url" },
+                "kind": { "type": "string", "enum": ["repo", "demo", "case-study", "slides", "other"] }
+              }
+            }
+          },
+          "image": { "$ref": "#/$defs/localPath" },
+          "featured": { "type": "boolean" },
+          "detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["problem", "solution", "result"],
+            "description": "Optional expandable detail view (problem → solution → result).",
+            "properties": {
+              "problem": { "type": "string", "minLength": 1, "maxLength": 500 },
+              "solution": { "type": "string", "minLength": 1, "maxLength": 500 },
+              "result": { "type": "string", "minLength": 1, "maxLength": 500 }
+            }
+          }
+        }
+      }
+    },
+
+    "experienceList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["org", "role", "location", "start", "end", "description"],
+        "properties": {
+          "org": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "role": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "location": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "start": { "$ref": "#/$defs/dateOrPresent" },
+          "end": { "$ref": "#/$defs/dateOrPresent" },
+          "type": {
+            "type": "string",
+            "enum": ["internship", "part-time", "full-time", "freelance", "volunteer", "leadership", "organization"]
+          },
+          "description": { "type": "string", "minLength": 1, "maxLength": 420 },
+          "highlights": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 160 } }
+        }
+      }
+    },
+
+    "achievementList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "issuer", "date", "category"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "issuer": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "date": { "$ref": "#/$defs/dateOrPresent" },
+          "category": { "type": "string", "enum": ["award", "certification", "honor", "competition"] },
+          "url": {
+            "type": ["string", "null"],
+            "format": "uri",
+            "pattern": "^https?://",
+            "description": "Credential / verification URL, or null."
+          }
+        }
+      }
+    },
+
+    "publicationList": {
+      "type": "array",
+      "description": "Optional section — hidden automatically when empty.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "publisher", "date", "url"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1, "maxLength": 160 },
+          "publisher": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "date": { "$ref": "#/$defs/dateOrPresent" },
+          "url": { "$ref": "#/$defs/url" },
+          "note": { "type": ["string", "null"], "maxLength": 200 }
+        }
+      }
+    },
+
+    "references": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["show", "note"],
+      "properties": {
+        "show": { "type": "boolean" },
+        "note": { "type": "string", "minLength": 1, "maxLength": 160 }
+      }
+    },
+
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["email", "form", "socials"],
+      "properties": {
+        "email": { "type": "string", "format": "email", "maxLength": 100 },
+        "form": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["endpoint", "honeypot"],
+          "description": "Contact form backend (Formspree/Web3Forms). null endpoint = plain mailto link.",
+          "properties": {
+            "endpoint": {
+              "type": ["string", "null"],
+              "format": "uri",
+              "pattern": "^https?://",
+              "description": "e.g. https://formspree.io/f/XXXXXXX — never a secret key."
+            },
+            "honeypot": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40,
+              "description": "Hidden field name bots fill in; submissions with it are dropped."
+            }
+          }
+        },
+        "socials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["platform", "label", "url"],
+            "properties": {
+              "platform": {
+                "type": "string",
+                "enum": ["github", "linkedin", "x", "facebook", "kaggle", "email", "other"]
+              },
+              "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+              "url": {
+                "type": "string",
+                "pattern": "^(https?://|mailto:)",
+                "description": "https://… or mailto:… — the only schemes the renderer will emit."
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "admin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passcodeSha256", "imageMaxKB"],
+      "properties": {
+        "passcodeSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 (lowercase hex) of the edit-mode passcode, or null to disable the gate. Convenience only — NOT security on a static site."
+        },
+        "imageMaxKB": { "type": "integer", "minimum": 32, "maximum": 4096 }
+      }
+    },
+
+    "footer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["note"],
+      "properties": {
+        "note": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    }
+  }
+}

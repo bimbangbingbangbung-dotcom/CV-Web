@@ -106,6 +106,9 @@
   --border-strong: #3a403d;
   --success: #5fbb86;
   --danger: #f27d70;
+  /* Lighter accent so links/controls stay AA on the near-black background. */
+  --accent: #5cc5ba;
+  --accent-hover: #7dd6cc;
   --accent-contrast: #06231f;
 }
 
