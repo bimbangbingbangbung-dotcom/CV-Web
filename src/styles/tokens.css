@@ -1,0 +1,117 @@
+/*
+ * Design tokens — the single source of visual truth.
+ *
+ * Every color, size, duration and radius used anywhere in the site is
+ * declared here. Components never hardcode values; they consume these
+ * variables, which is what makes appearance changes (accent color, radius)
+ * possible entirely from content.json.
+ *
+ * Palette direction: warm neutral monochrome + ONE accent (default teal).
+ * The accent is overridden at runtime from content.json (appearance.accent).
+ */
+
+:root {
+  /* ---------- Typography ---------- */
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo,
+    Consolas, monospace;
+
+  /* Fluid type scale (~1.2 minor third), tuned between 320px and 1440px */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm: clamp(0.8125rem, 0.78rem + 0.18vw, 0.875rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-md: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);
+  --text-lg: clamp(1.375rem, 1.25rem + 0.6vw, 1.625rem);
+  --text-xl: clamp(1.75rem, 1.5rem + 1.2vw, 2.25rem);
+  --text-2xl: clamp(2.25rem, 1.8rem + 2.2vw, 3.25rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ---------- Spacing (4/8 pt rhythm) ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* ---------- Layout ---------- */
+  --maxw: 46rem; /* ~736px — main reading column */
+  --maxw-wide: 60rem; /* ~960px — hero and grids */
+  --header-height: 3.25rem;
+  --hover-zone-height: 3.5rem; /* default; overridable from content.json */
+
+  /* ---------- Radii, borders ---------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+  --border-hairline: 1px;
+
+  /* ---------- Motion ---------- */
+  --dur-fast: 150ms;
+  --dur: 200ms;
+  --dur-slow: 250ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  /* ---------- Stacking ---------- */
+  --z-hover-zone: 90;
+  --z-touch-handle: 95;
+  --z-header: 100;
+  --z-banner: 120;
+
+  /* ---------- Accent (default; overridden at runtime from content.json) ---------- */
+  --accent: #0f6d66;
+  --accent-hover: #0b5852;
+  --accent-contrast: #ffffff;
+}
+
+/* ---------- Light theme (default) ---------- */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --surface-2: #f3f3f1;
+  --text: #1b1d1c;
+  --text-muted: #5b5f5d;
+  --text-faint: #7c817e;
+  --border: #e4e4e0;
+  --border-strong: #c9cac5;
+  --success: #2e7d4f;
+  --danger: #b42318;
+  --focus-ring: var(--accent);
+}
+
+/* ---------- Dark theme ---------- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0e100f;
+  --surface: #151817;
+  --surface-2: #1c201e;
+  --text: #e9eae7;
+  --text-muted: #a3a8a4;
+  --text-faint: #7d837f;
+  --border: #262a28;
+  --border-strong: #3a403d;
+  --success: #5fbb86;
+  --danger: #f27d70;
+  --accent-contrast: #06231f;
+}
+
+/* Users asking for more contrast get stronger borders and focus rings. */
+@media (prefers-contrast: more) {
+  :root {
+    --border: var(--border-strong);
+  }
+}
