@@ -339,8 +339,10 @@
           },
           "featured": { "type": "boolean" },
           "detail": {
-            "type": ["object", "null"],
-            "$ref": "#/$defs/projectDetail",
+            "anyOf": [
+              { "$ref": "#/$defs/projectDetail" },
+              { "type": "null" }
+            ],
             "description": "Optional expandable detail view (problem → solution → result), or null."
           }
         }
