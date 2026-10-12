@@ -19,6 +19,16 @@ import { openPanel } from './panel';
 
 const UNLOCK_KEY = 'cvweb:admin-unlocked';
 
+/**
+ * Module-level so every editor instance adds/removes THE SAME listener —
+ * a reopened editor can then clear a guard left by a previous close.
+ */
+let guardAttached = false;
+const guard = (event: BeforeUnloadEvent): void => {
+  event.preventDefault();
+  event.returnValue = '';
+};
+
 export interface AdminOptions {
   /** In-progress draft from a previous editor session in this page load. */
   initialDraft?: Content;
