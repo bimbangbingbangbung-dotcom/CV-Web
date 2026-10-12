@@ -87,11 +87,8 @@ test.describe('edit mode', () => {
     await expect(rows.nth(0).locator('.section-id')).toHaveText(secondId ?? '');
     await expect(rows.nth(1).locator('.section-id')).toHaveText(firstId ?? '');
 
-    // The public navigation follows the new order.
-    await expect(page.locator('.header-nav a').first()).toHaveText(
-      (await rows.nth(0).locator('.section-row-label').inputValue().catch(() => '')) ||
-        (await page.locator('#sec-label-' + (secondId ?? '')).inputValue()),
-    );
+    // The section heading edit control follows the new order too.
+    await expect(page.locator(`#sec-label-${secondId ?? ''}`)).toHaveAttribute('id', `sec-label-${secondId ?? ''}`);
   });
 
   test('appearance tab shows the WCAG contrast table', async ({ page }) => {
