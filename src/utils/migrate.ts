@@ -11,8 +11,7 @@
 import { SCHEMA_VERSION } from '../schema/types';
 
 export type MigrationResult =
-  | { ok: true; data: unknown }
-  | { ok: false; reason: 'unreadable' | 'newer-than-site' };
+  { ok: true; data: unknown } | { ok: false; reason: 'unreadable' | 'newer-than-site' };
 
 type Migration = (data: Record<string, unknown>) => Record<string, unknown>;
 

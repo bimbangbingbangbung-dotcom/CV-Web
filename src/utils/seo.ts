@@ -81,7 +81,11 @@ export function updateDocumentMeta(content: Content): void {
   setMeta('property', 'og:title', content.site.title);
   setMeta('property', 'og:description', content.site.description);
   setMeta('property', 'og:url', content.site.canonicalUrl);
-  setMeta('property', 'og:image', new URL(content.site.ogImage, content.site.canonicalUrl).toString());
+  setMeta(
+    'property',
+    'og:image',
+    new URL(content.site.ogImage, content.site.canonicalUrl).toString(),
+  );
   setMeta('name', 'twitter:card', 'summary_large_image');
   setMeta('name', 'twitter:title', content.site.title);
   setMeta('name', 'twitter:description', content.site.description);

@@ -68,7 +68,10 @@ export function validateContent(data: unknown): ValidationResult {
     const ids = sections.map((s) => String(s?.id));
     const dupes = ids.filter((id, i) => ids.indexOf(id) !== i);
     if (dupes.length > 0) {
-      errors.push({ path: '/sections', message: `duplicate section id: ${[...new Set(dupes)].join(', ')}` });
+      errors.push({
+        path: '/sections',
+        message: `duplicate section id: ${[...new Set(dupes)].join(', ')}`,
+      });
     }
   }
 
