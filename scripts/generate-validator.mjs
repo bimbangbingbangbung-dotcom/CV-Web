@@ -20,7 +20,7 @@ const outPath = path.join(root, 'src', 'utils', 'content-validator.generated.ts'
 
 const { default: Ajv2020 } = await import('ajv/dist/2020.js');
 const { default: addFormats } = await import('ajv-formats');
-const { default: standaloneCode } = await import('ajv/dist/standalone.js');
+const { default: standaloneCode } = await import('ajv/dist/standalone/index.js');
 
 const schema = JSON.parse(await readFile(schemaPath, 'utf8'));
 const ajv = new Ajv2020({ strict: true, allErrors: true, allowUnionTypes: true });
