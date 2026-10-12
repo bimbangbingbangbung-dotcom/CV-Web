@@ -22,21 +22,22 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/consistent-type-imports': 'error',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+    },
+  },
+  {
     // Node-side tooling: build scripts, configs, e2e tests. These talk to the
-    // terminal, so console output is the point — no-console off here.
+    // terminal, so console output is the point. Must come AFTER the generic
+    // block above — in flat config, later entries win for the same file.
     files: ['scripts/**/*.mjs', '*.config.ts', 'eslint.config.js', 'tests/e2e/**/*.ts'],
     languageOptions: {
       globals: { ...globals.node },
     },
     rules: {
       'no-console': 'off',
-    },
-  },
-  {
-    rules: {
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/consistent-type-imports': 'error',
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
     },
   },
 );
