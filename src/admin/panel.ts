@@ -393,18 +393,22 @@ export function openPanel(options: PanelOptions): () => void {
       const copy = [...sections];
       const [moved] = copy.splice(index, 1);
       copy.splice(index + delta, 0, moved);
-      store.set(['sections'], copy);
+      ctx.onCommit(['sections'], copy); // array → re-renders + live-previews
       announce(`Moved ${moved?.label ?? 'section'} to position ${index + delta + 1}`);
     };
 
     const rows = sections.map((section: SectionEntry, index: number) => {
       const labelInput = h('input', { id: `sec-label-${section.id}`, attrs: { type: 'text' } });
       labelInput.value = section.label;
-      labelInput.addEventListener('change', () => store.set(['sections', index, 'label'], labelInput.value));
+      labelInput.addEventListener('change', () =>
+        ctx.onCommit(['sections', index, 'label'], labelInput.value),
+      );
 
       const enabled = h('input', { id: `sec-enabled-${section.id}`, attrs: { type: 'checkbox' } });
       enabled.checked = section.enabled;
-      enabled.addEventListener('change', () => store.set(['sections', index, 'enabled'], enabled.checked));
+      enabled.addEventListener('change', () =>
+        ctx.onCommit(['sections', index, 'enabled'], enabled.checked),
+      );
 
       const up = h('button', { class: 'icon-btn', attrs: { type: 'button', 'aria-label': `Move ${section.label} up`, disabled: index === 0 } }, icon('arrow-up'));
       up.addEventListener('click', () => move(index, -1));
