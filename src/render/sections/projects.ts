@@ -3,7 +3,7 @@
  * expandable problem → solution → result detail view (<details>, so it works
  * without JavaScript and with keyboards out of the box).
  */
-import type { Content, Project } from '../schema/types';
+import type { Content, Project } from '../../schema/types';
 import { h } from '../../utils/dom';
 import { safeAssetPath } from '../../utils/url';
 import { chip, externalLink, labelOf, metaLine, sectionShell } from '../common';

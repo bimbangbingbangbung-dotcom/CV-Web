@@ -2,8 +2,8 @@
  * Footer — copyright (year auto-generated), last-updated date from JSON,
  * note, back-to-top and the subtle Edit link.
  */
-import type { Content } from '../schema/types';
-import { h } from '../utils/dom';
+import type { Content } from '../../schema/types';
+import { h } from '../../utils/dom';
 import { icon } from '../../components/icons';
 
 export function renderFooter(content: Content): HTMLElement {

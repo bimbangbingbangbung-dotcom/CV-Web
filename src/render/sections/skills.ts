@@ -2,8 +2,8 @@
  * Skills — grouped chips. Proficiency is always spelled out in words
  * ("Advanced"), never encoded in color alone.
  */
-import type { Content } from '../schema/types';
-import { h } from '../utils/dom';
+import type { Content } from '../../schema/types';
+import { h } from '../../utils/dom';
 import { chip, labelOf, levelChip, sectionShell } from '../common';
 
 export function renderSkills(content: Content): HTMLElement | null {

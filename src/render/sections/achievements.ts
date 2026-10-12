@@ -2,7 +2,7 @@
  * Achievements — compact rows: title, issuer · date, category chip and an
  * optional credential-verification link.
  */
-import type { Content } from '../schema/types';
+import type { Content } from '../../schema/types';
 import { h } from '../../utils/dom';
 import { chip, externalLink, labelOf, metaLine, sectionShell } from '../common';
 

@@ -2,8 +2,8 @@
  * About — long bio, "Now" mini-block and quick facts.
  * Hidden automatically when there is nothing to show.
  */
-import type { Content } from '../schema/types';
-import { h } from '../utils/dom';
+import type { Content } from '../../schema/types';
+import { h } from '../../utils/dom';
 import { chip, factRow, sectionShell } from '../common';
 
 export function renderAbout(content: Content): HTMLElement | null {

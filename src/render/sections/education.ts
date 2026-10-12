@@ -1,8 +1,8 @@
 /**
  * Education — vertical timeline: mono date range left, details right.
  */
-import type { Content } from '../schema/types';
-import { h } from '../utils/dom';
+import type { Content } from '../../schema/types';
+import { h } from '../../utils/dom';
 import { chip, dateRange, labelOf, sectionShell } from '../common';
 
 export function renderEducation(content: Content): HTMLElement | null {

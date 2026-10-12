@@ -7,10 +7,10 @@
  * badge and CTAs. Nothing here is hardcoded — every string comes from
  * content.json.
  */
-import type { Content } from '../schema/types';
-import { h, initialsFrom } from '../utils/dom';
-import { safeAssetPath } from '../utils/url';
-import { icon } from '../components/icons';
+import type { Content } from '../../schema/types';
+import { h, initialsFrom } from '../../utils/dom';
+import { safeAssetPath } from '../../utils/url';
+import { icon } from '../../components/icons';
 
 export function renderHero(content: Content): HTMLElement {
   const { owner, cv, contact } = content;

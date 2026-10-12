@@ -2,7 +2,7 @@
  * Experience — same timeline grammar as Education, with role type chip and
  * bullet highlights.
  */
-import type { Content } from '../schema/types';
+import type { Content } from '../../schema/types';
 import { h } from '../../utils/dom';
 import { chip, dateRange, labelOf, sectionShell } from '../common';
 
