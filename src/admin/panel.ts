@@ -115,9 +115,9 @@ export function openPanel(options: PanelOptions): () => void {
   const undoBtn = iconButton('undo', 'Undo (Ctrl+Z)');
   const redoBtn = iconButton('redo', 'Redo (Ctrl+Shift+Z)');
 
-  function iconButton(glyph: string, label: string): HTMLButtonElement {
+  function iconButton(glyph: 'undo' | 'redo', label: string): HTMLButtonElement {
     const btn = h('button', { class: 'icon-btn', attrs: { type: 'button', 'aria-label': label, title: label } });
-    btn.append(icon(glyph === 'undo' ? 'arrow-up' : 'arrow-up', 'icon icon-flip'));
+    btn.append(icon(glyph));
     return btn;
   }
 
