@@ -12,6 +12,8 @@
     "dev": "npm run gen:validator && vite",
     "gen:validator": "node scripts/generate-validator.mjs",
     "validate:content": "node scripts/validate-content.mjs",
+    "gen:assets": "node scripts/generate-images.mjs && node scripts/make-cv-placeholder.mjs",
+    "check:budget": "node scripts/check-budget.mjs",
     "build": "npm run gen:validator && npm run validate:content && tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
