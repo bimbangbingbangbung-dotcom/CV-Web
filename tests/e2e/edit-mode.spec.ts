@@ -87,8 +87,10 @@ test.describe('edit mode', () => {
     await expect(rows.nth(0).locator('.section-id')).toHaveText(secondId ?? '');
     await expect(rows.nth(1).locator('.section-id')).toHaveText(firstId ?? '');
 
-    // The section heading edit control follows the new order too.
-    await expect(page.locator(`#sec-label-${secondId ?? ''}`)).toHaveAttribute('id', `sec-label-${secondId ?? ''}`);
+    // The public preview nav follows the new order: the first nav link now
+    // matches the heading of the section that moved to the top.
+    const newFirstLabel = await page.locator(`#sec-label-${secondId ?? ''}`).inputValue();
+    await expect(page.locator('.header-nav a').first()).toHaveText(newFirstLabel);
   });
 
   test('appearance tab shows the WCAG contrast table', async ({ page }) => {
