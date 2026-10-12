@@ -150,6 +150,7 @@ export function openPanel(options: PanelOptions): () => void {
 
   const publishDownload = (): void => {
     store.set(['meta', 'lastUpdated'], new Date().toISOString().slice(0, 10));
+    onPreview(store.draft); // footer "Last updated" reflects immediately
     downloadJson(store.draft, 'content.json');
     status.textContent = 'Downloaded — replace public/content.json in the repo and commit to publish.';
   };
