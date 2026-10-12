@@ -12,8 +12,10 @@
 
 :root {
   /* ---------- Typography ---------- */
+  /* Geist — neutral, engineered, excellent at small sizes (brief allowed
+   * "Inter or Geist"; both design reviews prefer Geist). Self-hosted. */
   --font-sans:
-    'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Geist Variable', 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
   --font-mono:
     'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas,
@@ -54,9 +56,10 @@
   --hover-zone-height: 3.5rem; /* default; overridable from content.json */
 
   /* ---------- Radii, borders ---------- */
+  /* Shape rules (locked): cards 8px, large cards 12px, buttons 6px, tags full pill. */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 14px;
+  --radius-lg: 12px;
   --radius-full: 999px;
   --border-hairline: 1px;
 
@@ -72,9 +75,16 @@
   --z-header: 100;
   --z-banner: 120;
 
-  /* ---------- Accent (default; overridden at runtime from content.json) ---------- */
-  --accent: #0f6d66;
-  --accent-hover: #0b5852;
+  /* ---------- Accent ----------
+   * Runtime indirection: content.json sets --accent-user / --accent-dark-user
+   * (see applyAppearance in main.ts). --accent always resolves to the value
+   * for the CURRENT theme, so every component needs only one variable.
+   * Hover shades are derived once with color-mix — no extra tokens to keep in
+   * sync when the owner picks a different accent. */
+  --accent-user: #0f6d66;
+  --accent-dark-user: #5cc5ba;
+  --accent: var(--accent-user);
+  --accent-hover: color-mix(in srgb, var(--accent) 84%, #000);
   --accent-contrast: #ffffff;
 }
 
@@ -109,8 +119,8 @@
   --success: #5fbb86;
   --danger: #f27d70;
   /* Lighter accent so links/controls stay AA on the near-black background. */
-  --accent: #5cc5ba;
-  --accent-hover: #7dd6cc;
+  --accent: var(--accent-dark-user);
+  --accent-hover: color-mix(in srgb, var(--accent) 82%, #fff);
   --accent-contrast: #06231f;
 }
 
