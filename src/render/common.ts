@@ -11,6 +11,11 @@ import { icon } from '../components/icons';
 import { externalAnchor } from '../utils/url';
 import { LEVEL_LABELS, type SkillLevel } from '../schema/types';
 
+/** Resolve the owner-defined heading for a section (nav label = section title). */
+export function labelOf(content: { sections: { id: string; label: string }[] }, id: string): string {
+  return content.sections.find((s) => s.id === id)?.label ?? id;
+}
+
 /** The standard section shell: <section> with its heading and reveal hook. */
 export function sectionShell(id: string, label: string, ...children: (Node | null)[]): HTMLElement {
   const body = children.filter((child): child is Node => child !== null);
