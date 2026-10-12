@@ -121,6 +121,8 @@ function showErrorBanner(errors: FieldError[], source: ContentSource): void {
 
 /** Hash router for the built-in editor (#admin) — edit mode is code-split. */
 let currentContent: Content = DEFAULT_CONTENT;
+/** Immutable published baseline (never updated by editor previews). */
+let publishedContent: Content = DEFAULT_CONTENT;
 let adminOpen = false;
 let adminDispose: (() => void) | null = null;
 
@@ -138,7 +140,9 @@ async function routeAdmin(): Promise<void> {
   try {
     const { initAdmin } = await import('./admin/index');
     adminOpen = true;
-    adminDispose = initAdmin(currentContent, {
+    adminDispose = initAdmin(publishedContent, {
+      // Re-opening the editor restores the session's in-progress draft.
+      initialDraft: currentContent,
       // The public page live-previews the draft from inside the editor.
       onPreview: (draft) => {
         currentContent = draft;
