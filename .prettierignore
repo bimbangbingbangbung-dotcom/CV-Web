@@ -7,3 +7,5 @@ test-results/
 public/fonts/
 package-lock.json
 src/utils/content-validator.generated.ts
+.opencode/
+SKILL.md
