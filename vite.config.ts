@@ -15,8 +15,17 @@ export default defineConfig({
     sourcemap: false,
     assetsInlineLimit: 2048,
     // Public site JS budget is < 50 KB gzipped; edit mode is code-split
-    // automatically because it is dynamically imported (#admin).
+    // automatically because it is dynamically imported (#admin). The named
+    // "admin" chunk lets scripts/check-budget.mjs exclude it explicitly.
     reportCompressedSize: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          const normalized = id.replace(/\\/g, '/');
+          return normalized.includes('/src/admin/') ? 'admin' : undefined;
+        },
+      },
+    },
   },
   server: {
     port: 5173,
