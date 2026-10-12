@@ -182,6 +182,9 @@ export function initAdmin(content: Content, options: AdminOptions): () => void {
   };
 
   void (async () => {
+    // A pill/guard may linger from a previous close in this page load.
+    setGuard(false);
+
     // 1. Passcode gate (disabled by default; unlock sticks per session).
     if (content.admin.passcodeSha256) {
       let unlocked = false;
