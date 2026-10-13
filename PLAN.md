@@ -90,9 +90,10 @@ engineering student with two core requirements:
    (styled beside the draft pill in `admin.css`, `role="status"`, auto-
    dismiss) confirms the commit. (b) **Download content.json** moved out of
    the toolbar into Help → GitHub publishing, labelled as the manual
-   alternative (tokenless; `Ctrl/⌘ + S` fallback unchanged). (c) the header
-   **Edit** link is now invisible (`opacity: 0` in `header.css`) — it keeps
-   its place and stays clickable, and `:focus-visible` reveals it for
-   keyboard users. E2E updated: save test asserts the auto-close + toast,
-   download test opens Help first, and a new test covers the invisible Edit
-   link end-to-end (opacity 0 → click → editor opens).
+   alternative (tokenless; `Ctrl/⌘ + S` fallback unchanged). (c) both **Edit**
+   links (header actions + footer) are now invisible (`opacity: 0`, shared
+   rule in `header.css`) — they keep their place and stay clickable, and
+   `:focus-visible` reveals them for keyboard users. E2E updated: save test
+   asserts the auto-close + toast, download test opens Help first, and a new
+   test covers both invisible Edit links end-to-end (opacity 0 → click →
+   editor opens).

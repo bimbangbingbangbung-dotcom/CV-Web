@@ -13,9 +13,9 @@ the site rebuilds itself.
 
 ## 1. Edit mode (recommended)
 
-1. Open the site and go to **`/#admin`** (or click the _Edit_ link in the
-   header — it is invisible by design; it sits at the end of the header
-   actions and still works when clicked).
+1. Open the site and go to **`/#admin`** (or click an _Edit_ link — one sits
+   at the end of the header actions, one in the footer; both are invisible by
+   design but still work when clicked).
 2. Edit fields on the **Content** tab — the page behind updates live.
 3. Publish with whichever path you set up:
 
