@@ -66,15 +66,15 @@ Notes:
 
 ### Shortcuts
 
-| Keys                 | Action                  |
-| -------------------- | ----------------------- |
-| `Ctrl/⌘ + Z`         | Undo                    |
-| `Ctrl/⌘ + Shift + Z` | Redo                    |
-| `Ctrl/⌘ + Y`         | Redo (Windows)          |
+| Keys                 | Action                                                        |
+| -------------------- | ------------------------------------------------------------- |
+| `Ctrl/⌘ + Z`         | Undo                                                          |
+| `Ctrl/⌘ + Shift + Z` | Redo                                                          |
+| `Ctrl/⌘ + Y`         | Redo (Windows)                                                |
 | `Ctrl/⌘ + S`         | Save to GitHub (Download when GitHub publishing isn’t set up) |
-| `Esc`                | Close dialogs           |
-| `M` (public site)    | Toggle the header       |
-| `T` (public site)    | Toggle light/dark theme |
+| `Esc`                | Close dialogs                                                 |
+| `M` (public site)    | Toggle the header                                             |
+| `T` (public site)    | Toggle light/dark theme                                       |
 
 ### Other buttons
 
