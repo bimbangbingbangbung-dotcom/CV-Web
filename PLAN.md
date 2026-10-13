@@ -84,3 +84,15 @@ engineering student with two core requirements:
    the badge/pill/unload-guard clear. Covered by 24 new unit tests and 2 E2E
    tests (API mocked incl. CORS preflight); the real-API error path was
    verified manually (friendly 401 message, button re-enabled).
+3. **Post-save UX pass** — three owner-requested changes: (a) a successful
+   **Save to GitHub** now closes the editor and lands on the home page, where
+   the live preview already shows the change; a transient `.save-toast`
+   (styled beside the draft pill in `admin.css`, `role="status"`, auto-
+   dismiss) confirms the commit. (b) **Download content.json** moved out of
+   the toolbar into Help → GitHub publishing, labelled as the manual
+   alternative (tokenless; `Ctrl/⌘ + S` fallback unchanged). (c) the header
+   **Edit** link is now invisible (`opacity: 0` in `header.css`) — it keeps
+   its place and stays clickable, and `:focus-visible` reveals it for
+   keyboard users. E2E updated: save test asserts the auto-close + toast,
+   download test opens Help first, and a new test covers the invisible Edit
+   link end-to-end (opacity 0 → click → editor opens).
