@@ -1,11 +1,11 @@
 {
   "meta": {
     "schemaVersion": 1,
-    "lastUpdated": "2026-10-12"
+    "lastUpdated": "2026-10-13"
   },
   "site": {
-    "title": "Juan Miguel Reyes — Computer Engineering Student",
-    "description": "TODO: one-sentence summary of who you are and what you build — used for search results and link previews.",
+    "title": "Joshua Angeles",
+    "description": "tite ko malaki\n",
     "canonicalUrl": "https://bimbangbingbangbung-dotcom.github.io/CV-Web/",
     "ogImage": "./assets/og-image.png",
     "lang": "en",
@@ -48,24 +48,75 @@
     },
     "photo": null,
     "initials": "JR",
-    "languages": ["Filipino (native)", "English (fluent)"],
-    "interests": ["embedded systems", "robotics", "IoT", "PCB design", "edge AI"],
+    "languages": [
+      "Filipino (native)",
+      "English (fluent)"
+    ],
+    "interests": [
+      "embedded systems",
+      "robotics",
+      "IoT",
+      "PCB design",
+      "edge AI"
+    ],
     "now": [
-      { "text": "Learning Rust for embedded targets (STM32)" },
-      { "text": "Building a soil-sensor mesh network for our community farm" },
-      { "text": "TODO: add what you are currently learning or building" }
+      {
+        "text": "Learning Rust for embedded targets (STM32)"
+      },
+      {
+        "text": "Building a soil-sensor mesh network for our community farm"
+      },
+      {
+        "text": "TODO: add what you are currently learning or building"
+      }
     ]
   },
   "sections": [
-    { "id": "about", "label": "About", "enabled": true },
-    { "id": "education", "label": "Education", "enabled": true },
-    { "id": "skills", "label": "Skills", "enabled": true },
-    { "id": "projects", "label": "Projects", "enabled": true },
-    { "id": "experience", "label": "Experience", "enabled": true },
-    { "id": "achievements", "label": "Achievements", "enabled": true },
-    { "id": "publications", "label": "Publications", "enabled": true },
-    { "id": "references", "label": "References", "enabled": true },
-    { "id": "contact", "label": "Contact", "enabled": true }
+    {
+      "id": "about",
+      "label": "About",
+      "enabled": true
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "enabled": true
+    },
+    {
+      "id": "skills",
+      "label": "Skills",
+      "enabled": true
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "enabled": true
+    },
+    {
+      "id": "experience",
+      "label": "Experience",
+      "enabled": true
+    },
+    {
+      "id": "achievements",
+      "label": "Achievements",
+      "enabled": true
+    },
+    {
+      "id": "publications",
+      "label": "Publications",
+      "enabled": true
+    },
+    {
+      "id": "references",
+      "label": "References",
+      "enabled": true
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "enabled": true
+    }
   ],
   "education": [
     {
@@ -82,45 +133,115 @@
         "Data Structures & Algorithms",
         "Computer Networks"
       ],
-      "honors": ["TODO: Dean's Lister, AY 2025–2026"]
+      "honors": [
+        "TODO: Dean's Lister, AY 2025–2026"
+      ]
     }
   ],
   "skills": [
     {
       "group": "Programming Languages",
       "items": [
-        { "name": "C", "level": "advanced", "note": null },
-        { "name": "C++", "level": "intermediate", "note": null },
-        { "name": "Python", "level": "advanced", "note": "automation, data, ML glue code" },
-        { "name": "TypeScript / JavaScript", "level": "intermediate", "note": null },
-        { "name": "Verilog HDL", "level": "beginner", "note": null }
+        {
+          "name": "C",
+          "level": "advanced",
+          "note": null
+        },
+        {
+          "name": "C++",
+          "level": "intermediate",
+          "note": null
+        },
+        {
+          "name": "Python",
+          "level": "advanced",
+          "note": "automation, data, ML glue code"
+        },
+        {
+          "name": "TypeScript / JavaScript",
+          "level": "intermediate",
+          "note": null
+        },
+        {
+          "name": "Verilog HDL",
+          "level": "beginner",
+          "note": null
+        }
       ]
     },
     {
       "group": "Hardware / Embedded",
       "items": [
-        { "name": "Arduino & ESP32", "level": "advanced", "note": null },
-        { "name": "STM32 (HAL)", "level": "intermediate", "note": null },
-        { "name": "Raspberry Pi", "level": "intermediate", "note": null },
-        { "name": "KiCad (PCB design)", "level": "beginner", "note": null },
-        { "name": "Oscilloscope & logic analyzer", "level": "intermediate", "note": null }
+        {
+          "name": "Arduino & ESP32",
+          "level": "advanced",
+          "note": null
+        },
+        {
+          "name": "STM32 (HAL)",
+          "level": "intermediate",
+          "note": null
+        },
+        {
+          "name": "Raspberry Pi",
+          "level": "intermediate",
+          "note": null
+        },
+        {
+          "name": "KiCad (PCB design)",
+          "level": "beginner",
+          "note": null
+        },
+        {
+          "name": "Oscilloscope & logic analyzer",
+          "level": "intermediate",
+          "note": null
+        }
       ]
     },
     {
       "group": "Tools & Platforms",
       "items": [
-        { "name": "Git & GitHub", "level": "advanced", "note": null },
-        { "name": "Linux (Debian/Arch)", "level": "intermediate", "note": null },
-        { "name": "Docker", "level": "beginner", "note": null },
-        { "name": "PlatformIO", "level": "advanced", "note": null }
+        {
+          "name": "Git & GitHub",
+          "level": "advanced",
+          "note": null
+        },
+        {
+          "name": "Linux (Debian/Arch)",
+          "level": "intermediate",
+          "note": null
+        },
+        {
+          "name": "Docker",
+          "level": "beginner",
+          "note": null
+        },
+        {
+          "name": "PlatformIO",
+          "level": "advanced",
+          "note": null
+        }
       ]
     },
     {
       "group": "Soft Skills",
       "items": [
-        { "name": "Technical writing", "level": "advanced", "note": null },
-        { "name": "Team leadership", "level": "intermediate", "note": null },
-        { "name": "Debugging under pressure", "level": "expert", "note": "3 a.m. hardware bugs" }
+        {
+          "name": "Technical writing",
+          "level": "advanced",
+          "note": null
+        },
+        {
+          "name": "Team leadership",
+          "level": "intermediate",
+          "note": null
+        },
+        {
+          "name": "Debugging under pressure",
+          "level": "expert",
+          "note": "3 a.m. hardware bugs"
+        }
       ]
     }
   ],
@@ -130,14 +251,24 @@
       "description": "TODO: one or two sentences describing the project — what it does and why it matters. Example: Solar-powered soil sensors that water a garden automatically and log moisture data to a local dashboard.",
       "role": "Firmware + backend",
       "year": "2026",
-      "tech": ["ESP32", "MQTT", "Python", "InfluxDB", "Grafana"],
+      "tech": [
+        "ESP32",
+        "MQTT",
+        "Python",
+        "InfluxDB",
+        "Grafana"
+      ],
       "links": [
         {
           "label": "Repository",
           "url": "https://github.com/todo-jmreyes/smart-irrigation",
           "kind": "repo"
         },
-        { "label": "Live demo", "url": "https://todo-example.vercel.app", "kind": "demo" }
+        {
+          "label": "Live demo",
+          "url": "https://todo-example.vercel.app",
+          "kind": "demo"
+        }
       ],
       "image": null,
       "featured": true,
@@ -152,7 +283,12 @@
       "description": "TODO: short description. Example: A educational single-cycle RISC-V core synthesized and tested on an FPGA board, running a blink and UART demo.",
       "role": "Solo project (coursework)",
       "year": "2025",
-      "tech": ["Verilog", "Vivado", "RISC-V", "FPGA"],
+      "tech": [
+        "Verilog",
+        "Vivado",
+        "RISC-V",
+        "FPGA"
+      ],
       "links": [
         {
           "label": "Repository",
@@ -169,7 +305,11 @@
       "description": "TODO: short description. Example: A small web app a local barangay uses to track document requests end-to-end, replacing a paper logbook.",
       "role": "Full-stack developer",
       "year": "2025",
-      "tech": ["TypeScript", "SQLite", "Node.js"],
+      "tech": [
+        "TypeScript",
+        "SQLite",
+        "Node.js"
+      ],
       "links": [
         {
           "label": "Case study",
@@ -253,14 +393,26 @@
       "honeypot": "company"
     },
     "socials": [
-      { "platform": "github", "label": "GitHub", "url": "https://github.com/todo-jmreyes" },
+      {
+        "platform": "github",
+        "label": "GitHub",
+        "url": "https://github.com/todo-jmreyes"
+      },
       {
         "platform": "linkedin",
         "label": "LinkedIn",
         "url": "https://www.linkedin.com/in/todo-jmreyes"
       },
-      { "platform": "email", "label": "Email", "url": "mailto:todo.juanmiguel@example.com" },
-      { "platform": "x", "label": "X", "url": "https://x.com/todo-jmreyes" }
+      {
+        "platform": "email",
+        "label": "Email",
+        "url": "mailto:todo.juanmiguel@example.com"
+      },
+      {
+        "platform": "x",
+        "label": "X",
+        "url": "https://x.com/todo-jmreyes"
+      }
     ]
   },
   "admin": {
