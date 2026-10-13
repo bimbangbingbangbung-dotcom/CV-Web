@@ -128,6 +128,14 @@
   color: var(--text-faint);
   text-decoration: underline;
   text-underline-offset: 0.2em;
+  /* Invisible by design: only someone who knows where it is will click it.
+     It keeps its space in the header and stays fully clickable. */
+  opacity: 0;
+}
+
+/* Keyboard users still get a visible focus target. */
+.header-edit:focus-visible {
+  opacity: 1;
 }
 
 .header-edit:hover {
