@@ -760,6 +760,11 @@ export function openPanel(options: PanelOptions): () => void {
         fieldRow('Remember token on this device', rememberInput, 'Off = this session only.'),
       ),
       h('div', { class: 'gh-actions' }, testBtn, forgetBtn),
+      h('p', {
+        class: 'admin-help',
+        text: 'Manual alternative — Download content.json writes the finished file to your computer so you can replace public/content.json in the repository and commit it yourself, without a token.',
+      }),
+      h('div', { class: 'gh-actions' }, downloadBtn),
       h('h3', { class: 'admin-subtitle', text: 'Shortcuts' }),
       h(
         'ul',
