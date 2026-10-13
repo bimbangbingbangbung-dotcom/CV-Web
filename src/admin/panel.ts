@@ -222,8 +222,7 @@ export function openPanel(options: PanelOptions): () => void {
     }
     const check = DraftStore.parseContent(store.draft);
     if (!check.ok) {
-      const count = 'errors' in check ? check.errors.length : 0;
-      status.textContent = `Not saved — the draft has ${count} schema problem(s). Use Import or Reset draft to recover.`;
+      status.textContent = `Not saved — the draft has ${check.errors.length} schema problem(s). Use Import or Reset draft to recover.`;
       return;
     }
 
