@@ -73,7 +73,12 @@ export function renderHero(content: Content): HTMLElement {
 
   return h(
     'section',
-    { class: 'hero', id: 'top', attrs: { 'aria-labelledby': 'hero-title', 'data-reveal': true } },
+    // No data-reveal on the hero on purpose: hiding the LCP element behind an
+    // opacity fade suppresses the browser's largest-contentful-paint entry
+    // (Lighthouse then reports NO_LCP and scores performance as null).
+    // Above-the-fold content paints immediately; reveals are for scroll-in
+    // sections only.
+    { class: 'hero', id: 'top', attrs: { 'aria-labelledby': 'hero-title' } },
     h(
       'div',
       { class: 'hero-main' },

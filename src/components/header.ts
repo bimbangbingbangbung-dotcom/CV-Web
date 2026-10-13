@@ -358,6 +358,10 @@ export function initHeader(content: Content): HeaderHandles {
         /* ignore */
       }
       window.setTimeout(() => {
+        // Never hijack an interaction already in progress: if the visitor has
+        // entered and left the top edge (a hide is pending), they have
+        // discovered the header — showing it again would cancel their hide.
+        if (hideTimer !== null) return;
         show();
         window.setTimeout(() => {
           const hovered = header.matches(':hover');
