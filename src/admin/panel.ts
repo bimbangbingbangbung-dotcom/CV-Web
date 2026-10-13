@@ -626,7 +626,7 @@ export function openPanel(options: PanelOptions): () => void {
         { class: 'shortcut-list' },
         shortcut('Ctrl/⌘ + Z', ' Undo last change'),
         shortcut('Ctrl/⌘ + Shift + Z', ' Redo'),
-        shortcut('Ctrl/⌘ + S', ' Download content.json'),
+        shortcut('Ctrl/⌘ + S', ' Save to GitHub (Download when GitHub publishing isn’t set up)'),
         shortcut('Esc', ' Close dialogs'),
         shortcut('M', ' Toggle header (public site)'),
         shortcut('T', ' Toggle theme (public site)'),
@@ -689,7 +689,9 @@ export function openPanel(options: PanelOptions): () => void {
       store.redo();
     } else if (key === 's') {
       event.preventDefault();
-      publishDownload();
+      // Save to GitHub when publishing is configured; plain download otherwise.
+      if (isConfigured(loadSettings(), getToken())) void publishToGitHub();
+      else publishDownload();
     }
   };
   window.addEventListener('keydown', onKeyDown);
