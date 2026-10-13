@@ -4,8 +4,8 @@
     "lastUpdated": "2026-10-13"
   },
   "site": {
-    "title": "Joshua Angeles",
-    "description": "tite ko malaki\n",
+    "title": "Joshua Angeles — Computer Engineering Student",
+    "description": "Computer engineering student building embedded systems, mechanical CAD designs, and circuit prototypes. Siemens Solid Edge Certified Mechanical Associate.",
     "canonicalUrl": "https://bimbangbingbangbung-dotcom.github.io/CV-Web/",
     "ogImage": "./assets/og-image.png",
     "lang": "en",
@@ -36,18 +36,18 @@
     "label": "Download CV"
   },
   "owner": {
-    "fullName": "Juan Miguel Reyes",
+    "fullName": "Joshua Niño C. Angeles",
     "headline": "Computer Engineering Student",
-    "tagline": "I build things that connect hardware and software.",
-    "shortBio": "TODO: 2–3 sentences about who you are, what you enjoy building, and what you are looking for. Example shape: I am a computer engineering student who enjoys making embedded systems talk to the real world — from sensor firmware to the dashboards that visualize it. Currently looking for an internship where I can work close to the metal.",
-    "longBio": "TODO: optional 1–2 paragraph version of your story — your path into computer engineering, the problems you enjoy solving, and where you want to go next. Leave as null to hide this block.",
-    "location": "Cebu City, Philippines",
+    "tagline": "I connect software logic with physical hardware — from embedded firmware to 3D mechanical design.",
+    "shortBio": "Analytical computer engineering student with a multidisciplinary foundation spanning embedded systems programming, CAD mechanical design, and circuit prototyping. Siemens Solid Edge Certified Mechanical Associate (SSECMA) with formal Java programming credentials — a rare ability to integrate software logic with physical hardware engineering and 3D modeling.",
+    "longBio": "I'm currently finishing my BS in Computer Engineering at STI Ortigas-Cainta College (2023–present). My thesis is an Arduino-based automated pet food weighing vending machine — receipt printing with stock monitoring — which combines firmware, circuit design, and mechanical assembly in one build.\n\nI started in the STEM strand, where our research on an automatic trash can decomposer turned food waste into fertilizer and won awards at SHS EXPO 2023. Since then I've built a 6-DOF robotic arm, a domestic cleaning robot prototype, and a solar-powered mobile charging system. I'm looking for an internship where I can work close to the metal — embedded systems, hardware prototyping, or mechanical design.",
+    "location": "Cainta, Rizal, Philippines",
     "availability": {
-      "label": "Open to internships — Summer 2027",
+      "label": "Open to internships and OJT",
       "show": true
     },
     "photo": null,
-    "initials": "JR",
+    "initials": "JA",
     "languages": [
       "Filipino (native)",
       "English (fluent)"
@@ -55,19 +55,19 @@
     "interests": [
       "embedded systems",
       "robotics",
-      "IoT",
-      "PCB design",
-      "edge AI"
+      "mechatronics",
+      "CAD design",
+      "circuit prototyping"
     ],
     "now": [
       {
-        "text": "Learning Rust for embedded targets (STM32)"
+        "text": "Finishing my thesis: Arduino pet food weighing vending machine"
       },
       {
-        "text": "Building a soil-sensor mesh network for our community farm"
+        "text": "Building my Solid Edge mechanical design portfolio"
       },
       {
-        "text": "TODO: add what you are currently learning or building"
+        "text": "Looking for an internship where I can work close to the metal"
       }
     ]
   },
@@ -105,7 +105,7 @@
     {
       "id": "publications",
       "label": "Publications",
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "references",
@@ -120,107 +120,86 @@
   ],
   "education": [
     {
-      "institution": "TODO: University name (e.g. University of San Carlos)",
+      "institution": "STI Ortigas-Cainta College",
       "degree": "BS Computer Engineering",
-      "location": "Cebu City, Philippines",
-      "start": "2023",
-      "end": "2027",
-      "gpa": "3.4 / 4.0",
+      "location": "Cainta, Rizal, Philippines",
+      "start": "2023-08",
+      "end": "Present",
+      "gpa": null,
       "coursework": [
-        "Microprocessors & Embedded Systems",
-        "Digital Logic Design",
-        "Signals, Systems & Transforms",
-        "Data Structures & Algorithms",
-        "Computer Networks"
+        "Embedded systems & microcontrollers",
+        "Digital logic circuits",
+        "Electrical schematics & circuit design",
+        "3D mechanical CAD (Solid Edge)"
       ],
+      "honors": []
+    },
+    {
+      "institution": "STI Ortigas-Cainta College",
+      "degree": "Senior High School — STEM Strand",
+      "location": "Cainta, Rizal, Philippines",
+      "start": "2021-07",
+      "end": "2023-07",
+      "gpa": null,
+      "coursework": [],
       "honors": [
-        "TODO: Dean's Lister, AY 2025–2026"
+        "Graduated with Honors"
       ]
     }
   ],
   "skills": [
     {
-      "group": "Programming Languages",
+      "group": "Programming",
       "items": [
-        {
-          "name": "C",
-          "level": "advanced",
-          "note": null
-        },
         {
           "name": "C++",
           "level": "intermediate",
-          "note": null
+          "note": "embedded systems & microcontrollers"
         },
         {
-          "name": "Python",
-          "level": "advanced",
-          "note": "automation, data, ML glue code"
-        },
-        {
-          "name": "TypeScript / JavaScript",
+          "name": "Java",
           "level": "intermediate",
-          "note": null
-        },
-        {
-          "name": "Verilog HDL",
-          "level": "beginner",
-          "note": null
+          "note": "Oracle-credential fundamentals"
         }
       ]
     },
     {
-      "group": "Hardware / Embedded",
+      "group": "Mechanical Design (CAD)",
       "items": [
         {
-          "name": "Arduino & ESP32",
+          "name": "3D CAD modeling & assemblies",
           "level": "advanced",
-          "note": null
-        },
-        {
-          "name": "STM32 (HAL)",
-          "level": "intermediate",
-          "note": null
-        },
-        {
-          "name": "Raspberry Pi",
-          "level": "intermediate",
-          "note": null
-        },
-        {
-          "name": "KiCad (PCB design)",
-          "level": "beginner",
-          "note": null
-        },
-        {
-          "name": "Oscilloscope & logic analyzer",
-          "level": "intermediate",
-          "note": null
+          "note": "Siemens Solid Edge — SSECMA certified"
         }
       ]
     },
     {
-      "group": "Tools & Platforms",
+      "group": "Electronics",
       "items": [
         {
-          "name": "Git & GitHub",
-          "level": "advanced",
-          "note": null
-        },
-        {
-          "name": "Linux (Debian/Arch)",
+          "name": "Circuit design & drafting",
           "level": "intermediate",
-          "note": null
+          "note": "electrical schematics"
         },
         {
-          "name": "Docker",
-          "level": "beginner",
-          "note": null
-        },
+          "name": "Digital electronics",
+          "level": "intermediate",
+          "note": "design, simulation & testing"
+        }
+      ]
+    },
+    {
+      "group": "Hardware Prototyping",
+      "items": [
         {
-          "name": "PlatformIO",
+          "name": "Robotics prototyping",
           "level": "advanced",
-          "note": null
+          "note": "6-DOF arm & domestic cleaning robot"
+        },
+        {
+          "name": "Solar-powered charging systems",
+          "level": "intermediate",
+          "note": "mobile device charging"
         }
       ]
     },
@@ -228,95 +207,105 @@
       "group": "Soft Skills",
       "items": [
         {
-          "name": "Technical writing",
-          "level": "advanced",
-          "note": null
+          "name": "Initiative",
+          "level": null,
+          "note": "takes the lead in group projects and tasks"
         },
         {
-          "name": "Team leadership",
-          "level": "intermediate",
-          "note": null
+          "name": "Hardworking",
+          "level": null,
+          "note": "consistently meets strict project deadlines"
         },
         {
-          "name": "Debugging under pressure",
-          "level": "expert",
-          "note": "3 a.m. hardware bugs"
+          "name": "Adaptability",
+          "level": null,
+          "note": "quickly learns and adapts to any environment"
+        },
+        {
+          "name": "Teamwork",
+          "level": null,
+          "note": "collaborates to troubleshoot hardware issues"
+        },
+        {
+          "name": "Time Management",
+          "level": null,
+          "note": "prioritizes concurrent tasks effectively"
         }
       ]
     }
   ],
   "projects": [
     {
-      "title": "Smart Irrigation IoT System",
-      "description": "TODO: one or two sentences describing the project — what it does and why it matters. Example: Solar-powered soil sensors that water a garden automatically and log moisture data to a local dashboard.",
-      "role": "Firmware + backend",
+      "title": "Automated Pet Food Weighing Vending Machine",
+      "description": "My undergraduate thesis: an Arduino-based vending machine that weighs and dispenses pet food, prints receipts, and monitors stock levels — firmware, wiring, and mechanics in one build.",
+      "role": "Thesis project — firmware & systems design",
       "year": "2026",
       "tech": [
-        "ESP32",
-        "MQTT",
-        "Python",
-        "InfluxDB",
-        "Grafana"
+        "Arduino",
+        "C++",
+        "Load cell",
+        "Receipt printer"
       ],
-      "links": [
-        {
-          "label": "Repository",
-          "url": "https://github.com/todo-jmreyes/smart-irrigation",
-          "kind": "repo"
-        },
-        {
-          "label": "Live demo",
-          "url": "https://todo-example.vercel.app",
-          "kind": "demo"
-        }
-      ],
+      "links": [],
       "image": null,
       "featured": true,
-      "detail": {
-        "problem": "TODO: what problem did this solve? (e.g. Our community garden was over-watering plants during dry season with no data to guide decisions.)",
-        "solution": "TODO: how did you solve it? (e.g. Battery-powered capacitive soil sensors publish readings over MQTT every 15 minutes; a small Python service waters when thresholds are crossed.)",
-        "result": "TODO: measurable outcome. (e.g. Cut water use by ~40% over one dry season; dashboard used by 3 barangay gardens.)"
-      }
+      "detail": null
     },
     {
-      "title": "Single-Cycle RISC-V Processor",
-      "description": "TODO: short description. Example: A educational single-cycle RISC-V core synthesized and tested on an FPGA board, running a blink and UART demo.",
-      "role": "Solo project (coursework)",
-      "year": "2025",
+      "title": "6-DOF Robotic Arm",
+      "description": "A six-degree-of-freedom robotic arm I designed and built — structure, joint actuation, and control wiring, from mechanical assembly to embedded control.",
+      "role": "Design & build — mechanical + controls",
+      "year": "2023",
       "tech": [
-        "Verilog",
-        "Vivado",
-        "RISC-V",
-        "FPGA"
+        "Microcontrollers",
+        "C++",
+        "Mechatronics"
       ],
-      "links": [
-        {
-          "label": "Repository",
-          "url": "https://github.com/todo-jmreyes/riscv-single-cycle",
-          "kind": "repo"
-        }
+      "links": [],
+      "image": null,
+      "featured": true,
+      "detail": null
+    },
+    {
+      "title": "Domestic Cleaning Robot Prototype",
+      "description": "A prototype domestic cleaning robot — chassis, drive, and cleaning mechanism integrated on a microcontroller platform.",
+      "role": "Design & build (prototype)",
+      "year": "2023",
+      "tech": [
+        "Microcontrollers",
+        "Robotics",
+        "Prototyping"
       ],
+      "links": [],
       "image": null,
       "featured": false,
       "detail": null
     },
     {
-      "title": "Barangay Document Request Tracker",
-      "description": "TODO: short description. Example: A small web app a local barangay uses to track document requests end-to-end, replacing a paper logbook.",
-      "role": "Full-stack developer",
-      "year": "2025",
+      "title": "Solar-Powered Mobile Charging System",
+      "description": "A solar-powered charging system for mobile devices — harvesting, regulating, and delivering power for charging on the go.",
+      "role": "Design & build",
+      "year": "2023",
       "tech": [
-        "TypeScript",
-        "SQLite",
-        "Node.js"
+        "Solar power",
+        "Charge regulation",
+        "USB output"
       ],
-      "links": [
-        {
-          "label": "Case study",
-          "url": "https://github.com/todo-jmreyes/request-tracker#readme",
-          "kind": "case-study"
-        }
+      "links": [],
+      "image": null,
+      "featured": false,
+      "detail": null
+    },
+    {
+      "title": "Miniature House with Working Lights",
+      "description": "A scale-model house with a fully wired lighting circuit — built for SHS EXPO 2023, where it placed 2nd Best in Product (Physics).",
+      "role": "Build & wiring",
+      "year": "2023",
+      "tech": [
+        "Wiring",
+        "Lighting circuits"
       ],
+      "links": [],
       "image": null,
       "featured": false,
       "detail": null
@@ -324,70 +313,57 @@
   ],
   "experience": [
     {
-      "org": "TODO: Organization (e.g. Cebu Doctors' University ICT Center)",
-      "role": "IT Help Desk Assistant (Part-time)",
-      "location": "Cebu City, Philippines",
-      "start": "2025-08",
+      "org": "Association of Computer Engineering Students (STI OrCa)",
+      "role": "Speaker & Participant",
+      "location": "Metro Manila, Philippines",
+      "start": "2026-05",
       "end": "Present",
-      "type": "part-time",
-      "description": "TODO: 1–2 sentences about the role and who you served.",
+      "type": "organization",
+      "description": "Academic technology experience through my college organization — sharing CAD skills with fellow students and joining university-wide tech events.",
       "highlights": [
-        "TODO: quantified achievement (e.g. Resolved 20+ staff tickets weekly, avg. response under 2 hours)",
-        "TODO: achievement (e.g. Automated new-hardware imaging, cutting setup time from 40 to 12 minutes)"
-      ]
-    },
-    {
-      "org": "TODO: Organization (e.g. USC Robotics & IoT Society)",
-      "role": "Vice President",
-      "location": "Cebu City, Philippines",
-      "start": "2025",
-      "end": "2026",
-      "type": "leadership",
-      "description": "TODO: what the organization does and your mandate.",
-      "highlights": [
-        "TODO: achievement (e.g. Led a 12-member team to 2nd place at the Regional Robotics Challenge)",
-        "TODO: achievement (e.g. Ran 4 hands-on workshops attended by 80+ students)"
+        "Speaker — Solid Edge Workshop organized by ACES STI OrCa",
+        "Participant — IoT Competition, University of Makati",
+        "Attendee — Engenium Cup, De La Salle University"
       ]
     }
   ],
   "achievements": [
     {
-      "title": "2nd Place — Regional Robotics Challenge",
-      "issuer": "TODO: Organizer name",
-      "date": "2026-03",
-      "category": "competition",
-      "url": null
-    },
-    {
-      "title": "CCNA: Introduction to Networks",
-      "issuer": "Cisco Networking Academy",
-      "date": "2025-11",
+      "title": "Siemens Solid Edge Certified Mechanical Associate",
+      "issuer": "Siemens",
+      "date": "2025-12",
       "category": "certification",
-      "url": "https://www.credly.com/badges/todo-credential"
+      "url": null
     },
     {
-      "title": "Dean's Lister — AY 2025–2026",
-      "issuer": "TODO: University name",
-      "date": "2026",
-      "category": "honor",
+      "title": "Oracle Java Fundamentals Certification",
+      "issuer": "Oracle",
+      "date": "2025-12",
+      "category": "certification",
+      "url": null
+    },
+    {
+      "title": "1st Best in Infomercial (STEM) — SHS EXPO 2023",
+      "issuer": "STI Ortigas-Cainta College",
+      "date": "2023",
+      "category": "award",
+      "url": null
+    },
+    {
+      "title": "2nd Best in Product (Physics) — SHS EXPO 2023",
+      "issuer": "STI Ortigas-Cainta College",
+      "date": "2023",
+      "category": "award",
       "url": null
     }
   ],
-  "publications": [
-    {
-      "title": "TODO: title of your paper, poster or article",
-      "publisher": "TODO: journal, conference or outlet",
-      "date": "2026-06",
-      "url": "https://todo-example.vercel.app/publication",
-      "note": "TODO: one line about your contribution or findings."
-    }
-  ],
+  "publications": [],
   "references": {
     "show": true,
     "note": "Available on request."
   },
   "contact": {
-    "email": "todo.juanmiguel@example.com",
+    "email": "angelesjoshua166@gmail.com",
     "form": {
       "endpoint": null,
       "honeypot": "company"
@@ -396,22 +372,12 @@
       {
         "platform": "github",
         "label": "GitHub",
-        "url": "https://github.com/todo-jmreyes"
-      },
-      {
-        "platform": "linkedin",
-        "label": "LinkedIn",
-        "url": "https://www.linkedin.com/in/todo-jmreyes"
+        "url": "https://github.com/bimbangbingbangbung-dotcom"
       },
       {
         "platform": "email",
         "label": "Email",
-        "url": "mailto:todo.juanmiguel@example.com"
-      },
-      {
-        "platform": "x",
-        "label": "X",
-        "url": "https://x.com/todo-jmreyes"
+        "url": "mailto:angelesjoshua166@gmail.com"
       }
     ]
   },
