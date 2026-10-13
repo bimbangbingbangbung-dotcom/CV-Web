@@ -164,7 +164,7 @@ export function isConfigured(settings: RepoSettings, token: string | null): bool
 export function encodeBase64(text: string): string {
   const bytes = new TextEncoder().encode(text);
   let binary = '';
-  for (let i = 0; i < bytes.length; i += 1) binary += String.fromCharCode(bytes[i]);
+  for (const byte of bytes) binary += String.fromCharCode(byte);
   return btoa(binary);
 }
 
