@@ -51,10 +51,7 @@ test.describe('edit mode', () => {
     await page.goto('/#admin');
     await page.getByRole('button', { name: 'Save to GitHub' }).click();
     await expect(page.locator('.admin-status')).toContainText('GitHub publishing needs setup');
-    await expect(page.getByRole('tab', { name: 'Help' })).toHaveAttribute(
-      'aria-selected',
-      'true',
-    );
+    await expect(page.getByRole('tab', { name: 'Help' })).toHaveAttribute('aria-selected', 'true');
     await expect(page.locator('#f-gh-owner')).toBeVisible();
     await expect(page.locator('#f-gh-token')).toBeVisible();
   });

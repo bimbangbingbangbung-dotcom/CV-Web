@@ -82,7 +82,10 @@ function repoFromUrl(raw: string): { owner: string; repo: string } | null {
  * Pre-fill owner/repo from the deployed URL (owner.github.io/CV-Web) or from
  * the canonical URL in content.json, so localhost editing works too.
  */
-export function detectRepo(pageHref: string, canonicalUrl?: string): {
+export function detectRepo(
+  pageHref: string,
+  canonicalUrl?: string,
+): {
   owner: string;
   repo: string;
 } | null {

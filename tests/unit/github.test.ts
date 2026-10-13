@@ -30,11 +30,7 @@ const OK_CONFIG = {
 } as const;
 
 /** Minimal Response stand-in — jsdom doesn't provide fetch's Response. */
-const res = (
-  status: number,
-  body: unknown = {},
-  headers: Record<string, string> = {},
-): Response =>
+const res = (status: number, body: unknown = {}, headers: Record<string, string> = {}): Response =>
   ({
     ok: status >= 200 && status < 300,
     status,
@@ -143,9 +139,7 @@ describe('token storage', () => {
 
   it('moves it to localStorage when remembered, and clears both on forget', () => {
     setToken('secret', true);
-    expect(JSON.parse(localStorage.getItem('cvweb:github-token-persist') ?? 'null')).toBe(
-      'secret',
-    );
+    expect(JSON.parse(localStorage.getItem('cvweb:github-token-persist') ?? 'null')).toBe('secret');
     expect(sessionStorage.getItem('cvweb:github-token')).toBeNull();
     expect(getToken()).toBe('secret');
     clearToken();
