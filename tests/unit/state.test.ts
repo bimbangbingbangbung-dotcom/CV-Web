@@ -60,6 +60,19 @@ describe('DraftStore', () => {
     expect(store.dirty).toBe(false);
   });
 
+  it('markSaved re-baselines: badge clean, history kept for undo', () => {
+    const store = new DraftStore(published());
+    store.set(['owner', 'fullName'], 'Saved Person');
+    expect(store.dirty).toBe(true);
+
+    store.markSaved(); // called after a successful Save to GitHub
+    expect(store.dirty).toBe(false);
+
+    store.undo(); // history survives the save…
+    expect(store.draft.owner.fullName).toBe(DEFAULT_CONTENT.owner.fullName);
+    expect(store.dirty).toBe(true); // …and now differs from the new baseline
+  });
+
   it('caps history at 50 entries', () => {
     const store = new DraftStore(published());
     for (let i = 0; i < 75; i++) store.set(['owner', 'fullName'], `Name ${i}`);
