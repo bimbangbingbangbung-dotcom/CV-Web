@@ -127,7 +127,7 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
   is _never_ the published source — it only holds working copies and the
   last-known-good snapshot.
 - **Publish = save or download**: two paths out of the editor.
-  - **Save to GitHub** (`src/admin/github.ts`): commits
+  - **Save to GitHub** (`src/admin/github.ts`, toolbar button): commits
     `public/content.json` through the GitHub Contents API (GET the blob sha →
     PUT). Owner/repo/branch/path settings live in localStorage
     (`cvweb:github`) and pre-fill from the deployed/canonical URL; the token
@@ -135,13 +135,16 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
     is ticked) and is sent **only** to the constant `https://api.github.com`
     origin — host and path parts are validated/encoded before any request.
     After a successful commit, `DraftStore.markSaved()` re-baselines the
-    draft so the badge flips to “Matches published”, the draft pill and
-    `beforeunload` guard clear, and the deploy workflow rebuilds the site.
-    Failures map to friendly status text (401 bad token, 403 scope/rate
-    limit, 404 wrong repo/branch/path, 422 concurrent-edit race, network).
-  - **Download content.json** (also `Ctrl/⌘+S` when GitHub publishing isn’t
-    configured): writes the file; the owner drops it at `public/content.json`
-    and commits. The status line spells out whichever path ran.
+    draft (badge flips to “Matches published”; draft pill and `beforeunload`
+    guard clear), a transient `.save-toast` confirms the commit on the public
+    page, and the panel closes itself — landing the owner on the home page
+    where the live preview already shows the change. The deploy workflow then
+    rebuilds the site. Failures map to friendly status text (401 bad token,
+    403 scope/rate limit, 404 wrong repo/branch/path, 422 concurrent-edit
+    race, network) and keep the editor open.
+  - **Download content.json** (Help → GitHub publishing — the manual
+    alternative; also `Ctrl/⌘+S` when GitHub publishing isn’t configured):
+    writes the file; the owner drops it at `public/content.json` and commits.
 - **Live preview**: every commit re-renders the public page underneath
   (focus-preserving form rebuilds); a floating “Draft in editor” pill and a
   `beforeunload` guard track unsaved work.
