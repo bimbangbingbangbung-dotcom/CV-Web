@@ -13,16 +13,20 @@ the site rebuilds itself.
 
 ## 1. Edit mode (recommended)
 
-1. Open the site and go to **`/#admin`** (or click _Edit_ in the header menu).
+1. Open the site and go to **`/#admin`** (or click the _Edit_ link in the
+   header — it is invisible by design; it sits at the end of the header
+   actions and still works when clicked).
 2. Edit fields on the **Content** tab — the page behind updates live.
 3. Publish with whichever path you set up:
 
    - **Save to GitHub** (toolbar, or `Ctrl/⌘ + S`) — commits
-     `public/content.json` straight to the repository; GitHub Actions then
-     redeploys the site in ~1–2 minutes. One-time setup below.
-   - **Download content.json** — the manual path: replace
-     `public/content.json` in the repo and commit. CI verifies it, then
-     GitHub Pages redeploys automatically.
+     `public/content.json` straight to the repository, then returns you to
+     the home page with the changes already live underneath (a toast
+     confirms the commit; GitHub Actions redeploys the public site in
+     ~1–2 minutes). One-time setup below.
+   - **Download content.json** (Help → GitHub publishing) — the manual
+     alternative: replace `public/content.json` in the repo and commit.
+     CI verifies it, then GitHub Pages redeploys automatically.
 
 > The editor keeps an autosaved **draft** in your browser (localStorage). It is
 > only a working copy — the published site changes **only** after a save or a
@@ -40,9 +44,11 @@ the site rebuilds itself.
 4. Paste the token (optionally tick _Remember token on this device_) and
    press **Test connection** — the status should read
    `Connected to <owner>/<repo> ✓`.
-5. From now on, **Save to GitHub** (or `Ctrl/⌘ + S`) publishes. The
-   _Draft_ badge flips to _Matches published_ and the footer shows the new
-   date; the live site follows once Actions finishes (~1–2 minutes).
+5. From now on, **Save to GitHub** (or `Ctrl/⌘ + S`) publishes — the editor
+   closes itself and drops you back on the home page, where the draft is
+   already showing. The _Draft_ badge flips to _Matches published_ before the
+   close and a toast confirms the commit; the live site follows once Actions
+   finishes (~1–2 minutes).
 
 Notes:
 
