@@ -47,6 +47,85 @@ test.describe('edit mode', () => {
     expect(download.suggestedFilename()).toBe('content.json');
   });
 
+  test('Save to GitHub without setup routes to the Help configuration', async ({ page }) => {
+    await page.goto('/#admin');
+    await page.getByRole('button', { name: 'Save to GitHub' }).click();
+    await expect(page.locator('.admin-status')).toContainText('GitHub publishing needs setup');
+    await expect(page.getByRole('tab', { name: 'Help' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
+    await expect(page.locator('#f-gh-owner')).toBeVisible();
+    await expect(page.locator('#f-gh-token')).toBeVisible();
+  });
+
+  test('Save to GitHub commits content.json through the API', async ({ page }) => {
+    let committed: Record<string, unknown> | null = null;
+    let authHeader = '';
+    await page.route('https://api.github.com/**', async (route) => {
+      const request = route.request();
+      const cors = { 'Access-Control-Allow-Origin': '*' };
+      if (request.method() === 'OPTIONS') {
+        // CORS preflight for the authenticated PUT.
+        await route.fulfill({
+          status: 204,
+          headers: {
+            ...cors,
+            'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+            'Access-Control-Allow-Headers':
+              'Authorization, Content-Type, Accept, X-GitHub-Api-Version',
+          },
+        });
+        return;
+      }
+      if (request.method() === 'GET') {
+        await route.fulfill({
+          status: 404,
+          contentType: 'application/json',
+          headers: cors,
+          body: JSON.stringify({ message: 'Not Found' }),
+        });
+        return;
+      }
+      authHeader = request.headers()['authorization'] ?? '';
+      committed = JSON.parse(request.postData() ?? '{}') as Record<string, unknown>;
+      await route.fulfill({
+        status: 201,
+        contentType: 'application/json',
+        headers: cors,
+        body: JSON.stringify({ commit: { sha: 'c0ffee' } }),
+      });
+    });
+
+    await page.goto('/#admin');
+
+    // A real edit → the badge must start dirty, then clear after the save.
+    const input = page.locator('#f-owner-fullName');
+    await input.fill('Saved Person');
+    await input.blur();
+    await expect(page.locator('.admin-badge')).toContainText('Draft');
+
+    // Configure publishing in Help (settings persist on each change event).
+    await page.getByRole('tab', { name: 'Help' }).click();
+    await page.locator('#f-gh-owner').fill('octo-cat');
+    await page.locator('#f-gh-repo').fill('CV-Web');
+    await page.locator('#f-gh-branch').fill('main');
+    await page.locator('#f-gh-path').fill('public/content.json');
+    await page.locator('#f-gh-token').fill('ghp_test_token');
+    await page.locator('#f-gh-token').blur();
+
+    await page.getByRole('button', { name: 'Save to GitHub' }).click();
+    await expect(page.locator('.admin-status')).toContainText('Saved to octo-cat/CV-Web');
+    await expect(page.locator('.admin-badge')).toContainText('Matches published');
+
+    // The commit carried the edit and the configured target + credentials.
+    expect(committed).not.toBeNull();
+    expect(committed?.branch).toBe('main');
+    const decoded = Buffer.from(String(committed?.content), 'base64').toString('utf8');
+    expect(JSON.parse(decoded).owner.fullName).toBe('Saved Person');
+    expect(authHeader).toBe('Bearer ghp_test_token');
+  });
+
   test('import rejects invalid JSON with a visible status', async ({ page }) => {
     await page.goto('/#admin');
     await page.locator('.admin-root input[type="file"]').setInputFiles({
