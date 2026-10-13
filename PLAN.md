@@ -57,6 +57,30 @@ engineering student with two core requirements:
 ## Verification (final state)
 
 - Prettier clean · ESLint 0 problems · `tsc --noEmit` clean
-- 43/43 unit tests · 42 passed / 16 skipped / 0 failed E2E
-- Lighthouse ×3: 100 / 100 / 100 / 100, LCP ≈ 1.5 s
-- Public JS 9.63 KB gz / 50 KB budget
+- 68/68 unit tests · 44 passed / 18 skipped / 0 failed E2E
+- Lighthouse ×3: 99 / 100 / 100 / 100, LCP ≈ 1.8 s (score-curve
+  variance with the now-active web font; gate is ≥ 95)
+- Public JS 9.64 KB gz / 50 KB budget
+
+## Post-plan additions (2026-10-13)
+
+1. **Font wiring bug (debug pass)** — the preload hint existed but no
+   `@font-face` rule did anywhere in the project, so Geist was fetched and
+   never used (exactly what Chromium's "preloaded … but not used" warning
+   said) and all text silently fell back to the system UI font. Fixed with
+   document-relative `@font-face` rules in `index.html`: they resolve in dev
+   and on GitHub Pages project paths, and match the preload URL, so the font
+   is still fetched once. Verified in-browser: face loads, and 400 vs 900
+   weights render distinctly (variable font confirmed).
+2. **Save to GitHub** — new primary toolbar action backed by
+   `src/admin/github.ts`: commits `public/content.json` through the GitHub
+   Contents API (GET blob sha → PUT). Owner/repo/branch/path settings live in
+   `cvweb:github` (localStorage) and pre-fill from the deployed/canonical
+   URL; the token lives in sessionStorage (localStorage only when "remember"
+   is ticked) and is sent only to the constant `api.github.com` origin. The
+   Help tab gained a **GitHub publishing** setup section with **Test
+   connection**; `Ctrl/⌘ + S` routes to save when configured, download
+   otherwise. On success `DraftStore.markSaved()` re-baselines the draft so
+   the badge/pill/unload-guard clear. Covered by 24 new unit tests and 2 E2E
+   tests (API mocked incl. CORS preflight); the real-API error path was
+   verified manually (friendly 401 message, button re-enabled).

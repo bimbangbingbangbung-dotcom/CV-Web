@@ -87,7 +87,7 @@ src/
     github.ts                Save-to-GitHub: Contents API commit + token storage
     contrast.ts, diff.ts     WCAG checker + structured draft diff
   content-validator.generated.ts   build artifact (git-ignored from lint)
-tests/unit/*.test.ts         Vitest (43 tests)
+tests/unit/*.test.ts         Vitest (68 tests)
 tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 .github/workflows/ci.yml     lint → typecheck → test → build → e2e → lighthouse
 .github/workflows/deploy.yml build → GitHub Pages
@@ -189,7 +189,7 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 
 | Layer  | Tool                        | What it gates                                                                               |
 | ------ | --------------------------- | ------------------------------------------------------------------------------------------- |
-| Unit   | Vitest (jsdom, 43 tests)    | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync |
+| Unit   | Vitest (jsdom, 68 tests)    | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync, GitHub commit flow |
 | E2E    | Playwright (desktop+mobile) | content rendering, header contract, theme, touch menu, print, editor flows                  |
 | A11y   | axe-core in Playwright      | serious/critical violations on public page (both themes), overlay, editor                   |
 | Budget | check-budget.mjs            | public JS gzip budget                                                                       |
