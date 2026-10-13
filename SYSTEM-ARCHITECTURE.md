@@ -16,14 +16,14 @@
 
 ## 2. Stack rationale
 
-| Choice           | Why                                                                                                       |
-| ---------------- | --------------------------------------------------------------------------------------------------------- |
-| Vite             | instant dev server, Rollup production build, native code-splitting for `#admin`, HTML transform for SEO.   |
-| Vanilla TS       | the UI is a single page rendered from JSON; React/Vue would add ~40 KB gz for zero interaction complexity. |
-| Ajv (standalone) | schema is the single contract; the validator is compiled to plain JS at build time and tree-shaken.        |
-| CSS custom props | appearance (accent, radii, theme) becomes data-driven at runtime; no CSS-in-JS cost.                       |
-| Vitest + Playwright + axe | same Vite pipeline for unit tests; e2e against the real build; axe gates accessibility.             |
-| Geist + JetBrains Mono | self-hosted variable fonts, no third-party font CDN, no layout shift.                               |
+| Choice                    | Why                                                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Vite                      | instant dev server, Rollup production build, native code-splitting for `#admin`, HTML transform for SEO.   |
+| Vanilla TS                | the UI is a single page rendered from JSON; React/Vue would add ~40 KB gz for zero interaction complexity. |
+| Ajv (standalone)          | schema is the single contract; the validator is compiled to plain JS at build time and tree-shaken.        |
+| CSS custom props          | appearance (accent, radii, theme) becomes data-driven at runtime; no CSS-in-JS cost.                       |
+| Vitest + Playwright + axe | same Vite pipeline for unit tests; e2e against the real build; axe gates accessibility.                    |
+| Geist + JetBrains Mono    | self-hosted variable fonts, no third-party font CDN, no layout shift.                                      |
 
 ## 3. Data flow
 
@@ -123,7 +123,7 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
   buttons).
 - **DraftStore**: in-memory draft + localStorage autosave (`cvweb:draft`) with a
   50-step undo/redo stack, dirty flag, and “resume draft?” prompt. localStorage
-  is *never* the published source — it only holds working copies and the
+  is _never_ the published source — it only holds working copies and the
   last-known-good snapshot.
 - **Publish = download**: the browser cannot commit files, so “Download
   content.json” (also `Ctrl/⌘+S`) writes the file; the owner drops it at
@@ -173,13 +173,13 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 
 ## 11. Testing strategy
 
-| Layer    | Tool                       | What it gates                                                          |
-| -------- | -------------------------- | ---------------------------------------------------------------------- |
-| Unit     | Vitest (jsdom, 43 tests)   | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync |
-| E2E      | Playwright (desktop+mobile)| content rendering, header contract, theme, touch menu, print, editor flows |
-| A11y     | axe-core in Playwright     | serious/critical violations on public page (both themes), overlay, editor |
-| Budget   | check-budget.mjs           | public JS gzip budget                                                  |
-| Perf     | Lighthouse CI (≥ 95 ×4)    | performance, accessibility, best-practices, seo                        |
+| Layer  | Tool                        | What it gates                                                                               |
+| ------ | --------------------------- | ------------------------------------------------------------------------------------------- |
+| Unit   | Vitest (jsdom, 43 tests)    | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync |
+| E2E    | Playwright (desktop+mobile) | content rendering, header contract, theme, touch menu, print, editor flows                  |
+| A11y   | axe-core in Playwright      | serious/critical violations on public page (both themes), overlay, editor                   |
+| Budget | check-budget.mjs            | public JS gzip budget                                                                       |
+| Perf   | Lighthouse CI (≥ 95 ×4)     | performance, accessibility, best-practices, seo                                             |
 
 ## 12. CI/CD
 

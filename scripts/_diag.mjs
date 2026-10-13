@@ -40,7 +40,10 @@ console.log(
         size: Math.round(e.size),
         startTime: Math.round(e.startTime),
         el: e.element
-          ? e.element.tagName + (e.element.id ? '#' + e.element.id : '') + '.' + (e.element.className || '')
+          ? e.element.tagName +
+            (e.element.id ? '#' + e.element.id : '') +
+            '.' +
+            (e.element.className || '')
           : null,
       })),
     ),
@@ -53,8 +56,12 @@ console.log(
   'nav:',
   JSON.stringify(
     await page.evaluate(() => {
-      const links = [...document.querySelectorAll('.header-nav a')].map((a) => a.getAttribute('href'));
-      const broken = links.filter((h) => h && h.startsWith('#') && h !== '#admin' && !document.getElementById(h.slice(1)));
+      const links = [...document.querySelectorAll('.header-nav a')].map((a) =>
+        a.getAttribute('href'),
+      );
+      const broken = links.filter(
+        (h) => h && h.startsWith('#') && h !== '#admin' && !document.getElementById(h.slice(1)),
+      );
       return { links, broken };
     }),
   ),
@@ -74,10 +81,15 @@ console.log(
 
 // --- 2. axe: light theme (default) ---------------------------------------
 const light = await new AxeBuilder({ page }).analyze();
-console.log('AXE LIGHT serious/critical:', nodeDump(light.violations.filter((v) => ['serious', 'critical'].includes(v.impact))));
+console.log(
+  'AXE LIGHT serious/critical:',
+  nodeDump(light.violations.filter((v) => ['serious', 'critical'].includes(v.impact))),
+);
 console.log(
   'AXE LIGHT other ids:',
-  JSON.stringify(light.violations.filter((v) => !['serious', 'critical'].includes(v.impact)).map((v) => v.id)),
+  JSON.stringify(
+    light.violations.filter((v) => !['serious', 'critical'].includes(v.impact)).map((v) => v.id),
+  ),
 );
 
 // --- 3. axe: dark theme ---------------------------------------------------
@@ -117,7 +129,10 @@ await ep.goto(BASE + '/#admin', { waitUntil: 'load' });
 await ep.waitForSelector('.admin-root', { timeout: 10000 });
 await ep.waitForTimeout(700);
 const ed = await new AxeBuilder({ page: ep }).include('.admin-root').analyze();
-console.log('AXE EDITOR serious/critical:', nodeDump(ed.violations.filter((v) => ['serious', 'critical'].includes(v.impact))));
+console.log(
+  'AXE EDITOR serious/critical:',
+  nodeDump(ed.violations.filter((v) => ['serious', 'critical'].includes(v.impact))),
+);
 console.log('dialogs open:', await ep.locator('dialog[open]').count());
 await ep.close();
 

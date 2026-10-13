@@ -38,7 +38,9 @@ test.describe('content rendering', () => {
     const hrefs = await page
       .locator('.header-nav a')
       .evaluateAll((links) => links.map((a) => a.getAttribute('href')));
-    const anchors = hrefs.filter((h): h is string => h !== null && h.startsWith('#') && h !== '#admin');
+    const anchors = hrefs.filter(
+      (h): h is string => h !== null && h.startsWith('#') && h !== '#admin',
+    );
     expect(anchors.length).toBeGreaterThan(0);
     for (const href of anchors) {
       await expect(page.locator(`main ${href}`)).toHaveCount(1);

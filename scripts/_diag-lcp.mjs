@@ -43,12 +43,18 @@ async function probe(label, { disableReveal = false, theme } = {}) {
   await page.waitForTimeout(2500);
   const data = await page.evaluate(() => ({
     lcp: window.__lcp,
-    fcp: performance.getEntriesByType('paint').map((p) => ({ name: p.name, start: Math.round(p.startTime) })),
+    fcp: performance
+      .getEntriesByType('paint')
+      .map((p) => ({ name: p.name, start: Math.round(p.startTime) })),
     hero: (() => {
       const h = document.querySelector('.hero');
       if (!h) return null;
       const cs = getComputedStyle(h);
-      return { opacity: cs.opacity, display: cs.display, visible: h.classList.contains('is-visible') };
+      return {
+        opacity: cs.opacity,
+        display: cs.display,
+        visible: h.classList.contains('is-visible'),
+      };
     })(),
   }));
   console.log(label, JSON.stringify(data));

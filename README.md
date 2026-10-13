@@ -30,20 +30,20 @@ Open `http://localhost:5173/#admin` to edit content in the browser.
 
 ## Commands
 
-| Command                    | What it does                                             |
-| -------------------------- | -------------------------------------------------------- |
-| `npm run dev`              | Dev server with HMR                                      |
-| `npm run build`            | Generate validator → validate content → typecheck → build |
-| `npm run preview`          | Serve the production build locally                       |
-| `npm run typecheck`        | `tsc --noEmit`                                           |
-| `npm run lint`             | ESLint, zero warnings allowed                            |
-| `npm run format:check`     | Prettier check                                           |
-| `npm run validate:content` | Validate `public/content.json` against the schema        |
-| `npm test`                 | Unit tests (Vitest + jsdom)                              |
-| `npm run test:e2e`         | E2E + accessibility (Playwright + axe, desktop + mobile) |
-| `npm run lighthouse`       | Lighthouse CI (≥ 95 on all four categories)              |
-| `npm run check:budget`     | Public JS gzip budget (< 50 KB; editor chunk excluded)   |
-| `npm run gen:assets`       | Regenerate OG image, PWA icons, placeholder CV PDF       |
+| Command                    | What it does                                                              |
+| -------------------------- | ------------------------------------------------------------------------- |
+| `npm run dev`              | Dev server with HMR                                                       |
+| `npm run build`            | Generate validator → validate content → typecheck → build                 |
+| `npm run preview`          | Serve the production build locally                                        |
+| `npm run typecheck`        | `tsc --noEmit`                                                            |
+| `npm run lint`             | ESLint, zero warnings allowed                                             |
+| `npm run format:check`     | Prettier check                                                            |
+| `npm run validate:content` | Validate `public/content.json` against the schema                         |
+| `npm test`                 | Unit tests (Vitest + jsdom)                                               |
+| `npm run test:e2e`         | E2E + accessibility (Playwright + axe, desktop + mobile)                  |
+| `npm run lighthouse`       | Lighthouse CI (≥ 95 on all four categories)                               |
+| `npm run check:budget`     | Public JS gzip budget (< 50 KB; editor chunk excluded)                    |
+| `npm run gen:assets`       | Regenerate OG image, PWA icons, placeholder CV PDF                        |
 | `npm run ci`               | Fast gate: lint, typecheck, content validation, unit tests, build, budget |
 
 ## Editing your content
@@ -62,7 +62,7 @@ generated form UI, and the tests all read it.
 
 GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys to
 **GitHub Pages** on every push to `main` (enable it once: repo → Settings →
-Pages → Source: *GitHub Actions*). `ci.yml` runs the full gate
+Pages → Source: _GitHub Actions_). `ci.yml` runs the full gate
 (lint → typecheck → content validation → unit → build → budget → e2e →
 Lighthouse) on every push and PR.
 

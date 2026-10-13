@@ -4,16 +4,16 @@ Everything on this site comes from **one file**: `public/content.json`.
 There are two ways to edit it. Both end the same way: the file is committed and
 the site rebuilds itself.
 
-| Way                    | Best for                                             |
-| ---------------------- | ---------------------------------------------------- |
+| Way                      | Best for                                                                   |
+| ------------------------ | -------------------------------------------------------------------------- |
 | **Edit mode** (`#admin`) | Fast edits with live preview, undo, and a WCAG checker — no file browsing. |
-| **Direct JSON editing**  | Bulk changes, version-control workflows, scripting.  |
+| **Direct JSON editing**  | Bulk changes, version-control workflows, scripting.                        |
 
 ---
 
 ## 1. Edit mode (recommended)
 
-1. Open the site and go to **`/#admin`** (or click *Edit* in the header menu).
+1. Open the site and go to **`/#admin`** (or click _Edit_ in the header menu).
 2. Edit fields on the **Content** tab — the page behind updates live.
 3. Press **Download content.json** (or `Ctrl/⌘ + S`).
 4. Replace `public/content.json` in the repo with the downloaded file and
@@ -27,25 +27,25 @@ the site rebuilds itself.
 
 - **Content** — every data section (site, header, theme, CV, owner, education,
   skills, projects, experience, achievements, publications, references,
-  contact, admin, footer) plus *Meta → Last updated* (set automatically when
+  contact, admin, footer) plus _Meta → Last updated_ (set automatically when
   you download).
 - **Appearance** — accent colors for both themes, with a live **WCAG contrast
   table** (keep every row at “Pass”; text says Pass/Fail, not just color).
 - **Sections** — reorder (drag or Move up/down buttons), enable/disable, and
-  rename headings. This drives the header nav *and* the page order.
+  rename headings. This drives the header nav _and_ the page order.
 - **Help** — shortcut reference.
 
 ### Shortcuts
 
-| Keys                  | Action                          |
-| --------------------- | ------------------------------- |
-| `Ctrl/⌘ + Z`          | Undo                            |
-| `Ctrl/⌘ + Shift + Z`  | Redo                            |
-| `Ctrl/⌘ + Y`          | Redo (Windows)                  |
-| `Ctrl/⌘ + S`          | Download content.json           |
-| `Esc`                 | Close dialogs                   |
-| `M` (public site)     | Toggle the header               |
-| `T` (public site)     | Toggle light/dark theme         |
+| Keys                 | Action                  |
+| -------------------- | ----------------------- |
+| `Ctrl/⌘ + Z`         | Undo                    |
+| `Ctrl/⌘ + Shift + Z` | Redo                    |
+| `Ctrl/⌘ + Y`         | Redo (Windows)          |
+| `Ctrl/⌘ + S`         | Download content.json   |
+| `Esc`                | Close dialogs           |
+| `M` (public site)    | Toggle the header       |
+| `T` (public site)    | Toggle light/dark theme |
 
 ### Other buttons
 
@@ -140,12 +140,12 @@ section from nav and page at once.
 
 Put files in `public/assets/`:
 
-| File                    | Used for                                |
-| ----------------------- | --------------------------------------- |
-| `cv.pdf`                | “Download CV” button (placeholder ships — replace it) |
-| `photo.jpg`/`.png`      | hero avatar (square; alt text = your name) |
-| `og-image.png`          | link previews (regenerate: `npm run gen:assets`) |
-| `favicon-*.png`, `apple-touch-icon.png` | PWA/icon variants          |
+| File                                    | Used for                                              |
+| --------------------------------------- | ----------------------------------------------------- |
+| `cv.pdf`                                | “Download CV” button (placeholder ships — replace it) |
+| `photo.jpg`/`.png`                      | hero avatar (square; alt text = your name)            |
+| `og-image.png`                          | link previews (regenerate: `npm run gen:assets`)      |
+| `favicon-*.png`, `apple-touch-icon.png` | PWA/icon variants                                     |
 
 Regenerate all derived art after changing the mark or name:
 
@@ -157,11 +157,11 @@ npm run gen:assets
 
 ## 5. What happens when something breaks
 
-| Situation                     | Result                                                                       |
-| ----------------------------- | ---------------------------------------------------------------------------- |
-| `content.json` fails schema   | Red `role="alert"` banner + field list; fallback content renders (site never blank); CI blocks the deploy. |
-| File missing (bad deploy)     | Browser's last-known-good copy is used, banner explains it.                   |
-| Nothing available             | Built-in defaults render, banner explains it.                                 |
+| Situation                   | Result                                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `content.json` fails schema | Red `role="alert"` banner + field list; fallback content renders (site never blank); CI blocks the deploy. |
+| File missing (bad deploy)   | Browser's last-known-good copy is used, banner explains it.                                                |
+| Nothing available           | Built-in defaults render, banner explains it.                                                              |
 
 Validate any time with `npm run validate:content`.
 
