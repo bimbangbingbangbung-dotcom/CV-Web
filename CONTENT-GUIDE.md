@@ -15,13 +15,41 @@ the site rebuilds itself.
 
 1. Open the site and go to **`/#admin`** (or click _Edit_ in the header menu).
 2. Edit fields on the **Content** tab — the page behind updates live.
-3. Press **Download content.json** (or `Ctrl/⌘ + S`).
-4. Replace `public/content.json` in the repo with the downloaded file and
-   commit. CI verifies it, then GitHub Pages redeploys automatically.
+3. Publish with whichever path you set up:
+
+   - **Save to GitHub** (toolbar, or `Ctrl/⌘ + S`) — commits
+     `public/content.json` straight to the repository; GitHub Actions then
+     redeploys the site in ~1–2 minutes. One-time setup below.
+   - **Download content.json** — the manual path: replace
+     `public/content.json` in the repo and commit. CI verifies it, then
+     GitHub Pages redeploys automatically.
 
 > The editor keeps an autosaved **draft** in your browser (localStorage). It is
-> only a working copy — the published site changes **only** when you commit the
-> downloaded file. Closing the tab with unsaved work asks for confirmation.
+> only a working copy — the published site changes **only** after a save or a
+> commit. Closing the tab with unsaved work asks for confirmation.
+
+### Save to GitHub — one-time setup
+
+1. Create a token: GitHub → Settings → **Developer settings** → Personal
+   access tokens → **Fine-grained tokens**, scoped to this repository with
+   **Contents: Read and write** (a classic token with the `public_repo`
+   scope works too).
+2. In the editor, open the **Help** tab → **GitHub publishing**.
+3. _Owner_ and _Repository_ are pre-filled from the deployed URL — check
+   _Branch_ (usually `main`) and _File path_ (`public/content.json`).
+4. Paste the token (optionally tick _Remember token on this device_) and
+   press **Test connection** — the status should read
+   `Connected to <owner>/<repo> ✓`.
+5. From now on, **Save to GitHub** (or `Ctrl/⌘ + S`) publishes. The
+   _Draft_ badge flips to _Matches published_ and the footer shows the new
+   date; the live site follows once Actions finishes (~1–2 minutes).
+
+Notes:
+
+- The token never leaves your browser except to `api.github.com`, and is
+  kept in session storage only (localStorage when “remember” is ticked).
+- **Forget saved token** clears it; the Download path keeps working with no
+  token configured at all.
 
 ### Editor tabs
 
@@ -33,7 +61,8 @@ the site rebuilds itself.
   table** (keep every row at “Pass”; text says Pass/Fail, not just color).
 - **Sections** — reorder (drag or Move up/down buttons), enable/disable, and
   rename headings. This drives the header nav _and_ the page order.
-- **Help** — shortcut reference.
+- **Help** — shortcut reference and the one-time **GitHub publishing**
+  setup (repository settings + token for the Save-to-GitHub button).
 
 ### Shortcuts
 
@@ -42,7 +71,7 @@ the site rebuilds itself.
 | `Ctrl/⌘ + Z`         | Undo                    |
 | `Ctrl/⌘ + Shift + Z` | Redo                    |
 | `Ctrl/⌘ + Y`         | Redo (Windows)          |
-| `Ctrl/⌘ + S`         | Download content.json   |
+| `Ctrl/⌘ + S`         | Save to GitHub (Download when GitHub publishing isn’t set up) |
 | `Esc`                | Close dialogs           |
 | `M` (public site)    | Toggle the header       |
 | `T` (public site)    | Toggle light/dark theme |
