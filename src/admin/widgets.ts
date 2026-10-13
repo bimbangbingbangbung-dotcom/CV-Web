@@ -77,6 +77,9 @@ function fieldId(path: (string | number)[]): string {
   return `f-${path.join('-')}`;
 }
 
+/** Elements a `<label for>` can legally target (axe `label` rule). */
+const LABELABLE = 'input, select, textarea, button, output';
+
 /** Label + control + help text, wired with for/id and aria-describedby. */
 export function fieldRow(
   labelText: string,
@@ -84,10 +87,21 @@ export function fieldRow(
   help?: string,
   required = false,
 ): HTMLElement {
-  const id = control.id;
+  // Wrapper controls (e.g. the color group) mark their primary input via
+  // data-label-target; a plain control is its own label target. Composite
+  // groups have no marker and keep an unassociated group label, which is
+  // correct — their inner fields carry their own labels.
+  const targetId = control.getAttribute('data-label-target');
+  const target =
+    targetId !== null ? (control.querySelector(`#${CSS.escape(targetId)}`) ?? control) : control;
+  const id = target.id;
+  const labelable = target.matches(LABELABLE);
   const helpId = id ? `${id}-help` : undefined;
-  if (help && helpId) control.setAttribute('aria-describedby', helpId);
-  if (required) control.setAttribute('aria-required', 'true');
+  if (help && helpId) target.setAttribute('aria-describedby', helpId);
+  // aria-required is only valid on roles that support it — putting it on
+  // container divs/uls trips axe's aria-allowed-attr (critical). The visible
+  // " *" on the label carries requiredness for composite groups.
+  if (required && labelable) target.setAttribute('aria-required', 'true');
 
   return h(
     'div',
@@ -95,7 +109,7 @@ export function fieldRow(
     h('label', {
       class: 'admin-label',
       text: required ? `${labelText} *` : labelText,
-      ...(id ? { attrs: { for: id } } : {}),
+      ...(id && labelable ? { attrs: { for: id } } : {}),
     }),
     control,
     help ? h('p', { class: 'admin-help', id: helpId, text: help }) : null,
@@ -197,7 +211,16 @@ function colorControl(path: (string | number)[], value: unknown, ctx: FormContex
     }
   });
 
-  return h('div', { class: 'color-row' }, picker, text, swatch);
+  return h(
+    'div',
+    // The visible label belongs to the hex input, not the wrapper — fieldRow
+    // resolves data-label-target to wire label[for] and aria-describedby to
+    // the real form control (axe `label` rule).
+    { class: 'color-row', attrs: { 'data-label-target': text.id } },
+    picker,
+    text,
+    swatch,
+  );
 }
 
 function moveItem(items: unknown[], from: number, to: number): unknown[] {
