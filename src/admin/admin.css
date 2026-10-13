@@ -208,6 +208,28 @@ body.admin-open {
   line-height: var(--leading-snug);
 }
 
+/* ---------- GitHub publishing (Help tab) ---------- */
+
+.gh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.gh-grid .admin-field input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  justify-self: start;
+}
+
+.gh-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  flex-wrap: wrap;
+}
+
 /* ---------- Lists (projects, education, …) ---------- */
 
 .admin-list {
