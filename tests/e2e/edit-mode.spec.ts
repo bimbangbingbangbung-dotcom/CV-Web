@@ -25,12 +25,18 @@ test.describe('edit mode', () => {
     ).toHaveCount(0);
   });
 
-  test('header Edit link is invisible but still opens the editor', async ({ page }) => {
+  test('Edit links are invisible but still open the editor', async ({ page }) => {
     await page.goto('/');
     const edit = page.locator('.site-header .header-edit');
     await expect(edit).toHaveCount(1);
     await expect(edit).toHaveCSS('opacity', '0'); // invisible…
     await expect(edit).toHaveAttribute('href', '#admin'); // …but it still knows where to go
+
+    // The footer carries the same affordance, equally invisible.
+    const footerEdit = page.locator('.footer-edit');
+    await expect(footerEdit).toHaveCount(1);
+    await expect(footerEdit).toHaveCSS('opacity', '0');
+    await expect(footerEdit).toHaveAttribute('href', '#admin');
 
     await page.mouse.move(600, 4); // reveal the auto-hidden header
     await edit.click();
