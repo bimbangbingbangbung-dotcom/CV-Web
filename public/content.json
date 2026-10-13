@@ -233,7 +233,15 @@
       "url": null
     }
   ],
-  "publications": [],
+  "publications": [
+    {
+      "title": "TODO: title of your paper, poster or article",
+      "publisher": "TODO: journal, conference or outlet",
+      "date": "2026-06",
+      "url": "https://todo-example.vercel.app/publication",
+      "note": "TODO: one line about your contribution or findings."
+    }
+  ],
   "references": {
     "show": true,
     "note": "Available on request."

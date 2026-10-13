@@ -66,7 +66,12 @@ export function initHeader(content: Content): HeaderHandles {
   root.dataset['headerMode'] = cfg.mode;
   root.style.setProperty('--hover-zone-height', `${cfg.hoverZoneHeight}px`);
 
-  const navSections = content.sections.filter((s: SectionEntry) => s.enabled);
+  // Link only sections that actually rendered — a section with no data
+  // (empty list, references.show=false) disappears from the page, so linking
+  // it would ship a broken anchor. renderPage() runs before initHeader().
+  const navSections = content.sections.filter(
+    (s: SectionEntry) => s.enabled && document.getElementById(s.id) !== null,
+  );
   const initials = content.owner.initials ?? initialsFrom(content.owner.fullName);
 
   // --- Theme buttons (header + overlay share one sync function) ---
