@@ -31,6 +31,20 @@ test.describe('content rendering', () => {
     }
   });
 
+  test('every header nav link points to a section that exists', async ({ page }) => {
+    // Guards the nav filter: sections with no data vanish from the page, so
+    // a stale nav entry would ship a broken #anchor.
+    await page.goto('/');
+    const hrefs = await page
+      .locator('.header-nav a')
+      .evaluateAll((links) => links.map((a) => a.getAttribute('href')));
+    const anchors = hrefs.filter((h): h is string => h !== null && h.startsWith('#') && h !== '#admin');
+    expect(anchors.length).toBeGreaterThan(0);
+    for (const href of anchors) {
+      await expect(page.locator(`main ${href}`)).toHaveCount(1);
+    }
+  });
+
   test('ships JSON-LD structured data', async ({ page }) => {
     await page.goto('/');
     const jsonLd = page.locator('script[type="application/ld+json"]');
