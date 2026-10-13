@@ -378,6 +378,7 @@ export function openPanel(options: PanelOptions): () => void {
       importBtn,
       backupBtn,
       diffBtn,
+      saveBtn,
       downloadBtn,
       resetDraftBtn,
       resetPublishedBtn,
