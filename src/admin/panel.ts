@@ -109,6 +109,25 @@ function confirmAction(title: string, message: string, confirmLabel: string): Pr
   });
 }
 
+/**
+ * Transient save confirmation, appended to <body> so it survives the panel
+ * closing — pressing Save returns you to the home page (the changes are
+ * already live underneath) with this toast still on screen.
+ */
+function showSaveToast(message: string): void {
+  document.querySelectorAll('.save-toast').forEach((el) => el.remove());
+  const toast = h('div', { class: 'save-toast', attrs: { role: 'status', 'aria-live': 'polite' } });
+  const dismiss = h('button', {
+    class: 'save-toast-close',
+    text: '×',
+    attrs: { type: 'button', 'aria-label': 'Dismiss notification' },
+  });
+  toast.append(h('span', { text: message }), dismiss);
+  dismiss.addEventListener('click', () => toast.remove());
+  document.body.append(toast);
+  window.setTimeout(() => toast.remove(), 8000);
+}
+
 export function openPanel(options: PanelOptions): () => void {
   const { store, onPreview, onClose } = options;
   let activeTab: TabName = 'content';
@@ -244,7 +263,10 @@ export function openPanel(options: PanelOptions): () => void {
         message: `content: update via #admin editor (${stamp} UTC)`,
       });
       store.markSaved(); // badge → "Matches published", pill + unload guard clear
-      status.textContent = `Saved to ${settings.owner}/${settings.repo} (${settings.branch}) — GitHub Actions redeploys the site in ~1–2 minutes.`;
+      const savedMessage = `Saved to ${settings.owner}/${settings.repo} (${settings.branch}) — GitHub Actions redeploys the site in ~1–2 minutes.`;
+      status.textContent = savedMessage;
+      showSaveToast(savedMessage);
+      onClose(); // real-time result: return to the home page with the changes visible
     } catch (error) {
       status.textContent = `Save failed — ${describeApiError(error)}`;
     } finally {
@@ -379,7 +401,6 @@ export function openPanel(options: PanelOptions): () => void {
       backupBtn,
       diffBtn,
       saveBtn,
-      downloadBtn,
       resetDraftBtn,
       resetPublishedBtn,
       helpBtn,
