@@ -86,7 +86,7 @@ describe('detectRepo', () => {
 
 describe('validateConfig', () => {
   it('accepts a normal configuration', () => {
-    expect(validateConfig({ ...OK_CONFIG, rememberToken: false })).toEqual([]);
+    expect(validateConfig(OK_CONFIG)).toEqual([]);
   });
 
   it('rejects bad owners, repos, branches and paths', () => {
