@@ -83,7 +83,8 @@ src/
   admin/                     edit mode (code-split chunk, lazy on #admin)
     state.ts                 DraftStore: history, dirty flag, autosave
     widgets.ts               schema-driven form engine (recursion over $ref)
-    panel.ts                 toolbar/tabs/diff/import/export
+    panel.ts                 toolbar/tabs/diff/import/export/publish
+    github.ts                Save-to-GitHub: Contents API commit + token storage
     contrast.ts, diff.ts     WCAG checker + structured draft diff
   content-validator.generated.ts   build artifact (git-ignored from lint)
 tests/unit/*.test.ts         Vitest (43 tests)
@@ -125,9 +126,22 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
   50-step undo/redo stack, dirty flag, and “resume draft?” prompt. localStorage
   is _never_ the published source — it only holds working copies and the
   last-known-good snapshot.
-- **Publish = download**: the browser cannot commit files, so “Download
-  content.json” (also `Ctrl/⌘+S`) writes the file; the owner drops it at
-  `public/content.json` and commits. The status line spells this out.
+- **Publish = save or download**: two paths out of the editor.
+  - **Save to GitHub** (`src/admin/github.ts`): commits
+    `public/content.json` through the GitHub Contents API (GET the blob sha →
+    PUT). Owner/repo/branch/path settings live in localStorage
+    (`cvweb:github`) and pre-fill from the deployed/canonical URL; the token
+    lives in sessionStorage (localStorage only when “remember on this device”
+    is ticked) and is sent **only** to the constant `https://api.github.com`
+    origin — host and path parts are validated/encoded before any request.
+    After a successful commit, `DraftStore.markSaved()` re-baselines the
+    draft so the badge flips to “Matches published”, the draft pill and
+    `beforeunload` guard clear, and the deploy workflow rebuilds the site.
+    Failures map to friendly status text (401 bad token, 403 scope/rate
+    limit, 404 wrong repo/branch/path, 422 concurrent-edit race, network).
+  - **Download content.json** (also `Ctrl/⌘+S` when GitHub publishing isn’t
+    configured): writes the file; the owner drops it at `public/content.json`
+    and commits. The status line spells out whichever path ran.
 - **Live preview**: every commit re-renders the public page underneath
   (focus-preserving form rebuilds); a floating “Draft in editor” pill and a
   `beforeunload` guard track unsaved work.
