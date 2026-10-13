@@ -63,8 +63,8 @@ generated form UI, and the tests all read it.
 GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys to
 **GitHub Pages** on every push to `main` (enable it once: repo → Settings →
 Pages → Source: _GitHub Actions_). `ci.yml` runs the full gate
-(lint → typecheck → content validation → unit → build → budget → e2e →
-Lighthouse) on every push and PR.
+(lint → format → typecheck → content validation → unit → build → budget →
+e2e → Lighthouse) on every push and PR.
 
 ## Project structure
 
