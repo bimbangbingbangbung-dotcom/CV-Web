@@ -17,15 +17,15 @@ engineering student with two core requirements:
 
 ## Phases
 
-| #   | Phase              | Scope                                                                    | Status |
-| --- | ------------------ | ------------------------------------------------------------------------ | ------ |
-| 1   | **PLAN**           | Requirements, stack choice, architecture, this document                  | ✅     |
-| 2   | **SCAFFOLD**       | Vite + strict TypeScript, ESLint/Prettier, Vitest, Playwright, LHCI, CI  | ✅     |
-| 3   | **PUBLIC SITE**    | Content pipeline, 11 section renderers, auto-hide header, all stylesheets | ✅     |
-| 4   | **EDIT MODE**      | Schema-driven `/#admin` editor: forms, undo/redo, drafts, diff, export    | ✅     |
-| 5   | **HARDENING**      | XSS/scheme/storage audit, WCAG fixes, LCP fix, fallback ladder review     | ✅     |
-| 6   | **TESTS / CI**     | 43 unit tests, 58 E2E (desktop + mobile, axe), Lighthouse ≥ 95, Actions   | ✅     |
-| 7   | **DOCS**           | README, CONTENT-GUIDE, SYSTEM-ARCHITECTURE                                | ✅     |
+| #   | Phase           | Scope                                                                     | Status |
+| --- | --------------- | ------------------------------------------------------------------------- | ------ |
+| 1   | **PLAN**        | Requirements, stack choice, architecture, this document                   | ✅     |
+| 2   | **SCAFFOLD**    | Vite + strict TypeScript, ESLint/Prettier, Vitest, Playwright, LHCI, CI   | ✅     |
+| 3   | **PUBLIC SITE** | Content pipeline, 11 section renderers, auto-hide header, all stylesheets | ✅     |
+| 4   | **EDIT MODE**   | Schema-driven `/#admin` editor: forms, undo/redo, drafts, diff, export    | ✅     |
+| 5   | **HARDENING**   | XSS/scheme/storage audit, WCAG fixes, LCP fix, fallback ladder review     | ✅     |
+| 6   | **TESTS / CI**  | 43 unit tests, 58 E2E (desktop + mobile, axe), Lighthouse ≥ 95, Actions   | ✅     |
+| 7   | **DOCS**        | README, CONTENT-GUIDE, SYSTEM-ARCHITECTURE                                | ✅     |
 
 ## Key decisions
 
