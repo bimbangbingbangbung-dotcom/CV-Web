@@ -117,8 +117,12 @@ test.describe('edit mode', () => {
     await page.locator('#f-gh-token').blur();
 
     await page.getByRole('button', { name: 'Save to GitHub' }).click();
-    await expect(page.locator('.admin-status')).toContainText('Saved to octo-cat/CV-Web');
-    await expect(page.locator('.admin-badge')).toContainText('Matches published');
+    // Success closes the editor and lands on the home page, with a toast
+    // confirming the commit (the live preview already showed the changes).
+    await expect(page.locator('.save-toast')).toContainText('Saved to octo-cat/CV-Web');
+    await expect(page.locator('.admin-root')).toHaveCount(0);
+    await expect(page.locator('h1')).toHaveText('Saved Person');
+    await expect(page).toHaveURL(/\/$/); // back on the home page, editor gone
 
     // The commit carried the edit and the configured target + credentials.
     expect(puts).toHaveLength(1);
