@@ -44,6 +44,30 @@
       type="font/woff2"
       crossorigin
     />
+    <style>
+      /*
+       * @font-face lives here rather than in a bundled stylesheet so the URL
+       * stays document-relative (./fonts/…): that resolves correctly on the
+       * dev server AND on GitHub Pages project paths, and matches the preload
+       * hint above exactly so the font is fetched once. Without these rules
+       * the preloaded font is fetched but never used (Chromium warns) and all
+       * text silently falls back to the system UI font.
+       */
+      @font-face {
+        font-family: 'Geist Variable';
+        src: url('./fonts/geist-sans-latin.woff2') format('woff2');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono Variable';
+        src: url('./fonts/jetbrains-mono-latin.woff2') format('woff2');
+        font-weight: 100 800;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

@@ -56,6 +56,8 @@ const ICON_PATHS: Record<string, string[]> = {
   check: ['M5 13l4 4L19 7'],
   alert: ['M12 3 2 20h20L12 3Z', 'M12 10v4', 'M12 17.5h.01'],
   pencil: ['M4 20l4-1L20 7l-3-3L5 16l-1 4Z', 'M14 6l4 4'],
+  // Floppy-style save mark (used by the Save-to-GitHub button).
+  save: ['M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z', 'M17 21v-8H7v8', 'M7 3v5h8'],
 };
 
 /** Icons drawn with filled geometry (brand marks) rather than strokes. */
