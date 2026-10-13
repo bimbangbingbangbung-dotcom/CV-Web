@@ -57,7 +57,7 @@ test.describe('edit mode', () => {
   });
 
   test('Save to GitHub commits content.json through the API', async ({ page }) => {
-    let committed: Record<string, unknown> | null = null;
+    const puts: string[] = [];
     let authHeader = '';
     await page.route('https://api.github.com/**', async (route) => {
       const request = route.request();
@@ -85,7 +85,7 @@ test.describe('edit mode', () => {
         return;
       }
       authHeader = request.headers()['authorization'] ?? '';
-      committed = JSON.parse(request.postData() ?? '{}') as Record<string, unknown>;
+      puts.push(request.postData() ?? '{}');
       await route.fulfill({
         status: 201,
         contentType: 'application/json',
@@ -116,9 +116,10 @@ test.describe('edit mode', () => {
     await expect(page.locator('.admin-badge')).toContainText('Matches published');
 
     // The commit carried the edit and the configured target + credentials.
-    expect(committed).not.toBeNull();
-    expect(committed?.branch).toBe('main');
-    const decoded = Buffer.from(String(committed?.content), 'base64').toString('utf8');
+    expect(puts).toHaveLength(1);
+    const committed = JSON.parse(puts[0] ?? '{}') as Record<string, unknown>;
+    expect(committed.branch).toBe('main');
+    const decoded = Buffer.from(String(committed.content), 'base64').toString('utf8');
     expect(JSON.parse(decoded).owner.fullName).toBe('Saved Person');
     expect(authHeader).toBe('Bearer ghp_test_token');
   });
