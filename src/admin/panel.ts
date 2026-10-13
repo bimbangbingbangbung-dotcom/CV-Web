@@ -22,6 +22,7 @@ import {
 import { diffJson, describeDiff } from './diff';
 import { checkAccentPairs } from './contrast';
 import {
+  clearToken,
   commitContent,
   describeApiError,
   detectRepo,
@@ -612,14 +613,133 @@ export function openPanel(options: PanelOptions): () => void {
   function renderHelpTab(): HTMLElement {
     const shortcut = (keys: string, description: string): HTMLElement =>
       h('li', {}, h('kbd', { text: keys }), description);
+
+    // --- GitHub publishing settings (backing the Save-to-GitHub button) ---
+    const settings = loadSettings();
+    // No stored owner/repo yet → pre-fill from the deployed URL or canonical.
+    const detected =
+      settings.owner && settings.repo
+        ? null
+        : detectRepo(window.location.href, store.draft.site.canonicalUrl);
+    const existingToken = getToken();
+
+    const ownerInput = h('input', {
+      id: 'f-gh-owner',
+      attrs: { type: 'text', autocomplete: 'off', spellcheck: 'false' },
+    });
+    ownerInput.value = settings.owner || detected?.owner || '';
+    const repoInput = h('input', {
+      id: 'f-gh-repo',
+      attrs: { type: 'text', autocomplete: 'off', spellcheck: 'false' },
+    });
+    repoInput.value = settings.repo || detected?.repo || '';
+    const branchInput = h('input', {
+      id: 'f-gh-branch',
+      attrs: { type: 'text', autocomplete: 'off', spellcheck: 'false' },
+    });
+    branchInput.value = settings.branch;
+    const pathInput = h('input', {
+      id: 'f-gh-path',
+      attrs: { type: 'text', autocomplete: 'off', spellcheck: 'false' },
+    });
+    pathInput.value = settings.path;
+    const tokenInput = h('input', {
+      id: 'f-gh-token',
+      attrs: { type: 'password', autocomplete: 'new-password', spellcheck: 'false' },
+    });
+    tokenInput.placeholder = existingToken
+      ? 'A token is saved — type to replace it'
+      : 'ghp_… or github_pat_…';
+    const rememberInput = h('input', { id: 'f-gh-remember', attrs: { type: 'checkbox' } });
+    rememberInput.checked = settings.rememberToken;
+
+    const collect = (): RepoSettings => ({
+      owner: ownerInput.value.trim(),
+      repo: repoInput.value.trim(),
+      branch: branchInput.value.trim() || 'main',
+      path: pathInput.value.trim() || 'public/content.json',
+      rememberToken: rememberInput.checked,
+    });
+    for (const input of [ownerInput, repoInput, branchInput, pathInput]) {
+      input.addEventListener('change', () => saveSettings(collect()));
+    }
+    rememberInput.addEventListener('change', () => {
+      const token = getToken();
+      if (token) setToken(token, rememberInput.checked); // relocate saved token
+      saveSettings(collect());
+    });
+    tokenInput.addEventListener('change', () => {
+      const value = tokenInput.value.trim();
+      if (!value) return; // blank = keep the already saved token
+      setToken(value, rememberInput.checked);
+      tokenInput.value = '';
+      tokenInput.placeholder = 'A token is saved — type to replace it';
+      status.textContent = 'GitHub token saved.';
+    });
+
+    const runTest = async (): Promise<void> => {
+      const config = collect();
+      saveSettings(config);
+      const errors = validateConfig(config);
+      if (errors.length > 0) {
+        status.textContent = `Settings invalid — ${errors[0]}`;
+        return;
+      }
+      const token = getToken();
+      if (!token) {
+        status.textContent = 'No token saved yet — paste one above first.';
+        tokenInput.focus();
+        return;
+      }
+      status.textContent = 'Testing connection…';
+      try {
+        const name = await testConnection(config, token);
+        status.textContent = `Connected to ${name} ✓`;
+      } catch (error) {
+        status.textContent = `Connection failed — ${describeApiError(error)}`;
+      }
+    };
+    const testBtn = textButton('Test connection', () => void runTest());
+    const forgetBtn = textButton('Forget saved token', () => {
+      clearToken();
+      tokenInput.placeholder = 'ghp_… or github_pat_…';
+      status.textContent = 'Saved token cleared.';
+    });
+
     return h(
       'div',
       { class: 'help-panel' },
       h('h3', { class: 'admin-subtitle', text: 'How publishing works' }),
       h('p', {
         class: 'admin-help',
-        text: 'Edits here are a local draft (autosaved in your browser). "Download content.json" writes the finished file — put it at public/content.json in the repo and commit; the site rebuilds and deploys automatically.',
+        text: 'Edits here are a local draft (autosaved in your browser). "Save to GitHub" commits public/content.json straight to your repository and the deploy workflow rebuilds the site in ~1–2 minutes. "Download content.json" is the manual alternative — commit the file yourself.',
       }),
+      h('h3', { class: 'admin-subtitle', text: 'GitHub publishing' }),
+      h('p', {
+        class: 'admin-help',
+        text: 'Connect your repository once — then Save to GitHub works from the toolbar. The token stays in this browser (session only, unless "remember" is checked) and is only ever sent to api.github.com.',
+      }),
+      h(
+        'div',
+        { class: 'gh-grid' },
+        fieldRow(
+          'Owner',
+          ownerInput,
+          'GitHub user or organization — auto-detected from the deployed URL when empty.',
+          true,
+        ),
+        fieldRow('Repository', repoInput, 'e.g. CV-Web.', true),
+        fieldRow('Branch', branchInput, undefined, true),
+        fieldRow('File path', pathInput, 'Where content.json lives in the repo.', true),
+        fieldRow(
+          'GitHub token',
+          tokenInput,
+          'Fine-grained token with Contents → Read and write (Settings → Developer settings).',
+          true,
+        ),
+        fieldRow('Remember token on this device', rememberInput, 'Off = this session only.'),
+      ),
+      h('div', { class: 'gh-actions' }, testBtn, forgetBtn),
       h('h3', { class: 'admin-subtitle', text: 'Shortcuts' }),
       h(
         'ul',
@@ -634,7 +754,7 @@ export function openPanel(options: PanelOptions): () => void {
       h('h3', { class: 'admin-subtitle', text: 'Unsaved changes' }),
       h('p', {
         class: 'admin-help',
-        text: 'The "Draft" badge shows whether your draft differs from the published file, and the browser warns before you close the tab with unsaved work.',
+        text: 'The "Draft" badge shows whether your draft differs from the published file, and the browser warns before you close the tab with unsaved work. After a successful Save to GitHub the draft is marked published.',
       }),
     );
   }
