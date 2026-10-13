@@ -21,6 +21,19 @@ import {
 } from './widgets';
 import { diffJson, describeDiff } from './diff';
 import { checkAccentPairs } from './contrast';
+import {
+  commitContent,
+  describeApiError,
+  detectRepo,
+  getToken,
+  isConfigured,
+  loadSettings,
+  saveSettings,
+  setToken,
+  testConnection,
+  validateConfig,
+  type RepoSettings,
+} from './github';
 
 const rootSchema = schemaJson as unknown as SchemaNode;
 
@@ -164,7 +177,7 @@ export function openPanel(options: PanelOptions): () => void {
     },
   }) as HTMLInputElement;
 
-  const downloadBtn = h('button', { class: 'btn btn-primary btn-sm', attrs: { type: 'button' } });
+  const downloadBtn = h('button', { class: 'btn btn-ghost btn-sm', attrs: { type: 'button' } });
   downloadBtn.id = 'admin-download';
   downloadBtn.append(icon('download'), 'Download content.json');
 
@@ -176,6 +189,70 @@ export function openPanel(options: PanelOptions): () => void {
       'Downloaded — replace public/content.json in the repo and commit to publish.';
   };
   downloadBtn.addEventListener('click', publishDownload);
+
+  // --- Save to GitHub (Contents API commit → deploy workflow picks it up) ---
+  const saveBtn = h('button', { class: 'btn btn-primary btn-sm', attrs: { type: 'button' } });
+  saveBtn.id = 'admin-save';
+  saveBtn.append(icon('save'), 'Save to GitHub');
+  let saving = false;
+
+  const publishToGitHub = async (): Promise<void> => {
+    if (saving) return;
+    const settings = loadSettings();
+    const token = getToken();
+    if (!settings.owner || !settings.repo) {
+      status.textContent =
+        'GitHub publishing needs setup — opening the Help tab (GitHub publishing section).';
+      selectTab('help');
+      document.getElementById('f-gh-owner')?.focus();
+      return;
+    }
+    if (!token) {
+      status.textContent = 'Add a GitHub token first — Help tab → GitHub publishing.';
+      selectTab('help');
+      document.getElementById('f-gh-token')?.focus();
+      return;
+    }
+    const configErrors = validateConfig(settings);
+    if (configErrors.length > 0) {
+      status.textContent = `GitHub settings invalid — ${configErrors[0]}`;
+      selectTab('help');
+      return;
+    }
+    const check = DraftStore.parseContent(store.draft);
+    if (!check.ok) {
+      const count = 'errors' in check ? check.errors.length : 0;
+      status.textContent = `Not saved — the draft has ${count} schema problem(s). Use Import or Reset draft to recover.`;
+      return;
+    }
+
+    saving = true;
+    saveBtn.disabled = true;
+    status.textContent = `Saving to ${settings.owner}/${settings.repo}…`;
+    try {
+      store.set(['meta', 'lastUpdated'], new Date().toISOString().slice(0, 10));
+      onPreview(store.draft); // footer "Last updated" reflects immediately
+      const json = `${JSON.stringify(store.draft, null, 2)}\n`;
+      const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
+      await commitContent({
+        owner: settings.owner,
+        repo: settings.repo,
+        branch: settings.branch,
+        path: settings.path,
+        token,
+        content: json,
+        message: `content: update via #admin editor (${stamp} UTC)`,
+      });
+      store.markSaved(); // badge → "Matches published", pill + unload guard clear
+      status.textContent = `Saved to ${settings.owner}/${settings.repo} (${settings.branch}) — GitHub Actions redeploys the site in ~1–2 minutes.`;
+    } catch (error) {
+      status.textContent = `Save failed — ${describeApiError(error)}`;
+    } finally {
+      saving = false;
+      saveBtn.disabled = false;
+    }
+  };
+  saveBtn.addEventListener('click', () => void publishToGitHub());
 
   const backupBtn = textButton('Export backup', () => {
     downloadJson(store.draft, `content.backup-${new Date().toISOString().slice(0, 10)}.json`);
