@@ -46,7 +46,7 @@
       "label": "Open to internships and OJT",
       "show": true
     },
-    "photo": null,
+    "photo": "./assets/photo.jpg",
     "initials": "JA",
     "languages": [
       "Filipino (native)",
