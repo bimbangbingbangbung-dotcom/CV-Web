@@ -17,8 +17,12 @@ test.describe('edit mode', () => {
     await page.goto('/#admin');
     await expect(page.locator('.admin-root')).toBeVisible();
     await expect(page.getByRole('tab', { name: 'Content' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Download content.json' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Save to GitHub' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Undo (Ctrl+Z)' })).toBeDisabled();
+    // Download lives in Help → GitHub publishing (the manual alternative), not the toolbar.
+    await expect(
+      page.locator('.admin-bar').getByRole('button', { name: 'Download content.json' }),
+    ).toHaveCount(0);
   });
 
   test('field edits mark a draft, live-preview and undo restores', async ({ page }) => {
@@ -40,6 +44,7 @@ test.describe('edit mode', () => {
 
   test('download exports a content.json file', async ({ page }) => {
     await page.goto('/#admin');
+    await page.getByRole('tab', { name: 'Help' }).click(); // manual alternative lives here
     const [download] = await Promise.all([
       page.waitForEvent('download'),
       page.getByRole('button', { name: 'Download content.json' }).click(),
