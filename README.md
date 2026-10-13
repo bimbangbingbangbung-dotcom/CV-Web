@@ -51,8 +51,10 @@ Open `http://localhost:5173/#admin` to edit content in the browser.
 Two ways — see **[CONTENT-GUIDE.md](./CONTENT-GUIDE.md)** for the full
 field-by-field reference:
 
-1. **Editor**: visit `/#admin`, edit, press **Download content.json**, replace
-   `public/content.json`, commit.
+1. **Editor**: visit `/#admin`, edit, then either **Save to GitHub**
+   (one-time token setup in Help → GitHub publishing — commits
+   `public/content.json` directly, site redeploys in ~1–2 min) or
+   **Download content.json** and replace `public/content.json` yourself.
 2. **Directly**: edit `public/content.json` and run `npm run validate:content`.
 
 The contract between the two is `content.schema.json` — validation, the
