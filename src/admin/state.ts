@@ -68,7 +68,7 @@ function deepSet(target: unknown, path: (string | number)[], value: unknown): un
 
 export class DraftStore {
   private draftValue: Content;
-  private readonly publishedJson: string;
+  private publishedJson: string;
   private past: Content[] = [];
   private future: Content[] = [];
   private listeners: DraftListener[] = [];
@@ -172,6 +172,16 @@ export class DraftStore {
   /** Reset draft back to the published content (keeps history for undo). */
   resetToPublished(): void {
     this.replace(JSON.parse(this.publishedJson) as Content);
+  }
+
+  /**
+   * Re-baseline after a successful publish (Save to GitHub): the draft IS
+   * the published copy now, so the badge flips to "Matches published", the
+   * draft pill/unsafe-close guard clear, and localStorage drops the draft.
+   */
+  markSaved(): void {
+    this.publishedJson = JSON.stringify(this.draftValue);
+    this.emit(false);
   }
 
   /** Validate an arbitrary object as content (used by import/resume). */
