@@ -98,7 +98,9 @@
   --surface-2: #f3f3f1;
   --text: #1b1d1c;
   --text-muted: #5b5f5d;
-  --text-faint: #7c817e;
+  /* ≥4.5:1 on bg (#fbfbfa 4.87), surface (#ffffff 5.04) and surface-2
+     (#f3f3f1 4.54) — WCAG AA for the faint footer/meta/help text. */
+  --text-faint: #6b706d;
   --border: #e4e4e0;
   --border-strong: #c9cac5;
   --success: #2e7d4f;
