@@ -312,7 +312,8 @@ export function openPanel(options: PanelOptions): () => void {
       'aria-hidden': 'true',
       tabindex: '-1',
     },
-  }) as HTMLInputElement;
+  });
+  importInput.id = 'admin-import-input'; // stable target for tests + focus restore
 
   const downloadBtn = h('button', { class: 'btn btn-ghost btn-sm', attrs: { type: 'button' } });
   downloadBtn.id = 'admin-download';
