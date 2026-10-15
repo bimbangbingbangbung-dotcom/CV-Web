@@ -89,7 +89,7 @@ src/
     crop.ts                  photo cropper: cover/pan/zoom geometry + adjustment dialog
     contrast.ts, diff.ts     WCAG checker + structured draft diff
   content-validator.generated.ts   build artifact (git-ignored from lint)
-tests/unit/*.test.ts         Vitest (91 tests)
+tests/unit/*.test.ts         Vitest (102 tests)
 tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 .github/workflows/ci.yml     lint → typecheck → test → build → e2e → lighthouse
 .github/workflows/deploy.yml build → GitHub Pages
@@ -207,7 +207,7 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 
 | Layer  | Tool                        | What it gates                                                                                                                                 |
 | ------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unit   | Vitest (jsdom, 91 tests)    | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync, form engine, photo data URLs, GitHub commit flow |
+| Unit   | Vitest (jsdom, 102 tests)   | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync, form engine, photo data URLs, crop geometry, GitHub commit flow |
 | E2E    | Playwright (desktop+mobile) | content rendering, header contract, theme, touch menu, print, editor flows                                                                    |
 | A11y   | axe-core in Playwright      | serious/critical violations on public page (both themes), overlay, editor                                                                     |
 | Budget | check-budget.mjs            | public JS gzip budget                                                                                                                         |
