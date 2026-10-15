@@ -25,6 +25,11 @@ export function renderFooter(content: Content): HTMLElement {
     document.getElementById('main')?.focus({ preventScroll: true });
   });
 
+  // The note is optional in practice: an empty string hides the line entirely.
+  const footerNote = content.footer.note.trim()
+    ? h('p', { class: 'footer-note', text: content.footer.note })
+    : null;
+
   return h(
     'footer',
     { class: 'site-footer' },
@@ -38,7 +43,7 @@ export function renderFooter(content: Content): HTMLElement {
         h('span', { class: 'meta-dot', text: '·', attrs: { 'aria-hidden': 'true' } }),
         h('span', {}, 'Last updated ', lastUpdated),
       ),
-      h('p', { class: 'footer-note', text: content.footer.note }),
+      footerNote,
       h(
         'div',
         { class: 'footer-actions' },
