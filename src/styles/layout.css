@@ -112,9 +112,10 @@
 }
 
 /* Avatar: photo or generated initials — fixed 3:4 portrait rectangle
-   (matches the 900×1200 photo; no layout shift). */
+   (matches the 900×1200 photo; no layout shift). Sized so the face reads
+   clearly: up to 18rem wide on desktop, fluid down to 13rem. */
 .avatar {
-  width: 13rem;
+  width: clamp(13rem, 21vw, 18rem);
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-md);
   object-fit: cover;
@@ -142,7 +143,7 @@
   }
 
   .avatar {
-    width: 8rem;
+    width: 10rem;
   }
 }
 
