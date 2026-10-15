@@ -428,6 +428,13 @@ export function controlFor(
   value: unknown,
   ctx: FormContext,
 ): HTMLElement | null {
+  // Bespoke widget registered for this exact path (owner.photo → photo upload).
+  const override = ctx.customControls?.[path.join('.')];
+  if (override) {
+    const custom = override(path, rawNode, value, ctx);
+    if (custom) return custom;
+  }
+
   const node = valueSchema(rawNode, ctx.rootSchema);
 
   if (node.properties) return objectControl(path, node, value, ctx);
