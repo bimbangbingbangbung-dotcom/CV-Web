@@ -369,8 +369,37 @@ export function openPanel(options: PanelOptions): () => void {
     try {
       store.set(['meta', 'lastUpdated'], new Date().toISOString().slice(0, 10));
       onPreview(store.draft); // footer "Last updated" reflects immediately
-      const json = `${JSON.stringify(store.draft, null, 2)}\n`;
       const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
+
+      // An uploaded photo travels as a data URL in the draft; commit it as a
+      // real file FIRST so the published content.json stays small and fast.
+      // If the content commit then fails, the draft already points at the
+      // (now existing) file, so a plain retry just re-commits content.json.
+      let photoNote = '';
+      const photo = store.draft.owner.photo;
+      if (isDataImage(photo)) {
+        const bytes = dataUrlToBytes(photo);
+        if (bytes) {
+          const slash = settings.path.lastIndexOf('/');
+          const dir = slash === -1 ? '' : settings.path.slice(0, slash);
+          const assetPath = `${dir ? `${dir}/` : ''}assets/photo.jpg`;
+          status.textContent = `Uploading photo to ${settings.owner}/${settings.repo}…`;
+          await putFile({
+            owner: settings.owner,
+            repo: settings.repo,
+            branch: settings.branch,
+            path: assetPath,
+            token,
+            contentBase64: encodeBase64Bytes(bytes),
+            message: `content: upload photo via #admin editor (${stamp} UTC)`,
+          });
+          store.set(['owner', 'photo'], './assets/photo.jpg');
+          onPreview(store.draft);
+          photoNote = ` Photo committed to ${assetPath} (shows up with the redeploy).`;
+        }
+      }
+
+      const json = `${JSON.stringify(store.draft, null, 2)}\n`;
       await commitContent({
         owner: settings.owner,
         repo: settings.repo,
@@ -381,7 +410,7 @@ export function openPanel(options: PanelOptions): () => void {
         message: `content: update via #admin editor (${stamp} UTC)`,
       });
       store.markSaved(); // badge → "Matches published", pill + unload guard clear
-      const savedMessage = `Saved to ${settings.owner}/${settings.repo} (${settings.branch}) — GitHub Actions redeploys the site in ~1–2 minutes.`;
+      const savedMessage = `Saved to ${settings.owner}/${settings.repo} (${settings.branch}) — GitHub Actions redeploys the site in ~1–2 minutes.${photoNote}`;
       status.textContent = savedMessage;
       showSaveToast(savedMessage);
       onClose(); // real-time result: return to the home page with the changes visible
