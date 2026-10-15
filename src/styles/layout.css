@@ -111,10 +111,11 @@
   margin-top: var(--space-5);
 }
 
-/* Avatar: photo or generated initials, fixed square (no layout shift). */
+/* Avatar: photo or generated initials — fixed 3:4 portrait rectangle
+   (matches the 900×1200 photo; no layout shift). */
 .avatar {
-  width: 7.5rem;
-  aspect-ratio: 1;
+  width: 13rem;
+  aspect-ratio: 3 / 4;
   border-radius: var(--radius-md);
   object-fit: cover;
   display: block;
