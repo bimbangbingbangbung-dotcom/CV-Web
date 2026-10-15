@@ -17,7 +17,12 @@ the site rebuilds itself.
    at the end of the header actions, one in the footer; both are invisible by
    design but still work when clicked).
 2. Edit fields on the **Content** tab — the page behind updates live.
-3. Publish with whichever path you set up:
+3. To change your picture: **Content → Owner → Photo → _Upload photo_**
+   (JPG, PNG or WebP — it is resized and optimized automatically;
+   _Remove photo_ switches back to the initials avatar). **Save to GitHub**
+   commits the picture as `public/assets/photo.jpg`; the Download path keeps
+   it inside content.json.
+4. Publish with whichever path you set up:
 
    - **Save to GitHub** (toolbar, or `Ctrl/⌘ + S`) — commits
      `public/content.json` straight to the repository, then returns you to
@@ -125,8 +130,10 @@ fixed, so validate first.
 
 `fullName`, `initials` (optional — derived from the name otherwise),
 `headline`, `tagline`, `shortBio`, `longBio`, `location`, `availability`,
-`photo` (`./assets/photo.jpg` — square crop, alt text is generated from your
-name), `facts` (label/value rows), `now` (current-focus bullets).
+`photo` (`./assets/photo.jpg` — 3:4 portrait, big enough for the hero and
+print; alt text is generated from your name; `null` = initials avatar; change
+it with _Upload photo_ in the editor), `facts` (label/value rows), `now`
+(current-focus bullets).
 
 ### `sections`
 
