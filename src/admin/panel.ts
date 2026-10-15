@@ -24,7 +24,8 @@ import {
 } from './widgets';
 import { diffJson, describeDiff } from './diff';
 import { checkAccentPairs } from './contrast';
-import { dataUrlToBytes, isDataImage, optimizePhoto, PhotoError } from './image';
+import { dataUrlToBytes, decodePhoto, isDataImage, MAX_UPLOAD_MB, optimizeCanvas, PhotoError } from './image';
+import { openCropper } from './crop';
 import {
   clearToken,
   commitContent,
@@ -172,9 +173,10 @@ export function openPanel(options: PanelOptions): () => void {
 
   /**
    * owner.photo widget: path/URL field + live thumbnail + upload/remove.
-   * An uploaded file is optimized to a JPEG data URL (image.ts) so preview,
-   * undo, draft autosave and Download all see it; "Save to GitHub" then
-   * commits it as assets/photo.jpg and stores the plain path instead.
+   * An uploaded file (up to MAX_UPLOAD_MB) is decoded, adjusted in the
+   * cropper and optimized to a JPEG data URL (image.ts) so preview, undo,
+   * draft autosave and Download all see it; "Save to GitHub" then commits
+   * it as assets/photo.jpg and stores the plain path instead.
    */
   function photoControl(
     path: (string | number)[],
@@ -233,9 +235,17 @@ export function openPanel(options: PanelOptions): () => void {
     const processFile = async (file: File): Promise<void> => {
       uploadBtn.disabled = true;
       const before = Math.max(1, Math.round(file.size / 1024));
-      status.textContent = `Optimizing photo (${before} KB)…`;
+      status.textContent = `Preparing photo (${before} KB)…`;
+      let source: ImageBitmap | HTMLImageElement | null = null;
       try {
-        const dataUrl = await optimizePhoto(file, maxKB);
+        source = await decodePhoto(file);
+        const cropped = await openCropper(source);
+        if (!cropped) {
+          status.textContent = 'Photo upload cancelled.';
+          return;
+        }
+        status.textContent = 'Optimizing photo…';
+        const dataUrl = await optimizeCanvas(cropped, maxKB);
         formCtx.onCommit(path, dataUrl);
         input.value = dataUrl;
         sync(dataUrl);
@@ -249,6 +259,7 @@ export function openPanel(options: PanelOptions): () => void {
         status.textContent = `Photo upload failed — ${detail}`;
         formCtx.announce('Photo upload failed.');
       } finally {
+        if (source && 'close' in source) source.close();
         uploadBtn.disabled = false;
         fileInput.value = ''; // same file can be picked again
       }
@@ -276,7 +287,7 @@ export function openPanel(options: PanelOptions): () => void {
       h('div', { class: 'photo-edit-actions' }, uploadBtn, removeBtn, fileInput),
       h('p', {
         class: 'admin-help',
-        text: `JPG, PNG or WebP — resized and optimized to ${maxKB} KB or less. Save to GitHub commits the picture as an image file; Download keeps it inside content.json.`,
+        text: `JPG, PNG or WebP up to ${MAX_UPLOAD_MB} MB — adjust the crop, then the editor optimizes it to ${maxKB} KB or less. Save to GitHub commits the picture as an image file; Download keeps it inside content.json.`,
       }),
     );
   }
