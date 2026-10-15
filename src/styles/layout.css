@@ -225,8 +225,8 @@
 
 .timeline-item {
   display: grid;
-  grid-template-columns: 8.5rem minmax(0, 1fr);
-  gap: var(--space-2) var(--space-5);
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: var(--space-2) var(--space-6);
   padding-block: var(--space-5);
 }
 
@@ -242,6 +242,7 @@
   color: var(--text-faint);
   font-size: var(--text-sm);
   text-align: right;
+  white-space: nowrap;
   padding-top: 0.2em;
 }
 
@@ -295,7 +296,7 @@
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-  gap: var(--space-5);
+  gap: var(--space-6);
   list-style: none;
 }
 
