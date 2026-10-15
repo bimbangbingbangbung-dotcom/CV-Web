@@ -56,17 +56,7 @@
       "CAD design",
       "circuit prototyping"
     ],
-    "now": [
-      {
-        "text": "Finishing my thesis: Arduino pet food weighing vending machine"
-      },
-      {
-        "text": "Building my Solid Edge mechanical design portfolio"
-      },
-      {
-        "text": "Looking for an internship where I can work close to the metal"
-      }
-    ]
+    "now": []
   },
   "sections": [
     {
@@ -107,7 +97,7 @@
     {
       "id": "references",
       "label": "References",
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "contact",
@@ -334,7 +324,7 @@
   ],
   "publications": [],
   "references": {
-    "show": true,
+    "show": false,
     "note": "Available on request."
   },
   "contact": {
@@ -361,6 +351,6 @@
     "imageMaxKB": 512
   },
   "footer": {
-    "note": "Built with vanilla TypeScript — no frameworks, no trackers."
+    "note": ""
   }
 }
