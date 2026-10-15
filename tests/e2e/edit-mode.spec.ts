@@ -10,6 +10,12 @@ const content = JSON.parse(
   readFileSync(new URL('../../public/content.json', import.meta.url), 'utf8'),
 ) as { owner: { fullName: string } };
 
+/**1×1 PNG — a valid, tiny photo for the upload tests. */
+const TINY_PNG = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+  'base64',
+);
+
 test.describe('edit mode', () => {
   test.skip(({ isMobile }) => isMobile, 'editor is desktop-first');
 
@@ -193,15 +199,22 @@ test.describe('edit mode', () => {
 
     await page.goto('/#admin');
 
-    // Pick a (tiny, valid) PNG — the editor re-encodes it to a JPEG data URL.
+    // Pick a (tiny, valid) PNG — the editor opens the cropper for it.
     await page.locator('#f-owner-photo-file').setInputFiles({
       name: 'me.png',
       mimeType: 'image/png',
-      buffer: Buffer.from(
-        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
-        'base64',
-      ),
+      buffer: TINY_PNG,
     });
+
+    // The adjustment step comes first: drag to reposition (the photo starts
+    // centred) and slide to zoom, then apply the crop.
+    const cropDialog = page.locator('dialog.crop-dialog');
+    await expect(cropDialog).toBeVisible();
+    await expect(cropDialog.locator('.crop-canvas')).toBeVisible();
+    await cropDialog.locator('input[type="range"]').fill('2');
+    await expect(cropDialog.locator('.crop-zoom-value')).toHaveText('200%');
+    await cropDialog.getByRole('button', { name: 'Apply photo' }).click();
+    await expect(cropDialog).toHaveCount(0);
 
     // The field, the badge and the page behind the editor all update.
     await expect(page.locator('#f-owner-photo')).toHaveValue(/^data:image\/jpeg;base64,/);
