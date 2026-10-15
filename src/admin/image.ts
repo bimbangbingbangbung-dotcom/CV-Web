@@ -104,7 +104,7 @@ function dimensions(source: ImageBitmap | HTMLImageElement): { w: number; h: num
  */
 export async function optimizePhoto(file: File, maxKB: number): Promise<string> {
   const accepted =
-    ACCEPTED.includes(file.type) || /\.(jpe?g|png|webp)$/i.test(file.name ?? '');
+    ACCEPTED.includes(file.type) || /\.(jpe?g|png|webp)$/i.test(file.name);
   if (!accepted) {
     throw new PhotoError('use a JPG, PNG or WebP image — other formats are not supported.');
   }
