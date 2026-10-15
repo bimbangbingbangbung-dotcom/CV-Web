@@ -163,12 +163,19 @@ export function isConfigured(settings: RepoSettings, token: string | null): bool
   return validateConfig(settings).length === 0 && Boolean(token);
 }
 
+/** Base64 for raw bytes (image uploads) — chunked to stay clear of argument limits. */
+export function encodeBase64Bytes(bytes: Uint8Array): string {
+  let binary = '';
+  const CHUNK = 0x8000;
+  for (let i = 0; i < bytes.length; i += CHUNK) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + CHUNK));
+  }
+  return btoa(binary);
+}
+
 /** UTF-8-safe base64 for the Contents API (btoa alone mangles non-Latin1). */
 export function encodeBase64(text: string): string {
-  const bytes = new TextEncoder().encode(text);
-  let binary = '';
-  for (const byte of bytes) binary += String.fromCharCode(byte);
-  return btoa(binary);
+  return encodeBase64Bytes(new TextEncoder().encode(text));
 }
 
 export class GitHubApiError extends Error {
@@ -243,19 +250,19 @@ async function api(
   }
 }
 
-export interface CommitOptions extends RepoConfig {
+export interface PutFileOptions extends RepoConfig {
   token: string;
-  /** Full file text (already serialized). */
-  content: string;
+  /** Pre-encoded base64 of the file's bytes (text or binary). */
+  contentBase64: string;
   message: string;
 }
 
 /**
- * Commit the file. Creates it when missing, updates it otherwise (the GET
+ * Commit any file. Creates it when missing, updates it otherwise (the GET
  * supplies the blob sha the PUT needs).
  */
-export async function commitContent(options: CommitOptions): Promise<{ commitSha: string }> {
-  const { owner, repo, branch, path, token, content, message } = options;
+export async function putFile(options: PutFileOptions): Promise<{ commitSha: string }> {
+  const { owner, repo, branch, path, token, contentBase64, message } = options;
   const encOwner = encodeURIComponent(owner);
   const encRepo = encodeURIComponent(repo);
   const encPath = path.split('/').map(encodeURIComponent).join('/');
@@ -271,13 +278,26 @@ export async function commitContent(options: CommitOptions): Promise<{ commitSha
     throw await apiError(current, 'could not read the current file');
   }
 
-  const payload = { message, content: encodeBase64(content), branch, ...(sha ? { sha } : {}) };
+  const payload = { message, content: contentBase64, branch, ...(sha ? { sha } : {}) };
   const put = await api(base, token, { method: 'PUT', body: JSON.stringify(payload) });
   if (!put.ok) throw await apiError(put, 'could not commit the file');
 
   const result: unknown = await put.json();
   const commit = (result as { commit?: { sha?: unknown } }).commit?.sha;
   return { commitSha: typeof commit === 'string' ? commit : '' };
+}
+
+export interface CommitOptions extends RepoConfig {
+  token: string;
+  /** Full file text (already serialized). */
+  content: string;
+  message: string;
+}
+
+/** Commit a text file (content.json) through the same PUT machinery. */
+export async function commitContent(options: CommitOptions): Promise<{ commitSha: string }> {
+  const { content, ...rest } = options;
+  return putFile({ ...rest, contentBase64: encodeBase64(content) });
 }
 
 /** Verify owner/repo/token in one call (Help tab "Test connection"). */
