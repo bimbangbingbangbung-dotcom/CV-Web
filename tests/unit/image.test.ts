@@ -56,4 +56,12 @@ describe('optimizePhoto input validation', () => {
     const mystery = new File(['binary'], 'photo.tiff', { type: '' });
     await expect(optimizePhoto(mystery, 512)).rejects.toThrow(/JPG, PNG or WebP/);
   });
+
+  it('rejects photos over the 3 MB upload cap', async () => {
+    const big = new File([new Uint8Array(3 * 1024 * 1024 + 1)], 'big.jpg', {
+      type: 'image/jpeg',
+    });
+    await expect(optimizePhoto(big, 512)).rejects.toThrow(/3 MB/);
+    await expect(optimizePhoto(big, 512)).rejects.toBeInstanceOf(PhotoError);
+  });
 });
