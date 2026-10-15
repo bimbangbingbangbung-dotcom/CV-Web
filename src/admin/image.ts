@@ -1,24 +1,29 @@
 /**
  * Photo uploads for the #admin editor (owner.photo).
  *
- * A chosen file is decoded, orientation-corrected, downscaled and re-encoded
- * to JPEG entirely in the browser — the editor never uploads anything to a
- * server of ours. The result is stored as a base64 data URL in the draft so
- * live preview, undo, Download content.json and draft autosave all work with
- * no extra plumbing; "Save to GitHub" then extracts it into
- * `<repo>/assets/photo.jpg` and commits the plain path instead (see panel.ts).
+ * A chosen file (up to 3 MB) is decoded, orientation-corrected and handed to
+ * the cropper (crop.ts). The cropped canvas then goes through the same
+ * pipeline: downscale and re-encode to JPEG entirely in the browser — the
+ * editor never uploads anything to a server of ours. The result is stored as
+ * a base64 data URL in the draft so live preview, undo, Download content.json
+ * and draft autosave all work with no extra plumbing; "Save to GitHub" then
+ * extracts it into `<repo>/assets/photo.jpg` and commits the plain path
+ * instead (see panel.ts).
  *
- * Limits come from content.json admin.imageMaxKB (schema: 32–4096 KB).
+ * Output size comes from content.json admin.imageMaxKB (schema: 32–4096 KB).
  */
 
 /** Types we accept at the file picker (also checked by extension fallback). */
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp'];
 
-/** Long edge cap — well above the 13rem hero display size, even for 2×/zoom. */
+/** Long edge cap — comfortably above the largest hero avatar (18rem) at 2×. */
 const MAX_EDGE = 1200;
 
-/** Decode guard: files bigger than this are refused before we touch pixels. */
-const INPUT_LIMIT = 15 * 1024 * 1024;
+/** Upload cap: the owner picks a photo up to 3 MB, we optimize after cropping. */
+const INPUT_LIMIT = 3 * 1024 * 1024;
+
+/** INPUT_LIMIT in the unit errors and the editor help text use. */
+export const MAX_UPLOAD_MB = Math.round(INPUT_LIMIT / (1024 * 1024));
 
 /** Encode ladder: quality first (keeps resolution), then a little shrinking. */
 const QUALITIES = [0.85, 0.7, 0.55, 0.4];
@@ -97,48 +102,87 @@ function dimensions(source: ImageBitmap | HTMLImageElement): { w: number; h: num
   return { w: source.width, h: source.height };
 }
 
+/** Pixel dimensions of a decoded photo (img.naturalWidth or bitmap width). */
+export function photoDimensions(source: ImageBitmap | HTMLImageElement): { w: number; h: number } {
+  return dimensions(source);
+}
+
 /**
- * Validate, downscale and re-encode a picked photo as a JPEG data URL
- * whose payload stays within `maxKB`. Throws PhotoError with a message
- * meant for the status line.
+ * Validate a picked photo and decode it to drawable, orientation-corrected
+ * pixels. Throws PhotoError with a message meant for the status line; the
+ * caller owns the returned source (close() it if it is an ImageBitmap).
  */
-export async function optimizePhoto(file: File, maxKB: number): Promise<string> {
+export async function decodePhoto(file: File): Promise<ImageBitmap | HTMLImageElement> {
   const accepted = ACCEPTED.includes(file.type) || /\.(jpe?g|png|webp)$/i.test(file.name);
   if (!accepted) {
     throw new PhotoError('use a JPG, PNG or WebP image — other formats are not supported.');
   }
   if (file.size > INPUT_LIMIT) {
-    throw new PhotoError('that file is too large (over 15 MB) — crop or resize it first.');
+    throw new PhotoError(
+      `that file is too large (over ${MAX_UPLOAD_MB} MB) — pick a photo of ${MAX_UPLOAD_MB} MB or less.`,
+    );
   }
-
   const source = await decode(file);
+  const { w, h } = dimensions(source);
+  if (w < 1 || h < 1) {
+    if ('close' in source) source.close();
+    throw new PhotoError('that image has no pixels — pick a different file.');
+  }
+  return source;
+}
+
+/**
+ * Shared encode ladder: downscale toward MAX_EDGE, then walk the quality
+ * ladder (and finally shrinking) until the JPEG fits within maxKB.
+ */
+async function encodeLadder(
+  source: CanvasImageSource,
+  sw: number,
+  sh: number,
+  maxKB: number,
+): Promise<string> {
+  const baseScale = Math.min(1, MAX_EDGE / Math.max(sw, sh));
+  const limit = Math.max(1, Math.floor(maxKB * 1024));
+
+  for (const shrink of SHRINKS) {
+    const scale = baseScale * shrink;
+    const cw = Math.max(1, Math.round(sw * scale));
+    const ch = Math.max(1, Math.round(sh * scale));
+    const canvas = document.createElement('canvas');
+    canvas.width = cw;
+    canvas.height = ch;
+    const g = canvas.getContext('2d');
+    if (!g) throw new PhotoError('canvas is not available in this browser.');
+    g.fillStyle = '#ffffff'; // JPEG has no alpha — keep transparency from going black
+    g.fillRect(0, 0, cw, ch);
+    g.drawImage(source, 0, 0, cw, ch);
+    for (const quality of QUALITIES) {
+      const blob = await toJpeg(canvas, quality);
+      if (!blob) throw new PhotoError('could not encode the image in this browser.');
+      if (blob.size <= limit) return await blobToDataUrl(blob);
+    }
+  }
+  throw new PhotoError(`could not get it under ${maxKB} KB — try a smaller or cropped photo.`);
+}
+
+/**
+ * Re-encode an already-cropped canvas (the cropper's output) as a JPEG data
+ * URL whose payload stays within `maxKB`.
+ */
+export async function optimizeCanvas(canvas: HTMLCanvasElement, maxKB: number): Promise<string> {
+  return encodeLadder(canvas, canvas.width, canvas.height, maxKB);
+}
+
+/**
+ * Whole-file pipeline without the cropper (tests / fallback): validate,
+ * downscale and re-encode a picked photo as a JPEG data URL within `maxKB`.
+ * Throws PhotoError with a message meant for the status line.
+ */
+export async function optimizePhoto(file: File, maxKB: number): Promise<string> {
+  const source = await decodePhoto(file);
   try {
     const { w, h } = dimensions(source);
-    if (w < 1 || h < 1) {
-      throw new PhotoError('that image has no pixels — pick a different file.');
-    }
-    const baseScale = Math.min(1, MAX_EDGE / Math.max(w, h));
-    const limit = Math.max(1, Math.floor(maxKB * 1024));
-
-    for (const shrink of SHRINKS) {
-      const scale = baseScale * shrink;
-      const cw = Math.max(1, Math.round(w * scale));
-      const ch = Math.max(1, Math.round(h * scale));
-      const canvas = document.createElement('canvas');
-      canvas.width = cw;
-      canvas.height = ch;
-      const g = canvas.getContext('2d');
-      if (!g) throw new PhotoError('canvas is not available in this browser.');
-      g.fillStyle = '#ffffff'; // JPEG has no alpha — keep transparency from going black
-      g.fillRect(0, 0, cw, ch);
-      g.drawImage(source, 0, 0, cw, ch);
-      for (const quality of QUALITIES) {
-        const blob = await toJpeg(canvas, quality);
-        if (!blob) throw new PhotoError('could not encode the image in this browser.');
-        if (blob.size <= limit) return await blobToDataUrl(blob);
-      }
-    }
-    throw new PhotoError(`could not get it under ${maxKB} KB — try a smaller or cropped photo.`);
+    return await encodeLadder(source, w, h, maxKB);
   } finally {
     if ('close' in source) source.close();
   }
