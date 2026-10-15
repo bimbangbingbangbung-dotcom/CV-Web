@@ -24,7 +24,14 @@ import {
 } from './widgets';
 import { diffJson, describeDiff } from './diff';
 import { checkAccentPairs } from './contrast';
-import { dataUrlToBytes, decodePhoto, isDataImage, MAX_UPLOAD_MB, optimizeCanvas, PhotoError } from './image';
+import {
+  dataUrlToBytes,
+  decodePhoto,
+  isDataImage,
+  MAX_UPLOAD_MB,
+  optimizeCanvas,
+  PhotoError,
+} from './image';
 import { openCropper } from './crop';
 import {
   clearToken,

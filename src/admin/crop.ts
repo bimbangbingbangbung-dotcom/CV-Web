@@ -246,13 +246,7 @@ export function openCropper(
         text: 'Drag the photo to choose the visible area and use the slider to zoom. The crop is the 3:4 portrait shown on your home page.',
       }),
       h('div', { class: 'crop-stage' }, canvas),
-      h(
-        'label',
-        { class: 'crop-zoom' },
-        h('span', { text: 'Zoom' }),
-        slider,
-        pct,
-      ),
+      h('label', { class: 'crop-zoom' }, h('span', { text: 'Zoom' }), slider, pct),
       h('div', { class: 'dialog-actions' }, cancelBtn, resetBtn, applyBtn),
     );
 
