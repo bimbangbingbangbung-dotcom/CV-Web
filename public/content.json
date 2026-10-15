@@ -1,7 +1,7 @@
 {
   "meta": {
     "schemaVersion": 1,
-    "lastUpdated": "2026-10-13"
+    "lastUpdated": "2026-10-15"
   },
   "site": {
     "title": "Joshua Angeles — Computer Engineering Student",
@@ -48,7 +48,10 @@
     },
     "photo": "./assets/photo.jpg",
     "initials": "JA",
-    "languages": ["Filipino (native)", "English (fluent)"],
+    "languages": [
+      "Filipino (native)",
+      "English (fluent)"
+    ],
     "interests": [
       "embedded systems",
       "robotics",
@@ -129,7 +132,9 @@
       "end": "2023-07",
       "gpa": null,
       "coursework": [],
-      "honors": ["Graduated with Honors"]
+      "honors": [
+        "Graduated with Honors"
+      ]
     }
   ],
   "skills": [
@@ -225,7 +230,12 @@
       "description": "My undergraduate thesis: an Arduino-based vending machine that weighs and dispenses pet food, prints receipts, and monitors stock levels — firmware, wiring, and mechanics in one build.",
       "role": "Thesis project — firmware & systems design",
       "year": "2026",
-      "tech": ["Arduino", "C++", "Load cell", "Receipt printer"],
+      "tech": [
+        "Arduino",
+        "C++",
+        "Load cell",
+        "Receipt printer"
+      ],
       "links": [],
       "image": null,
       "featured": true,
@@ -236,7 +246,11 @@
       "description": "A six-degree-of-freedom robotic arm I designed and built — structure, joint actuation, and control wiring, from mechanical assembly to embedded control.",
       "role": "Design & build — mechanical + controls",
       "year": "2023",
-      "tech": ["Microcontrollers", "C++", "Mechatronics"],
+      "tech": [
+        "Microcontrollers",
+        "C++",
+        "Mechatronics"
+      ],
       "links": [],
       "image": null,
       "featured": true,
@@ -247,7 +261,11 @@
       "description": "A prototype domestic cleaning robot — chassis, drive, and cleaning mechanism integrated on a microcontroller platform.",
       "role": "Design & build (prototype)",
       "year": "2023",
-      "tech": ["Microcontrollers", "Robotics", "Prototyping"],
+      "tech": [
+        "Microcontrollers",
+        "Robotics",
+        "Prototyping"
+      ],
       "links": [],
       "image": null,
       "featured": false,
@@ -258,7 +276,11 @@
       "description": "A solar-powered charging system for mobile devices — harvesting, regulating, and delivering power for charging on the go.",
       "role": "Design & build",
       "year": "2023",
-      "tech": ["Solar power", "Charge regulation", "USB output"],
+      "tech": [
+        "Solar power",
+        "Charge regulation",
+        "USB output"
+      ],
       "links": [],
       "image": null,
       "featured": false,
@@ -269,7 +291,10 @@
       "description": "A scale-model house with a fully wired lighting circuit — built for SHS EXPO 2023, where it placed 2nd Best in Product (Physics).",
       "role": "Build & wiring",
       "year": "2023",
-      "tech": ["Wiring", "Lighting circuits"],
+      "tech": [
+        "Wiring",
+        "Lighting circuits"
+      ],
       "links": [],
       "image": null,
       "featured": false,
