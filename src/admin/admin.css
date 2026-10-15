@@ -372,6 +372,48 @@ body.admin-open {
   flex-shrink: 0;
 }
 
+/* ---------- Photo control (owner.photo) ---------- */
+
+.photo-edit {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.photo-edit-main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.photo-edit-main input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Preview thumb mirrors the hero avatar: 3:4 portrait, cover-cropped. */
+.photo-thumb {
+  width: 2.75rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: var(--border-hairline) solid var(--border);
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  text-align: center;
+  color: var(--text-faint);
+  overflow: hidden;
+}
+
+.photo-edit-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
 /* ---------- Appearance tab ---------- */
 
 .appearance-grid {

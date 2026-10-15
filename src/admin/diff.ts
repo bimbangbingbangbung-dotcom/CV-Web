@@ -15,6 +15,8 @@ const MAX_DEPTH = 12;
 
 function short(value: unknown): string {
   if (value === undefined) return '∅';
+  // Inline photos are huge base64 blobs — summarize instead of dumping them.
+  if (typeof value === 'string' && value.startsWith('data:image/')) return '"[uploaded image]"';
   const json = JSON.stringify(value) ?? String(value);
   return json.length > 80 ? `${json.slice(0, 77)}…` : json;
 }
