@@ -21,6 +21,7 @@ export interface SchemaNode {
   description?: string;
   title?: string;
   minLength?: number;
+  maxLength?: number;
   anyOf?: SchemaNode[];
   $ref?: string;
   $defs?: Record<string, SchemaNode>;
