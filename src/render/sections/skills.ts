@@ -18,11 +18,18 @@ export function renderSkills(content: Content): HTMLElement | null {
         'ul',
         { class: 'chip-row' },
         ...group.items.map((item) => {
-          const li = h('li', {}, chip(item.name));
+          const pair = h('span', { class: 'chip-pair' }, chip(item.name));
           const level = levelChip(item.level);
-          if (level) li.append(level);
-          if (item.note) li.append(h('span', { class: 'chip-note', text: item.note }));
-          return li;
+          if (level) pair.append(level);
+          if (!item.note) return h('li', {}, pair);
+          // Notes get their own line under the chip pair — a quiet italic
+          // caption, never faint inline text crammed beside the chips.
+          return h(
+            'li',
+            { class: 'skill-item--note' },
+            pair,
+            h('span', { class: 'chip-note', text: item.note }),
+          );
         }),
       ),
     ),
