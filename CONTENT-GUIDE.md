@@ -170,6 +170,9 @@ section from nav and page at once.
   powershell -Command "[BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes('your-passphrase'))).Replace('-','').ToLower()"
   ```
   This is a casual lock, **not security** — anyone can read the site's source.
+- `imageMaxKB` — size limit (in KB, schema range 32–4096; default 512) for
+  photos uploaded through the editor. The editor re-encodes the image to
+  stay under this limit.
 
 ### `footer` / `meta`
 
@@ -185,7 +188,7 @@ Put files in `public/assets/`:
 | File                                    | Used for                                              |
 | --------------------------------------- | ----------------------------------------------------- |
 | `cv.pdf`                                | “Download CV” button (placeholder ships — replace it) |
-| `photo.jpg`/`.png`                      | hero avatar (square; alt text = your name)            |
+| `photo.jpg`/`.png`                      | hero avatar (3:4 portrait; alt text = your name)      |
 | `og-image.png`                          | link previews (regenerate: `npm run gen:assets`)      |
 | `favicon-*.png`, `apple-touch-icon.png` | PWA/icon variants                                     |
 
