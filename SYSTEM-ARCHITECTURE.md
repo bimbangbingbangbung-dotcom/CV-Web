@@ -85,7 +85,8 @@ src/
     widgets.ts               schema-driven form engine (recursion over $ref)
     panel.ts                 toolbar/tabs/diff/import/export/publish + photo widget
     github.ts                Save-to-GitHub: Contents API commit + token storage
-    image.ts                 photo upload: validate, EXIF-fix, downscale, re-encode
+    image.ts                 photo upload: validate (≤3 MB), EXIF-fix, downscale, re-encode
+    crop.ts                  photo cropper: cover/pan/zoom geometry + adjustment dialog
     contrast.ts, diff.ts     WCAG checker + structured draft diff
   content-validator.generated.ts   build artifact (git-ignored from lint)
 tests/unit/*.test.ts         Vitest (91 tests)

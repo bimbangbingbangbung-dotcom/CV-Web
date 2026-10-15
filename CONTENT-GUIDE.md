@@ -18,8 +18,10 @@ the site rebuilds itself.
    design but still work when clicked).
 2. Edit fields on the **Content** tab — the page behind updates live.
 3. To change your picture: **Content → Owner → Photo → _Upload photo_**
-   (JPG, PNG or WebP — it is resized and optimized automatically;
-   _Remove photo_ switches back to the initials avatar). **Save to GitHub**
+   (JPG, PNG or WebP up to 3 MB — a crop dialog opens first: drag the photo
+   to reposition it, use the slider to zoom, then _Apply photo_; the editor
+   optimizes the result automatically. _Remove photo_ switches back to the
+   initials avatar). **Save to GitHub**
    commits the picture as `public/assets/photo.jpg`; the Download path keeps
    it inside content.json.
 4. Publish with whichever path you set up:
@@ -171,7 +173,8 @@ section from nav and page at once.
   ```
   This is a casual lock, **not security** — anyone can read the site's source.
 - `imageMaxKB` — size limit (in KB, schema range 32–4096; default 512) for
-  photos uploaded through the editor. The editor re-encodes the image to
+  photos uploaded through the editor (uploads themselves accept files up to
+  3 MB). The editor re-encodes the image to
   stay under this limit.
 
 ### `footer` / `meta`
