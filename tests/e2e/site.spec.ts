@@ -24,6 +24,20 @@ test.describe('content rendering', () => {
     await expect(page).toHaveTitle(content.site.title);
   });
 
+  test('hero photo is a large 3:4 portrait rectangle', async ({ page, isMobile }) => {
+    await page.goto('/');
+    const avatar = page.locator('.hero .avatar');
+    await expect(avatar).toBeVisible();
+    const box = await avatar.boundingBox();
+    expect(box).not.toBeNull();
+    const width = box?.width ?? 0;
+    const height = box?.height ?? 0;
+    // Big (13rem desktop / 8rem mobile) and portrait 3:4, not square.
+    expect(width).toBeGreaterThanOrEqual(isMobile ? 120 : 200);
+    expect(height / width).toBeGreaterThan(1.25);
+    expect(height / width).toBeLessThan(1.45);
+  });
+
   test('renders every enabled section heading', async ({ page }) => {
     await page.goto('/');
     for (const section of content.sections.filter((s) => s.enabled)) {
