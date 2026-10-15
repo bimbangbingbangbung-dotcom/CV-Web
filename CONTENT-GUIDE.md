@@ -176,7 +176,8 @@ section from nav and page at once.
 
 ### `footer` / `meta`
 
-- `footer.note`, `builtWithLabel` — footer text; `meta.lastUpdated` — shown in
+- `footer.note` — small footer line under the copyright; leave it empty to hide
+  the line. `meta.lastUpdated` — shown in
   the footer and sitemap (editor sets it on download).
 
 ---
