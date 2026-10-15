@@ -39,9 +39,9 @@ describe('dataUrlToBytes', () => {
     expect(dataUrlToBytes('data:image/jpeg;base64,')).toBeNull();
   });
 
-  it('returns null when base64 decoding fails', () => {
-    // Valid charset but not decodable (wrong padding).
-    expect(dataUrlToBytes('data:image/jpeg;base64,AAA')).toBeNull();
+  it('returns null when base64 decoding fails', async () => {
+    // Valid charset but a length that makes atob throw (length % 4 === 1).
+    expect(dataUrlToBytes('data:image/jpeg;base64,AAAAA')).toBeNull();
   });
 });
 

@@ -51,7 +51,7 @@ describe('valueSchema', () => {
     };
     const node = valueSchema(withRef, withRef);
     expect(node.properties).toBeDefined();
-    expect(node.type).toBeUndefined(); // object node without explicit type is fine
+    expect(node.type).toBe('object');
   });
 
   it('passes concrete nodes through unchanged', () => {
