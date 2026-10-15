@@ -63,9 +63,10 @@ export function resolveRef(node: SchemaNode, root: SchemaNode): SchemaNode {
 
 /** For nullable fields pick the concrete branch/type (anyOf or type: [X, null]). */
 export function valueSchema(node: SchemaNode, root: SchemaNode): SchemaNode {
-  const base = node.anyOf
-    ? (node.anyOf.find((branch) => branch.type !== 'null') ?? node.anyOf[0] ?? {})
-    : resolveRef(node, root);
+  const branch = node.anyOf
+    ? (node.anyOf.find((b) => b.type !== 'null') ?? node.anyOf[0] ?? {})
+    : node;
+  const base = resolveRef(branch, root);
   // Nullable fields are also written as type: ["string","null"] — unwrap to
   // the concrete type so the dispatch in controlFor (node.type === 'string')
   // matches instead of silently rendering no control.
@@ -140,7 +141,7 @@ export function fieldRow(
   );
 }
 
-function textControl(
+export function textControl(
   path: (string | number)[],
   node: SchemaNode,
   value: unknown,
