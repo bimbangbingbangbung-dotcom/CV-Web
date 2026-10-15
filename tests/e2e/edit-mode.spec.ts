@@ -151,9 +151,100 @@ test.describe('edit mode', () => {
     expect(authHeader).toBe('Bearer ghp_test_token');
   });
 
+  test('photo upload live-previews and commits the image to the repo', async ({ page }) => {
+    const puts: Array<{ path: string; body: Record<string, unknown> }> = [];
+    let authHeader = '';
+    await page.route('https://api.github.com/**', async (route) => {
+      const request = route.request();
+      const cors = { 'Access-Control-Allow-Origin': '*' };
+      if (request.method() === 'OPTIONS') {
+        await route.fulfill({
+          status: 204,
+          headers: {
+            ...cors,
+            'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+            'Access-Control-Allow-Headers':
+              'Authorization, Content-Type, Accept, X-GitHub-Api-Version',
+          },
+        });
+        return;
+      }
+      if (request.method() === 'GET') {
+        await route.fulfill({
+          status: 404,
+          contentType: 'application/json',
+          headers: cors,
+          body: JSON.stringify({ message: 'Not Found' }),
+        });
+        return;
+      }
+      authHeader = request.headers()['authorization'] ?? '';
+      puts.push({
+        path: new URL(request.url()).pathname,
+        body: JSON.parse(request.postData() ?? '{}') as Record<string, unknown>,
+      });
+      await route.fulfill({
+        status: 201,
+        contentType: 'application/json',
+        headers: cors,
+        body: JSON.stringify({ commit: { sha: 'c0ffee' } }),
+      });
+    });
+
+    await page.goto('/#admin');
+
+    // Pick a (tiny, valid) PNG — the editor re-encodes it to a JPEG data URL.
+    await page.locator('#f-owner-photo-file').setInputFiles({
+      name: 'me.png',
+      mimeType: 'image/png',
+      buffer: Buffer.from(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+        'base64',
+      ),
+    });
+
+    // The field, the badge and the page behind the editor all update.
+    await expect(page.locator('#f-owner-photo')).toHaveValue(/^data:image\/jpeg;base64,/);
+    await expect(page.locator('.admin-badge')).toContainText('Draft');
+    await expect(page.locator('.admin-status')).toContainText('Photo updated');
+    await expect(page.locator('.hero .avatar')).toHaveAttribute('src', /^data:image\/jpeg;base64,/);
+
+    // Configure publishing in Help (same as the plain content commit test).
+    await page.getByRole('tab', { name: 'Help' }).click();
+    await page.locator('#f-gh-owner').fill('octo-cat');
+    await page.locator('#f-gh-repo').fill('CV-Web');
+    await page.locator('#f-gh-branch').fill('main');
+    await page.locator('#f-gh-path').fill('public/content.json');
+    await page.locator('#f-gh-token').fill('ghp_test_token');
+    await page.locator('#f-gh-token').blur();
+
+    await page.getByRole('button', { name: 'Save to GitHub' }).click();
+    await expect(page.locator('.save-toast')).toContainText('Saved to octo-cat/CV-Web');
+    await expect(page.locator('.save-toast')).toContainText('public/assets/photo.jpg');
+    await expect(page.locator('.admin-root')).toHaveCount(0);
+
+    // Two commits, image FIRST so content.json never points at a missing file.
+    expect(puts.map((p) => p.path)).toEqual([
+      '/repos/octo-cat/CV-Web/contents/public/assets/photo.jpg',
+      '/repos/octo-cat/CV-Web/contents/public/content.json',
+    ]);
+    expect(authHeader).toBe('Bearer ghp_test_token');
+    const imageBytes = Buffer.from(String(puts[0]?.body['content']), 'base64');
+    expect(imageBytes.subarray(0, 3)).toEqual(Buffer.from([0xff, 0xd8, 0xff])); // JPEG magic
+    const committedContent = Buffer.from(
+      String(puts[1]?.body['content']),
+      'base64',
+    ).toString('utf8');
+    const committed = JSON.parse(committedContent) as { owner: { photo: string } };
+    expect(committed.owner.photo).toBe('./assets/photo.jpg');
+
+    // Back home, the hero points at the committed file (live again after redeploy).
+    await expect(page.locator('.hero .avatar')).toHaveAttribute('src', './assets/photo.jpg');
+  });
+
   test('import rejects invalid JSON with a visible status', async ({ page }) => {
     await page.goto('/#admin');
-    await page.locator('.admin-root input[type="file"]').setInputFiles({
+    await page.locator('#admin-import-input').setInputFiles({
       name: 'broken.json',
       mimeType: 'application/json',
       buffer: Buffer.from('{ this is not json'),
