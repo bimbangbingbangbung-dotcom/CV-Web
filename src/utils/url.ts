@@ -18,6 +18,10 @@ export function safeExternalUrl(raw: string): string | null {
 export function safeAssetPath(raw: string): string | null {
   const value = raw.trim();
   if (/^(https?:\/\/|\/|\.\/)/.test(value)) return value;
+  // Inline photos stored by the #admin editor: base64 data URLs for raster
+  // images only. data: in <img src> never executes script, and the strict
+  // type + base64 whitelist rejects text/html and SVG payloads outright.
+  if (/^data:image\/(?:jpe?g|png|webp);base64,[A-Za-z0-9+/=]+$/.test(value)) return value;
   return null;
 }
 
