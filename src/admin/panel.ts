@@ -8,6 +8,7 @@
  */
 import { h, clear } from '../utils/dom';
 import { icon } from '../components/icons';
+import { safeAssetPath } from '../utils/url';
 import type { Content, SectionEntry } from '../schema/types';
 import schemaJson from '../../content.schema.json';
 import { DraftStore, clearPersistedDraft } from './state';
@@ -16,19 +17,24 @@ import {
   fieldRow,
   humanize,
   resolveRef,
+  textControl,
+  valueSchema,
   type FormContext,
   type SchemaNode,
 } from './widgets';
 import { diffJson, describeDiff } from './diff';
 import { checkAccentPairs } from './contrast';
+import { dataUrlToBytes, isDataImage, optimizePhoto, PhotoError } from './image';
 import {
   clearToken,
   commitContent,
   describeApiError,
   detectRepo,
+  encodeBase64Bytes,
   getToken,
   isConfigured,
   loadSettings,
+  putFile,
   saveSettings,
   setToken,
   testConnection,
@@ -147,6 +153,7 @@ export function openPanel(options: PanelOptions): () => void {
       if (Array.isArray(value)) renderPreservingFocus();
     },
     announce,
+    customControls: { 'owner.photo': photoControl },
   };
 
   /**
