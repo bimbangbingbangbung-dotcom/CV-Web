@@ -23,7 +23,7 @@ describe('isDataImage', () => {
 describe('dataUrlToBytes', () => {
   it('decodes a base64 payload back to bytes', () => {
     const bytes = dataUrlToBytes(`data:image/jpeg;base64,${btoa('JFIF-ish')}`);
-    expect(bytes).toEqual(new TextEncoder().encode('JFIF-ish'));
+    expect(bytes).toEqual(Uint8Array.from('JFIF-ish', (c) => c.charCodeAt(0)));
   });
 
   it('preserves non-ASCII byte values', () => {

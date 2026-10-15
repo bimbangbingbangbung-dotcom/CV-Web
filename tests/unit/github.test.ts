@@ -13,6 +13,7 @@ import {
   describeApiError,
   detectRepo,
   encodeBase64,
+  encodeBase64Bytes,
   getToken,
   isConfigured,
   loadSettings,
