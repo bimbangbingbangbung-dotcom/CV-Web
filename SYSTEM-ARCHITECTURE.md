@@ -127,7 +127,9 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
   type (they used to render no control at all), and a `customControls` map on
   the form context lets one dotted path opt out of the generic widget —
   `owner.photo` uses it for its **upload control** (file picker →
-  `image.ts` validates/downscales/re-encodes to a ≤`admin.imageMaxKB` JPEG
+  `image.ts` validates up to 3 MB and decodes EXIF-corrected pixels →
+  `crop.ts` opens the adjust dialog (drag / zoom / arrow-key pan, 3:4 like
+  the hero) and renders the crop → `image.ts` downscales/re-encodes to a ≤`admin.imageMaxKB` JPEG
   data URL → live preview; the thumbnail mirrors the hero’s 3:4 crop).
 - **DraftStore**: in-memory draft + localStorage autosave (`cvweb:draft`) with a
   50-step undo/redo stack, dirty flag, and “resume draft?” prompt. localStorage
