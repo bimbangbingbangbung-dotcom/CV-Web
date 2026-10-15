@@ -254,6 +254,27 @@ test.describe('edit mode', () => {
     await expect(page.locator('.hero .avatar')).toHaveAttribute('src', './assets/photo.jpg');
   });
 
+  test('the cropper can be cancelled without changing the photo', async ({ page }) => {
+    await page.goto('/#admin');
+    const field = page.locator('#f-owner-photo');
+    const before = await field.inputValue();
+
+    await page.locator('#f-owner-photo-file').setInputFiles({
+      name: 'other.png',
+      mimeType: 'image/png',
+      buffer: TINY_PNG,
+    });
+
+    const cropDialog = page.locator('dialog.crop-dialog');
+    await expect(cropDialog).toBeVisible();
+    await cropDialog.getByRole('button', { name: 'Cancel' }).click();
+    await expect(cropDialog).toHaveCount(0);
+
+    // Nothing committed: the value is untouched and the status says so.
+    await expect(field).toHaveValue(before);
+    await expect(page.locator('.admin-status')).toContainText('Photo upload cancelled');
+  });
+
   test('import rejects invalid JSON with a visible status', async ({ page }) => {
     await page.goto('/#admin');
     await page.locator('#admin-import-input').setInputFiles({

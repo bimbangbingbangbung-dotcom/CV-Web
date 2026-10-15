@@ -32,8 +32,8 @@ test.describe('content rendering', () => {
     expect(box).not.toBeNull();
     const width = box?.width ?? 0;
     const height = box?.height ?? 0;
-    // Big (13rem desktop / 8rem mobile) and portrait 3:4, not square.
-    expect(width).toBeGreaterThanOrEqual(isMobile ? 120 : 200);
+    // Big (fluid 13–18rem desktop / 10rem mobile) and portrait 3:4, not square.
+    expect(width).toBeGreaterThanOrEqual(isMobile ? 150 : 250);
     expect(height / width).toBeGreaterThan(1.25);
     expect(height / width).toBeLessThan(1.45);
   });
