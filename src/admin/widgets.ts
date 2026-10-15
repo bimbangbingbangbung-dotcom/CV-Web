@@ -32,6 +32,21 @@ export interface FormContext {
   onCommit: (path: (string | number)[], value: unknown) => void;
   /** Politely announce reorder/remove actions to screen readers. */
   announce: (message: string) => void;
+  /**
+   * Site-specific control overrides keyed by dotted path
+   * (e.g. { 'owner.photo': photoUpload }). Checked before the generic
+   * dispatch so one special field can get a bespoke widget without
+   * touching the engine.
+   */
+  customControls?: Record<
+    string,
+    (
+      path: (string | number)[],
+      node: SchemaNode,
+      value: unknown,
+      ctx: FormContext,
+    ) => HTMLElement | null
+  >;
 }
 
 /** Follow `$ref` pointers like '#/$defs/projectDetail' until the node is concrete. */
@@ -46,11 +61,20 @@ export function resolveRef(node: SchemaNode, root: SchemaNode): SchemaNode {
   return current;
 }
 
-/** For nullable fields (anyOf [X, null]) pick the concrete branch. */
+/** For nullable fields pick the concrete branch/type (anyOf or type: [X, null]). */
 export function valueSchema(node: SchemaNode, root: SchemaNode): SchemaNode {
-  if (!node.anyOf) return resolveRef(node, root);
-  const concrete = node.anyOf.find((branch) => branch.type !== 'null') ?? node.anyOf[0];
-  return resolveRef(concrete ?? {}, root);
+  const base = node.anyOf
+    ? (node.anyOf.find((branch) => branch.type !== 'null') ?? node.anyOf[0] ?? {})
+    : resolveRef(node, root);
+  // Nullable fields are also written as type: ["string","null"] — unwrap to
+  // the concrete type so the dispatch in controlFor (node.type === 'string')
+  // matches instead of silently rendering no control.
+  const types = base.type;
+  if (Array.isArray(types)) {
+    const concrete = types.find((t) => t !== 'null') ?? types[0];
+    return concrete === undefined ? base : { ...base, type: concrete };
+  }
+  return base;
 }
 
 /** camelCase property name → "Camel Case" for labels. */
