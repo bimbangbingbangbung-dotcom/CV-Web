@@ -97,14 +97,10 @@ async function decode(file: File): Promise<ImageBitmap | HTMLImageElement> {
   }
 }
 
-function dimensions(source: ImageBitmap | HTMLImageElement): { w: number; h: number } {
-  if ('naturalWidth' in source) return { w: source.naturalWidth, h: source.naturalHeight };
-  return { w: source.width, h: source.height };
-}
-
 /** Pixel dimensions of a decoded photo (img.naturalWidth or bitmap width). */
 export function photoDimensions(source: ImageBitmap | HTMLImageElement): { w: number; h: number } {
-  return dimensions(source);
+  if ('naturalWidth' in source) return { w: source.naturalWidth, h: source.naturalHeight };
+  return { w: source.width, h: source.height };
 }
 
 /**
@@ -123,7 +119,7 @@ export async function decodePhoto(file: File): Promise<ImageBitmap | HTMLImageEl
     );
   }
   const source = await decode(file);
-  const { w, h } = dimensions(source);
+  const { w, h } = photoDimensions(source);
   if (w < 1 || h < 1) {
     if ('close' in source) source.close();
     throw new PhotoError('that image has no pixels — pick a different file.');
@@ -181,7 +177,7 @@ export async function optimizeCanvas(canvas: HTMLCanvasElement, maxKB: number): 
 export async function optimizePhoto(file: File, maxKB: number): Promise<string> {
   const source = await decodePhoto(file);
   try {
-    const { w, h } = dimensions(source);
+    const { w, h } = photoDimensions(source);
     return await encodeLadder(source, w, h, maxKB);
   } finally {
     if ('close' in source) source.close();
