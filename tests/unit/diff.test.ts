@@ -29,4 +29,14 @@ describe('diffJson', () => {
     const [entry] = diffJson({ a: 1 }, { a: 2 });
     expect(describeDiff(entry!)).toContain('a: 1 → 2');
   });
+
+  it('summarizes uploaded images instead of dumping base64', () => {
+    const [entry] = diffJson(
+      { owner: { photo: './assets/photo.jpg' } },
+      { owner: { photo: 'data:image/jpeg;base64,/9j/4AAQSkZJRg=='.repeat(10) } },
+    );
+    const line = describeDiff(entry!);
+    expect(line).toContain('[uploaded image]');
+    expect(line).not.toContain('base64');
+  });
 });

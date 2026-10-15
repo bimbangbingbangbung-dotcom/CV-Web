@@ -108,6 +108,26 @@ describe('encodeBase64', () => {
   });
 });
 
+describe('encodeBase64Bytes', () => {
+  it('round-trips raw bytes (JPEG magic travels intact)', () => {
+    const bytes = Uint8Array.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x42]);
+    const decoded = Uint8Array.from(atob(encodeBase64Bytes(bytes)), (c) => c.charCodeAt(0));
+    expect(decoded).toEqual(bytes);
+  });
+
+  it('handles payloads larger than one internal chunk (>32 KB)', () => {
+    const bytes = new Uint8Array(70_000);
+    for (let i = 0; i < bytes.length; i += 1) bytes[i] = i % 256;
+    const decoded = Uint8Array.from(atob(encodeBase64Bytes(bytes)), (c) => c.charCodeAt(0));
+    expect(decoded).toEqual(bytes);
+  });
+
+  it('matches encodeBase64 for the same content', () => {
+    const text = 'José — 日本語';
+    expect(encodeBase64Bytes(new TextEncoder().encode(text))).toBe(encodeBase64(text));
+  });
+});
+
 describe('settings storage', () => {
   it('returns defaults when nothing is stored', () => {
     expect(loadSettings()).toEqual(DEFAULT_SETTINGS);

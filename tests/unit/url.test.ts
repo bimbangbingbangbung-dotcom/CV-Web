@@ -36,4 +36,19 @@ describe('safeAssetPath', () => {
     expect(safeAssetPath('javascript:alert(1)')).toBeNull();
     expect(safeAssetPath('data:image/svg+xml,<svg onload=alert(1)>')).toBeNull();
   });
+
+  it('allows base64 raster image data URLs (inline photos from #admin)', () => {
+    expect(safeAssetPath('data:image/jpeg;base64,/9j/4AAQ')).toBe('data:image/jpeg;base64,/9j/4AAQ');
+    expect(safeAssetPath('data:image/jpg;base64,AAAA')).toBe('data:image/jpg;base64,AAAA');
+    expect(safeAssetPath('data:image/png;base64,iVBORw0KGgo=')).toBe('data:image/png;base64,iVBORw0KGgo=');
+    expect(safeAssetPath('data:image/webp;base64,UklGRg==')).toBe('data:image/webp;base64,UklGRg==');
+  });
+
+  it('rejects non-image, non-base64 and script-capable data URLs', () => {
+    expect(safeAssetPath('data:text/html;base64,PHNjcmlwdD4=')).toBeNull();
+    expect(safeAssetPath('data:image/svg+xml;base64,PHN2Zz4=')).toBeNull();
+    expect(safeAssetPath('data:image/jpeg,not-base64-payload')).toBeNull();
+    expect(safeAssetPath('data:image/jpeg;base64,*** bad ***')).toBeNull();
+    expect(safeAssetPath('data:image/jpeg;base64,')).toBeNull();
+  });
 });
