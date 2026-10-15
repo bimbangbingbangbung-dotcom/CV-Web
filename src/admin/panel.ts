@@ -170,6 +170,116 @@ export function openPanel(options: PanelOptions): () => void {
     else if (wasInsidePanel) root.focus();
   };
 
+  /**
+   * owner.photo widget: path/URL field + live thumbnail + upload/remove.
+   * An uploaded file is optimized to a JPEG data URL (image.ts) so preview,
+   * undo, draft autosave and Download all see it; "Save to GitHub" then
+   * commits it as assets/photo.jpg and stores the plain path instead.
+   */
+  function photoControl(
+    path: (string | number)[],
+    rawNode: SchemaNode,
+    value: unknown,
+    formCtx: FormContext,
+  ): HTMLElement {
+    const node = valueSchema(rawNode, formCtx.rootSchema);
+    const input = textControl(path, node, value, formCtx);
+    const maxKB = store.draft.admin.imageMaxKB;
+
+    const thumb = h('img', { class: 'photo-thumb', attrs: { alt: '', 'aria-hidden': 'true' } });
+    const placeholder = h('span', {
+      class: 'photo-thumb photo-thumb-empty',
+      text: 'No photo',
+      attrs: { 'aria-hidden': 'true' },
+    });
+    const uploadBtn = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Upload photo',
+      attrs: { type: 'button' },
+    });
+    const removeBtn = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Remove photo',
+      attrs: { type: 'button' },
+    });
+    const fileInput = h('input', {
+      attrs: {
+        type: 'file',
+        accept: 'image/jpeg,image/png,image/webp',
+        hidden: true,
+        'aria-hidden': 'true',
+        tabindex: '-1',
+      },
+    });
+    fileInput.id = 'f-owner-photo-file';
+
+    /** Reflect the current value into the thumbnail + remove button. */
+    const sync = (raw: string): void => {
+      const url = raw ? safeAssetPath(raw) : null;
+      if (url) {
+        thumb.src = url;
+        thumb.hidden = false;
+        placeholder.hidden = true;
+        removeBtn.disabled = false;
+      } else {
+        thumb.removeAttribute('src');
+        thumb.hidden = true;
+        placeholder.hidden = false;
+        removeBtn.disabled = true;
+      }
+    };
+    sync(typeof value === 'string' ? value : '');
+
+    const processFile = async (file: File): Promise<void> => {
+      uploadBtn.disabled = true;
+      const before = Math.max(1, Math.round(file.size / 1024));
+      status.textContent = `Optimizing photo (${before} KB)…`;
+      try {
+        const dataUrl = await optimizePhoto(file, maxKB);
+        formCtx.onCommit(path, dataUrl);
+        input.value = dataUrl;
+        sync(dataUrl);
+        const payloadLength = dataUrl.length - (dataUrl.indexOf(',') + 1);
+        const after = Math.max(1, Math.round((payloadLength * 3) / 4 / 1024));
+        status.textContent = `Photo updated (${after} KB) — Save to GitHub or Download content.json to publish it.`;
+        formCtx.announce('Photo updated — save to publish it.');
+      } catch (error) {
+        const detail = error instanceof PhotoError ? error.message : 'could not process that image.';
+        status.textContent = `Photo upload failed — ${detail}`;
+        formCtx.announce('Photo upload failed.');
+      } finally {
+        uploadBtn.disabled = false;
+        fileInput.value = ''; // same file can be picked again
+      }
+    };
+
+    // The path/URL can also be typed by hand — keep the preview in step.
+    input.addEventListener('change', () => sync(input.value));
+    uploadBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files?.[0];
+      if (file) void processFile(file);
+    });
+    removeBtn.addEventListener('click', () => {
+      formCtx.onCommit(path, null);
+      input.value = '';
+      sync('');
+      status.textContent = 'Photo removed — the initials avatar will show instead.';
+      formCtx.announce('Photo removed.');
+    });
+
+    return h(
+      'div',
+      { class: 'photo-edit', attrs: { 'data-label-target': input.id } },
+      h('div', { class: 'photo-edit-main' }, thumb, placeholder, input),
+      h('div', { class: 'photo-edit-actions' }, uploadBtn, removeBtn, fileInput),
+      h('p', {
+        class: 'admin-help',
+        text: `JPG, PNG or WebP — resized and optimized to ${maxKB} KB or less. Save to GitHub commits the picture as an image file; Download keeps it inside content.json.`,
+      }),
+    );
+  }
+
   // --- Toolbar ---
   const dirtyBadge = h('span', { class: 'badge admin-badge' });
   const status = h('span', {
