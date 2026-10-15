@@ -244,7 +244,8 @@ export function openPanel(options: PanelOptions): () => void {
         status.textContent = `Photo updated (${after} KB) — Save to GitHub or Download content.json to publish it.`;
         formCtx.announce('Photo updated — save to publish it.');
       } catch (error) {
-        const detail = error instanceof PhotoError ? error.message : 'could not process that image.';
+        const detail =
+          error instanceof PhotoError ? error.message : 'could not process that image.';
         status.textContent = `Photo upload failed — ${detail}`;
         formCtx.announce('Photo upload failed.');
       } finally {

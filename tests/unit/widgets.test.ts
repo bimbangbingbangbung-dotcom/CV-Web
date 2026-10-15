@@ -69,7 +69,12 @@ describe('controlFor', () => {
   });
 
   it('renders a textarea for a long nullable string field', () => {
-    const control = controlFor(['owner', 'longBio'], { type: ['string', 'null'] }, 'Bio', makeCtx());
+    const control = controlFor(
+      ['owner', 'longBio'],
+      { type: ['string', 'null'] },
+      'Bio',
+      makeCtx(),
+    );
     expect(control?.tagName).toBe('TEXTAREA');
     expect((control as HTMLTextAreaElement).value).toBe('Bio');
   });

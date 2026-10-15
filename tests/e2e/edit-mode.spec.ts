@@ -231,10 +231,9 @@ test.describe('edit mode', () => {
     expect(authHeader).toBe('Bearer ghp_test_token');
     const imageBytes = Buffer.from(String(puts[0]?.body['content']), 'base64');
     expect(imageBytes.subarray(0, 3)).toEqual(Buffer.from([0xff, 0xd8, 0xff])); // JPEG magic
-    const committedContent = Buffer.from(
-      String(puts[1]?.body['content']),
-      'base64',
-    ).toString('utf8');
+    const committedContent = Buffer.from(String(puts[1]?.body['content']), 'base64').toString(
+      'utf8',
+    );
     const committed = JSON.parse(committedContent) as { owner: { photo: string } };
     expect(committed.owner.photo).toBe('./assets/photo.jpg');
 
