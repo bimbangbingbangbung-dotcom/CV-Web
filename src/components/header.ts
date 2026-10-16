@@ -133,7 +133,6 @@ export function initHeader(content: Content): HeaderHandles {
       { class: 'header-actions' },
       themeBtn,
       makeCvButton('btn btn-primary btn-sm'),
-      editLink,
     ),
   );
 

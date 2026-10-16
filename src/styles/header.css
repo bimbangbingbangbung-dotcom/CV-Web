@@ -123,10 +123,8 @@
   margin-left: auto;
 }
 
-/* The invisible "Edit" affordance — header action and footer action.
-   Only someone who knows where it is will click it: it keeps its space,
-   stays fully clickable, and reveals itself on keyboard focus. */
-.header-edit,
+/* The invisible footer "Edit" affordance — it keeps its place, stays fully
+   clickable, and reveals itself on keyboard focus. */
 .footer-edit {
   font-size: var(--text-xs);
   color: var(--text-faint);
@@ -135,12 +133,10 @@
   opacity: 0;
 }
 
-.header-edit:focus-visible,
 .footer-edit:focus-visible {
   opacity: 1;
 }
 
-.header-edit:hover,
 .footer-edit:hover {
   color: var(--accent);
 }
