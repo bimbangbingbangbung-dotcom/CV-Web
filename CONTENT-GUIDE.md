@@ -13,9 +13,8 @@ the site rebuilds itself.
 
 ## 1. Edit mode (recommended)
 
-1. Open the site and go to **`/#admin`** (or click an _Edit_ link — one sits
-   at the end of the header actions, one in the footer; both are invisible by
-   design but still work when clicked).
+1. Open the site and go to **`/#admin`** (or click the _Edit_ link in the
+   footer — invisible by design but still works when clicked).
 2. Edit fields on the **Content** tab — the page behind updates live.
 3. To change your picture: **Content → Owner → Photo → _Upload photo_**
    (JPG, PNG or WebP up to 3 MB — a crop dialog opens first: drag the photo

@@ -31,21 +31,20 @@ test.describe('edit mode', () => {
     ).toHaveCount(0);
   });
 
-  test('Edit links are invisible but still open the editor', async ({ page }) => {
+  test('the footer Edit link is invisible but still opens the editor', async ({ page }) => {
     await page.goto('/');
-    const edit = page.locator('.site-header .header-edit');
-    await expect(edit).toHaveCount(1);
-    await expect(edit).toHaveCSS('opacity', '0'); // invisible…
-    await expect(edit).toHaveAttribute('href', '#admin'); // …but it still knows where to go
+    // The header's own Edit button is gone — the top bar and the touch menu
+    // carry only the theme toggle and the CV button.
+    await expect(page.locator('.site-header .header-edit')).toHaveCount(0);
+    await expect(page.locator('#site-menu .header-edit')).toHaveCount(0);
 
-    // The footer carries the same affordance, equally invisible.
+    // The footer keeps the affordance: invisible, but a working way in.
     const footerEdit = page.locator('.footer-edit');
     await expect(footerEdit).toHaveCount(1);
     await expect(footerEdit).toHaveCSS('opacity', '0');
     await expect(footerEdit).toHaveAttribute('href', '#admin');
 
-    await page.mouse.move(600, 4); // reveal the auto-hidden header
-    await edit.click();
+    await footerEdit.click();
     await expect(page.locator('.admin-root')).toBeVisible();
   });
 
