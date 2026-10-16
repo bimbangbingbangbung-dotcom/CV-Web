@@ -128,12 +128,7 @@ export function initHeader(content: Content): HeaderHandles {
       { class: 'header-nav', attrs: { 'aria-label': 'Primary' } },
       h('ul', {}, ...navLinks.map((link) => h('li', {}, link))),
     ),
-    h(
-      'div',
-      { class: 'header-actions' },
-      themeBtn,
-      makeCvButton('btn btn-primary btn-sm'),
-    ),
+    h('div', { class: 'header-actions' }, themeBtn, makeCvButton('btn btn-primary btn-sm')),
   );
 
   // --- Hover zone (desktop) ---
@@ -166,12 +161,7 @@ export function initHeader(content: Content): HeaderHandles {
         { attrs: { 'aria-label': 'Primary' } },
         h('ul', { class: 'menu-links' }, ...overlayLinks.map((l) => h('li', {}, l))),
       ),
-      h(
-        'div',
-        { class: 'menu-actions' },
-        makeThemeButton(),
-        makeCvButton('btn btn-primary'),
-      ),
+      h('div', { class: 'menu-actions' }, makeThemeButton(), makeCvButton('btn btn-primary')),
     ),
   );
   const handle = h(
