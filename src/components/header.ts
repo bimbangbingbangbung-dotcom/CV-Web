@@ -97,7 +97,7 @@ export function initHeader(content: Content): HeaderHandles {
   window.addEventListener('cvweb:themechange', syncThemeButtons);
   cleanup.push(() => window.removeEventListener('cvweb:themechange', syncThemeButtons));
 
-  // --- CV button + edit link (shared markup for header and overlay) ---
+  // --- CV button (shared markup for header and overlay) ---
   const cvHref = safeAssetPath(content.cv.path) ?? '#';
   const makeCvButton = (class_: string): HTMLAnchorElement => {
     const link = h('a', { class: class_, text: content.cv.label, attrs: { href: cvHref } });
@@ -106,15 +106,10 @@ export function initHeader(content: Content): HeaderHandles {
   };
   const makeNavLink = (section: SectionEntry): HTMLAnchorElement =>
     h('a', { text: section.label, attrs: { href: `#${section.id}` } });
-  const makeEditLink = (): HTMLAnchorElement | null =>
-    cfg.showEditLink
-      ? h('a', { class: 'header-edit', text: 'Edit', attrs: { href: '#admin' } })
-      : null;
 
   // --- Build the header ---
   const navLinks = navSections.map(makeNavLink);
   const themeBtn = makeThemeButton();
-  const editLink = makeEditLink();
 
   const header = h(
     'header',
@@ -177,7 +172,6 @@ export function initHeader(content: Content): HeaderHandles {
         { class: 'menu-actions' },
         makeThemeButton(),
         makeCvButton('btn btn-primary'),
-        editLink?.cloneNode(true) ?? null,
       ),
     ),
   );
