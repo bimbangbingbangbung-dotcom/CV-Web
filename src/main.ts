@@ -26,7 +26,13 @@ import { validateContent, type FieldError } from './utils/validate';
 import { saveSnapshot, loadSnapshot } from './utils/storage';
 import { updateDocumentMeta } from './utils/seo';
 import { initTheme, hasStoredMode, setMode } from './utils/theme';
+import { projectSlugs } from './utils/slug';
 import { renderPage } from './render';
+import {
+  PROJECT_ROUTE_PREFIX,
+  clearProjectView,
+  fillProjectView,
+} from './render/sections/project-view';
 import { initHeader } from './components/header';
 import { initReveal } from './utils/reveal';
 import { icon } from './components/icons';
@@ -166,6 +172,68 @@ function applyAppearance(content: Content): void {
   const root = document.documentElement;
   root.style.setProperty('--accent-user', content.appearance.accent);
   root.style.setProperty('--accent-dark-user', content.appearance.accentDark);
+}
+
+// --- Project detail route (#project-<slug>) ---------------------------------
+// The detail page is a view of the same document with its own URL: entering
+// hides every other block (body.route-project), leaving restores them and
+// puts the visitor back where they came from (section anchor, or the exact
+// scroll position when the previous hash was empty).
+let detailActive = false;
+let detailReturnScroll: number | null = null;
+
+function applyRoute(options: { initial?: boolean } = {}): void {
+  const view = document.getElementById('project-view');
+  const wasDetail = detailActive;
+  detailActive = false;
+  document.body.classList.remove('route-project');
+  if (view) {
+    view.hidden = true;
+    clearProjectView(view);
+  }
+
+  const hash = location.hash;
+  let slug: string | null = null;
+  if (hash.startsWith(PROJECT_ROUTE_PREFIX)) {
+    try {
+      slug = decodeURIComponent(hash.slice(PROJECT_ROUTE_PREFIX.length));
+    } catch {
+      slug = ''; // malformed percent-encoding → treated as an unknown slug
+    }
+  }
+
+  if (slug !== null) {
+    const index = projectSlugs(currentContent.projects).indexOf(slug);
+    const project = index === -1 ? undefined : currentContent.projects[index];
+    if (view && project) {
+      fillProjectView(view, project);
+      view.hidden = false;
+      document.body.classList.add('route-project');
+      detailActive = true;
+      document.title = `${project.title} — ${currentContent.site.title}`;
+      if (!wasDetail) detailReturnScroll = window.scrollY; // where Back lands
+      window.scrollTo(0, 0);
+      if (!options.initial) view.focus({ preventScroll: true });
+      return;
+    }
+    // Unknown slug (stale link after a rename) — soft-land on the project list.
+    document.getElementById('projects')?.scrollIntoView();
+    if (wasDetail) document.title = currentContent.site.title;
+    return;
+  }
+
+  if (!wasDetail) return;
+
+  // Left the project page: restore the document title and the right place.
+  document.title = currentContent.site.title;
+  const sectionId = hash.startsWith('#') && hash.length > 1 ? hash.slice(1) : '';
+  const target = sectionId ? document.getElementById(sectionId) : null;
+  if (target) {
+    target.scrollIntoView();
+    target.focus({ preventScroll: true });
+  } else if (!sectionId && detailReturnScroll !== null) {
+    window.scrollTo(0, detailReturnScroll);
+  }
 }
 
 /** Render the public page and wire up the header. Reused when publishing. */
