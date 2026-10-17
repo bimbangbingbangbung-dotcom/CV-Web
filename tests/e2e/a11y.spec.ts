@@ -36,6 +36,15 @@ test.describe('axe accessibility', () => {
     expect(badViolations(results.violations)).toEqual([]);
   });
 
+  test('project detail page', async ({ page }) => {
+    const slug = projectSlugs(content.projects)[0]!;
+    await page.goto(`/#project-${slug}`);
+    await page.waitForLoadState('networkidle');
+    await expect(page.locator('#project-view')).toBeVisible();
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(badViolations(results.violations)).toEqual([]);
+  });
+
   test('touch menu overlay', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'overlay opens via the touch handle');
     await page.goto('/');
