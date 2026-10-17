@@ -154,12 +154,15 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 - **Publish = save or download**: two paths out of the editor.
   - **Save to GitHub** (`src/admin/github.ts`, toolbar button): commits
     `public/content.json` through the GitHub Contents API (GET the blob sha →
-    PUT). When the draft’s `owner.photo` is an uploaded data URL, the image
-    bytes are committed **first** as `assets/photo.jpg` (same directory as
-    content.json) and the field is rewritten to `./assets/photo.jpg` before
-    content.json is serialized — the published JSON stays small, a failed
-    content commit is safe to retry, and Download (the token-less path)
-    simply keeps the data URL inline so the file is self-contained.
+    PUT). Every draft field still holding an uploaded data URL
+    (`owner.photo`, `projects.N.image`, `projects.N.gallery[i]`) is committed
+    **first** as a real image file — `assets/photo.jpg`,
+    `assets/projects/project-N-cover.jpg`,
+    `assets/projects/project-N-picture-M.jpg` — and rewritten to its plain
+    `./assets/…` path before content.json is serialized — the published JSON
+    stays small, a failed content commit is safe to retry, and Download (the
+    token-less path) simply keeps the data URLs inline so the file is
+    self-contained.
     Owner/repo/branch/path settings live in localStorage
     (`cvweb:github`) and pre-fill from the deployed/canonical URL; the token
     lives in sessionStorage (localStorage only when “remember on this device”
