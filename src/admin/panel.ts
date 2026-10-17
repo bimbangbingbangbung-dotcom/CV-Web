@@ -153,6 +153,18 @@ export function openPanel(options: PanelOptions): () => void {
   const announce = (message: string): void => {
     live.textContent = message;
   };
+  // Bespoke widgets keyed by exact dotted path (see controlFor in widgets.ts).
+  const customControls: NonNullable<FormContext['customControls']> = {
+    'owner.photo': photoControl,
+  };
+  // Project cover + gallery widgets are index-keyed the same way. 40 slots
+  // cover far more projects than a CV will hold; beyond them the generic
+  // text input still edits the fields, so nothing ever goes missing.
+  for (let i = 0; i < 40; i += 1) {
+    customControls[`projects.${i}.image`] = coverControl;
+    customControls[`projects.${i}.gallery`] = galleryControl;
+  }
+
   const ctx: FormContext = {
     rootSchema,
     onCommit: (path, value) => {
@@ -163,7 +175,7 @@ export function openPanel(options: PanelOptions): () => void {
       if (Array.isArray(value)) renderPreservingFocus();
     },
     announce,
-    customControls: { 'owner.photo': photoControl },
+    customControls,
   };
 
   /**
