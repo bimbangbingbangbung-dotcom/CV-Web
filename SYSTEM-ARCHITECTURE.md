@@ -36,7 +36,7 @@ localStorage snapshot ┘                                │            │
                      ▼                                 ▼            ▼
               renderPage(content)            ──► error banner + fallback ladder
                      │
-        applyAppearance → updateDocumentMeta → initHeader → initReveal
+        applyAppearance → updateDocumentMeta → initHeader → initReveal → applyRoute
 ```
 
 **Resilience ladder** (in `src/main.ts`):
