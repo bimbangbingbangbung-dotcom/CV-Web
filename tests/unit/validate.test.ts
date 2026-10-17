@@ -53,4 +53,55 @@ describe('validateContent', () => {
       ).toBe(true);
     }
   });
+
+  it('accepts project cover and gallery pictures as data URLs or paths', () => {
+    const content = validContent() as { projects: unknown[] };
+    content.projects.push({
+      title: 'Project X',
+      description: 'A project.',
+      role: 'Creator',
+      year: '2026',
+      tech: ['Arduino'],
+      links: [],
+      image: 'data:image/jpeg;base64,QUJD',
+      gallery: ['data:image/png;base64,QUJD', './assets/pic.jpg'],
+      featured: false,
+      detail: null,
+    });
+    expect(validateContent(content).ok).toBe(true);
+  });
+
+  it('rejects an unsafe scheme in a project picture', () => {
+    const content = validContent() as { projects: unknown[] };
+    content.projects.push({
+      title: 'Project X',
+      description: 'A project.',
+      role: 'Creator',
+      year: '2026',
+      tech: ['Arduino'],
+      links: [],
+      image: 'javascript:alert(1)',
+      featured: false,
+      detail: null,
+    });
+    const result = validateContent(content);
+    expect(result.ok).toBe(false);
+  });
+
+  it('rejects a project gallery with more than 30 pictures', () => {
+    const content = validContent() as { projects: unknown[] };
+    content.projects.push({
+      title: 'Project X',
+      description: 'A project.',
+      role: 'Creator',
+      year: '2026',
+      tech: ['Arduino'],
+      links: [],
+      gallery: Array.from({ length: 31 }, (_, i) => `./assets/pic-${i}.jpg`),
+      featured: false,
+      detail: null,
+    });
+    const result = validateContent(content);
+    expect(result.ok).toBe(false);
+  });
 });
