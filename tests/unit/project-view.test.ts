@@ -142,7 +142,7 @@ describe('fillProjectView', () => {
     const dialog = shell.querySelector<HTMLDialogElement>('dialog.lightbox');
     expect(dialog?.querySelector<HTMLButtonElement>('.lightbox-prev')?.hidden).toBe(true);
     expect(dialog?.querySelector<HTMLButtonElement>('.lightbox-next')?.hidden).toBe(true);
-    expect(dialog?.querySelector('.lightbox-counter')?.hidden).toBe(true);
+    expect(dialog?.querySelector<HTMLElement>('.lightbox-counter')?.hidden).toBe(true);
   });
 });
 
