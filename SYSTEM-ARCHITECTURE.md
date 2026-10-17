@@ -64,7 +64,8 @@ server.
 - `src/utils/dom.ts`'s `h()` is the **only** element factory. It sets
   `textContent`, never `innerHTML` (documented at the top of the file).
 - `safeExternalUrl()` allows `http(s)://`, `mailto:`, `tel:` only;
-  `safeAssetPath()` allows `/…`, `./…`, `https://…` only.
+  `safeAssetPath()` allows `/…`, `./…`, `https://…` and strict raster
+  `data:image/(jpeg|png|webp);base64,…` (uploaded pictures) only.
 - External links get `target="_blank" rel="noopener noreferrer"` automatically
   (`externalAnchor()`).
 - This makes XSS structurally impossible even if `content.json` is hostile.
