@@ -11,6 +11,26 @@ import {
 } from '../../src/render/sections/project-view';
 import type { Project } from '../../src/schema/types';
 
+// jsdom doesn't implement dialog.showModal()/close() yet. The lightbox only
+// relies on them toggling the `open` property, so stub the minimum here.
+{
+  const proto = HTMLDialogElement.prototype as HTMLDialogElement;
+  if (typeof proto.showModal !== 'function') {
+    Object.defineProperty(proto, 'showModal', {
+      value: function showModal(this: HTMLDialogElement) {
+        this.setAttribute('open', '');
+      },
+    });
+  }
+  if (typeof proto.close !== 'function') {
+    Object.defineProperty(proto, 'close', {
+      value: function close(this: HTMLDialogElement) {
+        this.removeAttribute('open');
+      },
+    });
+  }
+}
+
 /** Valid strict data URL (safeAssetPath only accepts raster base64 images). */
 const PICTURE = 'data:image/jpeg;base64,QUJD';
 
