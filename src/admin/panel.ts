@@ -711,7 +711,7 @@ export function openPanel(options: PanelOptions): () => void {
         message: `content: update via #admin editor (${stamp} UTC)`,
       });
       store.markSaved(); // badge → "Matches published", pill + unload guard clear
-      const savedMessage = `Saved to ${settings.owner}/${settings.repo} (${settings.branch}) — GitHub Actions redeploys the site in ~1–2 minutes.${photoNote}`;
+      const savedMessage = `Saved to ${settings.owner}/${settings.repo} (${settings.branch}) — GitHub Actions redeploys the site in ~1–2 minutes.${imageNote}`;
       status.textContent = savedMessage;
       showSaveToast(savedMessage);
       onClose(); // real-time result: return to the home page with the changes visible
