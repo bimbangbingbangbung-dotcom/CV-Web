@@ -48,6 +48,8 @@ const ICON_PATHS: Record<string, string[]> = {
   undo: ['M9 14 4 9l5-5', 'M4 9h10.5a5.5 5.5 0 0 1 0 11H11'],
   redo: ['m15 14 5-5-5-5', 'M20 9H9.5a5.5 5.5 0 0 0 0 11H13'],
   'arrow-up': ['M12 19V5', 'M5 12l7-7 7 7'],
+  'arrow-left': ['M19 12H5', 'M12 19l-7-7 7 7'],
+  'arrow-right': ['M5 12h14', 'M12 5l7 7-7 7'],
   menu: ['M4 7h16', 'M4 12h16', 'M4 17h16'],
   close: ['M6 6l12 12', 'M18 6 6 18'],
   mail: ['M3 5h18v14H3z', 'm3 7 9 6 9-6'],
