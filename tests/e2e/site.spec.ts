@@ -4,6 +4,7 @@
  */
 import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { projectSlugs } from '../../src/utils/slug';
 
 const content = JSON.parse(
   readFileSync(new URL('../../public/content.json', import.meta.url), 'utf8'),
@@ -11,6 +12,7 @@ const content = JSON.parse(
   owner: { fullName: string };
   site: { title: string };
   sections: { id: string; label: string; enabled: boolean }[];
+  projects: { title: string }[];
 };
 
 /** True when the header currently has the visible class. */
