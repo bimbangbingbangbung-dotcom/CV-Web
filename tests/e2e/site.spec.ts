@@ -80,6 +80,60 @@ test.describe('content rendering', () => {
   });
 });
 
+test.describe('project detail pages', () => {
+  const slugs = projectSlugs(content.projects);
+
+  test('clicking a project card opens its detail page; the back link returns', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const first = content.projects[0]!;
+    await page
+      .locator('.project-card')
+      .first()
+      .getByRole('link', { name: first.title })
+      .click();
+
+    await expect(page).toHaveURL(new RegExp(`#project-${slugs[0]!}$`));
+    await expect(page.locator('#project-view')).toBeVisible();
+    await expect(page.locator('#project-view-title')).toHaveText(first.title);
+    await expect(page.locator('#projects')).toBeHidden();
+    await expect(page).toHaveTitle(`${first.title} — ${content.site.title}`);
+
+    await page.locator('#project-view .project-back').click();
+    await expect(page.locator('#project-view')).toBeHidden();
+    await expect(page.locator('#projects')).toBeVisible();
+    await expect(page).toHaveTitle(content.site.title);
+  });
+
+  test('a deep link renders the detail page directly', async ({ page }) => {
+    const target = content.projects[1]!;
+    await page.goto(`/#project-${slugs[1]!}`);
+    await expect(page.locator('#project-view')).toBeVisible();
+    await expect(page.locator('#project-view-title')).toHaveText(target.title);
+    await expect(page.locator('#projects')).toBeHidden();
+  });
+
+  test('browser Back from a detail page returns to the list', async ({ page }) => {
+    await page.goto('/');
+    await page
+      .locator('.project-card')
+      .first()
+      .getByRole('link', { name: content.projects[0]!.title })
+      .click();
+    await expect(page.locator('#project-view')).toBeVisible();
+    await page.goBack();
+    await expect(page.locator('#project-view')).toBeHidden();
+    await expect(page.locator('#projects')).toBeVisible();
+  });
+
+  test('an unknown project slug lands on the projects list', async ({ page }) => {
+    await page.goto('/#project-no-such-project');
+    await expect(page.locator('#projects')).toBeVisible();
+    await expect(page.locator('#project-view')).toBeHidden();
+  });
+});
+
 test.describe('auto-hide header', () => {
   test('is hidden by default and reveals on top-edge hover', async ({ page, isMobile }) => {
     test.skip(isMobile, 'hover interaction is desktop-only');
