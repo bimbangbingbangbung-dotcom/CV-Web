@@ -170,6 +170,18 @@ export async function optimizeCanvas(canvas: HTMLCanvasElement, maxKB: number): 
 }
 
 /**
+ * Optimize an already-decoded photo (no cropper): downscale and re-encode as
+ * a JPEG data URL within `maxKB`. The caller owns the source (close() it).
+ */
+export async function optimizeSource(
+  source: ImageBitmap | HTMLImageElement,
+  maxKB: number,
+): Promise<string> {
+  const { w, h } = photoDimensions(source);
+  return encodeLadder(source, w, h, maxKB);
+}
+
+/**
  * Whole-file pipeline without the cropper (tests / fallback): validate,
  * downscale and re-encode a picked photo as a JPEG data URL within `maxKB`.
  * Throws PhotoError with a message meant for the status line.
@@ -177,8 +189,7 @@ export async function optimizeCanvas(canvas: HTMLCanvasElement, maxKB: number): 
 export async function optimizePhoto(file: File, maxKB: number): Promise<string> {
   const source = await decodePhoto(file);
   try {
-    const { w, h } = photoDimensions(source);
-    return await encodeLadder(source, w, h, maxKB);
+    return await optimizeSource(source, maxKB);
   } finally {
     if ('close' in source) source.close();
   }

@@ -257,7 +257,7 @@ function moveItem(items: unknown[], from: number, to: number): unknown[] {
 }
 
 /** Move/delete buttons shared by every list editor (the keyboard path for DnD). */
-function listControls(
+export function listControls(
   items: unknown[],
   index: number,
   path: (string | number)[],
