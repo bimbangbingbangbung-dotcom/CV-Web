@@ -250,7 +250,7 @@ function boot(content: Content, options: { instant?: boolean } = {}): void {
   currentContent = content;
   void routeAdmin();
   // Re-apply the current route: on boot this activates a deep-linked
-  #project-<slug>, and after an edit-mode preview it re-fills the page.
+  // #project-<slug>, and after an edit-mode preview it re-fills the page.
   applyRoute({ initial: true });
 }
 
@@ -268,7 +268,10 @@ async function start(): Promise<void> {
   }
 }
 
-window.addEventListener('hashchange', () => void routeAdmin());
+window.addEventListener('hashchange', () => {
+  void routeAdmin();
+  applyRoute();
+});
 
 // Print: expand every collapsible so no detail is lost on paper.
 window.addEventListener('beforeprint', () => {
