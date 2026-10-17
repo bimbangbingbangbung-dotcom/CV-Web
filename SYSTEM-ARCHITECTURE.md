@@ -82,24 +82,26 @@ scripts/
   generate-images.mjs        OG image + PWA icons (renders the SVG mark)
   make-cv-placeholder.mjs    valid placeholder PDF for the CV button
 src/
-  main.ts                    boot pipeline + #admin hash router
+  main.ts                    boot pipeline + hash router (#admin, #project-<slug>)
   schema/{types,defaults}.ts typed Content + last-resort fallback
   utils/                     dom, url, validate, migrate, storage, seo,
-                             reveal, theme
+                             reveal, theme, slug
   render/                    page orchestrator + one file per section
+                             (incl. project-view.ts: the #project-<slug> page)
   components/header.ts       auto-hide header, touch menu, shortcuts, scroll-spy
   components/icons.ts        inline SVG path data (Simple Icons CC0 + glyphs)
   styles/                    tokens, base, layout, components, header, print
   admin/                     edit mode (code-split chunk, lazy on #admin)
     state.ts                 DraftStore: history, dirty flag, autosave
     widgets.ts               schema-driven form engine (recursion over $ref)
-    panel.ts                 toolbar/tabs/diff/import/export/publish + photo widget
+    panel.ts                 toolbar/tabs/diff/import/export/publish
+                             + image widgets (photo / cover / gallery)
     github.ts                Save-to-GitHub: Contents API commit + token storage
-    image.ts                 photo upload: validate (≤3 MB), EXIF-fix, downscale, re-encode
+    image.ts                 image upload: validate (≤3 MB), EXIF-fix, downscale, re-encode
     crop.ts                  photo cropper: cover/pan/zoom geometry + adjustment dialog
     contrast.ts, diff.ts     WCAG checker + structured draft diff
   content-validator.generated.ts   build artifact (git-ignored from lint)
-tests/unit/*.test.ts         Vitest (102 tests)
+tests/unit/*.test.ts         Vitest (119 tests)
 tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 .github/workflows/ci.yml     lint → typecheck → test → build → e2e → lighthouse
 .github/workflows/deploy.yml build → GitHub Pages
