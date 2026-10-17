@@ -226,7 +226,7 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
 
 | Layer  | Tool                        | What it gates                                                                                                                                                |
 | ------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Unit   | Vitest (jsdom, 102 tests)   | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync, form engine, photo data URLs, crop geometry, GitHub commit flow |
+| Unit   | Vitest (jsdom, 119 tests)   | validation, migrations, URL safety, contrast math, DraftStore, DOM/XSS, content-schema sync, form engine, photo data URLs, crop geometry, GitHub commit flow, route slugs, project detail rendering + lightbox |
 | E2E    | Playwright (desktop+mobile) | content rendering, header contract, theme, touch menu, print, editor flows                                                                                   |
 | A11y   | axe-core in Playwright      | serious/critical violations on public page (both themes), overlay, editor                                                                                    |
 | Budget | check-budget.mjs            | public JS gzip budget                                                                                                                                        |
