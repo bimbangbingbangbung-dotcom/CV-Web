@@ -85,8 +85,13 @@ export function renderProjects(content: Content): HTMLElement | null {
   if (content.projects.length === 0) return null;
 
   // Featured first, everything else keeps its authored order (stable sort).
+  // Slugs resolve from the authored list so they match the router exactly.
+  const slugs = projectSlugs(content.projects);
+  const slugOf = new Map<Project, string>(
+    content.projects.map((project, index) => [project, slugs[index] ?? 'project']),
+  );
   const ordered = [...content.projects].sort((a, b) => Number(b.featured) - Number(a.featured));
-  const cards = ordered.map(projectCard);
+  const cards = ordered.map((project) => projectCard(project, slugOf.get(project) ?? 'project'));
 
   // Tag filter row — only worth showing with a few projects and real tags.
   const tags = [...new Set(ordered.flatMap((p) => p.tech))].sort((a, b) => a.localeCompare(b));
