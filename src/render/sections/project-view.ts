@@ -50,7 +50,10 @@ export function projectViewShell(): HTMLElement {
 }
 
 /** Modal picture viewer for one project's gallery (built per fill). */
-function buildLightbox(pictures: string[], title: string): {
+function buildLightbox(
+  pictures: string[],
+  title: string,
+): {
   dialog: HTMLDialogElement;
   open: (index: number, opener: HTMLElement) => void;
 } {

@@ -1,3 +1,15 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+public/fonts/
+package-lock.json
+src/utils/content-validator.generated.ts
+.opencode/
+SKILL.md
+
 # public/content.json is written by the editor at runtime (JSON.stringify)
 # and sometimes by hand through the GitHub web UI. Prettier collapses short
 # arrays onto one line — a format both writers naturally differ from — which

@@ -662,12 +662,7 @@ export function openPanel(options: PanelOptions): () => void {
       queue(['owner', 'photo'], `${assetPrefix}assets/photo.jpg`, store.draft.owner.photo, 'photo');
       store.draft.projects.forEach((project, index) => {
         const base = `${assetPrefix}assets/projects/project-${index + 1}`;
-        queue(
-          ['projects', index, 'image'],
-          `${base}-cover.jpg`,
-          project.image,
-          'cover picture',
-        );
+        queue(['projects', index, 'image'], `${base}-cover.jpg`, project.image, 'cover picture');
         (project.gallery ?? []).forEach((picture, slot) => {
           queue(
             ['projects', index, 'gallery', slot],
