@@ -7,6 +7,11 @@ framework), driven entirely by **`public/content.json`**.
 - **Everything editable without touching code** — edit the JSON directly, or
   use the built-in editor at `/#admin` (schema-driven forms, live preview,
   undo/redo, WCAG contrast checker, import/export).
+- **Pressable project cards** — each card links to its own detail page
+  (`#project-<slug>`, deep-linkable, browser Back works) showing the full
+  description, problem/solution/result story, cover picture and a gallery
+  with a lightbox. Covers and gallery pictures are uploaded right in the
+  editor; **Save to GitHub** commits them as real image files.
 - **Header taskbar hidden by default**, revealed from the top edge (hover /
   focus / touch pill), with shortcuts (`M`, `T`, `Esc`).
 - **Never a blank page** — content falls back from `content.json` →
