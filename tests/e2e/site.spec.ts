@@ -83,16 +83,10 @@ test.describe('content rendering', () => {
 test.describe('project detail pages', () => {
   const slugs = projectSlugs(content.projects);
 
-  test('clicking a project card opens its detail page; the back link returns', async ({
-    page,
-  }) => {
+  test('clicking a project card opens its detail page; the back link returns', async ({ page }) => {
     await page.goto('/');
     const first = content.projects[0]!;
-    await page
-      .locator('.project-card')
-      .first()
-      .getByRole('link', { name: first.title })
-      .click();
+    await page.locator('.project-card').first().getByRole('link', { name: first.title }).click();
 
     await expect(page).toHaveURL(new RegExp(`#project-${slugs[0]!}$`));
     await expect(page.locator('#project-view')).toBeVisible();

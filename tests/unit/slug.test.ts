@@ -15,9 +15,7 @@ describe('slugify', () => {
 
   it('collapses punctuation and whitespace runs into single hyphens', () => {
     expect(slugify('  Miniature House — 2024!  ')).toBe('miniature-house-2024');
-    expect(slugify('Solar-Powered / Mobile: Charging?')).toBe(
-      'solar-powered-mobile-charging',
-    );
+    expect(slugify('Solar-Powered / Mobile: Charging?')).toBe('solar-powered-mobile-charging');
   });
 
   it('strips accents through NFKD normalization', () => {

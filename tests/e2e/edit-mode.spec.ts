@@ -308,9 +308,7 @@ test.describe('edit mode', () => {
       mimeType: 'image/png',
       buffer: TINY_PNG,
     });
-    await expect(page.locator('#f-projects-0-gallery-0')).toHaveValue(
-      /^data:image\/jpeg;base64,/,
-    );
+    await expect(page.locator('#f-projects-0-gallery-0')).toHaveValue(/^data:image\/jpeg;base64,/);
     await page.locator('#f-projects-0-gallery-file').setInputFiles({
       name: 'pic-two.png',
       mimeType: 'image/png',
@@ -321,9 +319,7 @@ test.describe('edit mode', () => {
     // Removing the first row re-indexes the second into slot 1.
     await page.getByRole('button', { name: 'Remove Picture 1' }).click();
     await expect(page.locator('.gallery-list li')).toHaveCount(1);
-    await expect(page.locator('#f-projects-0-gallery-0')).toHaveValue(
-      /^data:image\/jpeg;base64,/,
-    );
+    await expect(page.locator('#f-projects-0-gallery-0')).toHaveValue(/^data:image\/jpeg;base64,/);
 
     // Configure publishing (Help tab), same as the other save tests.
     await page.getByRole('tab', { name: 'Help' }).click();
