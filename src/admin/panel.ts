@@ -193,36 +193,53 @@ export function openPanel(options: PanelOptions): () => void {
   };
 
   /**
-   * owner.photo widget: path/URL field + live thumbnail + upload/remove.
-   * An uploaded file (up to MAX_UPLOAD_MB) is decoded, adjusted in the
-   * cropper and optimized to a JPEG data URL (image.ts) so preview, undo,
-   * draft autosave and Download all see it; "Save to GitHub" then commits
-   * it as assets/photo.jpg and stores the plain path instead.
+   * Shared image widget: path/URL field + live thumbnail + upload/remove.
+   * An uploaded file (up to MAX_UPLOAD_MB) is decoded, optionally adjusted
+   * in the cropper and optimized to a JPEG data URL (image.ts) so preview,
+   * undo, draft autosave and Download all see it; "Save to GitHub" then
+   * commits it as a real asset file and stores the plain path (see
+   * publishToGitHub below).
    */
-  function photoControl(
+  interface ImageControlOptions {
+    /** Sentence-case noun used in statuses: 'Photo' | 'Picture'. */
+    noun: string;
+    uploadLabel: string;
+    removeLabel: string;
+    /** Thumbnail placeholder while the field is empty. */
+    emptyText: string;
+    /** Status line after removal — each field loses something different. */
+    removeStatus: string;
+    /** Open the cropper between decode and optimize (owner.photo only). */
+    crop: boolean;
+  }
+
+  function imageControl(
     path: (string | number)[],
     rawNode: SchemaNode,
     value: unknown,
     formCtx: FormContext,
+    options: ImageControlOptions,
   ): HTMLElement {
     const node = valueSchema(rawNode, formCtx.rootSchema);
     const input = textControl(path, node, value, formCtx);
     const maxKB = store.draft.admin.imageMaxKB;
+    const { noun, crop } = options;
+    const nounLower = noun.toLowerCase();
 
     const thumb = h('img', { class: 'photo-thumb', attrs: { alt: '', 'aria-hidden': 'true' } });
     const placeholder = h('span', {
       class: 'photo-thumb photo-thumb-empty',
-      text: 'No photo',
+      text: options.emptyText,
       attrs: { 'aria-hidden': 'true' },
     });
     const uploadBtn = h('button', {
       class: 'btn btn-ghost btn-sm',
-      text: 'Upload photo',
+      text: options.uploadLabel,
       attrs: { type: 'button' },
     });
     const removeBtn = h('button', {
       class: 'btn btn-ghost btn-sm',
-      text: 'Remove photo',
+      text: options.removeLabel,
       attrs: { type: 'button' },
     });
     const fileInput = h('input', {
@@ -234,7 +251,8 @@ export function openPanel(options: PanelOptions): () => void {
         tabindex: '-1',
       },
     });
-    fileInput.id = 'f-owner-photo-file';
+    // Stable id: f-owner-photo-file, f-projects-0-image-file, …
+    fileInput.id = `f-${path.join('-')}-file`;
 
     /** Reflect the current value into the thumbnail + remove button. */
     const sync = (raw: string): void => {
@@ -256,29 +274,35 @@ export function openPanel(options: PanelOptions): () => void {
     const processFile = async (file: File): Promise<void> => {
       uploadBtn.disabled = true;
       const before = Math.max(1, Math.round(file.size / 1024));
-      status.textContent = `Preparing photo (${before} KB)…`;
+      status.textContent = `Preparing ${nounLower} (${before} KB)…`;
       let source: ImageBitmap | HTMLImageElement | null = null;
       try {
         source = await decodePhoto(file);
-        const cropped = await openCropper(source);
-        if (!cropped) {
-          status.textContent = 'Photo upload cancelled.';
-          return;
+        let dataUrl: string;
+        if (crop) {
+          const cropped = await openCropper(source);
+          if (!cropped) {
+            status.textContent = `${noun} upload cancelled.`;
+            return;
+          }
+          status.textContent = `Optimizing ${nounLower}…`;
+          dataUrl = await optimizeCanvas(cropped, maxKB);
+        } else {
+          status.textContent = `Optimizing ${nounLower}…`;
+          dataUrl = await optimizeSource(source, maxKB);
         }
-        status.textContent = 'Optimizing photo…';
-        const dataUrl = await optimizeCanvas(cropped, maxKB);
         formCtx.onCommit(path, dataUrl);
         input.value = dataUrl;
         sync(dataUrl);
         const payloadLength = dataUrl.length - (dataUrl.indexOf(',') + 1);
         const after = Math.max(1, Math.round((payloadLength * 3) / 4 / 1024));
-        status.textContent = `Photo updated (${after} KB) — Save to GitHub or Download content.json to publish it.`;
-        formCtx.announce('Photo updated — save to publish it.');
+        status.textContent = `${noun} updated (${after} KB) — Save to GitHub or Download content.json to publish it.`;
+        formCtx.announce(`${noun} updated — save to publish it.`);
       } catch (error) {
         const detail =
           error instanceof PhotoError ? error.message : 'could not process that image.';
-        status.textContent = `Photo upload failed — ${detail}`;
-        formCtx.announce('Photo upload failed.');
+        status.textContent = `${noun} upload failed — ${detail}`;
+        formCtx.announce(`${noun} upload failed.`);
       } finally {
         if (source && 'close' in source) source.close();
         uploadBtn.disabled = false;
@@ -297,18 +321,226 @@ export function openPanel(options: PanelOptions): () => void {
       formCtx.onCommit(path, null);
       input.value = '';
       sync('');
-      status.textContent = 'Photo removed — the initials avatar will show instead.';
-      formCtx.announce('Photo removed.');
+      status.textContent = options.removeStatus;
+      formCtx.announce(`${noun} removed.`);
     });
+
+    const help = crop
+      ? `JPG, PNG or WebP up to ${MAX_UPLOAD_MB} MB — adjust the crop, then the editor optimizes it to ${maxKB} KB or less. Save to GitHub commits the picture as an image file; Download keeps it inside content.json.`
+      : `JPG, PNG or WebP up to ${MAX_UPLOAD_MB} MB — the editor optimizes it to ${maxKB} KB or less. Save to GitHub commits the picture as an image file; Download keeps it inside content.json.`;
 
     return h(
       'div',
       { class: 'photo-edit', attrs: { 'data-label-target': input.id } },
       h('div', { class: 'photo-edit-main' }, thumb, placeholder, input),
       h('div', { class: 'photo-edit-actions' }, uploadBtn, removeBtn, fileInput),
+      h('p', { class: 'admin-help', text: help }),
+    );
+  }
+
+  /**
+   * owner.photo widget: the shared image widget in crop mode (3:4 avatar).
+   * An uploaded file is decoded, adjusted in the cropper and optimized to a
+   * JPEG data URL so preview, undo, draft autosave and Download all see it;
+   * "Save to GitHub" then commits it as assets/photo.jpg and stores the
+   * plain path instead.
+   */
+  function photoControl(
+    path: (string | number)[],
+    rawNode: SchemaNode,
+    value: unknown,
+    formCtx: FormContext,
+  ): HTMLElement {
+    return imageControl(path, rawNode, value, formCtx, {
+      noun: 'Photo',
+      uploadLabel: 'Upload photo',
+      removeLabel: 'Remove photo',
+      emptyText: 'No photo',
+      removeStatus: 'Photo removed — the initials avatar will show instead.',
+      crop: true,
+    });
+  }
+
+  /**
+   * projects.N.image widget: the same widget without the cropper — the card
+   * and the detail page cover-crop through CSS, so any aspect works.
+   */
+  function coverControl(
+    path: (string | number)[],
+    rawNode: SchemaNode,
+    value: unknown,
+    formCtx: FormContext,
+  ): HTMLElement {
+    return imageControl(path, rawNode, value, formCtx, {
+      noun: 'Picture',
+      uploadLabel: 'Upload picture',
+      removeLabel: 'Remove picture',
+      emptyText: 'No picture',
+      removeStatus: 'Picture removed — the project shows without a cover.',
+      crop: false,
+    });
+  }
+
+  /**
+   * projects.N.gallery widget: ordered picture list — per-row path/URL field
+   * with thumbnail and upload, keyboard reordering/removal (listControls)
+   * and an "Add picture" picker that appends an optimized data URL. Same
+   * upload pipeline as the photo widget, minus the cropper (pictures keep
+   * their own aspect). "Save to GitHub" extracts each data URL into
+   * assets/projects/… and stores the plain path (see publishToGitHub below).
+   */
+  function galleryControl(
+    path: (string | number)[],
+    _rawNode: SchemaNode,
+    value: unknown,
+    formCtx: FormContext,
+  ): HTMLElement {
+    const items = Array.isArray(value) ? (value as string[]) : [];
+    const maxKB = store.draft.admin.imageMaxKB;
+    const baseId = `f-${path.join('-')}`; // f-projects-0-gallery
+
+    const addButton = h('button', {
+      class: 'btn btn-ghost btn-sm',
+      text: 'Add picture',
+      id: `add-${path.join('-')}`,
+      attrs: { type: 'button' },
+    });
+    addButton.prepend(icon('plus'));
+
+    const picker = h('input', {
+      attrs: {
+        type: 'file',
+        accept: 'image/jpeg,image/png,image/webp',
+        hidden: true,
+        'aria-hidden': 'true',
+        tabindex: '-1',
+      },
+    });
+    picker.id = `${baseId}-file`;
+
+    /** Decode → optimize → hand the data URL to the caller's commit. */
+    const processFile = async (file: File, apply: (dataUrl: string) => void): Promise<void> => {
+      addButton.disabled = true;
+      const before = Math.max(1, Math.round(file.size / 1024));
+      status.textContent = `Preparing picture (${before} KB)…`;
+      let source: ImageBitmap | HTMLImageElement | null = null;
+      try {
+        source = await decodePhoto(file);
+        status.textContent = 'Optimizing picture…';
+        const dataUrl = await optimizeSource(source, maxKB);
+        apply(dataUrl);
+        const payloadLength = dataUrl.length - (dataUrl.indexOf(',') + 1);
+        const after = Math.max(1, Math.round((payloadLength * 3) / 4 / 1024));
+        status.textContent = `Picture updated (${after} KB) — Save to GitHub or Download content.json to publish it.`;
+        formCtx.announce('Picture updated — save to publish it.');
+      } catch (error) {
+        const detail =
+          error instanceof PhotoError ? error.message : 'could not process that image.';
+        status.textContent = `Picture upload failed — ${detail}`;
+        formCtx.announce('Picture upload failed.');
+      } finally {
+        if (source && 'close' in source) source.close();
+        addButton.disabled = false;
+        picker.value = ''; // same file can be picked again
+      }
+    };
+
+    const rowEntry = (entry: string, index: number): HTMLElement => {
+      const input = h('input', {
+        id: `${baseId}-${index}`,
+        attrs: { type: 'text', 'aria-label': `Picture ${index + 1} path or URL` },
+      });
+      input.value = entry;
+
+      const thumb = h('img', { class: 'photo-thumb', attrs: { alt: '', 'aria-hidden': 'true' } });
+      const placeholder = h('span', {
+        class: 'photo-thumb photo-thumb-empty',
+        text: 'No picture',
+        attrs: { 'aria-hidden': 'true' },
+      });
+      const sync = (raw: string): void => {
+        const url = raw ? safeAssetPath(raw) : null;
+        if (url) {
+          thumb.src = url;
+          thumb.hidden = false;
+          placeholder.hidden = true;
+        } else {
+          thumb.removeAttribute('src');
+          thumb.hidden = true;
+          placeholder.hidden = false;
+        }
+      };
+      sync(entry);
+
+      const rowFile = h('input', {
+        attrs: {
+          type: 'file',
+          accept: 'image/jpeg,image/png,image/webp',
+          hidden: true,
+          'aria-hidden': 'true',
+          tabindex: '-1',
+        },
+      });
+      rowFile.id = `${baseId}-${index}-file`;
+      const uploadBtn = h('button', {
+        class: 'btn btn-ghost btn-sm',
+        text: 'Upload picture',
+        attrs: { type: 'button' },
+      });
+
+      input.addEventListener('change', () => {
+        // Whole-list commit: the form rebuilds (array value) and returns
+        // focus to this input by its stable id.
+        formCtx.onCommit(
+          path,
+          items.map((picture, i) => (i === index ? input.value : picture)),
+        );
+        sync(input.value);
+      });
+      uploadBtn.addEventListener('click', () => rowFile.click());
+      rowFile.addEventListener('change', () => {
+        const file = rowFile.files?.[0];
+        if (!file) return;
+        void processFile(file, (dataUrl) => {
+          formCtx.onCommit(
+            path,
+            items.map((picture, i) => (i === index ? dataUrl : picture)),
+          );
+          input.value = dataUrl;
+          sync(dataUrl);
+        });
+      });
+
+      return h(
+        'li',
+        { class: 'photo-edit gallery-row' },
+        h('div', { class: 'photo-edit-main' }, thumb, placeholder, input),
+        h(
+          'div',
+          { class: 'photo-edit-actions' },
+          uploadBtn,
+          rowFile,
+          listControls(items, index, path, `Picture ${index + 1}`, formCtx),
+        ),
+      );
+    };
+
+    addButton.addEventListener('click', () => picker.click());
+    picker.addEventListener('change', () => {
+      const file = picker.files?.[0];
+      if (file) void processFile(file, (dataUrl) => formCtx.onCommit(path, [...items, dataUrl]));
+    });
+
+    return h(
+      'div',
+      { class: 'gallery-edit', attrs: { 'data-label-target': addButton.id } },
+      items.length > 0
+        ? h('ul', { class: 'gallery-list' }, ...items.map((entry, index) => rowEntry(entry, index)))
+        : h('p', { class: 'admin-help gallery-empty', text: 'No pictures yet.' }),
+      h('div', { class: 'gallery-add' }, addButton, picker),
       h('p', {
         class: 'admin-help',
-        text: `JPG, PNG or WebP up to ${MAX_UPLOAD_MB} MB — adjust the crop, then the editor optimizes it to ${maxKB} KB or less. Save to GitHub commits the picture as an image file; Download keeps it inside content.json.`,
+        text: `JPG, PNG or WebP up to ${MAX_UPLOAD_MB} MB — each picture is optimized to ${maxKB} KB or less. Save to GitHub commits them as image files; Download keeps them inside content.json.`,
       }),
     );
   }
