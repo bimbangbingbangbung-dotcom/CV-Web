@@ -18,6 +18,7 @@ import { renderPublications } from './sections/publications';
 import { renderReferences } from './sections/references';
 import { renderContact } from './sections/contact';
 import { renderFooter } from './sections/footer';
+import { projectViewShell } from './sections/project-view';
 
 type SectionRenderer = (content: Content) => HTMLElement | null;
 
@@ -49,6 +50,9 @@ export function renderPage(content: Content): HTMLElement {
     const section = renderer(content);
     if (section) main.append(section);
   }
+
+  // Hidden shell for the #project-<slug> detail route (filled by the router).
+  main.append(projectViewShell());
 
   app.append(main, renderFooter(content));
   return main;
