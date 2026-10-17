@@ -49,6 +49,16 @@ Any failure past step 1 renders a dismissible `role="alert"` banner listing
 each broken field (`path — message`), so content problems are diagnosable
 without a terminal. The page never renders blank.
 
+**Routing** is hash-only and in-page: `#admin` opens the editor, and
+`#project-<slug>` swaps the section list for that project's detail page
+(cover, full description, problem/solution/result story, gallery with a
+lightbox; header and footer stay visible). Cards link to `#project-<slug>`
+(slugs come from the titles via `src/utils/slug.ts`, deduped left-to-right),
+Back/Forward work through `hashchange`, leaving the detail view restores the
+list's scroll position, and an unknown slug rewrites itself back to
+`#projects` — no server involvement, so the static host stays a dumb file
+server.
+
 ## 4. Rendering rules (security posture)
 
 - `src/utils/dom.ts`'s `h()` is the **only** element factory. It sets
