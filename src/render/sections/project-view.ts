@@ -224,7 +224,7 @@ export function fillProjectView(shell: HTMLElement, project: Project): void {
           lightbox.dialog,
         )
       : null,
-  );
+  ]);
 }
 
 /** Empty the shell again (route exit) — the heading goes blank with it. */
