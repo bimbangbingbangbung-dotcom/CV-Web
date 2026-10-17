@@ -82,13 +82,13 @@ content.schema.json      single contract: validation, edit forms, tests
 public/content.json      all site content (edit this)
 scripts/                 validator codegen, SEO build plugin, budget gate, asset gen
 src/
-  main.ts                boot pipeline (fetch → migrate → validate → render) + #admin router
+  main.ts                boot pipeline (fetch → migrate → validate → render) + hash router (#admin, #project-<slug>)
   schema/                typed Content + defaults
-  render/                section renderers (one file each)
+  render/                section renderers (one file each) incl. the project detail page
   components/            header (auto-hide), icons
   admin/                 edit mode (code-split, lazy-loaded on #admin)
   styles/                tokens, base, layout, components, header, print
-  utils/                 dom, url (safe schemes), validate, migrate, storage, seo, theme
+  utils/                 dom, url (safe schemes), validate, migrate, storage, seo, theme, slug
 tests/unit/              Vitest
 tests/e2e/               Playwright + axe
 .github/workflows/       ci.yml, deploy.yml
