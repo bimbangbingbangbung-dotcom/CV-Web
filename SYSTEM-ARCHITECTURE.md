@@ -138,11 +138,15 @@ tests/e2e/*.spec.ts          Playwright (desktop + Pixel 5) + axe
   buttons). Nullable `type: ["string","null"]` fields unwrap to their concrete
   type (they used to render no control at all), and a `customControls` map on
   the form context lets one dotted path opt out of the generic widget —
-  `owner.photo` uses it for its **upload control** (file picker →
-  `image.ts` validates up to 3 MB and decodes EXIF-corrected pixels →
-  `crop.ts` opens the adjust dialog (drag / zoom / arrow-key pan, 3:4 like
-  the hero) and renders the crop → `image.ts` downscales/re-encodes to a ≤`admin.imageMaxKB` JPEG
-  data URL → live preview; the thumbnail mirrors the hero’s 3:4 crop).
+  `owner.photo`, `projects.N.image` and `projects.N.gallery` use it for
+  **image upload widgets** (file picker → `image.ts` validates up to 3 MB and
+  decodes EXIF-corrected pixels → for the avatar only, `crop.ts` opens the
+  adjust dialog (drag / zoom / arrow-key pan, 3:4 like the hero) and renders
+  the crop → `image.ts` downscales/re-encodes to a ≤`admin.imageMaxKB` JPEG
+  data URL → live preview; card covers and gallery pictures skip the cropper
+  — any aspect works because CSS crops the card). The gallery widget renders
+  one row per picture (thumbnail, path/URL field, upload, keyboard
+  reorder/remove) plus an _Add picture_ picker.
 - **DraftStore**: in-memory draft + localStorage autosave (`cvweb:draft`) with a
   50-step undo/redo stack, dirty flag, and “resume draft?” prompt. localStorage
   is _never_ the published source — it only holds working copies and the
