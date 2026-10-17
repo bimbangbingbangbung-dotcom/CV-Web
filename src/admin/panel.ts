@@ -16,6 +16,7 @@ import {
   controlFor,
   fieldRow,
   humanize,
+  listControls,
   resolveRef,
   textControl,
   valueSchema,
@@ -30,6 +31,7 @@ import {
   isDataImage,
   MAX_UPLOAD_MB,
   optimizeCanvas,
+  optimizeSource,
   PhotoError,
 } from './image';
 import { openCropper } from './crop';
