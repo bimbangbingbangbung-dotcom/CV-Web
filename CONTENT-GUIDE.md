@@ -22,7 +22,8 @@ the site rebuilds itself.
    optimizes the result automatically. _Remove photo_ switches back to the
    initials avatar). **Save to GitHub**
    commits the picture as `public/assets/photo.jpg`; the Download path keeps
-   it inside content.json.
+   it inside content.json. Project cover pictures and galleries work the same
+   way without the crop step — see `projects` in the field guide below.
 4. Publish with whichever path you set up:
 
    - **Save to GitHub** (toolbar, or `Ctrl/⌘ + S`) — commits
