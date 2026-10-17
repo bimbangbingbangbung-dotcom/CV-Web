@@ -355,8 +355,18 @@
           },
           "image": {
             "type": ["string", "null"],
-            "description": "Path/URL to a project screenshot, or null for none.",
-            "pattern": "^(https?://|/|\\./)"
+            "description": "Cover picture: a path/URL or an uploaded data: image, or null for none.",
+            "pattern": "^(https?://|/|\\./|data:image/(jpe?g|png|webp))"
+          },
+          "gallery": {
+            "type": "array",
+            "description": "Extra pictures for the project's detail page — paths/URLs or uploaded data: images, in display order.",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "maxLength": 8000000,
+              "pattern": "^(https?://|/|\\./|data:image/(jpe?g|png|webp))"
+            }
           },
           "featured": { "type": "boolean" },
           "detail": {

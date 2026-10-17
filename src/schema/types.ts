@@ -143,6 +143,8 @@ export interface Project {
   tech: string[];
   links: ProjectLink[];
   image?: string | null;
+  /** Extra pictures on the project's detail page (paths or uploaded data: URLs). */
+  gallery?: string[];
   featured: boolean;
   detail?: ProjectDetail | null;
 }
