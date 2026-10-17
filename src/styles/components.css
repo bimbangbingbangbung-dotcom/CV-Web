@@ -470,3 +470,9 @@
   font-size: var(--text-xs);
   color: var(--text-faint);
 }
+
+/* Single-picture galleries hide the pager (author display rules would
+ * otherwise outrank the bare [hidden] attribute). */
+.lightbox [hidden] {
+  display: none;
+}

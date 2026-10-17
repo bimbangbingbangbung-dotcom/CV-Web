@@ -86,6 +86,13 @@ function buildLightbox(pictures: string[], title: string): {
     attrs: { 'aria-label': `${title} — pictures` },
   });
 
+  // One picture has nothing to page through — keep only the close button.
+  if (pictures.length < 2) {
+    prevBtn.hidden = true;
+    nextBtn.hidden = true;
+    counter.hidden = true;
+  }
+
   let opener: HTMLElement | null = null;
   let index = 0;
 
