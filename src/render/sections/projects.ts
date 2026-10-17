@@ -1,11 +1,15 @@
 /**
- * Projects — cards with tag filtering, a "Featured" flag and an optional
- * expandable problem → solution → result detail view (<details>, so it works
- * without JavaScript and with keyboards out of the box).
+ * Projects — pressable cards that open the project's detail page
+ * (#project-<slug>, see project-view.ts), with tag filtering, a "Featured"
+ * flag and an optional expandable problem → solution → result preview
+ * (<details>, so it works without JavaScript and with keyboards out of the
+ * box).
  */
 import type { Content, Project } from '../../schema/types';
 import { h } from '../../utils/dom';
 import { safeAssetPath } from '../../utils/url';
+import { projectSlugs } from '../../utils/slug';
+import { icon } from '../../components/icons';
 import { chip, externalLink, labelOf, metaLine, sectionShell } from '../common';
 
 function detailBlock(project: Project): HTMLElement | null {
@@ -28,7 +32,7 @@ function detailBlock(project: Project): HTMLElement | null {
   );
 }
 
-function projectCard(project: Project): HTMLElement {
+function projectCard(project: Project, slug: string): HTMLElement {
   const links = project.links
     .map((link) => externalLink(link.label, link.url, 'card-link'))
     .filter((el): el is HTMLAnchorElement => el !== null);
@@ -41,7 +45,11 @@ function projectCard(project: Project): HTMLElement {
     h(
       'div',
       { class: 'card-head' },
-      h('h3', { class: 'item-title', text: project.title }),
+      h(
+        'h3',
+        { class: 'item-title' },
+        h('a', { class: 'project-link', text: project.title, attrs: { href: `#project-${slug}` } }),
+      ),
       project.featured ? chip('Featured', 'chip-accent') : null,
     ),
     metaLine(project.role, project.year),
@@ -62,6 +70,14 @@ function projectCard(project: Project): HTMLElement {
         })
       : null,
     detailBlock(project),
+    // Visual affordance for the stretched card link (decorative — the h3
+    // anchor carries the accessible name and covers the whole card).
+    h(
+      'span',
+      { class: 'project-cta', attrs: { 'aria-hidden': 'true' } },
+      'View project details',
+      icon('arrow-right'),
+    ),
   );
 }
 
