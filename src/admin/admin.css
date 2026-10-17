@@ -414,6 +414,31 @@ body.admin-open {
   flex-wrap: wrap;
 }
 
+/* ---------- Gallery control (projects.N.gallery) ---------- */
+
+.gallery-list {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.gallery-row {
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.gallery-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.gallery-add {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
 /* ---------- Photo cropper (owner.photo upload step) ---------- */
 
 .crop-dialog {
