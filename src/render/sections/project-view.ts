@@ -12,7 +12,7 @@
  * backdrop clicks and the focus trap come for free).
  */
 import type { Project } from '../../schema/types';
-import { h, clear } from '../../utils/dom';
+import { h, clear, appendChildren } from '../../utils/dom';
 import { safeAssetPath } from '../../utils/url';
 import { icon } from '../../components/icons';
 import { chip, externalLink, metaLine } from '../common';
@@ -158,7 +158,7 @@ export function fillProjectView(shell: HTMLElement, project: Project): void {
   const detail = project.detail;
   const lightbox = pictures.length > 0 ? buildLightbox(pictures, title) : null;
 
-  body.append(
+  appendChildren(body, [
     h(
       'header',
       { class: 'project-head' },
