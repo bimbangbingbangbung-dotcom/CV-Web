@@ -132,11 +132,31 @@ test.describe('auto-hide header', () => {
   test('is hidden by default and reveals on top-edge hover', async ({ page, isMobile }) => {
     test.skip(isMobile, 'hover interaction is desktop-only');
     // The first-visit hint (showOnLoadHint) reveals the header ~350 ms after
-    // load — a race the assertion below would lose on a slow machine. A
-    // returning visit has no hint; that is the state this test pins.
+    // load — suppress it (returning visit) and park the pointer away from
+    // the top edge before load, so neither can race the default-hidden
+    // assertion below.
     await page.addInitScript(() => sessionStorage.setItem('cvweb:hinted', '1'));
+    await page.mouse.move(640, 400);
     await page.goto('/');
-    expect(await headerVisible(page)).toBe(false);
+    // Diagnostic payload rides in the message so a CI failure shows WHY the
+    // header revealed itself (hover/focus/scroll/hint state).
+    const state = JSON.stringify(
+      await page.evaluate(() => {
+        const header = document.querySelector('.site-header');
+        const zone = document.querySelector('.hover-zone');
+        const active = document.activeElement;
+        return {
+          headerClass: header?.className ?? null,
+          headerHovered: header?.matches(':hover') ?? null,
+          zoneHovered: zone?.matches(':hover') ?? null,
+          focusWithin: header?.contains(active ?? document.body) ?? null,
+          active: active ? `${active.tagName}.${(active as Element).className}` : null,
+          scrollY: window.scrollY,
+          hinted: sessionStorage.getItem('cvweb:hinted'),
+        };
+      }),
+    );
+    expect(await headerVisible(page), state).toBe(false);
 
     await page.mouse.move(600, 4); // into the invisible hover zone
     await expect.poll(() => headerVisible(page), { timeout: 1500 }).toBe(true);
