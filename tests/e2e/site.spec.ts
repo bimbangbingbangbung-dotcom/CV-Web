@@ -132,31 +132,15 @@ test.describe('auto-hide header', () => {
   test('is hidden by default and reveals on top-edge hover', async ({ page, isMobile }) => {
     test.skip(isMobile, 'hover interaction is desktop-only');
     // The first-visit hint (showOnLoadHint) reveals the header ~350 ms after
-    // load — suppress it (returning visit) and park the pointer away from
-    // the top edge before load, so neither can race the default-hidden
-    // assertion below.
+    // load — suppress it (returning visit) so only real input can reveal.
     await page.addInitScript(() => sessionStorage.setItem('cvweb:hinted', '1'));
-    await page.mouse.move(640, 400);
     await page.goto('/');
-    // Diagnostic payload rides in the message so a CI failure shows WHY the
-    // header revealed itself (hover/focus/scroll/hint state).
-    const state = JSON.stringify(
-      await page.evaluate(() => {
-        const header = document.querySelector('.site-header');
-        const zone = document.querySelector('.hover-zone');
-        const active = document.activeElement;
-        return {
-          headerClass: header?.className ?? null,
-          headerHovered: header?.matches(':hover') ?? null,
-          zoneHovered: zone?.matches(':hover') ?? null,
-          focusWithin: header?.contains(active ?? document.body) ?? null,
-          active: active ? `${active.tagName}.${(active as Element).className}` : null,
-          scrollY: window.scrollY,
-          hinted: sessionStorage.getItem('cvweb:hinted'),
-        };
-      }),
-    );
-    expect(await headerVisible(page), state).toBe(false);
+    // Some Chromium builds re-establish hover at the default pointer
+    // position after navigation, and (0,0) sits inside the invisible
+    // top-edge zone — park the pointer mid-page and let any transient
+    // reveal settle (pointerleave → hideDelayMs = 500 ms).
+    await page.mouse.move(640, 400);
+    await expect.poll(() => headerVisible(page), { timeout: 1500 }).toBe(false);
 
     await page.mouse.move(600, 4); // into the invisible hover zone
     await expect.poll(() => headerVisible(page), { timeout: 1500 }).toBe(true);
