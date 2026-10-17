@@ -636,33 +636,69 @@ export function openPanel(options: PanelOptions): () => void {
       onPreview(store.draft); // footer "Last updated" reflects immediately
       const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
 
-      // An uploaded photo travels as a data URL in the draft; commit it as a
-      // real file FIRST so the published content.json stays small and fast.
-      // If the content commit then fails, the draft already points at the
-      // (now existing) file, so a plain retry just re-commits content.json.
-      let photoNote = '';
-      const photo = store.draft.owner.photo;
-      if (isDataImage(photo)) {
-        const bytes = dataUrlToBytes(photo);
-        if (bytes) {
-          const slash = settings.path.lastIndexOf('/');
-          const dir = slash === -1 ? '' : settings.path.slice(0, slash);
-          const assetPath = `${dir ? `${dir}/` : ''}assets/photo.jpg`;
-          status.textContent = `Uploading photo to ${settings.owner}/${settings.repo}…`;
-          await putFile({
-            owner: settings.owner,
-            repo: settings.repo,
-            branch: settings.branch,
-            path: assetPath,
-            token,
-            contentBase64: encodeBase64Bytes(bytes),
-            message: `content: upload photo via #admin editor (${stamp} UTC)`,
-          });
-          store.set(['owner', 'photo'], './assets/photo.jpg');
-          onPreview(store.draft);
-          photoNote = ` Photo committed to ${assetPath} (shows up with the redeploy).`;
-        }
+      // Uploaded pictures travel as data URLs in the draft; commit each one
+      // as a real file FIRST (pictures, then content.json) so the published
+      // content.json stays small and fast and never points at a missing
+      // file. If the content commit then fails, the draft already points at
+      // the (now existing) files, so a plain retry just re-commits content.
+      const slash = settings.path.lastIndexOf('/');
+      const dir = slash === -1 ? '' : settings.path.slice(0, slash);
+      const assetPrefix = dir ? `${dir}/` : '';
+      const queued: {
+        draftPath: (string | number)[];
+        assetPath: string;
+        value: string;
+        noun: string;
+      }[] = [];
+      const queue = (
+        draftPath: (string | number)[],
+        assetPath: string,
+        value: unknown,
+        noun: string,
+      ): void => {
+        if (isDataImage(value)) queued.push({ draftPath, assetPath, value, noun });
+      };
+
+      queue(['owner', 'photo'], `${assetPrefix}assets/photo.jpg`, store.draft.owner.photo, 'photo');
+      store.draft.projects.forEach((project, index) => {
+        const base = `${assetPrefix}assets/projects/project-${index + 1}`;
+        queue(
+          ['projects', index, 'image'],
+          `${base}-cover.jpg`,
+          project.image,
+          'cover picture',
+        );
+        (project.gallery ?? []).forEach((picture, slot) => {
+          queue(
+            ['projects', index, 'gallery', slot],
+            `${base}-picture-${slot + 1}.jpg`,
+            picture,
+            'project picture',
+          );
+        });
+      });
+
+      const imageNotes: string[] = [];
+      for (const item of queued) {
+        const bytes = dataUrlToBytes(item.value);
+        if (!bytes) continue;
+        status.textContent = `Uploading ${item.noun} to ${settings.owner}/${settings.repo}…`;
+        await putFile({
+          owner: settings.owner,
+          repo: settings.repo,
+          branch: settings.branch,
+          path: item.assetPath,
+          token,
+          contentBase64: encodeBase64Bytes(bytes),
+          message: `content: upload ${item.noun} via #admin editor (${stamp} UTC)`,
+        });
+        // Draft references the committed file instead of the inline data URL.
+        store.set(item.draftPath, `./${item.assetPath.slice(assetPrefix.length)}`);
+        const cap = item.noun.charAt(0).toUpperCase() + item.noun.slice(1);
+        imageNotes.push(`${cap} committed to ${item.assetPath} (shows up with the redeploy).`);
       }
+      if (queued.length > 0) onPreview(store.draft);
+      const imageNote = imageNotes.length > 0 ? ` ${imageNotes.join(' ')}` : '';
 
       const json = `${JSON.stringify(store.draft, null, 2)}\n`;
       await commitContent({
