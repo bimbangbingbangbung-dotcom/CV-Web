@@ -11,7 +11,7 @@
  * a gallery picture opens a modal lightbox (native <dialog>, so Escape,
  * backdrop clicks and the focus trap come for free).
  */
-import type { Content, Project } from '../../schema/types';
+import type { Project } from '../../schema/types';
 import { h, clear } from '../../utils/dom';
 import { safeAssetPath } from '../../utils/url';
 import { icon } from '../../components/icons';
@@ -126,7 +126,7 @@ function buildLightbox(pictures: string[], title: string): {
 }
 
 /** Fill the shell with one project's page. Called by the hash router. */
-export function fillProjectView(shell: HTMLElement, content: Content, project: Project): void {
+export function fillProjectView(shell: HTMLElement, project: Project): void {
   const heading = shell.querySelector('#project-view-title');
   const body = shell.querySelector('.project-view-body');
   if (!body) return;
