@@ -228,6 +228,7 @@
       "tech": ["Arduino", "C++", "Load cell", "Receipt printer"],
       "links": [],
       "image": null,
+      "gallery": [],
       "featured": true,
       "detail": null
     },
@@ -239,6 +240,7 @@
       "tech": ["Microcontrollers", "C++", "Mechatronics"],
       "links": [],
       "image": null,
+      "gallery": [],
       "featured": true,
       "detail": null
     },
@@ -250,6 +252,7 @@
       "tech": ["Microcontrollers", "Robotics", "Prototyping"],
       "links": [],
       "image": null,
+      "gallery": [],
       "featured": false,
       "detail": null
     },
@@ -261,6 +264,7 @@
       "tech": ["Solar power", "Charge regulation", "USB output"],
       "links": [],
       "image": null,
+      "gallery": [],
       "featured": false,
       "detail": null
     },
@@ -272,6 +276,7 @@
       "tech": ["Wiring", "Lighting circuits"],
       "links": [],
       "image": null,
+      "gallery": [],
       "featured": false,
       "detail": null
     }

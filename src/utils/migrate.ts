@@ -1,10 +1,12 @@
 /**
  * Schema-version migration.
  *
- * content.json carries `meta.schemaVersion`. When the schema evolves, add a
- * numbered migration below and bump SCHEMA_VERSION — old exports (including
- * edit-mode backups from months ago) then upgrade automatically on load
- * instead of erroring out.
+ * content.json carries `meta.schemaVersion`. When the schema evolves in a way
+ * that would make old exports invalid, add a numbered migration below and bump
+ * SCHEMA_VERSION — old exports (including edit-mode backups from months ago)
+ * then upgrade automatically on load instead of erroring out. Purely additive
+ * optional fields (e.g. projects[].gallery) need no migration: old content
+ * still validates as-is.
  *
  * v1 → v1: identity (nothing to do yet — this is the first schema).
  */
