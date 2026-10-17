@@ -131,6 +131,10 @@ test.describe('project detail pages', () => {
 test.describe('auto-hide header', () => {
   test('is hidden by default and reveals on top-edge hover', async ({ page, isMobile }) => {
     test.skip(isMobile, 'hover interaction is desktop-only');
+    // The first-visit hint (showOnLoadHint) reveals the header ~350 ms after
+    // load — a race the assertion below would lose on a slow machine. A
+    // returning visit has no hint; that is the state this test pins.
+    await page.addInitScript(() => sessionStorage.setItem('cvweb:hinted', '1'));
     await page.goto('/');
     expect(await headerVisible(page)).toBe(false);
 
