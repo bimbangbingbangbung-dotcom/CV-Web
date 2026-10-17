@@ -217,6 +217,7 @@ Put files in `public/assets/`:
 | --------------------------------------- | ----------------------------------------------------- |
 | `cv.pdf`                                | “Download CV” button (placeholder ships — replace it) |
 | `photo.jpg`/`.png`                      | hero avatar (3:4 portrait; alt text = your name)      |
+| `projects/project-N-*.jpg`              | project cover + gallery pictures (editor uploads)     |
 | `og-image.png`                          | link previews (regenerate: `npm run gen:assets`)      |
 | `favicon-*.png`, `apple-touch-icon.png` | PWA/icon variants                                     |
 
