@@ -249,6 +249,9 @@ function boot(content: Content, options: { instant?: boolean } = {}): void {
   initReveal(main, { instant: options.instant === true });
   currentContent = content;
   void routeAdmin();
+  // Re-apply the current route: on boot this activates a deep-linked
+  #project-<slug>, and after an edit-mode preview it re-fills the page.
+  applyRoute({ initial: true });
 }
 
 async function start(): Promise<void> {
