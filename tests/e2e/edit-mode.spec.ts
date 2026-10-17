@@ -253,6 +253,109 @@ test.describe('edit mode', () => {
     await expect(page.locator('.hero .avatar')).toHaveAttribute('src', './assets/photo.jpg');
   });
 
+  test('project cover + gallery uploads commit their pictures to the repo', async ({ page }) => {
+    const puts: Array<{ path: string; body: Record<string, unknown> }> = [];
+    await page.route('https://api.github.com/**', async (route) => {
+      const request = route.request();
+      const cors = { 'Access-Control-Allow-Origin': '*' };
+      if (request.method() === 'OPTIONS') {
+        await route.fulfill({
+          status: 204,
+          headers: {
+            ...cors,
+            'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+            'Access-Control-Allow-Headers':
+              'Authorization, Content-Type, Accept, X-GitHub-Api-Version',
+          },
+        });
+        return;
+      }
+      if (request.method() === 'GET') {
+        await route.fulfill({
+          status: 404,
+          contentType: 'application/json',
+          headers: cors,
+          body: JSON.stringify({ message: 'Not Found' }),
+        });
+        return;
+      }
+      puts.push({
+        path: new URL(request.url()).pathname,
+        body: JSON.parse(request.postData() ?? '{}') as Record<string, unknown>,
+      });
+      await route.fulfill({
+        status: 201,
+        contentType: 'application/json',
+        headers: cors,
+        body: JSON.stringify({ commit: { sha: 'c0ffee' } }),
+      });
+    });
+
+    await page.goto('/#admin');
+
+    // Cover: no cropper step — decode + optimize straight to a data URL.
+    await page.locator('#f-projects-0-image-file').setInputFiles({
+      name: 'cover.png',
+      mimeType: 'image/png',
+      buffer: TINY_PNG,
+    });
+    await expect(page.locator('#f-projects-0-image')).toHaveValue(/^data:image\/jpeg;base64,/);
+    await expect(page.locator('.admin-status')).toContainText('Picture updated');
+
+    // Gallery: "Add picture" picks a file and appends a row each time.
+    await page.locator('#f-projects-0-gallery-file').setInputFiles({
+      name: 'pic-one.png',
+      mimeType: 'image/png',
+      buffer: TINY_PNG,
+    });
+    await expect(page.locator('#f-projects-0-gallery-0')).toHaveValue(
+      /^data:image\/jpeg;base64,/,
+    );
+    await page.locator('#f-projects-0-gallery-file').setInputFiles({
+      name: 'pic-two.png',
+      mimeType: 'image/png',
+      buffer: TINY_PNG,
+    });
+    await expect(page.locator('.gallery-list li')).toHaveCount(2);
+
+    // Removing the first row re-indexes the second into slot 1.
+    await page.getByRole('button', { name: 'Remove Picture 1' }).click();
+    await expect(page.locator('.gallery-list li')).toHaveCount(1);
+    await expect(page.locator('#f-projects-0-gallery-0')).toHaveValue(
+      /^data:image\/jpeg;base64,/,
+    );
+
+    // Configure publishing (Help tab), same as the other save tests.
+    await page.getByRole('tab', { name: 'Help' }).click();
+    await page.locator('#f-gh-owner').fill('octo-cat');
+    await page.locator('#f-gh-repo').fill('CV-Web');
+    await page.locator('#f-gh-branch').fill('main');
+    await page.locator('#f-gh-path').fill('public/content.json');
+    await page.locator('#f-gh-token').fill('ghp_test_token');
+    await page.locator('#f-gh-token').blur();
+
+    await page.getByRole('button', { name: 'Save to GitHub' }).click();
+    await expect(page.locator('.save-toast')).toContainText(
+      'public/assets/projects/project-1-cover.jpg',
+    );
+    await expect(page.locator('.save-toast')).toContainText(
+      'public/assets/projects/project-1-picture-1.jpg',
+    );
+
+    // Pictures commit FIRST (cover, then the surviving gallery picture),
+    // content.json LAST so it never points at a missing file.
+    expect(puts.map((p) => p.path)).toEqual([
+      '/repos/octo-cat/CV-Web/contents/public/assets/projects/project-1-cover.jpg',
+      '/repos/octo-cat/CV-Web/contents/public/assets/projects/project-1-picture-1.jpg',
+      '/repos/octo-cat/CV-Web/contents/public/content.json',
+    ]);
+    const committed = JSON.parse(
+      Buffer.from(String(puts[2]?.body['content']), 'base64').toString('utf8'),
+    ) as { projects: { image: string; gallery: string[] }[] };
+    expect(committed.projects[0]?.image).toBe('./assets/projects/project-1-cover.jpg');
+    expect(committed.projects[0]?.gallery).toEqual(['./assets/projects/project-1-picture-1.jpg']);
+  });
+
   test('the cropper can be cancelled without changing the photo', async ({ page }) => {
     await page.goto('/#admin');
     const field = page.locator('#f-owner-photo');
