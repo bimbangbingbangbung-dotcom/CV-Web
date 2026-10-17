@@ -5,6 +5,12 @@
  */
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { readFileSync } from 'node:fs';
+import { projectSlugs } from '../../src/utils/slug';
+
+const content = JSON.parse(
+  readFileSync(new URL('../../public/content.json', import.meta.url), 'utf8'),
+) as { projects: { title: string }[] };
 
 const badViolations = (
   violations: { impact?: string | null; id: string; help: string }[],
