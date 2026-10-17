@@ -137,6 +137,30 @@ print; alt text is generated from your name; `null` = initials avatar; change
 it with _Upload photo_ in the editor), `facts` (label/value rows), `now`
 (current-focus bullets).
 
+### `projects`
+
+Each entry: `title`, `description`, `role`, `year`, `tech` (string array →
+chips), `links` (`label` + `url`, optional
+`kind: repo | demo | case-study | slides | other`), `featured` (accent chip),
+plus the optional picture/story fields:
+
+- `image` — cover picture on the card and at the top of the project's own
+  detail page. Change it with _Upload picture_ (no crop step — any aspect
+  works, the card crops through CSS) or type a path/URL by hand.
+- `gallery` — ordered list of extra pictures, shown as a thumbnail strip on
+  the detail page (click one to open the lightbox). _Add picture_ appends a
+  row; every row has its own _Upload picture_ plus keyboard reorder/remove
+  buttons.
+- `detail` — `problem` / `solution` / `result` story blocks on the detail
+  page (`null` hides the story).
+
+Every card links to its own detail page (`#project-<slug>` — a slug derived
+from the title), so long descriptions and pictures never crowd the home
+page, and the link is shareable. **Save to GitHub** commits uploaded
+pictures as real files first (`public/assets/projects/project-1-cover.jpg`,
+`project-1-picture-2.jpg`, …) and then content.json; Download keeps the
+pictures inline as data URLs inside content.json.
+
 ### `sections`
 
 The master list — order, heading text, and `enabled: false` to remove a
