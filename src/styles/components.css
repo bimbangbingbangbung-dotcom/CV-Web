@@ -404,3 +404,69 @@
     transition: none;
   }
 }
+
+/* ---------- Picture lightbox (project detail page) ---------- */
+
+.lightbox {
+  position: relative;
+  padding: var(--space-3);
+  max-width: min(56rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  background: var(--bg);
+  color: var(--text);
+  border: var(--border-hairline) solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.lightbox::backdrop {
+  background: color-mix(in srgb, #000 55%, transparent);
+}
+
+.lightbox-img {
+  display: block;
+  max-width: min(52rem, calc(100vw - 4rem));
+  max-height: calc(100dvh - 9rem);
+  width: auto;
+  height: auto;
+  margin-inline: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+/* Controls float over the picture — solid surface so they stay legible. */
+.lightbox .icon-btn {
+  background: var(--surface);
+  border: var(--border-hairline) solid var(--border);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 1;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.lightbox-prev {
+  left: var(--space-4);
+}
+
+.lightbox-next {
+  right: var(--space-4);
+}
+
+.lightbox-counter {
+  display: block;
+  margin-top: var(--space-2);
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+}
