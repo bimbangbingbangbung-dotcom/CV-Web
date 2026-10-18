@@ -270,7 +270,11 @@
       ],
       "links": [],
       "image": null,
-      "gallery": [],
+      "gallery": [
+        "./assets/projects/project-3-picture-1.jpg",
+        "./assets/projects/project-3-picture-2.jpg",
+        "./assets/projects/project-3-picture-3.jpg"
+      ],
       "featured": false,
       "detail": null
     },
