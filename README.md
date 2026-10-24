@@ -102,6 +102,4 @@ tests/e2e/               Playwright + axe
   touching code.
 - **[PLAN.md](./PLAN.md)** — the original build plan (7 phases).
 
-## Auto-sync
-
-Changes made in OpenCode are automatically committed and pushed to GitHub.
+https://cv-web-production-7141.up.railway.app/
